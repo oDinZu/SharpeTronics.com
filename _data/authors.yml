@@ -1,0 +1,26 @@
+#This data file contains all the author(s) information. It enables us to make a one stop shop change for INF amount of posts to be updated.
+---
+Charles:
+  first_name:     "Charles"
+  last_name:      "Sharpe"
+  site:           "https://www.csharpe.me"
+  avatar:         "/uploads/authors/c-avatar.webp" #Size of avatar_image 36x36
+  bio:            "Independent Full-Stack Web Developer; curious about Astronomy, Information Technology, Privacy, Permaculture, Philosophy & Consciousness."
+  email:          "charles.sharpee@gmail.com"
+  # Twitter nick for use in Twitter cards and follow button.
+  twitter: "csharpe_me" # if no twitter in this config, the twitter follow button will be removed
+  # GitHub nick for use in follow button in author block.
+  github: "csharpee"
+  social:
+    - title: "github"
+      url: "https://github.com/csharpee"
+    - title: "linkedin"
+      url: "https://www.linkedin.com/in/EXAMPLE"
+    - title: "youtube"
+      url: "https://www.youtube.com/channel/EXAMPLE"
+    - title: "facebook"
+      url: "https://www.facebook.com/EXAMPLE"
+
+
+Dexter:
+---

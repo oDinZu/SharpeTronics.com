@@ -1,0 +1,46 @@
+---
+
+---
+{% comment %}
+	The default layout for the site, which is extended by all other layouts.
+{% endcomment %}
+
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+{% include head.html %}
+
+{% if page.title == "Home" %}
+<body class="landing is-preload">
+{% else %}
+<body class="landing is-preload single">
+{% endif %}
+<div class="page-wrapper">
+
+{% include header.html %}
+{% include navigation.html %}
+
+<main class="page-content" aria-label="Content">
+  {% comment %}
+  	Any layout that extends this layout will have its contents
+  	added as the content variable
+  {% endcomment %}
+
+  {{ content }}
+</main>
+
+  <!-- JS scripts get loaded last-->
+	<script src="{{ "/assets/js/jquery.min.js" | relative_url }}"></script>
+	<script src="{{ "/assets/js/jquery.scrolly.min.js" | relative_url }}"></script>
+	<script src="{{ "/assets/js/jquery.scrollex.min.js" | relative_url }}"></script>
+	<script src="{{ "/assets/js/browser.min.js" | relative_url }}"></script>
+
+	<script src="{{ "/assets/js/breakpoints.min.js" | relative_url }}"></script>
+	<script src="{{ "/assets/js/util.js" | relative_url }}"></script>
+	<script src="{{ "/assets/js/main.js" | relative_url }}"></script>
+
+</div>
+{% include footer.html %}
+  </body>
+
+</html>

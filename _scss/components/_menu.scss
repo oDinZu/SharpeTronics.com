@@ -1,0 +1,31 @@
+/* Menu */
+
+	ul.menu {
+		li {
+			border-left: solid _size(border-width);
+			display: inline-block;
+			list-style: none;
+			margin-left: 1em;
+			padding-left: 1em;
+
+			a {
+				text-decoration: none;
+			}
+
+			&:first-child {
+				border-left: 0;
+				margin-left: 0;
+				padding-left: 0;
+			}
+		}
+	}
+
+	@mixin color-menu($p: null) {
+		ul.menu {
+			li {
+				border-left-color: _palette($p, border);
+			}
+		}
+	}
+
+	@include color-menu;

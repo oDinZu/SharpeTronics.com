@@ -1,0 +1,13 @@
+#Documentation located here: https://github.com/forestryio/jekyll-menus
+---
+header:
+  - url: /
+    title: Home
+    identifier: header
+  - url: /blog/
+    title: Journal
+    identifier: header
+#  - url: /products/
+#    title: Shop
+#    identifier: header
+---

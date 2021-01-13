@@ -1,0 +1,81 @@
+---
+layout: default
+pagination:
+  enabled: false
+---
+{% comment %}
+	This layout is the single page of a product post.
+{% endcomment %}
+
+<section id="main" class="wrapper style1">
+  <div class="inner">
+
+    <!-- Shopping Cart -->
+    <section class="row product-cart">
+      <div class="col-6">
+        <a href="{{site.url}}/products"><h5 class="button back">< Go Back</h5></a>
+      </div>
+      <div class="col-6">
+        <ul>
+          <li>
+            <a href="#"><span class="fas fa-shopping-basket fa-2x" aria-hidden="true"></span>My Cart</a>
+          </li>
+        </ul>
+      </div>
+      </section>
+      <!-- Page Heading -->
+      <header class="major special">
+        <h1>{{ page.title }}</h1>
+        <p>{{ page.sub_heading }}</p>
+      </header>
+    <!-- Main Body Content -->
+      <div class="content">
+          <section class="row">
+          <!-- Product Image Banner -->
+          <div class="col-6 col-12-small product-image">
+            <section class="">
+              <a href="#"><img alt="{{ page.title }}" src="{{ page.banner_image }}" class="product-flex" /></a>
+            </section>
+          </div>
+          <!-- Product Details List -->
+          <div class="col-6 col-12-small product-details">
+            <section class="">
+              <ul>
+                <li>Price:</li>
+                <li>Weight:</li>
+                <li>Stock:</li>
+                <li>Sku:</li>
+                <li>Format:</li>
+                <li>Material:</li>
+                <li>Reviews:</li>
+              </ul>
+              <!-- Product Add To Cart Button -->
+              <a href="#" class="button fit">Add To Cart</a>
+            </section>
+          </div>
+          </section>
+
+          <!-- Product Description -->
+          <section class="row product-desc">
+            <div class="col-12">
+              <h3>Product Description</h3>
+            </div>
+            <div class="col-12">
+              {{ content }}
+              {% assign author = site.data.authors[page.author] %}
+              {%- include author_card.html -%}
+            </div>
+          </section>
+
+          <!-- Related product collection -->
+          <section class="row related-items">
+            <div class="col-12">
+              <h3>More Products</h3>
+            </div>
+            {%- assign related_posts = site.products | where_exp:"post", "post.url != page.url" | sample:3 -%}
+            {%- include product_related.html -%}
+        </section>
+      </div>
+
+    </div> <!-- Closing Inner -->
+</section> <!-- Closing Main Body -->

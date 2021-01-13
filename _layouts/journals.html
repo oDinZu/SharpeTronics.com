@@ -1,0 +1,43 @@
+---
+layout: post
+---
+{% comment %}
+	This layout is the posts index (a collection of all blog posts).
+{% endcomment %}
+
+<!-- Title -->
+<header class="major special">
+  <h1>{{ page.title }}</h1>
+  <p>{{ page.sub_title }}</p>
+</header>
+
+<!-- Main Body Content -->
+<div class="content">
+	<!-- This loops through the paginated posts collection posts-->
+	{% for post in paginator.posts %}
+	  <!-- Post layout structure -->
+	  <article class="post">
+	    <header>
+	      <a href="{{ post.url | absolute_url }}" class="hero image fit"><img src="{{ post.banner_image }}" alt="{{ post.title }}" /></a>
+
+	      <div class="title">
+	        <h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></h2>
+	        <p>{{ post.sub_heading }}</p>
+	      </div>
+	      {% assign author = site.data.authors[post.author] %}
+	      {%- include author_card.html -%}
+	    </header>
+	    <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
+	    <footer>
+	      <ul class="actions">
+	        <li><a href="{{ post.url | absolute_url }}" class="button">Continue Reading</a></li>
+	      </ul>
+	      <ul class="stats">
+	        <li>{{ post.category }}</li>
+	        <!-- <li class="icon solid fa-heart">144</li> -->
+	        <li><a href="{{ post.url | absolute_url }}" class="icon solid fa-comment">88</a></li>
+	      </ul>
+	    </footer>
+	  </article>
+	{% endfor %}
+</div>

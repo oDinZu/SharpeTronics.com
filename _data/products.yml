@@ -1,0 +1,166 @@
+#Product list for all items for SharpeTronics
+global-product:
+  tax: 6%
+  shipping: $5.00
+  delivery: 3-5 days
+  warranty: 30 days money back
+
+product-ten:
+  title: Peppermint Lip Balm
+  image: assets/images/Peppermint-Lip-Balm.jpg
+  description: Our all natural Peppermint lip balm was a great hit with our family & friends. We hope you enjoy it too!
+  excerpt: Our BEST SELLING lip balm - you'll love it!
+  category: Lip Balm
+  tag: Health
+  id: 201806
+  sku: 2020
+  quantity: 14
+  price: $5.00
+  weight: Peppermint
+  format: Physical
+  material: Wood, Steel
+  dimension: 15in x 35in
+
+product-one:
+  title: Peppermint Lip Balm
+  image: assets/images/Peppermint-Lip-Balm.jpg
+  description: Our all natural Peppermint lip balm was a great hit with our family & friends. We hope you enjoy it too!
+  excerpt: Our BEST SELLING lip balm - you'll love it!
+  category: Lip Balm
+  tag: Health
+  id: 201806
+  sku: 2020
+  quantity: 14
+  price: $5.00
+  weight: Peppermint
+  format: Physical
+  material: Wood, Steel
+  dimension: 15in x 35in
+
+product-nine:
+  title: Peppermint Lip Balm
+  image: assets/images/Peppermint-Lip-Balm.jpg
+  description: Our all natural Peppermint lip balm was a great hit with our family & friends. We hope you enjoy it too!
+  excerpt: Our BEST SELLING lip balm - you'll love it!
+  category: Lip Balm
+  tag: Health
+  id: 201806
+  sku: 2020
+  quantity: 14
+  price: $5.00
+  weight: Peppermint
+  format: Physical
+  material: Wood, Steel
+  dimension: 15in x 35in
+
+product-two:
+  title: Peppermint Lip Balm
+  image: assets/images/Peppermint-Lip-Balm.jpg
+  description: Our all natural Peppermint lip balm was a great hit with our family & friends. We hope you enjoy it too!
+  excerpt: Our BEST SELLING lip balm - you'll love it!
+  category: Lip Balm
+  tag: Health
+  id: 201806
+  sku: 2020
+  quantity: 14
+  price: $5.00
+  weight: Peppermint
+  format: Physical
+  material: Wood, Steel
+  dimension: 15in x 35in
+
+product-three:
+  title: Peppermint Lip Balm
+  image: assets/images/Peppermint-Lip-Balm.jpg
+  description: Our all natural Peppermint lip balm was a great hit with our family & friends. We hope you enjoy it too!
+  excerpt: Our BEST SELLING lip balm - you'll love it!
+  category: Lip Balm
+  tag: Health
+  id: 201806
+  sku: 2020
+  quantity: 14
+  price: $5.00
+  weight: Peppermint
+  format: Physical
+  material: Wood, Steel
+  dimension: 15in x 35in
+
+product-four:
+  title: Peppermint Lip Balm
+  image: assets/images/Peppermint-Lip-Balm.jpg
+  description: Our all natural Peppermint lip balm was a great hit with our family & friends. We hope you enjoy it too!
+  excerpt: Our BEST SELLING lip balm - you'll love it!
+  category: Lip Balm
+  tag: Health
+  id: 201806
+  sku: 2020
+  quantity: 14
+  price: $5.00
+  weight: Peppermint
+  format: Physical
+  material: Wood, Steel
+  dimension: 15in x 35in
+
+product-five:
+  title: Peppermint Lip Balm
+  image: assets/images/Peppermint-Lip-Balm.jpg
+  description: Our all natural Peppermint lip balm was a great hit with our family & friends. We hope you enjoy it too!
+  excerpt: Our BEST SELLING lip balm - you'll love it!
+  category: Lip Balm
+  tag: Health
+  id: 201806
+  sku: 2020
+  quantity: 14
+  price: $5.00
+  weight: Peppermint
+  format: Physical
+  material: Wood, Steel
+  dimension: 15in x 35in
+
+product-six:
+  title: Peppermint Lip Balm
+  image: assets/images/Peppermint-Lip-Balm.jpg
+  description: Our all natural Peppermint lip balm was a great hit with our family & friends. We hope you enjoy it too!
+  excerpt: Our BEST SELLING lip balm - you'll love it!
+  category: Lip Balm
+  tag: Health
+  id: 201806
+  sku: 2020
+  quantity: 14
+  price: $5.00
+  weight: Peppermint
+  format: Physical
+  material: Wood, Steel
+  dimension: 15in x 35in
+
+product-seven:
+  title: Peppermint Lip Balm
+  image: assets/images/Peppermint-Lip-Balm.jpg
+  description: Our all natural Peppermint lip balm was a great hit with our family & friends. We hope you enjoy it too!
+  excerpt: Our BEST SELLING lip balm - you'll love it!
+  category: Lip Balm
+  tag: Health
+  id: 201806
+  sku: 2020
+  quantity: 14
+  price: $5.00
+  weight: Peppermint
+  format: Physical
+  material: Wood, Steel
+  dimension: 15in x 35in
+
+product-eight:
+  title: Peppermint Lip Balm
+  image: assets/images/Peppermint-Lip-Balm.jpg
+  description: Our all natural Peppermint lip balm was a great hit with our family & friends. We hope you enjoy it too!
+  excerpt: Our BEST SELLING lip balm - you'll love it!
+  category: Lip Balm
+  tag: Health
+  id: 201806
+  sku: 2020
+  quantity: 14
+  price: $5.00
+  weight: Peppermint
+  format: Physical
+  material: Wood, Steel
+  dimension: 15in x 35in

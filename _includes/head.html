@@ -1,0 +1,72 @@
+<!--
+ *     ____    __                                   ______
+ *    /\  _`\ /\ \                                 /\__  _\                   __
+ *    \ \,\L\_\ \ \___      __    _ __  _____     _\/_/\ \/ _ __  ___    ___ /\_\    ___    ____
+ *     \/_\__ \\ \  _ `\  /'__`\ /\`'__/\ '__`\ /'__`\\ \ \/\`'__/ __`\/' _ `\/\ \  /'___\ /',__\
+ *       /\ \L\ \ \ \ \ \/\ \L\.\\ \ \/\ \ \L\ /\  __/ \ \ \ \ \/\ \L\ /\ \/\ \ \ \/\ \__//\__, `\
+ *       \ `\____\ \_\ \_\ \__/.\_\ \_\ \ \ ,__\ \____\ \ \_\ \_\ \____\ \_\ \_\ \_\ \____\/\____/
+ *        \/_____/\/_/\/_/\/__/\/_/\/_/  \ \ \/ \/____/  \/_/\/_/\/___/ \/_/\/_/\/_/\/____/\/___/
+ *                                        \ \_\
+ *                                         \/_/
+Owner: @csharpe_me (Charles Sharpe)
+Designer: @ajlkn, @csharpe_me
+Developer: @ajlkn, @csharpe_me
+Editor: @csharpe_me
+Engineering: @csharpe_me
+Quality Assurance: @csharpe_me
+-->
+
+<head>
+  <META charset="utf-8">
+  <META http-equiv="X-UA-Compatible" CONTENT="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <META NAME="robots" CONTENT="index, follow">
+
+  <META NAME="author" CONTENT="{{ site.data.global.author }}">
+  <META NAME="description" CONTENT="{{ site.data.global.description }}">
+  <META NAME="keywords" CONTENT="{{ site.data.global.keywords }}">
+
+  <!-- Geolocation Search Engine Optimization BING -->
+  <META NAME="geo.position" CONTENT="{{ site.data.global.location_coords }}" />
+  <META NAME="geo.placename" CONTENT="{{ site.data.global.location_town }}" />
+  <META NAME="geo.region" CONTENT="{{ site.data.global.location_state }}" />
+  <META NAME="ICBM" content="{{ site.data.global.location_coords }}" />
+
+  <!-- Standard SEO Twitter Card data -->
+  <META NAME="twitter:card" content="summary">
+  <META NAME="twitter:site" content="@{{ site.data.social.twitter_user }}">
+  <META NAME="twitter:title" content="{{ page.title }}">
+  <META NAME="twitter:description" content="{{ page.description }}">
+  <META NAME="twitter:creator" content="@{{ site.data.social.twitter_user }}">
+
+  <!-- Standard SEO Twitter Summary card images must be at least 120x120px -->
+  <META NAME="twitter:image" content="{{ page.image_url }}">
+  <META NAME="twitter:alt" content="{{ page.image_alt }}">
+
+  <!-- Standard SEO Open Graph data -->
+  <META property="og:title" content="{{ page.title }}" />
+  <META property="og:type" content="article" />
+  <META property="og:url" content="{{ page.url }}" />
+  <META property="og:image" content="{{ page.image_url }}" />
+  <META property="og:image" content="{{ page.image_alt }}" />
+  <META property="og:description" content="{{ site.data.global.description }}" />
+  <META property="og:site_name" content="{{ site.data.global.title }}" />
+  <META property="fb:admins" content="{{ site.data.social.facebook_admin_user }}" />
+
+  <!-- Favicons for various browsers including mobile -->
+  <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico" sizes="64x49">
+
+  <!-- Jekyll RSS Feed Plugin -->
+  {%- feed_meta -%}
+
+  <!-- Site title goes here -->
+  <title> {{ site.data.global.title }} | {{ page.title }} </title>
+
+  <!-- Linking local cascading stylesheet CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+
+  <!-- Loading local fonts ; preload for fast generation-->
+  <link rel="preload" href="/assets/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/assets/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/assets/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
