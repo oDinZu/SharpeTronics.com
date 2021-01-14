@@ -20,7 +20,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
 
-      - uses: helaili/jekyll-action@2.0.1
+      - uses: helaili/jekyll-action@v2
         env:
           # Ideally use GITHUB_TOKEN but it gives error for this action.
           JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
