@@ -16,12 +16,12 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * Clean minimal design
 * GitHub Pages ready (Free hosting)
 * GitHub Actions for expanding Jekyll usability
-* < Siteleaf CMS ready with user roles
-* < Comments with administration
-* < Ecommerce shopping
-* < Newsletter subscriptions
-* < Search functionality
-* < Web workers for caching data for speedy progressive web application (PWA)
+* < Siteleaf CMS ready with user roles (**Pending**)
+* < Comments with administration (**Pending**)
+* < Ecommerce shopping (**Pending**)
+* < Newsletter subscriptions (**Pending**)
+* < Search functionality (**Pending**)
+* < Web workers for caching data for speedy progressive web application (PWA) (**Pending**)
 
 # Jekyll Plugins
 * Menus
