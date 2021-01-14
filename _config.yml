@@ -51,7 +51,7 @@ picture:
 
 # Build settings
 plugins:
-  #- jekyll-feed #manually generated rss.xml https://jekyllrb.com/tutorials/convert-site-to-jekyll/#10-rss-feed
+  - jekyll-feed #manually generated rss.xml https://jekyllrb.com/tutorials/convert-site-to-jekyll/#10-rss-feed
   - jekyll-menus
   - jekyll-archives
   - jekyll-paginate-v2
