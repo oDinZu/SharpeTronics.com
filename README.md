@@ -5,7 +5,7 @@ Javascript frameworks create more complexity than needed, this example portrays 
 
 No proprietary operating system dependencies required, only Docker Engine super machines and some tender love and care. The base stack is Docker Engine + SCSS ready!
 
-# JAMstack Architecture Features
+# Architecture Features
 * JAMstack (Jekyll, API's, Markup)
 * Lightweight, Responsive & Fast!
 * SCSS ready!
