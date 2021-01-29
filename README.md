@@ -57,7 +57,7 @@ No proprietary operating system dependencies required, only Docker Engine super 
 2. ```cd sharpetronics.github.io```
 3. ```docker-compose up```
 
-*Happy Hacking! :)*
+*Happy Hacking!!! :)*
 
 ## Further Reading
 * Docker Engine https://docs.docker.com/install/
