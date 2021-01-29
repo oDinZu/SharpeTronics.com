@@ -1,14 +1,18 @@
 ---
-title: Privacy Policy
 layout: journal_single
-author: Charles
+
+author: Charles #case sensitive, please use capitalization for names.
+
+title: Privacy Policy
 sub_heading: Maecenas faucibus mollis interdum. Vivamus sagittis lacus
-banner_image: "/assets/images/pic01.jpg"
-banner_image_alt: privacy policy
+
+banner_image: "/assets/images/pic01.jpg" #Size of banner_image 840x341
+banner_image_alt: "privacy policy"
+
 category: Legal
 tag: Legal
----
 
+---
 <h2>Privacy Policy for SharpeTronics</h2>
 
 <p>At SharpeTronics, accessible from https://www.sharpetronics.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by SharpeTronics and how we use it.</p>
