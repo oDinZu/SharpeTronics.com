@@ -1,17 +1,14 @@
 ---
-layout: journal_single
-
-author: Charles #case sensitive, please use capitalization for names.
-
 title: Welcome To An Appalachian Technology Company
+layout: journal_single
+author: Charles
 sub_heading: Where light travels at high altitudes.
-
-banner_image: "/uploads/2021/wv-seneca-rocks-sky.webp" #Size of banner_image 840x341
-banner_image_alt: "WV Sky Seneca Rocks"
-
+banner_image: "/uploads/2021/wv-seneca-rocks-sky.webp"
+banner_image_alt: WV Sky Seneca Rocks
 category: Company
 tag: General
 ---
+
 Welcome to SharpeTronics, where light travels at high altitudes. We are a mountain made company in the Appalachians of West Virginia that strives with software and hardware technologies. We are statewide leaders in our area of expertise and invite you to support local business.
 
 Our mission is to enable a modern web architecture that empowers the user and enables accessibility for both beginners and experts. We are a technology business that challenges the status quo of web development and shares technical knowledge for both local and remote stations.

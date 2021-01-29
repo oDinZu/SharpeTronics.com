@@ -1,18 +1,14 @@
 ---
-layout: journal_single
-
-author: Charles #case sensitive, please use capitalization for names.
-
 title: Terms & Conditions
+layout: journal_single
+author: Charles
 sub_heading: Maecenas faucibus mollis interdum. Vivamus sagittis lacus
-
-banner_image: "/assets/images/pic01.jpg" #Size of banner_image 840x341
-banner_image_alt: "terms and conditions"
-
+banner_image: "/assets/images/pic01.jpg"
+banner_image_alt: terms and conditions
 category: Legal
 tag: Legal
-
 ---
+
 <h2><strong>Terms and Conditions</strong></h2>
 
 <p>Welcome to SharpeTronics!</p>
