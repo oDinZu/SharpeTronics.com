@@ -23,6 +23,21 @@ url: "https://sharpetronics.github.io" # the base hostname & protocol for your s
 
 #Latent Semantic Indexing for similarity bewtween documents.
 lsi: true
+
+# Strapi dashboard integration
+strapi:
+    # Your API endpoint (optional, default to http://localhost:1337)
+    endpoint: https://strapi-0die.onrender.com
+    # Collections, key is used to access in the strapi.collections
+    # template variable
+    collections:
+        # Example for a "posts" collection
+        posts:
+            # Collection name (optional). Used to construct the url requested. Example: type `foo` would generate the following url `http://localhost:1337/foo`.
+            type: post
+            # Permalink used to generate the output files (eg. /posts/:id).
+            permalink: /blog/:slug/
+
 # Collection configurations
 # These collections will enable to sort types of products and loop through that
 # type to be displayed on a page. As an example, I have 10 "3D" items, all 10 items
@@ -52,6 +67,7 @@ picture:
 # Build settings
 plugins:
   - jekyll-feed #manually generated rss.xml https://jekyllrb.com/tutorials/convert-site-to-jekyll/#10-rss-feed
+  - jekyll-strapi
   - jekyll-menus
   - jekyll-archives
   - jekyll-paginate-v2
