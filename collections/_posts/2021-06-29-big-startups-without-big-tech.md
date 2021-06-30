@@ -31,7 +31,7 @@ Knowing how to do this is important and enables more flow with development. Norm
 0. Open up Linux terminal
 1. `nano ~/.bashrc`
 2. Scroll down to end of page and type the following code to add "dfx" command to your profile or .bashrc.
-
+3. Rerun the updated .bashrc or .profile script via . ~/.bashrc, then test *"dfx --version"* again.
 ```
 # DFINITY MOTOKO
 export PATH=$HOME/bin:$PATH.
