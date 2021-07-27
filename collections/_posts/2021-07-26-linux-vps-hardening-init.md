@@ -95,19 +95,37 @@ Connection closed by foreign host.
 
 To further expand on the garden, we must define a secure space for each plant or service we are running. To manage each service, like dns, mail, gitea, etc... we create a new user for each of these environments. This separation is important for operational security (OPSEC).
 
-`useradd username`
+`adduser username` *Note: If we want to use Dockerfile or auto script without prompts, we make use of the **useradd** command.*
+
+```
+Adding user `username' ...
+Adding new group `username' (1003) ...
+Adding new user `username' (1002) with group `username' ...
+Creating home directory `/home/username' ...
+Copying files from `/etc/skel' ...
+New password: 
+```
 
 Next, if the user should have sudo permission, we do the following.
 
 `usermod -a -G sudo username`
 
+##### Prove User was Created
+
+`cat /etc/passwd`
+
+```
+...
+username:x:1001:1002:User Name,,,:/home/username:/bin/bash
+...
+```
 
 ##### Logging In with New Username
 
 `su username`
 
 ##### Update SSH Config
-`sudo nano/etc/ssh/sshd_config`
+`sudo nano /etc/ssh/sshd_config`
 
 Add sudo to the **AllowGroups** like so:
 
@@ -136,6 +154,8 @@ Paste your public key we created earlier into the authorized_keys file.
 ##### Restart SSH service
 
 `sudo service ssh restart`
+
+`exit`
 
 In conclusion, we are now able to login via SSH with new user and have also disabled root user logins.
 This process will have to be done for each user that is created.
