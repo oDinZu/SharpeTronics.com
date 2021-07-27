@@ -41,9 +41,6 @@ helaili.github.io
 TECHNOLOGY
 ----------
 
-Siteleaf - Content management system
-siteleaf.com
-
 Jekyll - Static site generator
 jekyllrb.com
 
