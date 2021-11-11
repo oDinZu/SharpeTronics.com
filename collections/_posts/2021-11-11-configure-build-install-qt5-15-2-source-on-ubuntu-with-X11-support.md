@@ -3,7 +3,7 @@ layout: journal_single
 
 author: Charles #case sensitive, please use capitalization for names.
 
-title: Configure Qt5.15.2 Source on Ubuntu 18.04 with X11 Support
+title: Configure Qt Source on Ubuntu 18.04 with X11 Support
 sub_heading: Compiling Qt5.15.2
 
 banner_image: "/uploads/2021/quantum-qt5.webp" #Size of banner_image 840x473
@@ -44,10 +44,10 @@ e1447db4f06c841d8947f0a6ce83a7b5  qt-everywhere-src-5.15.2.tar.xz
 sudo apt install build-essential libfontconfig1-dev libdbus-1-dev libfreetype6-dev libicu-dev libinput-dev libxkbcommon-dev libsqlite3-dev libssl-dev libpng-dev libjpeg-dev libglib2.0-dev
 ```
 
-#### (Optional) Install VC4 Drivers for RPi 4 type devices (i.e. cortex-a53 & cortex-a72)
+##### (Optional) Install VC4 Drivers for RPi 4 type devices (i.e. cortex-a53 & cortex-a72)
 `sudo apt install libgles2-mesa-dev libgbm-dev libdrm-dev`
 
-##### Install X11 Support Dependencies (optional, but for Hush apps, I had to use X11; EGLFS launched, but I wasn't able to use the GUI)
+#### Install X11 Support Dependencies
 ```
 sudo apt install libx11-dev libxcb1-dev  libxext-dev libxi-dev libxcomposite-dev libxcursor-dev libxtst-dev libxrandr-dev libfontconfig1-dev libfreetype6-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev  libxcb-glx0-dev  libxcb-keysyms1-dev libxcb-image0-dev  libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev  libxcb-randr0-dev  libxcb-render-util0-dev  libxcb-util0-dev  libxcb-xinerama0-dev  libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev
 ```
@@ -102,6 +102,5 @@ Using Qt version 5.15.2 in /usr/local/Qt-5.15.2/lib
 [Hush Tech Support Telegram channel](https://t.me/hush8support)
 
 ##### Sources:
-* Qt 5.15.2 Source Compile - <https://git.hush.is/hush/docs/src/branch/master/advanced/compile-qt5-from-source.md>
 
 * RPi 400 Qt 5.15.2 - <https://www.tal.org/tutorials/building-qt-515-raspberry-pi>
