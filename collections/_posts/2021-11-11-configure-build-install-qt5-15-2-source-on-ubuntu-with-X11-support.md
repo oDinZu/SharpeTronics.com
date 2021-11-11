@@ -14,7 +14,7 @@ tag: Linux, Devops, ARM64, RPi 400, Qt5
 ---
 ### Configure, Build, Install & Setup Qt5.15.2 Source on Ubuntu 18.04 with X11 Support
 
-This tutorial will teach you how to compile from source via CLI (command-line interface) and enable customization for building Qt apps on different operating systems. When compiling Qt5.15.2 yourself, you are empowered with a configuration that is constant throughout the Linux Universe. Some dependencies may need to be added, but overall, this details a thorough solution too building binaries from Qt source code like Hush SilentDragon or Hush SilentDragonLite. This process is also very similar with compiling Qt apps on your (AArch64) ARM64 devices like RPi 400, Rock64 & PineBook64.
+This tutorial will teach you how to compile from source via CLI (command-line interface) and enable customization for building Qt apps on different operating systems. When compiling Qt5.15.2 yourself, you are empowered with a configuration that is constant throughout the Linux Universe. Some dependencies may need to be added, but overall, this details a thorough solution to building binaries from Qt source code like Hush SilentDragon or Hush SilentDragonLite. This process is also very similar with compiling Qt apps on your (AArch64) ARM64 devices like RPi 400, Rock64 & PineBook64.
 
 *Note: This tutorial doesn't include json Qtwebengine*
 
@@ -97,10 +97,3 @@ Using Qt version 5.15.2 in /usr/local/Qt-5.15.2/lib
 `./build.sh`
 
 ![happy little apps](/uploads/2021/bob-ross-happy.gif)
-
-##### Support
-[Hush Tech Support Telegram channel](https://t.me/hush8support)
-
-##### Sources:
-
-* RPi 400 Qt 5.15.2 - <https://www.tal.org/tutorials/building-qt-515-raspberry-pi>
