@@ -10,7 +10,9 @@ banner_image: "/uploads/2021/quantum-qt5.webp" #Size of banner_image 840x473
 banner_image_alt: "Qt5 Compile"
 
 category: Tutorials
-tag: Linux, Devops, ARM64, RPi 400, Qt5
+tag: Linux, ARM64, RPi 400, Qt5
+
+updated: December 4, 2021
 ---
 ### Configure, Build, Install & Setup Qt 5.15.2 Source on Ubuntu 18.04 with X11 Support
 
@@ -22,6 +24,9 @@ When compiling Qt5 yourself, you are empowered with a configuration that is cons
 
 ### What is Qt?
 "Qt is a cross-platform application development framework for desktop, embedded and mobile." [Qt Wiki]
+
+### What is a Static Qt? 
+In general, a static Qt option includes libraries locally. This aids in having an application run on different versions of Linux distros. When the application is compiled, we check the app with *ldd yourapp* to list what the binary is dependent on to run. Essentially, the Qt libraries are included in the binary. Decovar.dev has a great explanation on advantages and disadvantages of building a static Qt. [At last, let's build Qt statically]
 
 ### Let's Begin!
 
@@ -66,15 +71,20 @@ sudo apt install build-essential libfontconfig1-dev libdbus-1-dev libfreetype6-d
 ```
 sudo apt install libgles2-mesa-dev libgbm-dev libdrm-dev
 ```
-#### Install X11 Support Dependencies
+#### (Optional) Install X11 Support Dependencies
 ```
 sudo apt install libx11-dev libxcb1-dev  libxext-dev libxi-dev libxcomposite-dev libxcursor-dev libxtst-dev libxrandr-dev libfontconfig1-dev libfreetype6-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev  libxcb-glx0-dev  libxcb-keysyms1-dev libxcb-image0-dev  libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev  libxcb-randr0-dev  libxcb-render-util0-dev  libxcb-util0-dev  libxcb-xinerama0-dev  libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev
 ```
 
 #### Configure Qt 5.15.2
 ```
-../qt-everywhere-src-5.15.2/configure -v -bundled-xcb-xinput -opensource -confirm-license -release -ssl -glib -no-feature-geoservices_mapboxgl -qt-pcre -nomake examples -no-compile-examples -nomake tests -reduce-exports -system-freetype -fontconfig -qpa xcb
+../qt-everywhere-src-5.15.2/configure -static -release -openssl-linked -opensource -confirm-license -qt-zlib -qt-libpng -bundled-xcb-xinput \
+-skip qtlocation -skip qtmacextras -skip qtpurchasing -skip qtscript -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qtdatavis3d -skip qtdoc -skip qtcharts -skip qtdeclarative -skip qt3d -skip qtwebengine -skip qtandroidextras -skip qtwebview -skip qtgamepad -skip qtquickcontrols -skip qtquickcontrols2 -skip qtremoteobjects -skip qtwebview -skip qtwebchannel -skip qtwebglplugin \
+-nomake examples -nomake tests  -feature-fontconfig -no-feature-getentropy -v
 ```
+
+*If you would like to see a full list of options, we can do **../qt-everywhere-src-5.15.2/configure -h**
+
 ##### Make the configuration *(-j 4 is number of cpus you want to use)*
 ```
 make -j 4
@@ -131,3 +141,5 @@ Using Qt version 5.15.2 in /usr/local/Qt-5.15.2/lib
 [doc.qt.io/qtmodules](https://doc.qt.io/qt-5/qtmodules.html)
 
 [wiki.qt.io/about](https://wiki.qt.io/About_Qt)
+
+[why-build-qt-statically](https://decovar.dev/blog/2018/02/17/build-qt-statically/#why-build-qt-statically)
