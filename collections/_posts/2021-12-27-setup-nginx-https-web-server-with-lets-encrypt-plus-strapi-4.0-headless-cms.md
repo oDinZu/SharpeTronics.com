@@ -41,7 +41,7 @@ Let's Begin! We begin by installing nginx, certbot and verifying versions Strapi
 
 ### Install Nginx Certbot Packages
 
-```sudo apt install certbot python3-certbot-nginx``
+```sudo apt install certbot python3-certbot-nginx```
 
 ### Install NGINX & verify version 
 
