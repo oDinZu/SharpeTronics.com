@@ -36,13 +36,17 @@ For this tutorial, we will launch a secure SSL NGINX web server for your website
 Let's Begin! We begin by installing nginx, certbot and verifying versions Strapi needs. Keep in mind, if you are reading this from the future, the versions will change.
 
 ### Update System
+
 ```sudo apt update```
 
 ### Install Nginx Certbot Packages
+
 ```sudo apt install certbot python3-certbot-nginx``
 
 ### Install NGINX & verify version 
+
 ```sudo apt install nginx```
+
 ```node -v && nginx -v```
 
 **Tip:** Strapi recommends nodejs v14, but v12 works.
@@ -54,10 +58,13 @@ Let's Begin! We begin by installing nginx, certbot and verifying versions Strapi
 Next, we will configure your newly installed Nginx server. By default the configurations are located at: /etc/nginx/ & /etc/nginx/sites-available/. To keep things tidy and organized, we create a new api.example.org conf for each domain we are publicly facing to WWW. 
 
 ### Make Directory & Copy Default HTML page 
+
 ```sudo mkdir -p /var/www/api.example.org/html/```
+
 ```sudo cp -R /var/www/html/index.nginx-debian.html /var/www/api.example.org/html/index.html```
 
 ### Duplicate Default Config 
+
 ```sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/api.example.org```
 
 ### Update NGINX api.example.org Config File
@@ -131,16 +138,21 @@ We run the automated tool Certbot and create all the needed files and update our
 
 ### Run Certbot
 ```sudo  certbot --nginx```
+
 ```Choose api.example.org for the site to create certs. for.```
+
 ```Choose option 1 to disable auto redirect HTTP traffic to HTTPS since we already redirected the traffic manually.```
 
 **Note** sudo certbot renew --dry-run will test for automatic renewal for your certs. [Certbot Insturctions]
 
 ### Verify api.example.org Updated with Correct Domain
+
 ```sudo nano /etc/nginx/sites-enabled/api.example.org```
 
 ### Test Config & Restart Nginx
+
 ```sudo nginx -t```
+
 ```sudo systemctl restart nginx```
 
 ## Firewall Configuration
@@ -148,10 +160,12 @@ Allow public to connect via HTTPS, we need to open up ports 80 & 443 (HTTP & HTT
 
 ### Allow UFW Ports for Public Traffic
 ```sudo ufw allow HTTPS```
+
 ```sudo ufw allow HTTP```
 
 ### Verify Status & Reload UFW
 ```sudo ufw status```
+
 ```sudo ufw reload```
 
 **Tip** sudo ufw allow 'Nginx Full' opens both port 80 & 443 (For SSL / TLS encryption).
@@ -161,25 +175,31 @@ Now, we must install Strapi 4.0 on the server and launch the Strapi server.
 
 ### Strapi Default Installation
 Goto desired place to install Strapi project i.e. ~/development/my-strapi-project, then,
+
 ```yarn create strapi-app my-project```
 
-**Note:** The default Strapi installation uses SQLite as the database. You are able to use other databases like PostgreSQL. See [Strapi Installation] for more details.
+**Note:** The default Strapi installation uses SQLite as the database. You are able to use other databases like PostgreSQL. See **[Strapi Installation]** for more details.
 
 ### Launch Strapi Development Server
+
 ```yarn develop```
 
 ### Launch Strapi from Domain URL 
-```Goto: api.example.com via web browser of your choice```
+
+```Goto: api.example.com via web browser of your choice.```
+
 ```Follow the instructions and continue creating a new Strapi administrator.```
 
-## References:
-[Nginx Strapi Configuration:](https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment/optional-software/nginx-proxy.html#nginx-upstream)
+#### References:
+[Nginx Strapi Configuration](https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment/optional-software/nginx-proxy.html#nginx-upstream)
+
 [Strapi Installation](https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/installation/cli.html#creating-a-strapi-project)
-[Nginx Server Blocks:](https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04)
-[Install Yarn:](https://yarnpkg.com/getting-started/install)
-[Certbot Insturctions:](https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal)
 
-## Donations Are Welcome
+[Nginx Server Blocks](https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04)
+
+[Install Yarn](https://yarnpkg.com/getting-started/install)
+
+[Certbot Insturctions](https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal)
+
+#### Donations Are Welcome
 [Cash App](https://cash.app/$sharpeee)
-
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="odinzu" data-color="#FFDD00" data-emoji="🍕" data-font="Cookie" data-text="Buy me a pizza" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
