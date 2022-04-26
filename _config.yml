@@ -20,6 +20,7 @@
 
 baseurl: "/" # the subpath of your site, e.g. /blog /galacticsociety.github.io
 url: "https://sharpetronics.github.io" # the base hostname & protocol for your site, e.g. https://sharpetronics.github.io
+source: .
 
 #Latent Semantic Indexing for similarity bewtween documents.
 lsi: true
@@ -67,6 +68,7 @@ picture:
 # Build settings
 plugins:
   - jekyll-feed #manually generated rss.xml https://jekyllrb.com/tutorials/convert-site-to-jekyll/#10-rss-feed
+  - jekyll-admin
   - jekyll-strapi
   - jekyll-menus
   - jekyll-archives

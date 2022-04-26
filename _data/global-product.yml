@@ -1,0 +1,6 @@
+#Product list for all items for SharpeTronics
+global-product:
+  tax: 6%
+  shipping: $5.00
+  delivery: 3-5 days
+  warranty: 30 days money back

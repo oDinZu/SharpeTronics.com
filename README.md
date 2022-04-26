@@ -37,8 +37,8 @@ No proprietary operating system dependencies required, only Docker Engine super 
 *All Ruby dependencies are created and stored in the Docker container. Simple, smooth and sweet :)*
 
 # API's
-* Siteleaf CMS
-* Staticman with GitHub
+* Strapi CMS, Jekyll-Admin CMS
+* ISSO (Comments)
 * Snipcart with Stripe
 * Mailjet Newsletters
 * Algolia Search

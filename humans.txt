@@ -1,11 +1,11 @@
-     ____    __                                   ______
-    /\  _`\ /\ \                                 /\__  _\                   __
-    \ \,\L\_\ \ \___      __    _ __  _____     _\/_/\ \/ _ __  ___    ___ /\_\    ___    ____
-     \/_\__ \\ \  _ `\  /'__`\ /\`'__/\ '__`\ /'__`\\ \ \/\`'__/ __`\/' _ `\/\ \  /'___\ /',__\
-       /\ \L\ \ \ \ \ \/\ \L\.\\ \ \/\ \ \L\ /\  __/ \ \ \ \ \/\ \L\ /\ \/\ \ \ \/\ \__//\__, `\
-       \/_____/\/_/\/_/\/__/\/_/\/_/  \ \ \/ \/____/  \/_/\/_/\/___/ \/_/\/_/\/_/\/____/\/___/
-                                       \ \_\
-                                        \/_/
+____    __                                   ______
+/\  _`\ /\ \                                 /\__  _\                   __
+\ \,\L\_\ \ \___      __    _ __  _____     _\/_/\ \/ _ __  ___    ___ /\_\    ___    ____
+\/_\__ \\ \  _ `\  /'__`\ /\`'__/\ '__`\ /'__`\\ \ \/\`'__/ __`\/' _ `\/\ \  /'___\ /',__\
+  /\ \L\ \ \ \ \ \/\ \L\.\\ \ \/\ \ \L\ /\  __/ \ \ \ \ \/\ \L\ /\ \/\ \ \ \/\ \__//\__, `\
+  \/_____/\/_/\/_/\/__/\/_/\/_/  \ \ \/ \/____/  \/_/\/_/\/___/ \/_/\/_/\/_/\/____/\/___/
+                                  \ \_\
+                                   \/_/
 Owner: @csharpe_me (Charles Sharpe)
 Designer: @ajlkn, @csharpe_me
 Developer: @ajlkn, @csharpe_me
@@ -32,12 +32,6 @@ SPECIAL THANKS
 @ajlkn
 aj.lkn.io
 
-@oakstudios
-oak.is
-
-@AlainHelaili
-helaili.github.io
-
 TECHNOLOGY
 ----------
 
@@ -62,7 +56,7 @@ yaml.org
 Docker - Container virtualization
 docker.com
 
-Git, GitHub, GitHub Actions & GitHub Pages - Code collaboration, continuous delivery, version management, DevOps & static hosting
+Git, Gitea, Drone, GitHub (Mirror) & Gitea Pages - Code collaboration, continuous delivery, version management, DevOps & static hosting
 github.com
 
 Font Awesome - Premium Web icons
@@ -105,8 +99,8 @@ creativecommons.org, gnu.org, fsf.org
 Web Browser Testing - Testing UI/UX of the website
 google.com/chrome/, www.mozilla.org/en-US/firefox
 
-DuckDuckGo - Search engine privacy
-duckduckgo.com
+Startpage - Search engine privacy
+startpage.com
 
 
 FONTS
