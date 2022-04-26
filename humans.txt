@@ -97,7 +97,7 @@ Licensing - Use & distribute software
 creativecommons.org, gnu.org, fsf.org
 
 Web Browser Testing - Testing UI/UX of the website
-google.com/chrome/, www.mozilla.org/en-US/firefox
+google.com/chrome/, mozilla.org/en-US/firefox
 
 Startpage - Search engine privacy
 startpage.com

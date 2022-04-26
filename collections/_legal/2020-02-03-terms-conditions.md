@@ -4,7 +4,7 @@ layout: journal_single
 author: Charles #case sensitive, please use capitalization for names.
 
 title: Terms & Conditions
-sub_heading: Maecenas faucibus mollis interdum. Vivamus sagittis lacus
+sub_heading: Our rules and regulations.
 
 banner_image: "/assets/images/pic01.jpg" #Size of banner_image 840x341
 banner_image_alt: "terms and conditions"

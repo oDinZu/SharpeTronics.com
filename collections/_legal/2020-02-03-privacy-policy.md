@@ -4,7 +4,7 @@ layout: journal_single
 author: Charles #case sensitive, please use capitalization for names.
 
 title: Privacy Policy
-sub_heading: Maecenas faucibus mollis interdum. Vivamus sagittis lacus
+sub_heading: Your data is always yours.
 
 banner_image: "/assets/images/pic01.jpg" #Size of banner_image 840x341
 banner_image_alt: "privacy policy"
