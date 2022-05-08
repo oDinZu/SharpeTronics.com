@@ -23,7 +23,7 @@ steps:
       path: /srv/jekyll
 
   commands:
-    - mkdir -pv .jekyll-cache/Jekyll/Cache/Jekyll-Cache
+    - mkdir -pv .jekyll-cache/Jekyll/Cache/Jekyll--Cache
     - gem install bundler
     - bundle install
     - bundle exec jekyll build --trace
