@@ -1,11 +1,11 @@
 ---
 kind: pipeline
 type: docker
-name: jekyll-builder
+name: default
 
 pipeline:
   build:
-    image: ruby
+    image: jekyll/jekyll:4.2
     commands:
       - gem install bundler
       - bundle install
