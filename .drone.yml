@@ -1,7 +1,7 @@
 ---
 kind: pipeline
 type: docker
-name: default
+name: build
 
 workspace:
   path: /drone/src
@@ -32,36 +32,22 @@ steps:
     - bundle exec jekyll build --trace
     - ls -a _site/
     - rm _site/docker-compose.yml
-    - rsync -h
+    - tar -czvf www-data.tar.gz _site/*
 
 ---
 kind: pipeline
 type: docker
-name: default
+name: transfer
 
 steps:
-- name: rsync
+- name: transfer-website
   image: drillster/drone-rsync
   settings:
-    hosts:
-      - remote1
-      - remote2
-    user:
-      from_secret: rsync_user
+    user: odinzu
     key:
       from_secret: rsync_key
+    hosts:
+      - remote1
     source: ./dist
     target: ~/packages
-    include:
-      - "app.tar.gz"
-      - "app.tar.gz.md5"
-    exclude:
-      - "**.*"
-    prescript:
-      - cd ~/packages
-      - md5sum -c app.tar.gz.md5
-      - tar -xf app.tar.gz -C ~/app
-    script:
-      - cd ~/packages
-      - md5sum -c app.tar.gz.md5
-      - tar -xf app.tar.gz -C ~/app
+    secrets: [ rsync_key ]
