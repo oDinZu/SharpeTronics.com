@@ -17,7 +17,7 @@ trigger:
 steps:
 - name: build-website
   image: jekyll/jekyll:4.2.2
-  privileged: true
+  privileged: false
   volumes:
     - name: jekyll
       path: /srv/jekyll
