@@ -21,7 +21,6 @@ steps:
     - name: jekyll
       path: /srv/jekyll
   commands:
-    - gem update --system
     - gem install bundler
     - bundle install
-    - bundle exec jekyll build
+    - bundle exec jekyll build --trace
