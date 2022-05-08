@@ -7,10 +7,11 @@ workspace:
   path: /drone/src
 
 platform:
-  os: ubuntu-18.04
+  os: linux
   arch: amd64
 
 steps:
+- name: jekyll-build
   image: jekyll/jekyll:4.2
   volumes:
     - name: jekyll
