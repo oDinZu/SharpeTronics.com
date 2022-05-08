@@ -33,7 +33,7 @@ steps:
     - ls -a _site/
     - rm _site/docker-compose.yml
     - tar -czf www-data.tar.gz _site/*
-    - ================================ Download Website Data ================================
+    - echo ================================ Download Website Data ================================
     - ls ww*
 
 ---
