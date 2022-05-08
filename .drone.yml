@@ -15,11 +15,12 @@ trigger:
   - master
 
 steps:
-- name: jekyll-build
+- name: build-website
   image: jekyll/jekyll:4.2.2
   volumes:
     - name: jekyll
       path: /srv/jekyll
+
   commands:
     - gem install bundler
     - bundle install
