@@ -26,7 +26,8 @@ steps:
     - whoami
     - pwd
     - ls -al
-    - chown -R jekyll:jekyll /drone/src
+    - chown -Rv jekyll:jekyll /drone/src
     - gem install bundler
     - bundle install
     - bundle exec jekyll build --trace
+    -ls -a
