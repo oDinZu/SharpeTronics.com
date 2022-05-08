@@ -3,10 +3,9 @@ kind: pipeline
 type: docker
 name: default
 
-pipeline:
-  build:
-    image: jekyll/jekyll:4.2
-    commands:
-      - gem install bundler
-      - bundle install
-      - bundle exec jekyll build
+steps:
+  image: jekyll/jekyll:4.2
+  commands:
+    - gem install bundler
+    - bundle install
+    - bundle exec jekyll build
