@@ -20,6 +20,8 @@ steps:
   volumes:
     - name: jekyll
       path: /srv/jekyll
+    - name: jekyll-cache
+      path: /drone/src/.jekyll-cache
 
   commands:
     - gem install bundler
