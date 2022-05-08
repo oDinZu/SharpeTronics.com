@@ -32,7 +32,8 @@ steps:
     - bundle exec jekyll build --trace
     - ls -a _site/
     - rm _site/docker-compose.yml
-    - tar -czvf www-data.tar.gz _site/* && ls .
+    - echo "================================ Download Website Data ================================"
+    - tar -czvf www-data.tar.gz _site/* && ls ww*
 
 ---
 kind: pipeline
