@@ -31,3 +31,37 @@ steps:
     - bundle install
     - bundle exec jekyll build --trace
     - ls -a _site/
+    - rm _site/docker-compose.yml
+    - rsync -h
+
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: rsync
+  image: drillster/drone-rsync
+  settings:
+    hosts:
+      - remote1
+      - remote2
+    user:
+      from_secret: rsync_user
+    key:
+      from_secret: rsync_key
+    source: ./dist
+    target: ~/packages
+    include:
+      - "app.tar.gz"
+      - "app.tar.gz.md5"
+    exclude:
+      - "**.*"
+    prescript:
+      - cd ~/packages
+      - md5sum -c app.tar.gz.md5
+      - tar -xf app.tar.gz -C ~/app
+    script:
+      - cd ~/packages
+      - md5sum -c app.tar.gz.md5
+      - tar -xf app.tar.gz -C ~/app
