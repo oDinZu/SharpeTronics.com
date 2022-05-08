@@ -23,10 +23,10 @@ steps:
       path: /srv/jekyll
 
   commands:
-    - mkdir -pv .jekyll-cache/Jekyll/Cache/Jekyll--Cache
     - whoami
     - pwd
     - ls -al
+    - chown -R jekyll:jekyll /drone/src
     - gem install bundler
     - bundle install
     - bundle exec jekyll build --trace
