@@ -33,7 +33,7 @@ steps:
     - ls -a _site/
     - rm _site/docker-compose.yml
     - echo "================================ Download Website Data ================================"
-    - tar -czvf www-data.tar.gz _site/* && ls ww*
+    - tar -czf www-data.tar.gz _site/* && ls ww*
 
 ---
 kind: pipeline
