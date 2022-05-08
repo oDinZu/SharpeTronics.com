@@ -1,0 +1,12 @@
+---
+kind: pipeline
+type: docker
+name: jekyll-builder
+
+pipeline:
+  build:
+    image: ruby
+    commands:
+      - gem install bundler
+      - bundle install
+      - bundle exec jekyll build
