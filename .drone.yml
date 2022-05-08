@@ -24,6 +24,8 @@ steps:
 
   commands:
     - mkdir -pv .jekyll-cache/Jekyll/Cache/Jekyll--Cache
+    - whoami
+    - pwd
     - gem install bundler
     - bundle install
     - bundle exec jekyll build --trace
