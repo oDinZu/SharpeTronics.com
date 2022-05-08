@@ -15,7 +15,9 @@ gem "jekyll", "~> 4.2.2"
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
 # gem "github-pages", group: :jekyll_plugins
 # If you have any plugins, put them here!
+# Added webrick for Jekyll 4.2.2; Ruby 3 doesn't have webrick by default.
 group :jekyll_plugins do
+   gem "webrick", "~> 1.7"
    gem "jekyll-feed", "~> 0.12"
    gem "jekyll-menus"
    gem "jekyll-tagging"

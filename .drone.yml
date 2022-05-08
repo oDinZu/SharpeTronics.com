@@ -10,9 +10,13 @@ platform:
   os: linux
   arch: amd64
 
+trigger:
+  branch:
+  - master
+
 steps:
 - name: jekyll-build
-  image: jekyll/jekyll:4.0
+  image: jekyll/jekyll:4.2.2
   volumes:
     - name: jekyll
       path: /srv/jekyll
@@ -21,7 +25,3 @@ steps:
     - gem install bundler
     - bundle install
     - bundle exec jekyll build
-
-trigger:
-  branch:
-  - master

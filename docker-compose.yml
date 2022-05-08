@@ -67,9 +67,9 @@
 version: '3'
 services:
     jekyll-serve:
-      image: jekyll/jekyll:4.0
+      image: jekyll/jekyll:4.2.2
       volumes:
         - '.:/srv/jekyll'
       ports:
         - 4000:4000
-      command: 'jekyll serve --lsi --watch --verbose --trace'
+      command: jekyll serve --lsi --watch --verbose --trace
