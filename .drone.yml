@@ -3,9 +3,24 @@ kind: pipeline
 type: docker
 name: default
 
+workspace:
+  path: /drone/src
+
+platform:
+  os: ubuntu-18.04
+  arch: amd64
+
 steps:
   image: jekyll/jekyll:4.2
+  volumes:
+    - name: jekyll
+      path: /srv/jekyll
   commands:
+    - gem update --system
     - gem install bundler
     - bundle install
     - bundle exec jekyll build
+
+trigger:
+  branch:
+  - master
