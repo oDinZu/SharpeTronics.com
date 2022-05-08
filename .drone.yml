@@ -12,7 +12,7 @@ platform:
 
 steps:
 - name: jekyll-build
-  image: jekyll/jekyll:latest
+  image: jekyll/jekyll:4.0
   volumes:
     - name: jekyll
       path: /srv/jekyll

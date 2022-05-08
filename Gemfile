@@ -21,9 +21,8 @@ group :jekyll_plugins do
    gem "jekyll-tagging"
    gem "jekyll-archives"
    gem "jekyll-paginate-v2"
-   gem 'jekyll_picture_tag', '~> 1.6'
-   gem 'jekyll-strapi'
-   gem 'jekyll-admin'
+   gem "jekyll-strapi"
+   gem "jekyll-admin"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem

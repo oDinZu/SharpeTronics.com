@@ -74,7 +74,6 @@ plugins:
   - jekyll-archives
   - jekyll-paginate-v2
   - jekyll/tagging
-  #- jekyll-picture-tag #currently not in use...see "picture settings above"
 
 sass:
   style: compressed # possible values: nested expanded compact compressed
