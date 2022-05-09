@@ -42,7 +42,8 @@ steps:
     - cp -R ../_site/* .
     - git add *
     - git commit -m "bots beeing bots --drone www-data push"
-    - echo $USERNAME
+    - echo "$USERNAME"
+    - cat "$USERNAME"
     - git push "https://"$USERNAME":"$PASSWORD"@git.sharpetronics.com/sharpetronics/sharpetronics.com.git origin www-data"
     - tar -czf ../www-data.tar.gz ../_site/*
     - ls ../ww*
