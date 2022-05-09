@@ -32,7 +32,7 @@ steps:
     - bundle exec jekyll build --trace
     - ls -a _site/
     - rm _site/docker-compose.yml
-    - git pull
+    - git pull origin www-data
     - git checkout www-data
     - cp -R _site/* .
     - git add *
