@@ -16,7 +16,7 @@ trigger:
 
 steps:
 - name: build-website
-  image: jekyll/jekyll:4.2.2
+  image: ruby/ruby:latest
   environment:
     GITEA_USER:
       from_secret: gitea_user
@@ -61,7 +61,6 @@ steps:
     - git commit -m "bots beeing bots! A drone www-data push"
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
-    - docker --help
     # write the ssh key to disk for rsync handshake to remote server
     - mkdir -p /root/.ssh/ && touch /root/.ssh/id_rsa
     - echo -n "$RSA_KEY" > /root/.ssh/id_rsa
