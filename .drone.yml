@@ -18,31 +18,55 @@ steps:
 - name: build-website
   image: jekyll/jekyll:4.2.2
   environment:
-    USERNAME:
+    GITEA_USER:
       from_secret: gitea_user
-    PASSWORD:
+    GITEA_PASS:
       from_secret: gitea_pass
+    SSH_USER:
+      from_secret: ssh_user
+    SSH_HOST:
+      from_secret: ssh_host
+    RSA_KEY:
+      from_secret: rsa_key
   privileged: false
   volumes:
     - name: jekyll
       path: /srv/jekyll
 
   commands:
+    # general vm information for debugging
     - whoami
     - pwd
     - ls -al
     - git --version && git status
+
+    # setup Jekyll permissions and build jekyll site
     - chown -R jekyll:jekyll /drone/src
     - gem install bundler
     - bundle install
     - bundle exec jekyll build --trace
+
+    # prepare _site dir
     - ls -a _site/
     - rm _site/docker-compose.yml
+
+    # update www-data branch with fresh drone ci Jekyll _site build
     - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git && cd sharpetronics.com/
     - git checkout www-data
     - cp -R ../_site/* .
     - git add *
-    - git commit -m "bots beeing bots --drone www-data push"
-    - git push https://$USERNAME:$PASSWORD@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
+    - git commit -m "bots beeing bots! A drone www-data push"
+    - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
+
+    # write the ssh key to disk for rsync handshake to remote server
+    - mkdir -p /root/.ssh/ && touch /root/.ssh/id_rsa
+    - echo -n "$RSA_KEY" > /root/.ssh/id_rsa
+    - chmod 600 /root/.ssh/id_rsa
+    # sync files to remote server [local _site ] to [remote _site www]
+    - rsync -a ../_site/* $SSH_USER@$SSH_HOST:/var/www/demo.sharpetronics.com/
+
+    # create tar.gz of _site directory for download elsewhere
     - tar -czf ../www-data.tar.gz ../_site/*
     - ls ../ww*
+
+    # TBC... add download of files from download.sharpetronics.com
