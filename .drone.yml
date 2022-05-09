@@ -16,7 +16,7 @@ trigger:
 
 steps:
 - name: build-website
-  image: ruby/ruby:latest
+  image: ruby:latest
   environment:
     GITEA_USER:
       from_secret: gitea_user
