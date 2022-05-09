@@ -34,4 +34,4 @@ steps:
     - rm _site/docker-compose.yml
     - tar -czf www-data.tar.gz _site/*
     - ls ww*
-    - git --version
+    - git --version && git status
