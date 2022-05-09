@@ -43,7 +43,7 @@ steps:
     - git add *
     - git commit -m "bots beeing bots --drone www-data push"
     - git config credential.helper store
-    - git push origin www-data
+    - git push https://$USERNAME:$PASSWORD@git.sharpetronics.com/sharpetronics/sharpetronics.com.git origin www-data
     - tar -czf ../www-data.tar.gz ../_site/*
     - ls ../ww*
     - git --version && git status
