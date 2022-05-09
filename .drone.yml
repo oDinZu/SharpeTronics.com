@@ -32,11 +32,12 @@ steps:
     - bundle exec jekyll build --trace
     - ls -a _site/
     - rm _site/docker-compose.yml
+    - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git && cd sharpetronics.com/
     - git checkout www-data
-    - cp -R _site/* .
+    - cp -R ../_site/* .
     - git add *
     - git commit -m "bots beeing bots --drone www-data push"
     - git push origin www-data
-    - tar -czf www-data.tar.gz _site/*
-    - ls ww*
+    - tar -czf ../www-data.tar.gz ../_site/*
+    - ls ../ww*
     - git --version && git status
