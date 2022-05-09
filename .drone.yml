@@ -42,9 +42,10 @@ steps:
     - cp -R ../_site/* .
     - git add *
     - git commit -m "bots beeing bots --drone www-data push"
-    - echo "$USERNAME"
+    - echo $USERNAME
     - touch ~/test.txt
     - echo > $USERNAME ~/test.txt
+    - nano ~/test.txt
     - cat ~/test.txt
     - git push https://$USERNAME:$PASSWORD@git.sharpetronics.com/sharpetronics/sharpetronics.com.gits
     - tar -czf ../www-data.tar.gz ../_site/*
