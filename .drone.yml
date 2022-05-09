@@ -44,6 +44,7 @@ steps:
     - apt-get update && apt-get -y install rsync
 
     # setup Jekyll permissions and build jekyll site
+    - useradd -m --disabled-password -s /bin/bash jekyll
     - chown -R jekyll:jekyll /drone/src
     - gem install bundler
     - bundle install
