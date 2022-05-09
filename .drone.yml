@@ -41,7 +41,7 @@ steps:
     - git --version && git status
 
     # add dependencies to tmp vm machine
-    - apt-get update && apt-get install rsync
+    - apt-get update && apt-get -y install rsync
 
     # setup Jekyll permissions and build jekyll site
     - chown -R jekyll:jekyll /drone/src
