@@ -32,7 +32,8 @@ steps:
     - bundle exec jekyll build --trace
     - ls -a _site/
     - rm _site/docker-compose.yml
-    - git checkout origin www-data
+    - git pull
+    - git checkout www-data
     - cp -R _site/* .
     - git add *
     - git commit -m "bots beeing bots --drone www-data push"
