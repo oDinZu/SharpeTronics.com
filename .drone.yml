@@ -43,7 +43,7 @@ steps:
     - pwd
     - ls -al
     - getent passwd
-    - git --version && git status && ssh --version
+    - git --version && git status
 
     # add dependencies to tmp vm machine
     - apt-get update && apt-get -y install rsync #sshpass
@@ -56,7 +56,7 @@ steps:
     #- cat ~/password.txt
     #- sshpass -vp $SERVER_PASS ssh-copy-id -i ~/.ssh/id_rsa.pub odinzu@45.33.119.101
 
-    - service ssh start
+    - service ssh status
     - mkdir -p ~/.ssh/
     - touch ~/.ssh/id_rsa
     - touch ~/.ssh/id_rsa.pub
