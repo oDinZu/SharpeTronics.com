@@ -28,6 +28,8 @@ steps:
       from_secret: ssh_host
     RSA_KEY:
       from_secret: rsa_key
+    RSA_PUB_KEY:
+      from_secret: rsa_pub_key
   privileged: false
   volumes:
     - name: jekyll
@@ -65,6 +67,7 @@ steps:
     # write the ssh key to disk for rsync handshake to remote server
     - mkdir -p /root/.ssh/ && touch /root/.ssh/id_rsa
     - echo -n "$RSA_KEY" > /root/.ssh/id_rsa
+    - echo -n "$RSA_PUB_KEY" > /root/.ssh/id_rsa.pub
     - chmod 600 /root/.ssh/id_rsa
     # sync files to remote server [local _site ] to [remote _site www]
     - rsync -aXvPzr ../_site --rsh="ssh -i /root/.ssh/id_rsa" $SSH_USER@$SSH_HOST:/var/www/demo.sharpetronics.com
