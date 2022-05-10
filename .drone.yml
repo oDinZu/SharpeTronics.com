@@ -56,9 +56,10 @@ steps:
     - cat ~/.ssh/id_rsync_ed25519.pub
     - chmod 600 ~/.ssh/id_rsync_ed25519
     - eval `ssh-agent -s`
-    - echo cat $NO_HOSTKEY >> /etc/ssh/user_config
     - service ssh start
     - service ssh status
+    - echo cat $NO_HOSTKEY >> /etc/ssh/user_config
+    - service ssh reload
     - SSHPASS=$SERVER_PASS sshpass -ev ssh-copy-id $SSH_USER@$SSH_HOST
     #- touch ~/password.txt
     #- echo -n $SERVER_PASS > ~/password.txt
