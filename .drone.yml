@@ -65,10 +65,15 @@ steps:
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
     # write the ssh key to disk for rsync handshake to remote server
-    - mkdir -p /root/.ssh/ && touch /root/.ssh/id_rsa
+    - mkdir -p /root/.ssh/ && touch /root/.ssh/id_rsa && touch /root/.ssh/id_rsa.pub
     - echo -n "$RSA_KEY" > /root/.ssh/id_rsa
     - echo -n "$RSA_PUB_KEY" > /root/.ssh/id_rsa.pub
-    - chmod 600 /root/.ssh/id_rsa
+    - chmod 600 /root/.ssh/id_rsa && chmod 600 /root/.ssh/id_rsa.pub
+
+    # add git.sharpetronics.com to known hosts
+    - touch /root/.ssh/known_hosts
+    - chmod 600 /root/.ssh/known_hosts
+    - ssh-keyscan -H git.sharpetronics.com > /etc/ssh/ssh_known_hosts 2> /dev/null
     # sync files to remote server [local _site ] to [remote _site www]
     - rsync -aXvPzr ../_site --rsh="ssh -i /root/.ssh/id_rsa" $SSH_USER@$SSH_HOST:/var/www/demo.sharpetronics.com
 
