@@ -56,7 +56,6 @@ steps:
     #- cat ~/password.txt
     #- sshpass -vp $SERVER_PASS ssh-copy-id -i ~/.ssh/id_rsa.pub odinzu@45.33.119.101
 
-    - service ssh status
     - mkdir -p ~/.ssh/
     - touch ~/.ssh/id_rsa
     - touch ~/.ssh/id_rsa.pub
