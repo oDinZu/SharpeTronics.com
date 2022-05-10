@@ -43,7 +43,7 @@ steps:
     - ls /
     - ls /home
     - ls /root
-    - cut -d -f1 /etc/passwd
+    - getent passwd
     - git --version && git status
 
     # add dependencies to tmp vm machine
