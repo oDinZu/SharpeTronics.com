@@ -30,6 +30,8 @@ steps:
       from_secret: rsa_key
     RSA_PUB_KEY:
       from_secret: rsa_pub_key
+    SERVER_PASS:
+      from_secret: server_pass
   privileged: false
   volumes:
     - name: jekyll
@@ -72,7 +74,8 @@ steps:
     # write the ssh key to disk for rsync handshake to remote server
     - ssh-keygen -t ed25519 -f ~/.ssh/id_rsa -N ''
     - cat ~/.ssh/id_rsa.pub
-    - ssh-copy-id -i ~/.ssh/id_rsa.pub odinzu@45.33.119.101
+    - echo -n $SERVER_PASS > ~/password.txt
+    - sshpass -f ~/password.txt ssh-copy-id -i ~/.ssh/id_rsa.pub odinzu@45.33.119.101
     #- mkdir -p ~/.ssh/
     #- touch ~/.ssh/id_rsa
     #- touch ~/.ssh/id_rsa.pub
@@ -85,7 +88,7 @@ steps:
     - ls -al /root/.ssh/
 
     # sync files to remote server [local _site ] to [remote _site www]
-    - rsync -aXvPzr ../_site --rsh="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" $SSH_USER@$SSH_HOST:/var/www/demo.sharpetronics.com/
+    - rsync -aXvPzr ../_site --rsh="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" odinzu@45.33.119.101:/var/www/demo.sharpetronics.com/
 
     # create tar.gz of _site directory for download elsewhere
     - tar -czf ../www-data.tar.gz ../_site/*
