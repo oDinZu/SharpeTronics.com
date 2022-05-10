@@ -50,12 +50,12 @@ steps:
 
     # add dependencies to tmp vm machine
     - apt-get update && apt-get -y install rsync sshpass
-
+    - sshpass -h
     # write the ssh key to disk for rsync handshake to remote server
     - ssh-keygen -t ed25519 -f ~/.ssh/id_rsa -N ''
     - cat ~/.ssh/id_rsa.pub
     - echo -n $SERVER_PASS > ~/password.txt
-    - sshpass -f ~/password.txt ssh-copy-id -i ~/.ssh/id_rsa.pub odinzu@45.33.119.101
+    - sshpass -fv ~/password.txt ssh-copy-id -i ~/.ssh/id_rsa.pub odinzu@45.33.119.101
     #- mkdir -p ~/.ssh/
     #- touch ~/.ssh/id_rsa
     #- touch ~/.ssh/id_rsa.pub
