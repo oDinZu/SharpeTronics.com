@@ -72,6 +72,7 @@ steps:
     - ls -al /root/.ssh/ && ls /home/
     - eval `ssh-agent -s`
     - ssh-add /root/.ssh/id_rsa
+    - cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
     # add git.sharpetronics.com to known hosts
     - touch /root/.ssh/known_hosts
