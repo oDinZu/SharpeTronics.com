@@ -43,9 +43,9 @@ steps:
     - getent passwd
     - git --version && git status
 
-
     # add dependencies to tmp vm machine
     - apt-get update && apt-get -y install rsync sshpass openssh-server openssh-client
+    - sshpass --help
     # write the ssh key to disk for rsync handshake to remote server
     - mkdir -p ~/.ssh/
     - chmod 700 ~/.ssh
