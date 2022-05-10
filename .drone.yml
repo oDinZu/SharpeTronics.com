@@ -54,6 +54,7 @@ steps:
     # write the ssh key to disk for rsync handshake to remote server
     - ssh-keygen -t ed25519 -f ~/.ssh/id_rsa -N ''
     - cat ~/.ssh/id_rsa.pub
+    - eval `ssh-agent -s`
     - ssh-add ~/.ssh/id_rsa
     - touch ~/password.txt
     - echo -n $SERVER_PASS > ~/password.txt
@@ -67,7 +68,6 @@ steps:
     #- echo -nv $RSA_PUB_KEY > ~/.ssh/id_rsa.pub
     #- cp /root/.ssh/id_rsa.pub ~/.ssh/authorized_keys
     - chmod 600 ~/.ssh/id_rsa
-    - eval `ssh-agent -s`
     #- ls -al /root/.ssh/
 
     # setup Jekyll permissions and build jekyll site
