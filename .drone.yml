@@ -67,8 +67,7 @@ steps:
     - echo -n "$RSA_KEY" > /root/.ssh/id_rsa
     - chmod 600 /root/.ssh/id_rsa
     # sync files to remote server [local _site ] to [remote _site www]
-    - cat /root/.ssh/id_rsa
-    - rsync -aXvPzr ../site/* --rsh="ssh -i /root/.ssh/id_rsa" $SSH_USER@$SSH_HOST:/var/www/demo.sharpetronics.com
+    - rsync -aXvPzr ../_site --rsh="ssh -i /root/.ssh/id_rsa" $SSH_USER@$SSH_HOST:/var/www/demo.sharpetronics.com
 
     # create tar.gz of _site directory for download elsewhere
     - tar -czf ../www-data.tar.gz ../_site/*
