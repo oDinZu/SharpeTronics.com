@@ -61,9 +61,9 @@ steps:
     - touch ~/.ssh/id_rsa
     - touch ~/.ssh/id_rsa.pub
     #- cat "$RSA_KEY" >> "~/.ssh/id_rsa" <
-    - echo \" cat 'RSA_KEY'\" >> ~/.ssh/id_rsa
+    - echo \" cat '$RSA_KEY'\" >> ~/.ssh/id_rsa
     #- cat "$RSA_PUB_KEY" >> ~/.ssh/id_rsa.pub
-    - echo \" cat 'RSA_PUB_KEY'\" >> ~/.ssh/id_rsa.pub
+    - echo \" cat '$RSA_PUB_KEY'\" >> ~/.ssh/id_rsa.pub
     - cat ~/.ssh/id_rsa.pub
     - chmod 600 ~/.ssh/id_rsa
     - eval `ssh-agent -s`
