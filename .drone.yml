@@ -26,10 +26,8 @@ steps:
       from_secret: ssh_user
     SSH_HOST:
       from_secret: ssh_host
-    RSA_KEY:
-      from_secret: rsa_key
-    RSA_PUB_KEY:
-      from_secret: rsa_pub_key
+    NO_HOSTKEY:
+      from_secret: no_hostkey
     SERVER_PASS:
       from_secret: server_pass
   privileged: false
