@@ -40,7 +40,8 @@ steps:
     - whoami
     - pwd
     - ls -al
-    - ls /
+    - ls /home
+    - ls /root
     - git --version && git status
 
     # add dependencies to tmp vm machine
@@ -73,11 +74,11 @@ steps:
     - echo -n "$RSA_KEY" > /root/.ssh/id_rsa
     - echo -n "$RSA_PUB_KEY" > /root/.ssh/id_rsa.pub
     - cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
+    - eval `ssh-agent -s`
     - ssh-add /root/.ssh/id_rsa
     - chmod 600 /root/.ssh/id_rsa
     - chmod 600 /root/.ssh/id_rsa.pub
     - ls -al /root/.ssh/
-    - eval `ssh-agent -s`
 
 
     # add git.sharpetronics.com to known hosts
