@@ -59,8 +59,8 @@ steps:
     - mkdir -p ~/.ssh/
     - touch ~/.ssh/id_rsa
     - touch ~/.ssh/id_rsa.pub
-    - echo -n $RSA_KEY > ~/.ssh/id_rsa
-    - echo -n $RSA_PUB_KEY > ~/.ssh/id_rsa.pub
+    - echo -n "$RSA_KEY" > ~/.ssh/id_rsa
+    - echo -n "$RSA_PUB_KEY" > ~/.ssh/id_rsa.pub
     - cat ~/.ssh/id_rsa.pub
     - chmod 600 ~/.ssh/id_rsa
     - eval `ssh-agent -s`
