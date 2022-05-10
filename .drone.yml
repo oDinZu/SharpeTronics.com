@@ -61,7 +61,7 @@ steps:
     - touch ~/.ssh/id_rsa.pub
     - echo -n "$RSA_KEY" > ~/.ssh/id_rsa
     - echo -n "$RSA_PUB_KEY" > ~/.ssh/id_rsa.pub
-    - echo ~/.ssh/id_rsa.pub
+    - echo "$RSA_PUB_KEY"
     - chmod 600 ~/.ssh/id_rsa
     - eval `ssh-agent -s`
     - ssh-add ~/.ssh/id_rsa
