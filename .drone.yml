@@ -71,7 +71,7 @@ steps:
     - chmod 600 /root/.ssh/id_rsa && chmod 600 /root/.ssh/id_rsa.pub
     - ls -al /root/.ssh/
     - eval `ssh-agent -s`
-    - ssh-add /root/id_rsa
+    - ssh-add /root/.ssh/id_rsa
 
     # add git.sharpetronics.com to known hosts
     - touch /root/.ssh/known_hosts
