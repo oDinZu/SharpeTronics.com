@@ -70,14 +70,17 @@ steps:
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
     # write the ssh key to disk for rsync handshake to remote server
-    - mkdir -p /root/.ssh/
-    - touch /root/.ssh/id_rsa
-    - touch /root/.ssh/id_rsa.pub
-    - echo -nv $RSA_KEY > /root/.ssh/id_rsa
-    - echo -nv $RSA_PUB_KEY > /root/.ssh/id_rsa.pub
-    - cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
-    - chmod 600 /root/.ssh/id_rsa
-    - chmod 600 /root/.ssh/id_rsa.pub
+    - ssh-keygen -t ed25519 -f ~/.ssh/id_rsa -N ''
+    - cat ~/.ssh/id_rsa.pub
+    - ssh-copy-id -i ~/.ssh/id_rsa.pub $SSH_USER@$SSH_HOST
+    #- mkdir -p ~/.ssh/
+    #- touch ~/.ssh/id_rsa
+    #- touch ~/.ssh/id_rsa.pub
+    #- echo -nv $RSA_KEY > ~/.ssh/id_rsa
+    #- echo -nv $RSA_PUB_KEY > ~/.ssh/id_rsa.pub
+    #- cp /root/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+    - chmod 600 ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa.pub
     - eval `ssh-agent -s`
     #- ssh-add /root/.ssh/id_rsa
     - ls -al /root/.ssh/
