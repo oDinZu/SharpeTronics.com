@@ -49,10 +49,10 @@ steps:
     - git --version && git status
 
     # add dependencies to tmp vm machine
-    - apt-get update && apt-get -y install rsync
+    - apt-get update && apt-get -y install rsync sshpass
 
     # setup Jekyll permissions and build jekyll site
-    - adduser --no-create-home --disabled-password jekyll
+    - adduser --no-create-home --disabled-password --gecos "" jekyll
     - chown -R jekyll:jekyll /drone/src
     - gem install bundler
     - bundle install
