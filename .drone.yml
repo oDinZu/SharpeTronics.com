@@ -60,8 +60,8 @@ steps:
     - touch ~/.ssh/id_rsa
     - touch ~/.ssh/id_rsa.pub
     - echo -n "$RSA_KEY" > ~/.ssh/id_rsa
-    - echo -n "$RSA_PUB_KEY" > ~/.ssh/id_rsa.pub
-    - echo "$RSA_PUB_KEY"
+    - echo -n "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDfafplZc39GZ7tSZc7uGvMKl6g/kBf0pPRRCbwoBXeO odinzu@li435-140" > ~/.ssh/id_rsa.pub
+    - cat ~/.ssh/id_rsa.pub
     - chmod 600 ~/.ssh/id_rsa
     - eval `ssh-agent -s`
     - ssh-add ~/.ssh/id_rsa
