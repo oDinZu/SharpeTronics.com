@@ -57,7 +57,7 @@ steps:
     - cat ~/.ssh/id_rsync_ed25519.pub
     - chmod 600 ~/.ssh/id_rsync_ed25519
     - eval `ssh-agent -s`
-    - SSHPASS='3304 Tickle' sshpass -ev ssh-copy-id odinzu@45.33.119.101
+    - SSHPASS=$SSHPASS sshpass -ev ssh-copy-id odinzu@45.33.119.101
     #- touch ~/password.txt
     #- echo -n $SERVER_PASS > ~/password.txt
     #- echo $SERVER_PASS
