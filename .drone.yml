@@ -41,9 +41,8 @@ steps:
     - pwd
     - ls -al
     - ls /
-    - cd /home/
-    - ls
-    - ls /root/
+    - ls /home
+    - ls /root
     - git --version && git status
 
     # add dependencies to tmp vm machine
