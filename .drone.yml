@@ -48,12 +48,12 @@ steps:
     # add dependencies to tmp vm machine
     - apt-get update && apt-get -y install rsync sshpass
     # write the ssh key to disk for rsync handshake to remote server
-    #- mkdir -p ~/.ssh/
-    #- chmod 700 ~/.ssh
-    #- touch ~/.ssh/id_rsync_ed25519
-    #- touch ~/.ssh/id_rsync_ed25519.pub
+    - mkdir -p ~/.ssh/
+    - chmod 700 ~/.ssh
+    - touch ~/.ssh/id_rsync_ed25519
+    - touch ~/.ssh/id_rsync_ed25519.pub
     - ssh-keygen -t ed25519 -f ~/.ssh/id_rsync_ed25519 -N ''
-    - sshpass -vp $SERVER_PASS ssh-copy-id -i ~/.ssh/id_rsync_ed25519.pub odinzu@45.33.119.101
+    - sshpass -vp $SERVER_PASS ssh-copy-id -i /root/.ssh/id_rsync_ed25519.pub odinzu@45.33.119.101
     - cat ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - eval `ssh-agent -s`
@@ -94,7 +94,7 @@ steps:
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
     # sync files to remote server [local _site ] to [remote _site www]
-    - rsync -aXvPzr ../_site odinzu@45.33.119.101:/var/www/demo.sharpetronics.com/
+    - rsync -aXvPzr -e ssh ../_site/* odinzu@45.33.119.101:/var/www/demo.sharpetronics.com/html/
 
     # create tar.gz of _site directory for download elsewhere
     - tar -czf ../www-data.tar.gz ../_site/*
