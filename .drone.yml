@@ -54,8 +54,8 @@ steps:
     # write the ssh key to disk for rsync handshake to remote server
     - ssh-keygen -t ed25519 -f ~/.ssh/id_rsa -N ''
     - cat ~/.ssh/id_rsa.pub
-    - echo -n $SERVER_PASS > ~/password.txt
     - touch ~/password.txt
+    - echo -n $SERVER_PASS > ~/password.txt
     - echo $SERVER_PASS
     - cat ~/password.txt
     - sshpass -fv "~/password.txt" ssh-copy-id -i ~/.ssh/id_rsa.pub odinzu@45.33.119.101
