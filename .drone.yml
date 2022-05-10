@@ -56,10 +56,17 @@ steps:
     #- cat ~/password.txt
     #- sshpass -vp $SERVER_PASS ssh-copy-id -i ~/.ssh/id_rsa.pub odinzu@45.33.119.101
 
-    - mkdir -p ~/.ssh/
+    - service ssh start
+      mkdir -p ~/.ssh/
     - touch ~/.ssh/id_rsa
     - touch ~/.ssh/id_rsa.pub
-    - echo -n "$RSA_KEY" > ~/.ssh/id_rsa
+    - echo -n "-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+QyNTUxOQAAACA32n6ZWXN/Rme7UmXO7hrzCpeoP5AX9KT0UQm8KAV3jgAAAJhPeME/T3jB
+PwAAAAtzc2gtZWQyNTUxOQAAACA32n6ZWXN/Rme7UmXO7hrzCpeoP5AX9KT0UQm8KAV3jg
+AAAEBd+2cwrEiYpslkwUaQkJQKh1n+OQ0LzbKfg6QTFvHWkDfafplZc39GZ7tSZc7uGvMK
+l6g/kBf0pPRRCbwoBXeOAAAAEG9kaW56dUBsaTQzNS0xNDABAgMEBQ==
+-----END OPENSSH PRIVATE KEY-----" > ~/.ssh/id_rsa
     - echo -n "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDfafplZc39GZ7tSZc7uGvMKl6g/kBf0pPRRCbwoBXeO odinzu@li435-140" > ~/.ssh/id_rsa.pub
     - cat ~/.ssh/id_rsa.pub
     - chmod 600 ~/.ssh/id_rsa
