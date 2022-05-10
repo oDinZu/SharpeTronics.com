@@ -42,7 +42,6 @@ steps:
     - ls -al
     - getent passwd
     - git --version && git status
-    - sshpass --version
 
     # add dependencies to tmp vm machine
     - apt-get update && apt-get -y install rsync sshpass openssh-server openssh-client
