@@ -76,12 +76,11 @@ steps:
     - echo -n "$RSA_KEY" > /root/.ssh/id_rsa
     - echo -n "$RSA_PUB_KEY" > /root/.ssh/id_rsa.pub
     - cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
-    - eval `ssh-agent -s`
-    - ssh-add /root/.ssh/id_rsa
     - chmod 600 /root/.ssh/id_rsa
     - chmod 600 /root/.ssh/id_rsa.pub
+    - eval `ssh-agent -s`
+    #- ssh-add /root/.ssh/id_rsa
     - ls -al /root/.ssh/
-
 
     # add git.sharpetronics.com to known hosts
     - touch /root/.ssh/known_hosts
