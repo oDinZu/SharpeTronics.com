@@ -69,7 +69,7 @@ steps:
     - echo -n "$RSA_KEY" > /root/.ssh/id_rsa
     - echo -n "$RSA_PUB_KEY" > /root/.ssh/id_rsa.pub
     - chmod 600 /root/.ssh/id_rsa && chmod 600 /root/.ssh/id_rsa.pub
-    - ls -al /root/.ssh/ && ls /home/
+    - ls -al /root/.ssh/ && ls /
     - eval `ssh-agent -s`
     #- ssh-add /root/.ssh/id_rsa
     - cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
