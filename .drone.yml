@@ -43,7 +43,7 @@ steps:
     - pwd
     - ls -al
     - getent passwd
-    - git --version && git status
+    - git --version && git status && ssh --version
 
     # add dependencies to tmp vm machine
     - apt-get update && apt-get -y install rsync #sshpass
