@@ -46,28 +46,28 @@ steps:
     - git --version && git status
 
     # add dependencies to tmp vm machine
-    - apt-get update && apt-get -y install rsync #sshpass
-    #- sshpass -h
+    - apt-get update && apt-get -y install rsync sshpass
     # write the ssh key to disk for rsync handshake to remote server
-    #- ssh-keygen -t ed25519 -f ~/.ssh/id_rsa -N ''
+    - ssh-keygen -t ed25519 -f ~/.ssh/id_rsa -N ''
+    - sshpass -vp $SERVER_PASS ssh-copy-id -i ~/.ssh/id_rsync_ed25519.pub odinzu@45.33.119.101
     #- touch ~/password.txt
     #- echo -n $SERVER_PASS > ~/password.txt
     #- echo $SERVER_PASS
     #- cat ~/password.txt
-    #- sshpass -vp $SERVER_PASS ssh-copy-id -i ~/.ssh/id_rsa.pub odinzu@45.33.119.101
+    -
 
     - mkdir -p ~/.ssh/
     - chmod 700 ~/.ssh
     - touch ~/.ssh/id_rsa
     - touch ~/.ssh/id_rsa.pub
     #- cat "$RSA_KEY" >> "~/.ssh/id_rsa" <
-    - echo cat $RSA_KEY >> ~/.ssh/id_rsa
+    #- echo cat $RSA_KEY >> ~/.ssh/id_rsa
     #- cat "$RSA_PUB_KEY" >> ~/.ssh/id_rsa.pub
-    - echo cat $RSA_PUB_KEY >> ~/.ssh/id_rsa.pub
+    #- echo cat $RSA_PUB_KEY >> ~/.ssh/id_rsa.pub
     - cat ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - eval `ssh-agent -s`
-    # ssh-add ~/.ssh/id_rsa
+    #- ssh-add
     #- cp /root/.ssh/id_rsa.pub ~/.ssh/authorized_keys
     #- ls -al /root/.ssh/
 
