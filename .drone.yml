@@ -51,10 +51,6 @@ steps:
     # add dependencies to tmp vm machine
     - apt-get update && apt-get -y install rsync sshpass
 
-    # prepare _site dir
-    - ls -a _site/
-    - rm _site/docker-compose.yml
-
     # write the ssh key to disk for rsync handshake to remote server
     - ssh-keygen -t ed25519 -f ~/.ssh/id_rsa -N ''
     - cat ~/.ssh/id_rsa.pub
@@ -77,6 +73,10 @@ steps:
     - gem install bundler
     - bundle install
     - bundle exec jekyll build --trace
+
+    # prepare _site dir
+    - ls -a _site/
+    - rm _site/docker-compose.yml
 
     # update www-data branch with fresh drone ci Jekyll _site build
     - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git
