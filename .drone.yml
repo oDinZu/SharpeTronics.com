@@ -50,7 +50,7 @@ steps:
     # write the ssh key to disk for rsync handshake to remote server
     - mkdir -p ~/.ssh/
     - chmod 700 ~/.ssh
-    - touch ~/.ssh/id_rsync_ed25519
+    #- touch ~/.ssh/id_rsync_ed25519
     #- touch ~/.ssh/id_rsync_ed25519.pub
     - ssh-keygen -t ed25519 -f ~/.ssh/id_rsync_ed25519 -N ''
     - cat ~/.ssh/id_rsa
