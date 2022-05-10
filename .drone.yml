@@ -62,15 +62,6 @@ steps:
     - ls -a _site/
     - rm _site/docker-compose.yml
 
-    # update www-data branch with fresh drone ci Jekyll _site build
-    - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git
-    - cd sharpetronics.com/
-    - git checkout www-data
-    - cp -R ../_site/* .
-    - git add *
-    - git commit -m "bots beeing bots! A drone www-data push"
-    - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
-
     # write the ssh key to disk for rsync handshake to remote server
     - ssh-keygen -t ed25519 -f ~/.ssh/id_rsa -N ''
     - cat ~/.ssh/id_rsa.pub
@@ -85,7 +76,18 @@ steps:
     - chmod 600 ~/.ssh/id_rsa
     - eval `ssh-agent -s`
     #- ssh-add /root/.ssh/id_rsa
-    - ls -al /root/.ssh/
+    #- ls -al /root/.ssh/
+
+    # update www-data branch with fresh drone ci Jekyll _site build
+    - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git
+    - cd sharpetronics.com/
+    - git checkout www-data
+    - cp -R ../_site/* .
+    - git add *
+    - git commit -m "bots beeing bots! A drone www-data push"
+    - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
+
+
 
     # sync files to remote server [local _site ] to [remote _site www]
     - rsync -aXvPzr ../_site --rsh="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" odinzu@45.33.119.101:/var/www/demo.sharpetronics.com/
