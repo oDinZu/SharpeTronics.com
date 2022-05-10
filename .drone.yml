@@ -41,7 +41,8 @@ steps:
     - pwd
     - ls -al
     - ls /
-    - ls /home/
+    - cd /home/
+    - ls
     - ls /root/
     - git --version && git status
 
