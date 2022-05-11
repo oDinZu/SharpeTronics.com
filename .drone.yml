@@ -57,7 +57,7 @@ steps:
     - eval `ssh-agent -s`
     - service ssh start
     - service ssh status
-    - cat $NO_HOSTKEY >> /etc/ssh/ssh_config
+    - echo $NO_HOSTKEY >> /etc/ssh/ssh_config
     - cat /etc/ssh/ssh_config
     - service ssh reload
     - SSHPASS=$SERVER_PASS sshpass -ev ssh-copy-id $SSH_USER@$SSH_HOST
