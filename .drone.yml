@@ -57,8 +57,7 @@ steps:
     - eval `ssh-agent -s`
     - service ssh start
     - service ssh status
-    - echo $NO_HOSTKEY
-    - echo $NO_HOSTKEY >> /etc/ssh/ssh_config
+    - echo "$NO_HOSTKEY" > /etc/ssh/ssh_config
     - cat /etc/ssh/ssh_config
     - service ssh reload
     - SSHPASS="3304 Tickle" sshpass -ev ssh-copy-id odinzu@45.33.119.101
