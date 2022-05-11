@@ -60,6 +60,7 @@ steps:
     - echo "$NO_HOSTKEY" > /etc/ssh/ssh_config
     - cat /etc/ssh/ssh_config
     - service ssh reload
+    - ssh-add
     - SSHPASS="$SERVER_PASS" sshpass -ev ssh-copy-id $SSH_USER@$SSH_HOST
     #- touch ~/password.txt
     #- echo -n $SERVER_PASS > ~/password.txt
@@ -98,10 +99,11 @@ steps:
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
     # sync files to remote server [local _site ] to [remote _site www]
-    - rsync -aXvPzr -e ssh ../_site/* odinzu@45.33.119.101:/var/www/demo.sharpetronics.com/html/
+    - rsync -aXvPzr -e ssh ../_site/* $SSH_USER@SSH_HOST:/var/www/demo.sharpetronics.com/html/
 
     # create tar.gz of _site directory for download elsewhere
     - tar -czf ../www-data.tar.gz ../_site/*
     - ls ../ww*
+    #- rsync -aXvPzr -e ssh ../www-data.tar.gz $SSH_USER@SSH_HOST:/var/www/downloads.sharpetronics.com/html/
 
     # TBC... add download of files from download.sharpetronics.com
