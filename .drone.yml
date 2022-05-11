@@ -39,44 +39,24 @@ steps:
     # general vm information for debugging
     - whoami
     - pwd
-    - ls -al
-    - getent passwd
-    - git --version && git status
 
-    # add dependencies to tmp vm machine
+    # add dependencies to tmp docker vm
     - apt-get update && apt-get -y install rsync sshpass openssh-server openssh-client
     # write the ssh key to disk for rsync handshake to remote server
     - mkdir -p ~/.ssh/
     - chmod 700 ~/.ssh
-    #- touch ~/.ssh/id_rsync_ed25519
-    #- touch ~/.ssh/id_rsync_ed25519.pub
+    ## create key id_rsync_ed25519 & id_rsync_ed25519.pub (Only share *.pub with .ssh/authorized_keys on target server B)
     - ssh-keygen -t ed25519 -f ~/.ssh/id_rsync_ed25519 -N ''
-    - cat ~/.ssh/id_rsync_ed25519
-    - cat ~/.ssh/id_rsync_ed25519.pub
     - chmod 600 ~/.ssh/id_rsync_ed25519
     - eval `ssh-agent -s`
     - service ssh start
     - service ssh status
     - echo "$NO_HOSTKEY" > /etc/ssh/ssh_config
     - cat /etc/ssh/ssh_config
+    ## add private key to ssh-agent for ssh-copy-id
     - ssh-add ~/.ssh/id_rsync_ed25519
     - service ssh reload
     - SSHPASS="$SERVER_PASS" sshpass -ev ssh-copy-id $SSH_USER@$SSH_HOST
-    #- touch ~/password.txt
-    #- echo -n $SERVER_PASS > ~/password.txt
-    #- echo $SERVER_PASS
-    #- cat ~/password.txt
-    -
-
-
-    #- cat "$RSA_KEY" >> "~/.ssh/id_rsa" <
-    #- echo cat $RSA_KEY >> ~/.ssh/id_rsa
-    #- cat "$RSA_PUB_KEY" >> ~/.ssh/id_rsa.pub
-    #- echo cat $RSA_PUB_KEY >> ~/.ssh/id_rsa.pub
-
-    #- ssh-add
-    #- cp /root/.ssh/id_rsa.pub ~/.ssh/authorized_keys
-    #- ls -al /root/.ssh/
 
     # setup Jekyll permissions and build jekyll site
     - adduser --no-create-home --disabled-password --gecos "" jekyll
@@ -104,6 +84,6 @@ steps:
     # create tar.gz of _site directory for download elsewhere
     - tar -czf ../www-data_sharpetronics.tar.gz ../_site/*
     - ls ../ww*
-    #- rsync -aXvPzr -e ssh ../www-data.tar.gz $SSH_USER@SSH_HOST:/var/www/downloads.sharpetronics.com/html/
 
     # TBC... add download of files from download.sharpetronics.com
+    #- rsync -aXvPzr -e ssh ../www-data.tar.gz $SSH_USER@SSH_HOST:/var/www/downloads.sharpetronics.com/html/
