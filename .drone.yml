@@ -102,7 +102,7 @@ steps:
     - rsync -aXvPzr -e ssh ../_site/* $SSH_USER@$SSH_HOST:/var/www/demo.sharpetronics.com/html/
 
     # create tar.gz of _site directory for download elsewhere
-    - tar -czf ../www-data.tar.gz ../_site/*
+    - tar -czf ../www-data_sharpetronics.tar.gz ../_site/*
     - ls ../ww*
     #- rsync -aXvPzr -e ssh ../www-data.tar.gz $SSH_USER@SSH_HOST:/var/www/downloads.sharpetronics.com/html/
 
