@@ -99,7 +99,7 @@ steps:
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
     # sync files to remote server [local _site ] to [remote _site www]
-    - rsync -aXvPzr -e ssh ../_site/* $SSH_USER@SSH_HOST:/var/www/demo.sharpetronics.com/html/
+    - rsync -aXvPzr -e ssh ../_site/* $SSH_USER@$SSH_HOST:/var/www/demo.sharpetronics.com/html/
 
     # create tar.gz of _site directory for download elsewhere
     - tar -czf ../www-data.tar.gz ../_site/*
