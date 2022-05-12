@@ -19,7 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 baseurl: "/" # the subpath of your site, e.g. /blog /galacticsociety.github.io
-url: "https://sharpetronics.com" # the base hostname & protocol for your site, GitHub example: https://sharpetronics.github.io
+url: "https://www.sharpetronics.com" # the base hostname & protocol for your site, GitHub example: https://sharpetronics.github.io
 source: .
 
 #Latent Semantic Indexing for similarity bewtween documents.
