@@ -42,6 +42,7 @@ steps:
 
     # add dependencies to tmp docker vm
     - apt-get update && apt-get -y install rsync sshpass openssh-server openssh-client
+    - rsync --version 
 
     # write the ssh key to disk for rsync handshake to remote server
     - mkdir -p ~/.ssh/
