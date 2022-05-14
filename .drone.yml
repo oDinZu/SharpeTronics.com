@@ -103,26 +103,23 @@ steps:
     # add download.tar.gz of files from download.sharpetronics.com
     # a = archive v=verbose z=compress r=recursive -e=env
     - rsync -avz --chmod=775 -e ssh ../www-data_sharpetronics.tar.gz $SSH_USER@$SSH_HOST:/var/www/downloads.sharpetronics.com/html/sharpetronics.com/
-
-    cat << "EOF"
-______________________
-< Who you Gonna Call >
-----------------------
-            \          __---__
-                    _-       /--______
-               __--( /     \ )XXXXXXXXXXX\v.
-             .-XXX(   O   O  )XXXXXXXXXXXXXXX-
-            /XXX(       U     )        XXXXXXX\
-          /XXXXX(              )--_  XXXXXXXXXXX\
-         /XXXXX/ (      O     )   XXXXXX   \XXXXX\
-         XXXXX/   /            XXXXXX   \__ \XXXXX
-         XXXXXX__/          XXXXXX         \__---->
- ---___  XXX__/          XXXXXX      \__         /
-   \-  --__/   ___/\  XXXXXX            /  ___--/=
-    \-\    ___/    XXXXXX              '--- XXXXXX
-       \-\/XXX\ XXXXXX                      /XXXXX
-         \XXXXXXXXX   \                    /XXXXX/
-          \XXXXXX      >                 _/XXXXX/
-            \XXXXX--__/              __-- XXXX/
-             -XXXXXXXX---------------  XXXXXX-
-EOF
+#______________________
+#< Who you Gonna Call >
+#----------------------
+#            \          __---__
+#                    _-       /--______
+#               __--( /     \ )XXXXXXXXXXX\v.
+#             .-XXX(   O   O  )XXXXXXXXXXXXXXX-
+#            /XXX(       U     )        XXXXXXX\
+#          /XXXXX(              )--_  XXXXXXXXXXX\
+#         /XXXXX/ (      O     )   XXXXXX   \XXXXX\
+#         XXXXX/   /            XXXXXX   \__ \XXXXX
+#         XXXXXX__/          XXXXXX         \__---->
+# ---___  XXX__/          XXXXXX      \__         /
+#   \-  --__/   ___/\  XXXXXX            /  ___--/=
+#    \-\    ___/    XXXXXX              '--- XXXXXX
+#       \-\/XXX\ XXXXXX                      /XXXXX
+#         \XXXXXXXXX   \                    /XXXXX/
+#          \XXXXXX      >                 _/XXXXX/
+#             -XXXXXXXX---------------  XXXXXX-
+#
