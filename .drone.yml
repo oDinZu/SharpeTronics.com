@@ -45,19 +45,22 @@ steps:
     - rsync --version
     - bc --version
 
+
     # write the ssh key to disk for rsync handshake to remote server
     - mkdir -p ~/.ssh/
     - chmod 700 ~/.ssh
-    ## create key id_rsync_ed25519 & id_rsync_ed25519.pub (Only share *.pub with .ssh/authorized_keys on target server B)
+    # create key id_rsync_ed25519 & id_rsync_ed25519.pub (Only share *.pub with .ssh/authorized_keys on target server B)
     - ssh-keygen -t ed25519 -f ~/.ssh/id_rsync_ed25519 -N ''
     - chmod 600 ~/.ssh/id_rsync_ed25519
     - eval `ssh-agent -s`
     - service ssh start
     - service ssh status
-    ## load updated ssh_config from secret of repo: StrictHostKeyChecking no
+
+    # load updated ssh_config from drone secret of repo: StrictHostKeyChecking no
     - echo "$NO_HOSTKEY" > /etc/ssh/ssh_config
     - cat /etc/ssh/ssh_config
-    ## add private key to ssh-agent for ssh-copy-id
+
+    # add private key to ssh-agent for ssh-copy-id
     - ssh-add ~/.ssh/id_rsync_ed25519
     - service ssh reload
     - SSHPASS="$SERVER_PASS" sshpass -ev ssh-copy-id $SSH_USER@$SSH_HOST
@@ -86,16 +89,18 @@ steps:
     - chmod -R 775 ../_site
     - groupadd rsync-users
     - chown -R www-data:rsync-users ../_site
+    # a = archive v=verbose z=compress r=recursive -e=env
     - rsync -aXvPzr --omit-dir-times --chown=www-data:rsync-users --chmod=775 -e ssh ../_site/* $SSH_USER@$SSH_HOST:/var/www/sharpetronics.com/html/
 
     # create tar.gz of _site directory for download elsewhere
     - tar -czf ../www-data_sharpetronics.tar.gz ../_site/*
     - chmod 775 ../www-data_sharpetronics.tar.gz
     - chown www-data:www-data ../www-data_sharpetronics.tar.gz
+
     # size of the file in bytes
     - tar -tzvf ../www-data_sharpetronics.tar.gz | sed 's/ \+/ /g' | cut -f3 -d' ' | sed '2,$s/^/+ /' | paste -sd' ' | bc
     - ls ../ww*
 
-    # add download of files from download.sharpetronics.com
+    # add download.tar.gz of files from download.sharpetronics.com
     # a = archive v=verbose z=compress r=recursive -e=env
     - rsync -avz --chmod=775 -e ssh ../www-data_sharpetronics.tar.gz $SSH_USER@$SSH_HOST:/var/www/downloads.sharpetronics.com/html/sharpetronics.com/
