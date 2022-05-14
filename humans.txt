@@ -75,14 +75,23 @@ pop.system76.com
 Cloudflare - DNS & CDN
 cloudflare.com
 
+Certbot - Enable secure websites with Let's Encrypt.
+certbot.eff.org
+
 Atom - Text editor
 atom.io
 
 Figma - UI/UX collaboration editor
 figma.com
 
-Mailjet - Newsletters & Emails
-mailjet.com
+Drone CI - Automated software build and test.
+drone.io
+
+Gitea - A painless, self-hosted Git service.
+gitea.com
+
+DockerHub - Build and ship any application anywhere
+hub.docker.com
 
 Google Workspace - Business & collaboration tools
 workspace.google.com
@@ -96,7 +105,7 @@ unsplash.com
 Licensing - Use & distribute software
 creativecommons.org, gnu.org, fsf.org
 
-Web Browser Testing - Testing UI/UX of the website
+Web Browser Debugging - Testing UI/UX of the website
 google.com/chrome/, mozilla.org/en-US/firefox
 
 Startpage - Search engine privacy
