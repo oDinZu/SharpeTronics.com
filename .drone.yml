@@ -71,7 +71,6 @@ steps:
     # prepare _site dir
     - ls -a _site/
     - rm _site/docker-compose.yml
-    - rm _site/CNAME
 
     # update www-data branch with fresh drone ci Jekyll _site build
     - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git
@@ -92,7 +91,7 @@ steps:
     - tar -czf ../www-data_sharpetronics.tar.gz ../_site/*
     - chmod 775 ../www-data_sharpetronics.tar.gz
     - chown www-data:www-data ../www-data_sharpetronics.tar.gz
-    # size of the file
+    # size of the file in bytes
     - tar -tzvf ../www-data_sharpetronics.tar.gz | sed 's/ \+/ /g' | cut -f3 -d' ' | sed '2,$s/^/+ /' | paste -sd' ' | bc
     - ls ../ww*
 
