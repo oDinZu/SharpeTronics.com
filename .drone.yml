@@ -71,6 +71,7 @@ steps:
     # prepare _site dir
     - ls -a _site/
     - rm _site/docker-compose.yml
+    - rm _site/CNAME
 
     # update www-data branch with fresh drone ci Jekyll _site build
     - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git
