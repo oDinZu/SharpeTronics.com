@@ -43,6 +43,7 @@ steps:
     # add dependencies to tmp docker vm
     - apt-get update && apt-get -y install rsync sshpass openssh-server openssh-client
     - rsync --version
+    - bc --version
 
     # write the ssh key to disk for rsync handshake to remote server
     - mkdir -p ~/.ssh/
@@ -88,8 +89,8 @@ steps:
 
     # create tar.gz of _site directory for download elsewhere
     - tar -czf ../www-data_sharpetronics.tar.gz ../_site/*
-    - tar tzvf ../www-data_sharpetronics.tar.gz | sed 's/ \+/ /g' | cut -f3 -d' ' | sed '2,$s/^/+ /' | paste -sd' ' | bc
+    - tar -tzvf ../www-data_sharpetronics.tar.gz | sed 's/ \+/ /g' | cut -f3 -d' ' | sed '2,$s/^/+ /' | paste -sd' ' | bc
     - ls ../ww*
 
     # add download of files from download.sharpetronics.com
-    - rsync -aXvPzrt--chown=www-data:www-data --chmod=775 -e ssh ../www-data_sharpetronics.tar.gz $SSH_USER@SSH_HOST:/var/www/downloads.sharpetronics.com/html/sharpetronics.com/
+    - rsync -aXvPzrt --chown=www-data:www-data --chmod=775 -e ssh ../www-data_sharpetronics.tar.gz $SSH_USER@SSH_HOST:/var/www/downloads.sharpetronics.com/html/sharpetronics.com/
