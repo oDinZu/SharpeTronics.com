@@ -82,15 +82,19 @@ steps:
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
     # sync files to remote server [local _site ] to [remote _site www] while preserving permissions.
-    #- chmod -R 775 ../_site
-    #- groupadd rsync-users
-    #- chown -R www-data:rsync-users ../_site
+    - chmod -R 775 ../_site
+    - groupadd rsync-users
+    - chown -R www-data:rsync-users ../_site
     - rsync -aXvPzr --omit-dir-times --chown=www-data:rsync-users --chmod=775 -e ssh ../_site/* $SSH_USER@$SSH_HOST:/var/www/sharpetronics.com/html/
 
     # create tar.gz of _site directory for download elsewhere
     - tar -czf ../www-data_sharpetronics.tar.gz ../_site/*
+    - chmod 775 ../www-data_sharpetronics.tar.gz
+    - chown www-data:www-data ../www-data_sharpetronics.tar.gz
+    # size of the file
     - tar -tzvf ../www-data_sharpetronics.tar.gz | sed 's/ \+/ /g' | cut -f3 -d' ' | sed '2,$s/^/+ /' | paste -sd' ' | bc
     - ls ../ww*
 
     # add download of files from download.sharpetronics.com
-    - rsync -aXvPzr --chmod=775 -e ssh ../www-data_sharpetronics.tar.gz $SSH_USER@$SSH_HOST:/var/www/downloads.sharpetronics.com/html/sharpetronics.com/
+    # a = archive X= v=verbose P= z=compress r=recursive
+    - rsync -avz --chmod=775 -e ssh ../www-data_sharpetronics.tar.gz $SSH_USER@$SSH_HOST:/var/www/downloads.sharpetronics.com/html/sharpetronics.com/
