@@ -84,7 +84,7 @@ steps:
     - chmod -R 775 ../_site
     - groupadd rsync-users
     - chown -R www-data:rsync-users ../_site
-    - rsync -aXPzr --timeout -e ssh ../_site/* $SSH_USER@$SSH_HOST:/var/www/sharpetronics.com/html/
+    - rsync -aXPzrpog -e ssh ../_site/* $SSH_USER@$SSH_HOST:/var/www/sharpetronics.com/html/
 
     # create tar.gz of _site directory for download elsewhere
     - tar -czf ../www-data_sharpetronics.tar.gz ../_site/*
@@ -92,4 +92,4 @@ steps:
     - ls ../ww*
 
     # add download of files from download.sharpetronics.com
-    - rsync -aXvPzr --timeout -e ssh ../www-data_sharpetronics.tar.gz $SSH_USER@SSH_HOST:/var/www/downloads.sharpetronics.com/html/sharpetronics.com/
+    - rsync -aXvPzr -e ssh ../www-data_sharpetronics.tar.gz $SSH_USER@SSH_HOST:/var/www/downloads.sharpetronics.com/html/sharpetronics.com/
