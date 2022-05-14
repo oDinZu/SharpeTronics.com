@@ -13,7 +13,7 @@ category: Legal
 tag: Legal
 
 ---
-<h2>Privacy Policy for SharpeTronics</h2>
+<h2>Privacy Policy for SharpeTronics.com, Inc.</h2>
 
 <p>At SharpeTronics, accessible from https://www.sharpetronics.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by SharpeTronics and how we use it.</p>
 
