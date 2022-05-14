@@ -82,6 +82,7 @@ steps:
 
     # sync files to remote server [local _site ] to [remote _site www] while preserving permissions.
     - chmod -R 775 ../_site
+    - groupadd rsync-users
     - chown -R www-data:rsync-users ../_site
     - rsync -aXPzrpog --timeout -e ssh ../_site/* $SSH_USER@$SSH_HOST:/var/www/sharpetronics.com/html/
 
