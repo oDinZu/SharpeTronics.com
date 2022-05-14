@@ -41,7 +41,7 @@ steps:
     - pwd
 
     # add dependencies to tmp docker vm
-    - apt-get update && apt-get -y install rsync sshpass openssh-server openssh-client
+    - apt-get update && apt-get -y install rsync sshpass openssh-server openssh-client bc
     - rsync --version
     - bc --version
 
