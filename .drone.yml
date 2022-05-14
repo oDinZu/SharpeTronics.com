@@ -96,5 +96,5 @@ steps:
     - ls ../ww*
 
     # add download of files from download.sharpetronics.com
-    # a = archive X= v=verbose P= z=compress r=recursive
+    # a = archive v=verbose z=compress r=recursive -e=env
     - rsync -avz --chmod=775 -e ssh ../www-data_sharpetronics.tar.gz $SSH_USER@$SSH_HOST:/var/www/downloads.sharpetronics.com/html/sharpetronics.com/
