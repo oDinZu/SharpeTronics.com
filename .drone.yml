@@ -45,7 +45,6 @@ steps:
     - rsync --version
     - bc --version
 
-
     # write the ssh key to disk for rsync handshake to remote server
     - mkdir -p ~/.ssh/
     - chmod 700 ~/.ssh
@@ -72,7 +71,7 @@ steps:
     - bundle install
     - bundle exec jekyll build --trace
 
-    # prepare _site dir
+    # prepare _site dir for www-data branch & compression
     - ls -a _site/
     - rm _site/docker-compose.yml
 
@@ -85,7 +84,7 @@ steps:
     - git commit -m "bots beeing bots! A drone www-data push"
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
-    # sync files to remote server [local _site ] to [remote _site www] while preserving permissions.
+    # sync files to remote server [local _site ] to [remote www edge] while preserving permissions.
     - chmod -R 775 ../_site
     - groupadd rsync-users
     - chown -R www-data:rsync-users ../_site
@@ -104,3 +103,26 @@ steps:
     # add download.tar.gz of files from download.sharpetronics.com
     # a = archive v=verbose z=compress r=recursive -e=env
     - rsync -avz --chmod=775 -e ssh ../www-data_sharpetronics.tar.gz $SSH_USER@$SSH_HOST:/var/www/downloads.sharpetronics.com/html/sharpetronics.com/
+
+    cat << "EOF"
+______________________
+< Who you Gonna Call >
+----------------------
+            \          __---__
+                    _-       /--______
+               __--( /     \ )XXXXXXXXXXX\v.
+             .-XXX(   O   O  )XXXXXXXXXXXXXXX-
+            /XXX(       U     )        XXXXXXX\
+          /XXXXX(              )--_  XXXXXXXXXXX\
+         /XXXXX/ (      O     )   XXXXXX   \XXXXX\
+         XXXXX/   /            XXXXXX   \__ \XXXXX
+         XXXXXX__/          XXXXXX         \__---->
+ ---___  XXX__/          XXXXXX      \__         /
+   \-  --__/   ___/\  XXXXXX            /  ___--/=
+    \-\    ___/    XXXXXX              '--- XXXXXX
+       \-\/XXX\ XXXXXX                      /XXXXX
+         \XXXXXXXXX   \                    /XXXXX/
+          \XXXXXX      >                 _/XXXXX/
+            \XXXXX--__/              __-- XXXX/
+             -XXXXXXXX---------------  XXXXXX-
+EOF
