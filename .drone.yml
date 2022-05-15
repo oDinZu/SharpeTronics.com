@@ -39,6 +39,7 @@ steps:
     # general vm information for debugging
     - whoami
     - pwd
+    - gem environment
 
     # add dependencies to tmp docker vm
     - apt-get update && apt-get -y install rsync sshpass openssh-server openssh-client bc
