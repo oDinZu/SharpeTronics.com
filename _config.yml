@@ -28,7 +28,7 @@ lsi: true
 # Strapi dashboard integration
 strapi:
     # Your API endpoint (optional, default to http://localhost:1337)
-    endpoint: https://api.sharpetronics.com
+    endpoint: https://dash.sharpetronics.com
     # Collections, key is used to access in the strapi.collections
     # template variable
     collections:
