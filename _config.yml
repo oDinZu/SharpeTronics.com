@@ -25,6 +25,29 @@ source: .
 #Latent Semantic Indexing for similarity bewtween documents.
 lsi: true
 
+feed:
+  collections:
+    posts:
+      path: "/feed/posts-feed.xml"
+      categories:
+        - company
+        - tutorials
+        - devops
+    products:
+      path: "/feed/products-feed.xml"
+      categories:
+        - company
+        - tutorials
+        - legal
+        - devops
+    legal:
+      path: "/feed/legal-feed.xml"
+      categories:
+        - company
+        - tutorials
+        - legal
+        - devops
+
 # Strapi dashboard integration
 strapi:
     # Your API endpoint (optional, default to http://localhost:1337)

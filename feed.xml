@@ -13,10 +13,12 @@ layout: null
         <lastBuildDate>{{ site.data.global.time | date_to_rfc822 }}</lastBuildDate>
         {% for post in site.posts %}
         <item>
+            <image>{{ post.image }}</image>
             <title>{{ post.title }}</title>
             <link>
                 {{ post.url | prepend: site.url }}
             </link>
+            <author>{{ post.author }}</author>
             <description>
                 {{ post.content | escape | truncate: '400' }}
             </description>
