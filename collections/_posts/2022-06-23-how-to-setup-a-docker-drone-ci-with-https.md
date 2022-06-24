@@ -115,6 +115,12 @@ INFO[0000] starting the server
 INFO[0000] successfully pinged the remote server
 ```
 
+#### Stop & Start Container
+```
+sudo docker container stop st-drone-ssl
+sudo docker container start st-drone-ssl
+```
+
 ### Part II - Configure a Drone Runner Pipeline with Docker Engine
 
 This article will be shared at a later date.

@@ -25,19 +25,19 @@ In this article, I will be sharing a *HOWTO* create your own end-to-end encrypte
 
 The minimal cost is less than $100 per year and is portable with the *nifty* config option -with-rebar; this option packages the whole app for transport.
 
-## Configure & compile Ejabberd
+### Configure & compile Ejabberd
 
 Please see [Ejabberd Configure] for setting up your Linux environment.
 
-### Requirements
+#### Requirements
 - A remove server that has been hardened [Linux VPS Hardening](https://www.sharpetronics.com/blog/tutorials/2021/07/26/linux-vps-hardening-init/)
 - Linux CLI knowledge
 - Patience
 
-### Operating System
+#### Operating System
 - This article is tested with `cat /etc/os-release` VERSION="20.04.4 LTS (Focal Fossa)"
 
-### Dependencies:
+#### Dependencies:
 - GNU Make `make -v`
 - GCC `sudo apt install build-essential && gcc -v`
 - Libexpat 1.95 or higher `sudo apt install -y expat && libexpat-dev`
@@ -63,7 +63,7 @@ git checkout tags/22.05 -b branch-name-example && git status
 ```
 **Note 2-3:** the latest stable release is 22.05 on June 21, 2022. Verify you are on branch-name-example.
 
-### We begin compiling and installng **ejabberd** after the environment is ready
+#### We begin compiling and installng **ejabberd** after the environment is ready
 
 Below, I had to create my **configure** file with *autogen*. The **configure** options I have included are: postgresql database (default: mysql), zlib compression algos (optional), extra dev tools (optional) and rebar for packaging everything into one portable app.(optional) To see more options, please visit: [Ejabberd Configure](https://github.com/processone/ejabberd/blob/22.05/COMPILE.md)
 
@@ -105,9 +105,9 @@ cd ejabberd-20.05/ && ls bin/
 
 As you have noticed, ejabberdctl status failed to start. This is because we now have to configure the server.
 
-## PART II - TBA
+### PART II - TBA
 
-## References:
+### References:
 
 - [Ejabberd Source](https://github.com/processone/ejabberd/blob/22.05/COMPILE.md)
 - [Ejabberd Compile](https://docs.ejabberd.im/admin/installation/#source-code)
@@ -116,3 +116,17 @@ As you have noticed, ejabberdctl status failed to start. This is because we now 
 - [Linux VPS Hardening](https://www.sharpetronics.com/blog/tutorials/2021/07/26/linux-vps-hardening-init/)
 - [OMEMO Extension](https://conversations.im/omemo/)
 - [XMPP Servers](https://xmpp.org/software/servers/)
+
+### Support
+
+If you have any questions, concerns, want to say hi, please join the following channel: [SharpeTronics Discord Support Channel](https://discord.gg/HQcvr2JBQv) Eventually, I plan on having a commenting system on here..
+
+### Donations
+Recently, I have had many folk as about **how to send me a donation**. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!
+
+- [Cash App](https://cash.app/$sharpeee)
+- [Venmo](https://account.venmo.com/u/seabeeess)
+- [Open Collective](https://opencollective.com/sharpetronics)
+- **Bitcoin Address:** 1BszkJe66oYps5PNwivFBBNTo1PAFYTMwF
+- **Hush Address:** zs1qx8dutj96kdcx29a4070pumzdqsk7vnayk4pf8tf6duj304y4akey9ze39upzz9qtchculp8mdw
+- **Stellar Address:** GARFNIQZPE5SHGJSR25AIFWWGUB7GJIW4TVZ5ZUSEP5VMJIVIUONANK4

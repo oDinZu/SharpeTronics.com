@@ -16,15 +16,15 @@ updated: December 27, 2021
 ---
 
 ## General
-For this tutorial, we will launch a secure SSL NGINX web server for your website domain example.org and enable an API to be consumed from the subdomain i.e. api.example.org with Strapi 4.0. 
+For this tutorial, we will launch a secure SSL NGINX web server for your website domain example.org and enable an API to be consumed from the subdomain i.e. api.example.org with Strapi 4.0.
 
 *Tip:* For each reference, I add the **[reference name]** in brackets at the end of the "transmission." **[AWK example]**
- 
-## Requirements: 
+
+## Requirements:
 - a Ubuntu Linux 20.04 VPS with SSH access
 - CLI knowledge
 - a registered web domain i.e. example.org
-- Basic knowledge of DNS and managing a VPS with SSH 
+- Basic knowledge of DNS and managing a VPS with SSH
 
 ## Dependencies & Packages
 - NodeJS v12 or v14 (v14 is recommended for Strapi 4.0)
@@ -32,7 +32,7 @@ For this tutorial, we will launch a secure SSL NGINX web server for your website
 - Certbot with Let's Encrypt
 - Nano editor
 
-## Prepare Operating System 
+## Prepare Operating System
 Let's Begin! We begin by installing nginx, certbot and verifying versions Strapi needs. Keep in mind, if you are reading this from the future, the versions will change.
 
 ### Update System
@@ -43,7 +43,7 @@ Let's Begin! We begin by installing nginx, certbot and verifying versions Strapi
 
 ```sudo apt install certbot python3-certbot-nginx```
 
-### Install NGINX & verify version 
+### Install NGINX & verify version
 
 ```sudo apt install nginx```
 
@@ -51,19 +51,19 @@ Let's Begin! We begin by installing nginx, certbot and verifying versions Strapi
 
 **Tip:** Strapi recommends nodejs v14, but v12 works.
 
-### Install Yarn (Corepack) 
+### Install Yarn (Corepack)
 ```npm i -g corepack``` **[Install Yarn]**
 
-## Configure NGINX 
-Next, we will configure your newly installed Nginx server. By default the configurations are located at: /etc/nginx/ & /etc/nginx/sites-available/. To keep things tidy and organized, we create a new api.example.org conf for each domain we are publicly facing to WWW. 
+## Configure NGINX
+Next, we will configure your newly installed Nginx server. By default the configurations are located at: /etc/nginx/ & /etc/nginx/sites-available/. To keep things tidy and organized, we create a new api.example.org conf for each domain we are publicly facing to WWW.
 
-### Make Directory & Copy Default HTML page 
+### Make Directory & Copy Default HTML page
 
 ```sudo mkdir -p /var/www/api.example.org/html/```
 
 ```sudo cp -R /var/www/html/index.nginx-debian.html /var/www/api.example.org/html/index.html```
 
-### Duplicate Default Config 
+### Duplicate Default Config
 
 ```sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/api.example.org```
 
@@ -120,11 +120,11 @@ server {
 ``` CTRL+X, then Y for Yes to save```
 
 ### Symbolic Link to sites-enabled
-This creates a 'mirror' like reference to the sites-available folder. 
+This creates a 'mirror' like reference to the sites-available folder.
 
 ```sudo ln -s /etc/nginx/sites-available/api.exampleorg /etc/nginx/sites-enabled/```
 
-#### Verify Symbolic Link 
+#### Verify Symbolic Link
 ```ls /etc/nginx/sites-enabled/```
 
 ## DNS Configuration
@@ -134,7 +134,7 @@ We now point our domain to the server we are hosting our Strapi on. i.e. 123.123
 Depending on your DNS provider or maybe you have your own Domain Name Server, we point our DNS settings for example.org to 123.123.1.1 as type A. I personally recommend Cloudflare.
 
 ## Create SSL Certs
-We run the automated tool Certbot and create all the needed files and update our *api.example.org* configuration file. 
+We run the automated tool Certbot and create all the needed files and update our *api.example.org* configuration file.
 
 ### Run Certbot
 ```sudo  certbot --nginx```
@@ -184,7 +184,7 @@ Goto desired place to install Strapi project i.e. ~/development/my-strapi-projec
 
 ```yarn develop```
 
-### Launch Strapi from Domain URL 
+### Launch Strapi from Domain URL
 
 ```Goto: api.example.com via web browser of your choice.```
 
@@ -201,5 +201,16 @@ Goto desired place to install Strapi project i.e. ~/development/my-strapi-projec
 
 [Certbot Insturctions](https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal)
 
-#### Donations Are Welcome
-[Cash App](https://cash.app/$sharpeee)
+### Support
+
+If you have any questions, concerns, want to say hi, please join the following channel: [SharpeTronics Discord Support Channel](https://discord.gg/HQcvr2JBQv) Eventually, I plan on having a commenting system on here..
+
+### Donations
+Recently, I have had many folk as about **how to send me a donation**. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!
+
+- [Cash App](https://cash.app/$sharpeee)
+- [Venmo](https://account.venmo.com/u/seabeeess)
+- [Open Collective](https://opencollective.com/sharpetronics)
+- **Bitcoin Address:** 1BszkJe66oYps5PNwivFBBNTo1PAFYTMwF
+- **Hush Address:** zs1qx8dutj96kdcx29a4070pumzdqsk7vnayk4pf8tf6duj304y4akey9ze39upzz9qtchculp8mdw
+- **Stellar Address:** GARFNIQZPE5SHGJSR25AIFWWGUB7GJIW4TVZ5ZUSEP5VMJIVIUONANK4

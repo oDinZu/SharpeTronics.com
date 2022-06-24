@@ -122,7 +122,11 @@ docker logs st-drone-runner
 INFO[0000] starting the server
 INFO[0000] successfully pinged the remote server
 ```
-
+#### Stop & Start Container
+```
+sudo docker container stop st-drone-ssl
+sudo docker container start st-drone-ssl
+```
 ### References
 - [Drone Runner Configuration](https://docs.drone.io/runner/docker/configuration/reference/)
 - [Drone Runner Docker Installation](https://docs.drone.io/runner/docker/installation/linux/)

@@ -49,3 +49,17 @@ I hope this quick tutorial aided in your Linux administration talents. I will be
 * Internet Computer Genesis Launch Event - <https://youtu.be/xiupEw4MfxY> - Premiered May 7, 2021
 * The Dfinity Foundation - <https://dfinity.org/>
 * Adding a Path to the Linux PATH variable - <https://www.baeldung.com/linux/path-variable> - May 13th, 2021
+
+### Support
+
+If you have any questions, concerns, want to say hi, please join the following channel: [SharpeTronics Discord Support Channel](https://discord.gg/HQcvr2JBQv) Eventually, I plan on having a commenting system on here..
+
+### Donations
+Recently, I have had many folk as about **how to send me a donation**. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!
+
+- [Cash App](https://cash.app/$sharpeee)
+- [Venmo](https://account.venmo.com/u/seabeeess)
+- [Open Collective](https://opencollective.com/sharpetronics)
+- **Bitcoin Address:** 1BszkJe66oYps5PNwivFBBNTo1PAFYTMwF
+- **Hush Address:** zs1qx8dutj96kdcx29a4070pumzdqsk7vnayk4pf8tf6duj304y4akey9ze39upzz9qtchculp8mdw
+- **Stellar Address:** GARFNIQZPE5SHGJSR25AIFWWGUB7GJIW4TVZ5ZUSEP5VMJIVIUONANK4

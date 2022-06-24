@@ -16,7 +16,7 @@ updated: December 4, 2021
 ---
 ### Configure, Build, Install & Setup Qt 5.15.2 Source on Ubuntu 18.04 with X11 Support
 
-This tutorial will teach you how to compile from source via CLI (command-line interface) and enable customization for building Qt5 apps on different operating systems andor hardware architectures like RPI400. 
+This tutorial will teach you how to compile from source via CLI (command-line interface) and enable customization for building Qt5 apps on different operating systems andor hardware architectures like RPI400.
 
 When compiling Qt5 yourself, you are empowered with a configuration that is constant throughout the Linux Universe. This process is also very similar with compiling Qt apps on your (AArch64) ARM64 devices like RPi 400, Rock64 & PineBook64.
 
@@ -25,7 +25,7 @@ When compiling Qt5 yourself, you are empowered with a configuration that is cons
 ### What is Qt?
 "Qt is a cross-platform application development framework for desktop, embedded and mobile." [Qt Wiki]
 
-### What is a Static Qt? 
+### What is a Static Qt?
 In general, a static Qt option includes libraries locally. This aids in having an application run on different versions of Linux distros. When the application is compiled, we check the app with *ldd yourapp* to list what the binary is dependent on to run. Essentially, the Qt libraries are included in the binary. Decovar.dev has a great explanation on advantages and disadvantages of building a static Qt. [At last, let's build Qt statically]
 
 ### Let's Begin!
@@ -130,9 +130,6 @@ Using Qt version 5.15.2 in /usr/local/Qt-5.15.2/lib
 ```
 ./build.sh
 ```
-#### Support & Questions
-[sharpetronics.github](https://github.com/SharpeTronics/sharpetronics.github.io/issues)
-
 ![happy little apps](/uploads/2021/bob-ross-happy.gif)
 
 #### References
@@ -143,3 +140,17 @@ Using Qt version 5.15.2 in /usr/local/Qt-5.15.2/lib
 [wiki.qt.io/about](https://wiki.qt.io/About_Qt)
 
 [why-build-qt-statically](https://decovar.dev/blog/2018/02/17/build-qt-statically/#why-build-qt-statically)
+
+### Support
+
+If you have any questions, concerns, want to say hi, please join the following channel: [SharpeTronics Discord Support Channel](https://discord.gg/HQcvr2JBQv) Eventually, I plan on having a commenting system on here..
+
+### Donations
+Recently, I have had many folk as about **how to send me a donation**. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!
+
+- [Cash App](https://cash.app/$sharpeee)
+- [Venmo](https://account.venmo.com/u/seabeeess)
+- [Open Collective](https://opencollective.com/sharpetronics)
+- **Bitcoin Address:** 1BszkJe66oYps5PNwivFBBNTo1PAFYTMwF
+- **Hush Address:** zs1qx8dutj96kdcx29a4070pumzdqsk7vnayk4pf8tf6duj304y4akey9ze39upzz9qtchculp8mdw
+- **Stellar Address:** GARFNIQZPE5SHGJSR25AIFWWGUB7GJIW4TVZ5ZUSEP5VMJIVIUONANK4
