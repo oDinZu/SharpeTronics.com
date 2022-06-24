@@ -143,14 +143,14 @@ Using Qt version 5.15.2 in /usr/local/Qt-5.15.2/lib
 
 ### Support
 
-If you have any questions, concerns, want to say hi, please join the following channel: [SharpeTronics Discord Support Channel](https://discord.gg/HQcvr2JBQv) Eventually, I plan on having a commenting system on here..
+If you have any questions, concerns, want to say hi, please join the following channel: [SharpeTronics Discord Support Channel]({{ site.data.social.discord_invite }}) Eventually, I plan on having a commenting system on here..
 
 ### Donations
 Recently, I have had many folk as about **how to send me a donation**. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!
 
-- [Cash App](https://cash.app/$sharpeee)
-- [Venmo](https://account.venmo.com/u/seabeeess)
-- [Open Collective](https://opencollective.com/sharpetronics)
-- **Bitcoin Address:** 1BszkJe66oYps5PNwivFBBNTo1PAFYTMwF
-- **Hush Address:** zs1qx8dutj96kdcx29a4070pumzdqsk7vnayk4pf8tf6duj304y4akey9ze39upzz9qtchculp8mdw
-- **Stellar Address:** GARFNIQZPE5SHGJSR25AIFWWGUB7GJIW4TVZ5ZUSEP5VMJIVIUONANK4
+- [Cash App]({{ site.data.payment.cashapp_acct }})
+- [Venmo]({{ site.data.payment.venmo_acct }})
+- [Open Collective]({{ site.data.payment.open_collective }})
+- **Bitcoin Address:** {{ site.data.payment.bitcoin_addr }}
+- **Hush Address:** {{ site.data.payment.hush_addr }}
+- **Stellar Address:** {{ site.data.payment.stellar_addr }}

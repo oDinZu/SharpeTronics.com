@@ -15,7 +15,7 @@ tag: Linux, Drone, CI, How-to
 
 > BeeYoop BeeDeepBoom Weeop DEEpaEEya
 
-In general, this article describes how to setup SSL with a Drone Runner. This is part II of a part I series. If you would like to learn how-to setup the Drone Server, please visit: [Setup Drone CI Server](#).
+In general, this article describes how to setup SSL with a Drone Runner. This is part II of a part I series. If you would like to learn how-to setup the Drone Server, please visit: [Setup Drone CI Server](https://www.sharpetronics.com/blog/tutorials/2022/06/23/how-to-setup-a-docker-drone-ci-with-https/).
 
 This part II creates a pipeline runner with a Docker machine; what that means is, like GitHub Actions, but with Drone super powers. The configuration file is stored as `.drone.yml` in the root of your site directory and drone server uses that application yml file to do a series of commands or actions within the virtual docker machine.
 
@@ -32,7 +32,7 @@ This is empowering because you can automate a fresh build every time. Also, you 
 - a basic understanding of how to use Docker Engine
 - basic Nginx, Gitea and Certbot/Let's Encrypt experience
 - openssl
-- a running drone ci server [see part I](#)
+- a running drone ci server [see part I](https://www.sharpetronics.com/blog/tutorials/2022/06/23/how-to-setup-a-docker-drone-ci-with-https/)
 
 ### Let's Begin!
 
@@ -72,9 +72,9 @@ docker run --detach \
 
 An example of a custom pipeline I have created. I ain't going to explain this to you in detail; I expect you to determine your own pipeline and this is only for a reference point. Essentially, what you will be doing is launching your own virtual machine for your specific use case scenario.
 
-In this example, on drone.example.com, I have created a secret pass that needs to be passed to the virtual machine so I can package the build after it succeeds into a www_data only branch on my git server.
+In this example, on drone.example.com, I have created a secret pass that needs to be passed to the virtual machine so I can package the build aka **_site** only, then auto push to www_data branch on my git server. Furthermore, I **rsync** this data through an ssh tunnel to a **Gitea Pages** server that serves the **WWW or edge** data.
 
-**Note: 3:** The example configuration I created is a **.drone.yml** file stored in the root of your site project.
+**Note: 3:** The example configuration is a **.drone.yml** file stored in the root of your site project.
 
 ```
 ---
@@ -135,14 +135,14 @@ sudo docker container start st-drone-ssl
 
 ### Support
 
-If you have any questions, concerns, want to say hi, please join the following channel: [SharpeTronics Discord Support Channel](https://discord.gg/HQcvr2JBQv) Eventually, I plan on having a commenting system on here..
+If you have any questions, concerns, want to say hi, please join the following channel: [SharpeTronics Discord Support Channel]({{ site.data.social.discord_invite }}) Eventually, I plan on having a commenting system on here..
 
 ### Donations
 Recently, I have had many folk as about **how to send me a donation**. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!
 
-- [Cash App](https://cash.app/$sharpeee)
-- [Venmo](https://account.venmo.com/u/seabeeess)
-- [Open Collective](https://opencollective.com/sharpetronics)
-- **Bitcoin Address:** 1BszkJe66oYps5PNwivFBBNTo1PAFYTMwF
-- **Hush Address:** zs1qx8dutj96kdcx29a4070pumzdqsk7vnayk4pf8tf6duj304y4akey9ze39upzz9qtchculp8mdw
-- **Stellar Address:** GARFNIQZPE5SHGJSR25AIFWWGUB7GJIW4TVZ5ZUSEP5VMJIVIUONANK4
+- [Cash App]({{ site.data.payment.cashapp_acct }})
+- [Venmo]({{ site.data.payment.venmo_acct }})
+- [Open Collective]({{ site.data.payment.open_collective }})
+- **Bitcoin Address:** {{ site.data.payment.bitcoin_addr }}
+- **Hush Address:** {{ site.data.payment.hush_addr }}
+- **Stellar Address:** {{ site.data.payment.stellar_addr }}

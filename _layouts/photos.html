@@ -1,0 +1,26 @@
+---
+layout: page
+---
+<div class="home">
+  <h1 class="page-heading">Photos</h1>
+  {%- if strapi.collections.photos.size > 0 -%}
+  <ul>
+    {%- for photo in strapi.collections.photos -%}
+    <li>
+      <a href="{{ photo.url }}">Title {{ photo.attributes.Title }}</a>
+      <img src="{{ photo.url }}"/>
+      {{ page.document.Comment }}
+      {{ photo.attributes.Comment }}
+      {{ photo.attributes.createdAt }}
+      <!-- <img src="{{ photo.id.data.attributes.Image.data.attributes.| asset_url }}"/> -->
+      <!-- <img src="{{ photo.attributes.Image.data.attributes.| asset_url }}"/> -->
+      <!-- <img src="{{ photo.id.attributes.Image.data.attributes.| asset_url }}"/> -->
+      <!-- <img src="{{ photo.id.data.strapi_attributes.Image.data.attributes.| asset_url }}"/> -->
+      <!-- <img src="{{ photo.strapi_attributes.Image.data.attributes.| asset_url }}"/> -->
+      <img src="{{ page.document.strapi_attributes.Image.data.attributes.url }}"/>
+
+    </li>
+    {%- endfor -%}
+  </ul>
+  {%- endif -%}
+</div>

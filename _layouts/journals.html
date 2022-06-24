@@ -30,10 +30,11 @@ layout: post
 	    <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
 	    <footer>
 	      <ul class="actions">
-	        <li><a href="{{ post.url | absolute_url }}" class="button">Continue Reading</a></li>
+	        <li><a href="{{ post.url | absolute_url }}" class="button"><b>Continue Reading</b></a></li>
 	      </ul>
 	      <ul class="stats">
-	        <li>{{ post.category }}</li>
+	        <li><b>{{ post.category }}</b></li>
+					<li><b>Tags:</b><a href="#">{{ post.tag }}</a></li>
 	        <!-- <li class="icon solid fa-heart">144</li> -->
 	        <li><a href="{{ post.url | absolute_url }}" class="icon solid fa-comment">88</a></li>
 	      </ul>
