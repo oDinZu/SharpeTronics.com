@@ -15,16 +15,21 @@ gem "jekyll", "~> 4.2.2"
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
 # gem "github-pages", group: :jekyll_plugins
 # If you have any plugins, put them here!
-# Added webrick for Jekyll 4.2.2; Ruby 3 doesn't have webrick by default.
+
 group :jekyll_plugins do
-   gem "webrick", "~> 1.7"
+   gem "webrick", "~> 1.7" # Added webrick for Jekyll 4.2.2; Ruby 3 doesn't have webrick by default. DEV
+   gem "down", "~> 5.0" # Added down for strapi_image_filter. DEV
+   gem "json", "~> 2.1" # Added down for strapi_http. DEV
+   gem "http", "~> 3.2" # Added down for strapi_http. DEV
+
    gem "jekyll-feed", "~> 0.12"
    gem "jekyll-menus"
    gem "jekyll-tagging"
    gem "jekyll-archives"
    gem "jekyll-paginate-v2"
-   gem "jekyll-strapi"
-   gem "jekyll-admin"
+   gem "httparty"
+   #gem "jekyll-strapi"
+   gem "jekyll-admin" # Added for easy way to have GUI for developers DEV
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem

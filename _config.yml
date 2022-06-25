@@ -92,11 +92,12 @@ picture:
 plugins:
   - jekyll-feed #manually generated rss.xml https://jekyllrb.com/tutorials/convert-site-to-jekyll/#10-rss-feed
   - jekyll-admin
-  - jekyll-strapi
+  #- jekyll-strapi
   - jekyll-menus
   - jekyll-archives
   - jekyll-paginate-v2
   - jekyll/tagging
+  #- jekyll/tags/strapiimagefilter
 
 sass:
   style: compressed # possible values: nested expanded compact compressed
