@@ -1,0 +1,7 @@
+{% for item in site.data.posts.index.data %}
+  <li>
+    {{ item.id }} {{ item.attributes.title }} {{ item.attributes.updatedAt | date: "%Y" }}
+    <img src="{{site.url}}/uploads/2021/{{ item.attributes.image.data.attributes.name }}" />
+    {{ item.attributes.image.data.attributes.placeholder}}
+  </li>
+{% endfor %}
