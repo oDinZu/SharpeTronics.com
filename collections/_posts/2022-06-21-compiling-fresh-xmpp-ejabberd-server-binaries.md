@@ -101,11 +101,11 @@ cd ejabberd-20.05/ && ls bin/
 ./bin/ejabberdctl status
 ```
 
-### NOW, the hard part... configuration of your fresh ejabberd binaries.
+> NOW, the hard part... configuration of your fresh ejabberd binaries.
 
-As you have noticed, ejabberdctl status failed to start. This is because we now have to configure the server.
+As you may have noticed, **ejabberdctl** status failed to start. This is because we now have to configure the server.
 
-### PART II - TBA
+##$# PART II - TBA
 
 ### References:
 
@@ -121,12 +121,9 @@ As you have noticed, ejabberdctl status failed to start. This is because we now 
 
 If you have any questions, concerns, want to say hi, please join the following channel: [SharpeTronics Discord Support Channel]({{ site.data.social.discord_invite }}) Eventually, I plan on having a commenting system on here..
 
-### Donations
+### Want to buy me a coffee?
 Recently, I have had many folk as about **how to send me a donation**. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!
 
 - [Cash App]({{ site.data.payment.cashapp_acct }})
 - [Venmo]({{ site.data.payment.venmo_acct }})
 - [Open Collective]({{ site.data.payment.open_collective }})
-- **Bitcoin Address:** {{ site.data.payment.bitcoin_addr }}
-- **Hush Address:** {{ site.data.payment.hush_addr }}
-- **Stellar Address:** {{ site.data.payment.stellar_addr }}
