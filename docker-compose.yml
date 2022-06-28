@@ -72,4 +72,6 @@ services:
         - '.:/srv/jekyll'
       ports:
         - 4000:4000
+      environment:
+        - STRAPI_TOKEN=$STRAPI_TOKEN
       command: jekyll serve --lsi --watch --verbose --trace
