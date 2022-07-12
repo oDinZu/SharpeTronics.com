@@ -12,15 +12,19 @@ banner_image_alt: "Macguyvering Strapi"
 category: Tutorials
 tag: How-to, Strapi, Configuration
 ---
-In this article, we will be replacing the Strapi favicon with your own favicon. Furthermore, this same process is similar to how we replace the login logo `AuthLogo` and menu logo with `MenuLogo'. For more details, please visit Strapi documentations example configuration. [Strapi Documents] 
+  In this article, we will be replacing the Strapi favicon with your own favicon. Furthermore, this same process is similar to how we replace the login logo `AuthLogo` and menu logo with `MenuLogo'. For more details, please visit Strapi documentations example configuration. [Strapi Documents] 
 
-#### Create an extensions folder in: `src/admin/extensions/`
+#### 1. Create an extensions folder in: 
 
-#### Upload your favicon into: `src/admin/extensions/`
+`src/admin/extensions/`
 
-#### Replace the **favicon.ico** at `Strapi app root` with your favicon.ico
+#### 2. Upload your favicon into: 
+`src/admin/extensions/`
 
-#### Update your `src/admin/app.js` with the following:
+#### 3. Replace the **favicon.ico** at 
+`Strapi app root` with your favicon.ico
+
+#### 4. Update your `src/admin/app.js` with the following:
 ```
 import favicon from './extensions/favicon.png';
 
@@ -33,7 +37,7 @@ export default {
   }
 }
 ```
-#### Rebuild, run & revisit your Strapi app `yarn build && yarn develop`
+#### 5. Rebuild, run & revisit your Strapi app `yarn build && yarn develop`
 Your Strapi app should now have your updated favicon.
 
 *Note: Be certain the *cached favicon* is **cleared**. It can be cached in your web browser and also with your domain management tool like Cloudflare's CDN*
