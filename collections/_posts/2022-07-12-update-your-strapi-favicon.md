@@ -14,10 +14,6 @@ tag: How-to, Strapi, Configuration
 ---
 &nbsp;&nbsp;&nbsp;&nbsp;In this article, we will be replacing the Strapi favicon with your own favicon. This same process is similar to how we replace the login logo `AuthLogo` and menu logo with `MenuLogo`. For more details, please visit Strapi documentations example configuration. [Strapi Documents] 
 
-#### Favicon
-
-Replacing the Strapi favicon with a custom favicon.
-
 > **Tip:** This same process may be used to replace the login logo `AuthLogo` and menu logo with `MenuLogo`. 
 > For more details, please visit Strapi [Strapi Documents](#)
 
