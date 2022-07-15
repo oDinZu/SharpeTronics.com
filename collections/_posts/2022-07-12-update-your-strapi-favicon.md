@@ -15,7 +15,7 @@ tag: How-to, Strapi, Configuration
 &nbsp;&nbsp;&nbsp;&nbsp;In this article, we will be replacing the Strapi favicon with your own favicon. This same process is similar to how we replace the login logo `AuthLogo` and menu logo with `MenuLogo`. For more details, please visit Strapi documentations example configuration. [Strapi Documents] 
 
 > **Tip:** This same process may be used to replace the login logo `AuthLogo` and menu logo with `MenuLogo`. 
-> For more details, please visit Strapi [Strapi Documents](#)
+> For more details, please visit [Strapi Documents](https://docs.strapi.io/developer-docs/latest/development/admin-customization.html#logos)
 
 1. Create an extensions folder at:
 `src/admin/extensions/`
