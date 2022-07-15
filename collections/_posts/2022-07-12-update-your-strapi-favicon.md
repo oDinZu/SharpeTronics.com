@@ -42,7 +42,6 @@ export default {
   }
 }
 ```
-
 5. Rebuild, run & revisit your Strapi app
  `yarn build && yarn develop`
 
