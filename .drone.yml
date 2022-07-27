@@ -30,6 +30,8 @@ steps:
       from_secret: no_hostkey
     SERVER_PASS:
       from_secret: server_pass
+    API_TOKEN:
+      from_secret: api_token
   privileged: false
   volumes:
     - name: jekyll
