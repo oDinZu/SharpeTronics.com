@@ -107,8 +107,8 @@ inkscape.org, imagemagick.org, gimp.org
 Unsplash - The internet’s source of freely-usable images.
 unsplash.com
 
-Licensing - Use & distribute software
-creativecommons.org, gnu.org, fsf.org
+Licensing - GPLv3
+gpl-3.0.en.html
 
 Web Browser Debugging - Testing UI/UX of the website
 google.com/chrome/, mozilla.org/en-US/firefox
