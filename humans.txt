@@ -99,9 +99,6 @@ gitea.com
 DockerHub - Build and ship any application anywhere
 hub.docker.com
 
-Google Workspace - Business & collaboration tools
-workspace.google.com
-
 Inkscape, Imagemagick & Gimp - Graphics editor
 inkscape.org, imagemagick.org, gimp.org
 
