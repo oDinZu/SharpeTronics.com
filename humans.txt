@@ -43,6 +43,9 @@ TECHNOLOGY
 Ruby - A dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.
 ruby-lang.org/en/
 
+Ruby Gems - Find, install, and publish RubyGems.
+rubygems.org/
+
 Jekyll - Static site generator
 jekyllrb.com
 
@@ -79,6 +82,7 @@ fontawesome.com
 JavaScript libraries include:
 jQuery, breakpoints.js
 
+...many, many more
 
 TOOLS
 -----
@@ -116,9 +120,13 @@ gpl-3.0.en.html
 Web Browser Debugging - Testing UI/UX of the website
 google.com/chrome/, mozilla.org/en-US/firefox
 
+Stack overflow - Best answers
+stackoverflow.com
+
 Startpage - Search engine privacy
 startpage.com
 
+...many, many more
 
 FONTS
 -----
