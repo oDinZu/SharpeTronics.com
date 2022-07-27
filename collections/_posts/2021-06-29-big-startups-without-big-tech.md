@@ -1,19 +1,14 @@
 ---
-layout: journal_single
-
-author: Charles #case sensitive, please use capitalization for names.
-
+layout: post
+date: 2021-06-29
+author: Charles
+banner_image: /uploads/decentralized_385bd5a376.webp
+banner_image_alt: An image of interconnecting objects
 title: Big Startups Without Big Tech
 sub_heading: Liquid Democracy Empowering Network Users
-
-banner_image: "/uploads/2021/decentralized.webp" #Size of banner_image 840x473
-banner_image_alt: "Decentralized Internet Dfinity"
-
-category: Tutorials
-tag: Linux, Motoko, Installation
+tags: Blockchain, Linux, 
+category: How-to
 ---
-
-
 Welcome to the Blockchain Internet called DFINITY. In my spare time, I have been tinkering and learning **Motoko**. It is a language built for the Internet Computer (IC) that can be used to interface applications, websites and other various software.
 
 Motoko is a programming typed language that compiles into WebAssembly (WA) and is created by **Andreas Rossberg** & the **Dfinity Foundation**
@@ -49,14 +44,3 @@ I hope this quick tutorial aided in your Linux administration talents. I will be
 * Internet Computer Genesis Launch Event - <https://youtu.be/xiupEw4MfxY> - Premiered May 7, 2021
 * The Dfinity Foundation - <https://dfinity.org/>
 * Adding a Path to the Linux PATH variable - <https://www.baeldung.com/linux/path-variable> - May 13th, 2021
-
-### Support
-
-If you have any questions, concerns, want to say hi, please join the following channel: [SharpeTronics Discord Support Channel]({{ site.data.social.discord_invite }}) Eventually, I plan on having a commenting system on here..
-
-### Want to buy me a coffee?
-Recently, I have had many folk as about **how to send me a donation**. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!
-
-- [Cash App]({{ site.data.payment.cashapp_acct }})
-- [Venmo]({{ site.data.payment.venmo_acct }})
-- [Open Collective]({{ site.data.payment.open_collective }})

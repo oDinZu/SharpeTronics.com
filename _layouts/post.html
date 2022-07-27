@@ -1,16 +1,42 @@
 ---
 layout: default
+pagination:
+  enabled: false
 ---
 {% comment %}
-	This layout is a post with pagination.
+	This layout is the single page of a blog post.
 {% endcomment %}
 
-<!-- Main -->
 <section id="main" class="wrapper style1">
   <div class="inner">
+    <!-- Shopping Cart -->
+    <section class="row product-cart journal">
+      <div class="col-12">
+        <a href="{{site.url}}/blog"><h5 class="button back">< Go Back</h5></a>
+      </div>
+      </section>
 
+  <!-- Title -->
+    <header class="major special journal">
+      <div class="hero"> <img class="image fit" src="{{ page.banner_image }}" alt="{{ page.banner_image_alt }}"> </div>
+      <h1>{{ page.title }}</h1>
+      <p>{{ page.sub_title }}</p>
+    </header>
     <!-- Content -->
-    {{ content }}
+      <div class="content">
+        {{ content }}
+        {% assign author = site.data.authors[page.author] %}
+        {%- include author_card.html -%}
 
-  </div>
+        <!-- Related posts collection -->
+        <section class="row related-items">
+          <div class="col-12">
+            <h3>More Posts</h3>
+          </div>
+          {%- assign related_posts = site.posts | where_exp:"post", "post.url != page.url" | sample:3 -%}
+          {%- include product_related.html -%}
+        </section>
+      </div>
+
+    </div>
 </section>

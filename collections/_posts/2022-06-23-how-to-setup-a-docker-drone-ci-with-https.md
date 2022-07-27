@@ -1,18 +1,14 @@
 ---
-layout: journal_single
-
-author: Charles #case sensitive, please use capitalization for names.
-
+layout: post
+date: 2022-06-23
+author: Charles
+banner_image: /uploads/r2d2_skywalker_c84e2364fe.webp
+banner_image_alt: Skywalker with R2D2
 title: How to Setup a Docker Drone CI with HTTPS
 sub_heading: Obiwon Can Oh Be! A digital C3-PO working beside you!
-
-banner_image: "/uploads/2022/r2d2-skywalker.webp" #Size of banner_image 840x473
-banner_image_alt: "Skywalker with R2D2"
-
-category: Tutorials
-tag: Linux, Drone, CI, How-to
+tags: Nginx, Linux, VPS, Drone CI, Docker, 
+category: How-to
 ---
-
 > R2D2, you know better than to trust a strange computer! [beeps]
 
 In general, this Drone server enables continuous integration (CI) and is a stepping stone for continuous delivery (CD), including gh-pages and gh-actions like functionality.
@@ -138,7 +134,7 @@ This article will be shared at a later date.
 
 If you have any questions, concerns, want to say hi, please join the following channel: [SharpeTronics Discord Support Channel]({{ site.data.social.discord_invite }}) Eventually, I plan on having a commenting system on here..
 
-### Want to buy me a coffee?
+### Donations
 Recently, I have had many folk as about **how to send me a donation**. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!
 
 - [Cash App]({{ site.data.payment.cashapp_acct }})

@@ -1,18 +1,14 @@
 ---
-layout: journal_single
-
-author: Charles #case sensitive, please use capitalization for names.
-
+layout: post
+date: 2022-06-23
+author: Charles
+banner_image: /uploads/c3po_a_friend_in_need_74a237a413.webp
+banner_image_alt: Black and white still image of C3PO
 title: How to Setup a Secure Docker Drone Runner with Drone CI
 sub_heading: BeeYoop BeeDeepBoom Weeop DEEpaEEya
-
-banner_image: "/uploads/2022/c3po-a-friend-in-need.webp" #Size of banner_image 840x473
-banner_image_alt: "Black and white still image of C3PO"
-
-category: Tutorials
-tag: Linux, Drone, CI, How-to
+tags: Linux, Drone CI, Docker, 
+category: How-to
 ---
-
 > BeeYoop BeeDeepBoom Weeop DEEpaEEya
 
 In general, this article describes how to setup SSL with a Drone Runner. This is part II of a part I series. If you would like to learn how-to setup the Drone Server, please visit: [Setup Drone CI Server](https://www.sharpetronics.com/blog/tutorials/2022/06/23/how-to-setup-a-docker-drone-ci-with-https/).
