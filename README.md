@@ -5,7 +5,7 @@ Javascript frameworks create more complexity than needed, this example displays 
 
 No proprietary operating system dependencies required, only Docker Engine super machines and some tender love and care.
 
-# Architecture Features (includes both: software & hardware)
+# Architecture Features
 * JAMstack (Jekyll, API's, Markup)
 * Lightweight, Responsive & Static!
 * SCSS ready!
@@ -45,7 +45,7 @@ No proprietary operating system dependencies required, only Docker Engine super 
 
 ## Clone, Build & Launch
 1. In local directory for development, ```https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git```
-2. ```cd sharpetronics.github.io```
+2. ```cd sharpetronics.com```
 3. ```docker-compose up or docker compose up```
 
 *Happy Hacking!!! :)*
