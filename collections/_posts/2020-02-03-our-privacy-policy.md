@@ -1,13 +1,15 @@
 ---
+updatedAt: 2022-10-11T22:20:40.674Z
 layout: post
+title: Our Privacy Policy
+subheading: Your data is always yours.
+slug: our-privacy-policy
 date: 2020-02-03
 author: Charles
 banner_image: /uploads/terms_48bec2a697.webp
-banner_image_alt: An image of a gradient of colours.
-title: Our Privacy Policy
-sub_heading: Your data is always yours.
-tags: Celebration, Privacy, Terms & Conditions, 
+banner_image_description: an image gradient of blue and white.
 category: Legal
+tags: Privacy, 
 ---
 <h2>Privacy Policy for SharpeTronics.com, Inc.</h2>
 

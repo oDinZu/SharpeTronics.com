@@ -73,5 +73,6 @@ services:
       ports:
         - 4000:4000
       environment:
-        - API_TOKEN=$API_TOKEN
+        - API_TOKEN=$API_TOKEN,
+        - STRIPE_LIVE_KEY=$STRIPE_LIVE_KEY
       command: jekyll serve --lsi --watch --verbose --trace

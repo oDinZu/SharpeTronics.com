@@ -1,13 +1,15 @@
 ---
+updatedAt: 2022-10-11T22:12:00.118Z
 layout: post
+title: Big Startups Without Big Tech
+subheading: Liquid Democracy Empowering Network Users
+slug: big-startups-without-big-tech
 date: 2021-06-29
 author: Charles
 banner_image: /uploads/decentralized_385bd5a376.webp
-banner_image_alt: An image of interconnecting objects
-title: Big Startups Without Big Tech
-sub_heading: Liquid Democracy Empowering Network Users
-tags: Blockchain, Linux, 
+banner_image_description: Transparent cubes and a high tech lighting backdrop
 category: How-to
+tags: Blockchain, 
 ---
 Welcome to the Blockchain Internet called DFINITY. In my spare time, I have been tinkering and learning **Motoko**. It is a language built for the Internet Computer (IC) that can be used to interface applications, websites and other various software.
 

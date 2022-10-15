@@ -1,13 +1,15 @@
 ---
+updatedAt: 2022-10-11T22:04:01.861Z
 layout: post
+title: How to Setup a Docker Drone CI with HTTPS
+subheading: Obiwon Can Oh Be! A digital C3-PO working beside you!
+slug: how-to-setup-a-docker-drone-ci-with-https
 date: 2022-06-23
 author: Charles
 banner_image: /uploads/r2d2_skywalker_c84e2364fe.webp
-banner_image_alt: Skywalker with R2D2
-title: How to Setup a Docker Drone CI with HTTPS
-sub_heading: Obiwon Can Oh Be! A digital C3-PO working beside you!
-tags: Nginx, Linux, VPS, Drone CI, Docker, 
+banner_image_description: r2d2 and Luke lego people standing on a laptop
 category: How-to
+tags: VPS, SSL, Drone CI, Docker, 
 ---
 > R2D2, you know better than to trust a strange computer! [beeps]
 

@@ -1,5 +1,5 @@
 ---
-updatedAt: 2022-10-12T23:07:49.156Z
+updatedAt: 2022-10-15T21:18:32.132Z
 layout: post
 title: Upgrade your Crosshair VI Hero Motherboard Firmware with System76's PopOS!
 subheading: I was doing a bit of yak shaving this morning, and it looks like it might have paid off.

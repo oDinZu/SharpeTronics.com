@@ -5,8 +5,8 @@ Charles:
   last_name:      "Sharpe"
   site:           "https://www.csharpe.me"
   avatar:         "/uploads/authors/c-avatar.webp" #Size of avatar_image 36x36
-  bio:            "Independent Full-Stack Web Developer; curious about Astronomy, Information Technology, Privacy, Permaculture, Philosophy & Consciousness."
-  email:          "charles.sharpee@gmail.com"
+  bio:            "A Stack Architect; curious about Astronomy, Information Technology, Privacy, Permaculture, Philosophy & Consciousness."
+  email:          "info@sharpetronics.com"
   # Twitter nick for use in Twitter cards and follow button.
   twitter: "csharpe_me" # if no twitter in this config, the twitter follow button will be removed
   # GitHub nick for use in follow button in author block.
@@ -14,12 +14,8 @@ Charles:
   social:
     - title: "github"
       url: "https://github.com/csharpee"
-    - title: "linkedin"
-      url: "https://www.linkedin.com/in/EXAMPLE"
-    - title: "youtube"
-      url: "https://www.youtube.com/channel/EXAMPLE"
-    - title: "facebook"
-      url: "https://www.facebook.com/EXAMPLE"
+    - title: "twitter"
+      url: "https://www.twitter.com/odinzu_me"
 
 
 Dexter:

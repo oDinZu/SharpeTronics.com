@@ -1,13 +1,15 @@
 ---
+updatedAt: 2022-10-11T22:07:37.794Z
 layout: post
+title: Setup a Secure NGINX HTTPS Web Server with Let's Encrypt + Strapi 4.0 Headless CMS
+subheading: Static Websites with CMS
+slug: setup-a-secure-nginx-https-web-server-with-let-s-encrypt-strapi-4-0-headless-cms
 date: 2021-12-27
 author: Charles
 banner_image: /uploads/santa_rudolph_unsplash_0ae8e3d5a7.webp
-banner_image_alt: An image of two pair of holiday cheer feet.
-title: Setup a Secure NGINX HTTPS Web Server with Let's Encrypt + Strapi 4.0 Headless CMS
-sub_heading: Static Websites with CMS
-tags: Nginx, Strapi, Headless CMS, JAMstack, 
+banner_image_description: Two feet wearing socks beside each other with faces of Santa Clause and another of Rudolph
 category: How-to
+tags: Nginx, Strapi, SSL, Headless CMS, JAMstack, 
 ---
 ## General
 For this tutorial, we will launch a secure SSL NGINX web server for your website domain example.org and enable an API to be consumed from the subdomain i.e. api.example.org with Strapi 4.0. 

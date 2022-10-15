@@ -16,7 +16,7 @@ layout: post
 
 	      <div class="title">
 	        <h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></h2>
-	        <p>{{ post.sub_heading }}</p>
+	        <p>{{ post.subheading }}</p>
 	      </div>
 	      {% assign author = site.data.authors[post.author] %}
 	      {%- include author_card.html -%}
@@ -30,7 +30,7 @@ layout: post
 	        <li><b>{{ post.category }}</b></li>
 					<li><b>Tags: </b>{{ post.tags }}</li>
 	        <!-- <li class="icon solid fa-heart">144</li> -->
-	        <li><a href="{{ post.url | absolute_url }}" class="icon solid fa-comment">88</a></li>
+	        <li><a href="{{ post.url | absolute_url }}" class="icon solid fa-comment">43</a></li>
 	      </ul>
 	    </footer>
 	  </article>

@@ -9,18 +9,20 @@ pagination:
 
 <section id="main" class="wrapper style1">
   <div class="inner">
-    <!-- Shopping Cart -->
+    {% unless page.layout == "posts" %}
+    <!-- The back button on a single post -->
     <section class="row product-cart journal">
       <div class="col-12">
         <a href="{{site.url}}/blog"><h5 class="button back">< Go Back</h5></a>
       </div>
-      </section>
+    </section>
+    {% endunless %}
 
   <!-- Title -->
     <header class="major special journal">
       <div class="hero"> <img class="image fit" src="{{ page.banner_image }}" alt="{{ page.banner_image_alt }}"> </div>
       <h1>{{ page.title }}</h1>
-      <p>{{ page.sub_title }}</p>
+      <p>{{ page.subheading }}</p>
     </header>
     <!-- Content -->
       <div class="content">

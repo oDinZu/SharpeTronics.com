@@ -1,13 +1,15 @@
 ---
+updatedAt: 2022-10-15T21:46:42.406Z
 layout: post
+title: How to Setup a Secure Docker Drone Runne with Drone CI
+subheading: BeeYoop BeeDeepBoom Weeop DEEpaEEya
+slug: how-to-setup-a-secure-docker-drone-runne-with-drone-ci
 date: 2022-06-23
 author: Charles
 banner_image: /uploads/c3po_a_friend_in_need_74a237a413.webp
-banner_image_alt: Black and white still image of C3PO
-title: How to Setup a Secure Docker Drone Runner with Drone CI
-sub_heading: BeeYoop BeeDeepBoom Weeop DEEpaEEya
-tags: Linux, Drone CI, Docker, 
+banner_image_description: a picture of c3po from Star Wars
 category: How-to
+tags: Linux, Drone CI, Docker, 
 ---
 > BeeYoop BeeDeepBoom Weeop DEEpaEEya
 

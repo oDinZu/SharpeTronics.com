@@ -1,13 +1,15 @@
 ---
+updatedAt: 2022-10-11T22:35:18.838Z
 layout: post
+title: Configure a Static Qt5 from Source on Ubuntu 18.04 with X11 Support
+subheading: Compiling & Configuring Qt from Source
+slug: configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support
 date: 2021-11-11
 author: Charles
-banner_image: /uploads/quantum_qt5_95dcd080f1.webp
-banner_image_alt: An image of a gold computer circuit.
-title: Configure a Static Qt5 from Source on Ubuntu 18.04 with X11 Support
-sub_heading: Compiling & Configuring Qt from Source
-tags: Linux, VPS, ARM64, AArch64, X11, 
-category: How-to
+banner_image: /uploads/quantum_qt5_41fa19c935.webp
+banner_image_description: A golden circuit board.
+category: Devops
+tags: Linux, Qt5, ARM64, Raspberry Pi 400, X11, 
 ---
 ### Configure, Build, Install & Setup Qt 5.15.2 Source on Ubuntu 18.04 with X11 Support
 

@@ -49,31 +49,36 @@ feed:
         - legal
         - devops
 
+# ===================================================================================
 # teh API dashboard configuration
 api:
-    # Your API endpoint
+    # ecommerce integration with Stripe
+    stripe:
+      # The Stripe Jekyll configuration
+      enabled: true # sometimes we don't need ecommerce integration; defaults to false
+      reset_stripe_db: false # when set true, it will delete all remote Stripe products and resubmit the products from CMS interface; caution! used for cleaning a Stripe db.
+
+    # uri format: [endpoint]+[endpoint_ext]+[endpoint_param]
     endpoint: https://dash.sharpetronics.com # url to api; no trailing slash
     endpoint_ext: /api/ # (optional) the extension of endpoint e.g. https://www.example.com/api/
-    endpoint_query: ?populate=* # (optional) e.g. force retrieve all json data
-    output: true # when true (global), new or modified images are downloaded from each collection type
-    local_media_dir: uploads/ # a placeholder example
+    endpoint_param: ?populate=* # (optional) e.g. populate all json data; does not affect endpoint_uploads.
+    endpoint_uploads: uploads # optional, no use at the moment; the location of all media files on api; this is required for downloading images
+
+    local_media_dir: uploads/ # where to cache the images
+    cache_images: true # when true (global), new or modified images are downloaded from endpoint_uploads; note: Docker is also caching downloaded images.
+
     collections:
-        # Example for a "posts" collection
-        posts: # required
-            # Collection name used to construct the url requested. Example: type `foo` would generate the following url `http://localhost:1337/foo`.
-            type: posts  # used for directory creation and organizing files
-            filepath: '_data/posts/index.json' # a placeholder example
-            # Permalink used to generate the output files (eg. /posts/:id).
-            # permalink: /blog/:id/
-            # output: false
-        # Example for a "products" collection
-        #products:
-            # Collection name (optional). Used to construct the url requested. Example: type `foo` would generate the following url `http://localhost:1337/foo`.
-            #type: products  # a placeholder example
-            #path: '_data/products/index.json' # a placeholder example
-            # Permalink used to generate the output files (eg. /posts/:id).
-            # permalink: /blog/:id/
-            # output: false
+      # the "posts" collection
+      posts: # required
+        # Collection name used to construct the url requested. Example: type `foo` would generate the following url `http://localhost:1337/foo`.
+        type: posts  # required; used for directory creation and organizing files
+        filepath: '_data/posts/index.json' # the filepath for posts json hash
+      # the "products" collection
+      products: # optional?
+        # Collection name (optional). Used to construct the url requested. Example: type `foo` would generate the following url `http://localhost:1337/foo`.
+        type: products  # required; used for directory creation and organizing files
+        filepath: '_data/products/index.json' # the filepath for products json hash
+# ===================================================================================
 
 # Collection configuration
 # These collections will sort types of products and loop through that
@@ -83,7 +88,7 @@ collections_dir: collections
 
 collections:
   products:
-    output: true
+    output: true # true or false
     permalink: /products/:path/
 
 permalink: "/blog/:categories/:year/:month/:day/:title/" # Built in options include: date, pretty, ordinal, weekdate, none; learn more here: https://jekyllrb.com/docs/permalinks/
@@ -104,7 +109,6 @@ sass:
 
 # Site configuration for the Jekyll v2 Pagination gem
 pagination:
-
   # Site-wide kill switch, disabled here it doesn't run at all
   enabled: true
   # Set to 'true' to enable pagination debugging. This can be enabled in the site config or only for individual pagination pages
@@ -114,7 +118,7 @@ pagination:
   # How many objects per paginated page, used to be `paginate` (default: 0, means all)
   per_page: 9
   # The permalink structure for the paginated pages (this can be any level deep)
-  permalink: '/:num/' # Pages are index.html inside this folder (default)
+  permalink: ':num/' # Pages are index.html inside this folder (default)
   #permalink: '/page/:num.html' # Pages are simple html files
   #permalink: '/page/:num' # Pages are html files, linked jekyll extensionless permalink style.
 

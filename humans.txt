@@ -30,7 +30,7 @@ SPECIAL THANKS
 @YOU
 
 @ajlkn
-aj.lkn.io
+aj.lkn.io/
 
 @strapijs
 strapi.io/
@@ -119,9 +119,6 @@ gpl-3.0.en.html
 
 Web Browser Debugging - Testing UI/UX of the website
 google.com/chrome/, mozilla.org/en-US/firefox
-
-Stack overflow - Best answers
-stackoverflow.com
 
 Startpage - Search engine privacy
 startpage.com

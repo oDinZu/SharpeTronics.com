@@ -1,13 +1,15 @@
 ---
+updatedAt: 2022-10-11T22:27:25.997Z
 layout: post
+title: Sharpetronics Inc. Becomes Official
+subheading: Winding Roads
+slug: sharpetronics-inc-becomes-official
 date: 2021-03-17
 author: Charles
 banner_image: /uploads/pillars_face_art_973bf824dd.webp
-banner_image_alt: An image of a pillar holding up a building.
-title: SharpeTronics Inc. Becomes Official
-sub_heading: Winding Roads
-tags: Celebration, 
+banner_image_description: A pillar with a head holding up the ceiling.
 category: Company
+tags: Contribute, Technology, 
 ---
 We as in SharpeTronics Inc. are proud to announce our business is official with the mountain state of West Virginia on March 17, 2021.
 

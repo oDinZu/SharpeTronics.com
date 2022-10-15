@@ -1,13 +1,15 @@
 ---
+updatedAt: 2022-10-11T22:20:58.472Z
 layout: post
+title: Our Terms & Conditions
+subheading: Our rules and regulations.
+slug: our-terms-and-conditions
 date: 2020-02-03
 author: Charles
 banner_image: /uploads/terms_48bec2a697.webp
-banner_image_alt: An image with a gradient of colours.
-title: Our Terms & Conditions
-sub_heading: Our rules and regulations.
-tags: Celebration, Privacy, Terms & Conditions, 
+banner_image_description: an image gradient of blue and white.
 category: Legal
+tags: Terms & Conditions, 
 ---
 <h2><strong>Terms and Conditions</strong></h2>
 

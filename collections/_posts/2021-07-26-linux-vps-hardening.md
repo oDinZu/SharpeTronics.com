@@ -1,13 +1,15 @@
 ---
+updatedAt: 2022-10-11T22:10:34.668Z
 layout: post
+title: Linux VPS Hardening
+subheading: Initializing a secure environment
+slug: linux-vps-hardening
 date: 2021-07-26
 author: Charles
 banner_image: /uploads/linux_admin_0def8999f2.webp
-banner_image_alt: an image of a hooded individual typing on a keyboard
-title: Linux VPS Hardening
-sub_heading: Initializing a secure environment
-tags: Linux, Privacy, Security, 
-category: How-to
+banner_image_description: The back of a black hoodie hacking at software
+category: Devops
+tags: Linux, VPS, SSL, Security, 
 ---
 ### Planting Seeds
 

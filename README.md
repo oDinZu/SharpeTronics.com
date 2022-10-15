@@ -17,10 +17,10 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * SharpeTronics Pages ready (free static hosting).
 * Drone CI / CD system.
 * Backups for restoring to previous states.
-* Headless CMS with superpowers!
+* Headless CMS with Strapi superpowers!
 * Ease of use for editors and writers.
 * Distributed CDN with automatic HTTPS (Cloudflare).
-* Secure ecommerce shopping.
+* Secure Ecommerce shopping with Stripe.
 * International Multi-language
 
 # Jekyll Plugins
@@ -59,8 +59,8 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * Stripe https://stripe.com/docs
 * SharpeTronics Custom Ruby Plugin (License: GPLv3)
 
-## Socials 
+## Socials
 * Discord: https://discord.gg/TUZ6P7BV
-* Twitter: https://nitter.privacydev.net/sharpetronics
+* Twitter: https://twitter.com/sharpetronics
 * Email: info@sharpetronics.com
 * Telegram: https://t.me/+oFUwKSn3frgzZDFh

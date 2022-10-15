@@ -32,6 +32,8 @@ steps:
       from_secret: server_pass
     API_TOKEN:
       from_secret: api_token
+    STRIPE_LIVE_KEY:
+      from_secret: stripe_live_key
   privileged: false
   volumes:
     - name: jekyll

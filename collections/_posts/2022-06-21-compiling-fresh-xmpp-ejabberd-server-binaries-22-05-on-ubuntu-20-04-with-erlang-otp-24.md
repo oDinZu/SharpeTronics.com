@@ -1,13 +1,15 @@
 ---
+updatedAt: 2022-10-11T22:35:01.620Z
 layout: post
+title: Compiling Fresh XMPP Ejabberd Server Binaries 22.05 on Ubuntu 20.04 with Erlang OTP 24
+subheading: Creating and host your own end-to-end encryption Instant Messenger app
+slug: compiling-fresh-xmpp-ejabberd-server-binaries-22-05-on-ubuntu-20-04-with-erlang-otp-24
 date: 2022-06-21
 author: Charles
 banner_image: /uploads/ejabberd_in_the_jungle_8a9f00e089.webp
-banner_image_alt: Compiling Fresh XMPP Ejabberd Server Binaries 22.05 on Ubuntu 20.04 with Erlang OTP 24
-title: Compiling Fresh XMPP Ejabberd Server Binaries 22.05 on Ubuntu 20.04 with Erlang OTP 24
-sub_heading: Creating and host your own end-to-end encryption Instant Messenger app
-tags: Linux, XMPP, Ejabberd, 
+banner_image_description: A human male swinging above the trees in a jungle.
 category: Devops
+tags: Privacy, XMPP, Ejabberd, 
 ---
 # Compiling ejabberd v22.05
 ### A XMPP server based on Erlang/OTP 24

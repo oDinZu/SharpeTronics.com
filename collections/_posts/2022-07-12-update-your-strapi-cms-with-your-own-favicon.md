@@ -1,13 +1,15 @@
 ---
+updatedAt: 2022-10-15T18:40:33.689Z
 layout: post
+title: Update your Strapi CMS with your own Favicon
+subheading: How-to replace the favicon
+slug: update-your-strapi-cms-with-your-own-favicon
 date: 2022-07-12
 author: Charles
-banner_image: /uploads/code_eff0ff4f77.webp
-banner_image_alt: Macguyvering Strapi
-title: Update your Strapi CMS with your own Favicon
-sub_heading: How-to replace the favicon
-tags: Strapi, Configure, Contribute, 
+banner_image: /uploads/code_2b5ed5fa9c.webp
+banner_image_description: computer code matrix
 category: How-to
+tags: Jekyll, Strapi, Headless CMS, 
 ---
 &nbsp;&nbsp;&nbsp;&nbsp;In this article, we will be replacing the Strapi favicon with your own favicon. This same process is similar to how we replace the login logo `AuthLogo` and menu logo with `MenuLogo`. For more details, please visit Strapi documentations example configuration. [Strapi Documents] 
 
