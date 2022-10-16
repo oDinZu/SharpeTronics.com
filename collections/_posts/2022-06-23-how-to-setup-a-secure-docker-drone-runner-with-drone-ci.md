@@ -1,9 +1,9 @@
 ---
-updatedAt: 2022-10-15T21:46:42.406Z
+updatedAt: 2022-10-16T16:23:44.426Z
 layout: post
-title: How to Setup a Secure Docker Drone Runne with Drone CI
+title: How to Setup a Secure Docker Drone Runner with Drone CI
 subheading: BeeYoop BeeDeepBoom Weeop DEEpaEEya
-slug: how-to-setup-a-secure-docker-drone-runne-with-drone-ci
+slug: how-to-setup-a-secure-docker-drone-runner-with-drone-ci
 date: 2022-06-23
 author: Charles
 banner_image: /uploads/c3po_a_friend_in_need_74a237a413.webp

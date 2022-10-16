@@ -62,7 +62,7 @@ No proprietary operating system dependencies required, only Docker Engine super 
 *Currently, the integration is maintained with Ubuntu 20.04 LTS Linux operating system, although, it is possible to use with Macintosh or Windows. The setup with docker and docker-compose will be similar as the Linux workflow; please see **Further Reading** for more details or get involved at: https://discord.gg/TUZ6P7BV.*
 
 ### Clone, Build & Launch
-1. In local directory for development, ```https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git```
+1. ```git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git```
 2. ```cd sharpetronics.com```
 3. ```docker compose up```
 4. ```open a web browser and navigate to: ``` *localhost:4000*
