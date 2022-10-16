@@ -27,6 +27,7 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * Secure Ecommerce shopping with Stripe.
 * International Multi-language
 * Commenting System with moderation
+* Secure SharpeTronics (ST) hosting that is flexible, lightning fast and inexpensive.
 
 ## Jekyll Plugins
 * Menus
