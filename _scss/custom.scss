@@ -16,6 +16,22 @@ h1, h2, h3, h4, h5, h6, header.major h1, .icon.style3 {
   color: #404040;
 }
 
+#thank-you-message {
+  display: none;
+}
+
+#thank-you-message.show {
+  display: block;
+}
+
+#newsletter-form {
+  border: none;
+}
+
+#newsletter-form.hide {
+  display: none;
+}
+
 strong, b {
     font-weight: 700;
 }
@@ -421,6 +437,10 @@ a.author {
 
   .product p {
     margin-bottom: 1.5em;
+  }
+
+  ul.actions {
+    margin-left: 0px;
   }
 
   .product p, .product h2, .product h3, .product h4, .product ul.actions {
