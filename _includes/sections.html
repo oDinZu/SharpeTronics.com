@@ -178,6 +178,8 @@
           }).then(res => res.json())
             .then(data => console.log(data))
             .catch (error => console.log(error));
+            //window.alert("Thank You! You have been added to our mailing list.")
+            // TODO: needs more error checking
             thankYouMessage.classList.add('show');
             newsletterForm.classList.add('hide');
         });
