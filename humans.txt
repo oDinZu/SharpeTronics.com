@@ -21,7 +21,7 @@ SHARPETRONICS TEAM
 
 Made with Cosmic LOVE in West Virginia.
 
-Charles Sharpe (@csharpe_me)
+Charles Sharpe (@odinzu_me)
 csharpe.me
 
 
@@ -82,13 +82,12 @@ fontawesome.com
 JavaScript libraries include:
 jQuery, breakpoints.js
 
-...many, many more
 
 TOOLS
 -----
 
 Linux - Operating system
-pop.system76.com
+pop.system76.com, ubuntu.com, archlinux.org
 
 Cloudflare - DNS & CDN
 cloudflare.com
@@ -96,8 +95,8 @@ cloudflare.com
 Certbot - Enable secure websites with Let's Encrypt.
 certbot.eff.org
 
-Atom - Text editor
-atom.io
+Geany - The Flyweight IDE
+geany.org
 
 Drone CI - Automated software build and test.
 drone.io
