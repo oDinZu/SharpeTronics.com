@@ -13,7 +13,7 @@ layout: post
 	  <!-- Post layout structure -->
 	  <article class="post">
 	    <header>
-	      <a href="{{ post.url | absolute_url }}" class="hero image fit"><img src="{{ post.banner_image }}" alt="{{ post.title }}" /></a>
+	      <a href="{{ post.url | absolute_url }}" class="hero image fit"><img src="{{ post.banner_image }}" alt="{{ post.title }}" loading="lazy"/></a>
 
 	      <div class="title">
 	        <h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></h2>
