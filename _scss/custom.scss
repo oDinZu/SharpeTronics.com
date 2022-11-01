@@ -4,7 +4,7 @@ body a {
 
 body.landing {
   background-attachment: scroll !important;
-  background-color: #f4f4f4;
+  background-color: #fff;
 }
 
 body.single {
@@ -286,6 +286,14 @@ a.author {
   input[type="submit"], input[type="reset"], input[type="button"], button, .button {
     padding: 0 2.9em;
   }
+  /* ---------Back to Top------------- */
+  #myBtn {
+    padding: 0 .50em;
+    display: none;
+    position: fixed;
+    bottom: .25em !important;
+    right: .25em !important;
+  }
 }
 
 #footer .copyright a, #footer .copyright {
@@ -488,7 +496,7 @@ a.author {
     padding: 0 .5em 0 .5em;
   }
   .product-cart .button.back {
-    margin: 1.5em;
+    margin: 0 0 1em 0;
     font-weight: bold;
   }
 
@@ -534,3 +542,46 @@ a.author {
   .related-products h3 {
     margin-bottom: .5em;
   }
+
+/* ---------Comment Discussion Styling------------- */
+ul.simple-nested li {
+  margin-left: 3em;
+}
+
+div.comment {
+  background-color: #fff;
+  padding: 1em;
+}
+
+em.date {
+  font-size: .75em
+}
+
+section.comments ul {
+  list-style: disclosure-closed;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ---------Back to Top------------- */
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_scroll_to_top */
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #f5f5f5;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color: #67c3af3b;
+}

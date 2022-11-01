@@ -4,10 +4,10 @@ header:
   - url: /
     title: Home
     identifier: header
-  - url: /blog/
+  - url: /blog
     title: Journal
     identifier: header
-#  - url: /products/
+#  - url: /products
 #    title: Shop
 #    identifier: header
 ---

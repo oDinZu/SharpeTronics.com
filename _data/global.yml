@@ -1,6 +1,7 @@
 #This data file contains all the global site information.
 ---
 title: SharpeTronics
+legal_title: SharpeTronics, LLC
 support_email: info@sharpetronics.com
 sales_email: sales@sharpetronics.com
 info_email: info@sharpetronics.com
@@ -23,7 +24,7 @@ location_coords: "39.63;-79,96"
 terms_link: /blog/legal/2020/02/03/our-terms-and-conditions/
 privacy_link: /blog/legal/2020/02/03/our-privacy-policy/
 sitemap_link: /sitemap.xml
-license_shorthand: This is Free Software released under <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a>
+license_shorthand: This is Free Software released under <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a>.
 license_longhand: >-  # this means to ignore newlines
   This is Free Software released under GPLv3. Any misuse of this software
   will be followed up with GPL enforcement via Software Freedom Law Center:

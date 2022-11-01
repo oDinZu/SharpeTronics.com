@@ -1,7 +1,7 @@
 # This software generates mardown formatted products from json data.
-# Copyright (C) SharpeTronics, Inc. 2013-2023
+# Copyright (C) SharpeTronics, LLC, 2013-2023
 
-# Author(s): Charles Sharpe(@odinzu_me) aka SharpeTronics, Inc.
+# Author(s): Charles Sharpe(@odinzu_me) aka SharpeTronics, LLC,
 # License: GPLv3
 # Version: 1.3
 
@@ -9,7 +9,7 @@
 # will be followed up with GPL enforcement via Software Freedom Law Center:
 # https://www.softwarefreedom.org/
 
-# If you incorporate or include any code from SharpeTronics, Inc., your
+# If you incorporate or include any code from SharpeTronics, LLC,, your
 # code must be licensed as GPLv3 (not GPLv2 or MIT)
 
 # The GPLv3 software license applies to the code directly included in this source distribution.
@@ -17,7 +17,7 @@
 
 # Dependencies downloaded as part of the build process may be covered by other open-source licenses.
 
-# We are open to granting a more permissive (such as MIT or Apache 2.0) license to SharpeTronics, Inc.
+# We are open to granting a more permissive (such as MIT or Apache 2.0) license to SharpeTronics, LLC,
 # software on a *case-by-case* basis, for an agreed upon price. Please email
 # info@sharpetronics.com.
 
