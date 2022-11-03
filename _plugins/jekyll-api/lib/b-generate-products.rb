@@ -118,6 +118,14 @@ module Jekyll
           author = id["attributes"]["author"]["data"]["attributes"]["name"]
           Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Author: " "#{author}".to_s.yellow
         end
+        
+        # determine if author avatar data is blank or null.
+        if "#{id["attributes"]["author"]["data"]["attributes"]["avatar_image"]["data"]}".blank? || "#{id["attributes"]["author"]["data"]["attributes"]["avatar_image"]["data"]}".empty?
+            Jekyll.logger.debug "ERROR: the author avatar data is missing; does post [" "#{title}] have a author avatar?".to_s.red
+        else
+          author_image = id["attributes"]["author"]["data"]["attributes"]["avatar_image"]["data"]["attributes"]["url"]
+          Jekyll.logger.debug "::DOCUMENT POST DEBUG:: Author_Avatar URL: " "#{author_image}".to_s.yellow
+        end
 
         # determine if banner_image is blank or null.
         if "#{id["attributes"]["banner_image"]}".blank?
@@ -318,6 +326,7 @@ module Jekyll
         p.puts "slug: #{slug}"
         p.puts "date: #{date}"
         p.puts "author: #{author}"
+        p.puts "author_image: #{author_image}"
         p.puts "banner_image: #{banner_image}"   # the banner images are downloaded from API in image-filter.rb.
         p.puts "banner_image_description: #{banner_image_description}"
         p.puts "category: " "#{category}"

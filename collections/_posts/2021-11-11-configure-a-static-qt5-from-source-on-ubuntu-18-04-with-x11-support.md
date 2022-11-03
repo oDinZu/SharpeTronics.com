@@ -6,6 +6,7 @@ subheading: Compiling & Configuring Qt from Source
 slug: configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support
 date: 2021-11-11
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/quantum_qt5_41fa19c935.webp
 banner_image_description: A golden circuit board.
 category: Devops

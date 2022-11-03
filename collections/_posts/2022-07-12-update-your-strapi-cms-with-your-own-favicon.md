@@ -6,6 +6,7 @@ subheading: How-to replace the favicon
 slug: update-your-strapi-cms-with-your-own-favicon
 date: 2022-07-12
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/code_2b5ed5fa9c.webp
 banner_image_description: computer code matrix
 category: How-to

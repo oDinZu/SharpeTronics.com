@@ -6,6 +6,7 @@ subheading: Our rules and regulations.
 slug: our-terms-and-conditions
 date: 2020-02-03
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/terms_48bec2a697.webp
 banner_image_description: an image gradient of blue and white.
 category: Legal

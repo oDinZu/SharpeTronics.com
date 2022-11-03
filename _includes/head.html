@@ -33,15 +33,19 @@ Quality Assurance: @odinzu_me
   <META NAME="ICBM" content="{{ site.data.global.location_coords }}" />
 
   <!-- Standard SEO Twitter Card data -->
-  <META NAME="twitter:card" content="summary">
-  <META NAME="twitter:site" content="@{{ site.data.social.twitter_user }}">
-  <META NAME="twitter:title" content="{{ page.title }}">
-  <META NAME="twitter:description" content="{{ page.description }}">
-  <META NAME="twitter:creator" content="@{{ site.data.social.twitter_user }}">
+  <META property="twitter:card" content="summary">
+  <META property="twitter:site" content="@{{ site.data.social.twitter_user }}">
+  <META property="twitter:title" content="{{ page.title }}">
+  <META property="twitter:description" content="{{ page.description }}">
+  <META property="twitter:creator" content="@{{ site.data.social.twitter_user }}">
 
-  <!-- Standard SEO Twitter Summary card images must be at least 120x120px -->
-  <META NAME="twitter:image" content="{{ page.image_url }}">
-  <META NAME="twitter:alt" content="{{ page.image_alt }}">
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ page.url }}">
+  <meta property="twitter:title" content="{{ page.title }}">
+  <meta property="twitter:description" content="{{ page.description }}">
+  <meta property="twitter:image" content="{{ page.image_url }}">
+  <meta property="twitter:creator" content="{{ page.author }}">
 
   <!-- Standard SEO Open Graph data -->
   <META property="og:title" content="{{ page.title }}" />

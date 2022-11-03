@@ -41,7 +41,8 @@ api_endpoint = f['api']['endpoint']
 endpoint_param = f['api']['endpoint_param']
 endpoint_ext = f['api']['endpoint_ext']
 Jekyll.logger.debug "DEBUG: API_ENDPDOINT for GET COLLECTIONS: " "#{api_endpoint}".to_s.yellow.bold
-
+media_dir = f['api']['local_media_dir']
+Jekyll.logger.debug "CONFIG DEBUG: MEDIA_DIR: " "#{media_dir}".to_s.yellow.bold
 # authenticated or public API data
 # import API_TOKEN from the environment. e.g. export API_TOKEN=example
 api_token = ENV['API_TOKEN']
@@ -75,11 +76,14 @@ if "#{api_token}".blank?
   end # close if/else
 
 # parses through local Jekyll _config.yml file and gets collection `type`
+posts_type = f['api']['collections']['posts']['type']
+Jekyll.logger.debug "CONFIG DEBUG: JEKYLL CONFIG POSTS PATH: " "#{posts_type}".to_s.yellow.bold
+
 products_type = f['api']['collections']['products']['type']
 Jekyll.logger.debug "CONFIG DEBUG: JEKYLL CONFIG PRODUCTS PATH: " "#{products_type}".to_s.yellow
 
-posts_type = f['api']['collections']['posts']['type']
-Jekyll.logger.debug "CONFIG DEBUG: JEKYLL CONFIG POSTS PATH: " "#{posts_type}".to_s.yellow.bold
+authors_type = f['api']['collections']['authors']['type']
+Jekyll.logger.debug "CONFIG DEBUG: JEKYLL CONFIG AUTHORS PATH: " "#{authors_type}".to_s.yellow.bold
 
 # store filepath config options
 posts_filepath = f['api']['collections']['posts']['filepath']
@@ -88,12 +92,42 @@ Jekyll.logger.debug "CONFIG DEBUG: JEKYLL CONFIG POSTS FILEPATH: " "#{posts_file
 products_filepath = f['api']['collections']['products']['filepath']
 Jekyll.logger.debug "CONFIG DEBUG: JEKYLL CONFIG PRODUCTS FILEPATH: " "#{products_filepath}".to_s.yellow
 
+authors_filepath = f['api']['collections']['authors']['filepath']
+Jekyll.logger.debug "CONFIG DEBUG: JEKYLL CONFIG AUTHORS FILEPATH: " "#{authors_filepath}".to_s.yellow
+
+puts Dir.pwd # where is local directory from plugins folder?
+puts Dir.entries("./_data/") # gets contents of local web app dir
+
+# Create posts directory only if they don't exist
+if not Dir.exist?("./_data/""#{posts_type}")
+  Jekyll.logger.info "the Jekyll posts directory does not exist, let's create one".to_s.red
+  Dir.mkdir("./_data/""#{posts_type}")
+  Jekyll.logger.info "DIR DEBUG: The local ./_data/posts directory is created at: " "#{posts_type}".to_s.yellow
+end
+
+# Create products directory only if they don't exist
+if not Dir.exist?("./_data/""#{products_type}")
+  Jekyll.logger.info "the Jekyll products directory does not exist, let's create one".to_s.red
+  Dir.mkdir("./_data/""#{products_type}")
+  Jekyll.logger.info "DIR DEBUG: The local ./_data/products directory is created at: " "#{products_type}".to_s.yellow
+end
+
+# Create author directory only if they don't exist
+if not Dir.exist?("./_data/""#{authors_type}")
+  Jekyll.logger.info "the Jekyll ./_data/authors directory does not exist, let's create one".to_s.red
+  Dir.mkdir("./_data/""#{authors_type}")
+  Jekyll.logger.info "DIR DEBUG: The local authors directory is created at: " "#{authors_type}".to_s.yellow
+end
+
 # build the resource link & populate posts json data
 uri_posts = "#{api_endpoint}#{endpoint_ext}#{posts_type}#{endpoint_param}"
 Jekyll.logger.debug "HTTP DEBUG: POSTS URI: " "#{uri_posts}".to_s.yellow.bold
 # build the resource link & populate posts json data
 uri_products = "#{api_endpoint}#{endpoint_ext}#{products_type}#{endpoint_param}"
 Jekyll.logger.debug "HTTP DEBUG: PRODUCTS URI: " "#{uri_products}".to_s.yellow
+# build the resource link & populate author json data
+uri_authors = "#{api_endpoint}#{endpoint_ext}#{authors_type}#{endpoint_param}"
+Jekyll.logger.debug "HTTP DEBUG: AUTHORS URI: " "#{uri_authors}".to_s.yellow.bold
 
 # the actual GET with header data; retrieve all product and posts json data from API
 posts_api_connect = api_builder.get(uri_posts)
@@ -102,12 +136,18 @@ Jekyll.logger.debug "HTTP DEBUG: THE COLLECTION is: #{posts_type} with STATUS CO
 products_api_connect = api_builder.get(uri_products)
 Jekyll.logger.debug "HTTP DEBUG: THE COLLECTION is: #{products_type} with STATUS CODE: #{products_api_connect.status}".to_s.cyan.bold
 
+authors_api_connect = api_builder.get(uri_authors)
+Jekyll.logger.debug "HTTP DEBUG: THE COLLECTION is: #{authors_type} with STATUS CODE: #{authors_api_connect.status}".to_s.cyan.bold
+
 # store all data into the body of the api
 posts_json_data = posts_api_connect.body
 Jekyll.logger.debug "HTTP DEBUG: IS POST JSON DATA EMPTY? #{posts_json_data.empty?}".to_s.yellow
 
 products_json_data = products_api_connect.body
 Jekyll.logger.debug "HTTP DEBUG: IS PRODUCT JSON DATA EMPTY? #{products_json_data.empty?}".to_s.yellow
+
+authors_json_data = authors_api_connect.body
+Jekyll.logger.debug "HTTP DEBUG: IS AUTHORS JSON DATA EMPTY? #{products_json_data.empty?}".to_s.yellow
 
 # opens the posts file and writes the data to the file
 Jekyll.logger.debug "WRITING RAW POSTS JSON DATA TO FILE...".yellow.bold
@@ -121,4 +161,11 @@ Jekyll.logger.debug "WRITING RAW PRODUCTS JSON DATA TO FILE...".yellow.bold
 File.write(products_filepath, JSON.dump(products_json_data))
 puts ""
 Jekyll.logger.debug "SUCCESS! JSON PRODUCTS FILE DOWNLOADED...".cyan.bold
+puts ""
+
+# opens the authors file and writes the data to the file
+Jekyll.logger.debug "WRITING RAW PRODUCTS JSON DATA TO FILE...".yellow.bold
+File.write(authors_filepath, JSON.dump(authors_json_data))
+puts ""
+Jekyll.logger.debug "SUCCESS! JSON AUTHORS FILE DOWNLOADED...".cyan.bold
 puts ""

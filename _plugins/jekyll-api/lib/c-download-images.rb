@@ -313,5 +313,79 @@ else
     end # ends post collection id exist?
     puts "" # pretty debug spacing
   end # end post formatting check
+  
+  
+  
+  # begin parsing through AUTHORS json data.
+  # prepare authors images from sorting the json data.
+  if f['api']['collections']['authors']['type'] != 'authors' # case sensitive
+    Jekyll.logger.debug "CONFIG DEBUG: AUTHORS FILEPATH IS MISSING or INCORRECT IN JEKYLL _CONFIG.YML, see documentation ".to_s.red
+  else
+    # load filepath, then parse through json file in _data/authors/index.json
+    json_authors_path = f['api']['collections']['authors']['filepath']
+    Jekyll.logger.debug "CONFIG DEBUG: AUTHORS PATH: " "#{json_authors_path}".to_s.yellow.bold
+
+    read_authors_json = File.read(json_authors_path) # read json for all authors
+    #Jekyll.logger.debug "DEBUG: READ JSON FILE: " "#{read_post_json}".to_s.yellow.bold  # basic debug test
+
+    parsed_authors_json_file = JSON.parse(read_authors_json.to_s) # returns json hash
+    Jekyll.logger.debug "JSON DEBUG: IS PARSED_JSON_FILE MISSING? " "#{parsed_authors_json_file.blank?}".to_s.yellow  # basic debug test
+
+    # cache / check and download all authors image data
+    authors_collection_ids = parsed_authors_json_file["data"]
+    # loop through each authors collection id
+    authors_collection_ids.each do |id|
+
+        # we only need the urls for each image to prep for download
+        #pp id
+        authors_avatar_images = id["attributes"]["avatar_image"]["data"]
+        # loop through each authors image.
+        authors_avatar_images.each do |a_image|
+          # get authors_avatar_images from each AUTHOR
+          if a_image.blank? || a_image.empty?
+            Jekyll.logger.debug "ERROR: IMAGE DATA EMPTY for AUTHORS: " "#{a_image["attributes"]["name"]}".to_s.red  # basic debug test
+          else
+            # set uri_path https://www.example.com/uploads/example.webp            
+            authors_avatar_image_uri_path = "#{api_endpoint}#{id["attributes"]["avatar_image"]["data"]["attributes"]["url"]}"
+            Jekyll.logger.debug "AUTHORS FILE DEBUG: AUTHOR AVATAR URI_PATH: " "#{authors_avatar_image_uri_path}".to_s.yellow.bold
+
+            # get image_file_name
+            authors_avatar_image_file_name = "#{id["attributes"]["avatar_image"]["data"]["attributes"]["hash"]}"
+            Jekyll.logger.debug "AUTHORS FILE DEBUG: AUTHORS AVATAR IMAGE URI_PATH: " "#{authors_avatar_image_file_name}".to_s.yellow.bold
+
+            # prepare filename
+            authors_avatar_image_file_ext = "#{id["attributes"]["avatar_image"]["data"]["attributes"]["ext"]}"
+            Jekyll.logger.debug "AUTHORS FILE DEBUG: THE FILE EXTENSION NAME: " "#{authors_avatar_image_file_ext}".to_s.yellow.bold  # basic debug test
+
+            # if cached AUTHOR filename exists, skip; else check modified time.
+            if File.exist?(media_dir + authors_avatar_image_file_name + authors_avatar_image_file_ext) === false
+
+              # where the magic happens; we finally download a new image
+              authors_avatar_download_image = api_builder.get(authors_avatar_image_uri_path)
+              Jekyll.logger.debug "DOWNLOADING... THE AVATAR IMAGE URI IS: " "#{authors_avatar_image_uri_path}".to_s.cyan.bold  # basic debug test
+              Jekyll.logger.debug "HTTP DEBUG: A NEW AVATAR IMAGE HTTP(S) RESPONSE: " "#{authors_avatar_download_image.status}\n" "#{authors_avatar_download_image.headers}\n".to_s.yellow # debug http response status
+
+              # only save file if data exists
+              authors_avatar_file_exist_debug = File.exist?(media_dir + authors_avatar_image_file_name + authors_avatar_image_file_ext) # file already exists?
+              Jekyll.logger.debug "FILE DEBUG: DOES AVATAR IMAGE ALREADY EXIST? " "#{authors_avatar_file_exist_debug}".to_s.yellow  # basic debug test
+
+              # TODO: enable to work with Windows NTFS File Systems
+              #file_ctime = File.ctime(media_dir + file_name + file_ext) # in NTFS (Windows) returns creation time (birthtime)
+              #Jekyll.logger.debug "DEBUG: WHEN WAS FILE LAST MODIFIED? " "#{file_ctime}".to_s.yellow  # basic debug test
+
+              c = File.open(authors_avatar_image_file_name + authors_avatar_image_file_ext, 'w') # w - Create an empty file for writing.
+              c.write(authors_avatar_download_image.body) # write the download to local media_dir
+              c.close # close the file
+              FileUtils.mv "#{c.path}", "#{media_dir}" # move the file to custom path
+              Jekyll.logger.debug "FILE DEBUG: THE WHOLE AVATAR IMAGE FILE NAME " "#{authors_avatar_image_file_name}" "#{authors_avatar_image_file_ext}".to_s.yellow.bold  # basic debug test
+            else
+              Jekyll.logger.debug "AUTHOR IMAGE ALREADY EXISTS - SKIPPING".to_s.magenta
+            end # end cached if file exists
+          end # author image data exist?
+        end # author.images.each do
+
+    end # ends authors collection id exist?
+    puts "" # pretty debug spacing
+  end # end authors formatting check
 
 end # end is cache_images enabled?

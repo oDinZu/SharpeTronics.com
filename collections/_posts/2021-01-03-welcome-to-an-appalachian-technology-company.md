@@ -6,6 +6,7 @@ subheading: Where light travels at high altitudes.
 slug: welcome-to-an-appalachian-technology-company
 date: 2021-01-03
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/wv_seneca_rocks_sky_0d5928baa9.webp
 banner_image_description: An image of the night sky in West Virginia.
 category: Company

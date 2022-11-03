@@ -6,6 +6,7 @@ subheading: BeeYoop BeeDeepBoom Weeop DEEpaEEya
 slug: how-to-setup-a-secure-docker-drone-runner-with-drone-ci
 date: 2022-06-23
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/c3po_a_friend_in_need_74a237a413.webp
 banner_image_description: a picture of c3po from Star Wars
 category: How-to

@@ -50,21 +50,21 @@ feed:
         - devops
 
 # ===================================================================================
-# teh API dashboard configuration
+# the API dashboard configuration
 api:
-    # ecommerce integration with Stripe
+    # Ecommerce integration with Stripe
     stripe:
       # The Stripe Jekyll configuration
       enabled: true # sometimes we don't need ecommerce integration; defaults to false
-      reset_stripe_db: false # when set true, it will delete all remote Stripe products and resubmit the products from CMS interface; caution! used for cleaning a Stripe db.
+      # TODO? reset_stripe_db: false # when set true, it will delete all remote Stripe products and resubmit the products from CMS interface; caution! used for cleaning a Stripe db.
 
     # uri format: [endpoint]+[endpoint_ext]+[endpoint_param]
     endpoint: https://dash.sharpetronics.com # url to api; no trailing slash
     endpoint_ext: /api/ # (optional) the extension of endpoint e.g. https://www.example.com/api/
-    endpoint_param: ?populate=* # (optional) e.g. populate all json data; does not affect endpoint_uploads.
+    endpoint_param: ?populate=deep # (optional) e.g. populate all json data; does not affect endpoint_uploads.
     endpoint_uploads: uploads # optional, no use at the moment; the location of all media files on api; this is required for downloading images
 
-    local_media_dir: uploads/ # where to cache the images
+    local_media_dir: uploads/ # where to cache the images # TODO add more organization for image folder data e.g. uploads/products & post image folder 
     cache_images: true # when true (global), new or modified images are downloaded from endpoint_uploads; note: Docker is also caching downloaded images.
 
     collections:
@@ -74,10 +74,14 @@ api:
         type: posts  # required; used for directory creation and organizing files
         filepath: '_data/posts/index.json' # the filepath for posts json hash
       # the "products" collection
-      products: # optional?
+      products: # optional
         # Collection name (optional). Used to construct the url requested. Example: type `foo` would generate the following url `http://localhost:1337/foo`.
         type: products  # required; used for directory creation and organizing files
         filepath: '_data/products/index.json' # the filepath for products json hash
+      authors: # required
+        # Collection name (optional). Used to construct the url requested. Example: type `foo` would generate the following url `http://localhost:1337/foo`.
+        type: authors  # required; used for directory creation and organizing files
+        filepath: '_data/authors/index.json' # the filepath for products json hash
 # ===================================================================================
 
 # Collection configuration

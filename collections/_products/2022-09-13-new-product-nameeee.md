@@ -7,6 +7,7 @@ subheading: test again yupy an update
 slug: new-product-nameeee
 date: 2022-09-13
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/optimus_primed_886bcb1942.jpeg
 banner_image_description: this is a description
 category: Legal

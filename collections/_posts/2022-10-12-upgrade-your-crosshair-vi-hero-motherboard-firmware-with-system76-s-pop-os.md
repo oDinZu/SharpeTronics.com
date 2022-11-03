@@ -6,6 +6,7 @@ subheading: I was doing a bit of yak shaving this morning, and it looks like it 
 slug: upgrade-your-crosshair-vi-hero-motherboard-firmware-with-system76-s-pop-os
 date: 2022-10-12
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/galactic_andromeda_workstation_393e5d94d4.webp
 banner_image_description: a fresh computer desk with monitors from the Andromeda Galaxy.
 category: How-to

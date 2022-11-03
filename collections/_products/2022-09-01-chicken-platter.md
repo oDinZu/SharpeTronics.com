@@ -7,6 +7,7 @@ subheading: sadfasdf
 slug: chicken-platter
 date: 2022-09-01
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/terms_48bec2a697.webp
 banner_image_description: a short desc. about the banner image
 category: How-to

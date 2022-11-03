@@ -6,6 +6,7 @@ subheading: Static Websites with CMS
 slug: setup-a-secure-nginx-https-web-server-with-let-s-encrypt-strapi-4-0-headless-cms
 date: 2021-12-27
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/santa_rudolph_unsplash_0ae8e3d5a7.webp
 banner_image_description: Two feet wearing socks beside each other with faces of Santa Clause and another of Rudolph
 category: How-to

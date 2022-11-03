@@ -6,6 +6,7 @@ subheading: Obiwon Can Oh Be! A digital C3-PO working beside you!
 slug: how-to-setup-a-docker-drone-ci-with-https
 date: 2022-06-23
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/r2d2_skywalker_c84e2364fe.webp
 banner_image_description: r2d2 and Luke lego people standing on a laptop
 category: How-to

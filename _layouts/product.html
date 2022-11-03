@@ -35,20 +35,38 @@ pagination:
           <div class="col-6 col-12-small product-image">
             <section class="">
               <a href="#"><img alt="{{ page.title }}" src="{{ page.banner_image }}" class="product-flex" /></a>
+              
+              <!-- Product Gallery Grid -->
+              {%- include product-grid-gallery.html -%}
             </section>
           </div>
           <!-- Product Details List -->
           <div class="col-6 col-12-small product-details">
             <section class="">
               <ul>
-                <li>Price:</li>
-                <li>Weight:</li>
-                <li>Stock:</li>
-                <li>Sku:</li>
-                <li>Format:</li>
-                <li>Material:</li>
-                <li>Reviews:</li>
+                <h4>Product Details</h4>
+                <li><b>Price:</b> ${{ page.unit_price | precision: 2}}</li>
+                <li><b>Currency Type:</b> {{ page.currency_type }}</li>
+                <li><b>Quantity:</b> {{ page.quantity | precision: 1}}</li>
+                <li><b>Material Type:</b> {{ page.material_type }}</li>
+                <li><b>Country Origin:</b> {{ page.country_origin }}</li>
+                <li><b>Tax Code:</b> {{ page.tax_code }}</li>
+                <li><b>Sku:</b> {{ page.stripe_id }}</li>
+                <li><b>Digital Software:</b> {{ page.is_software }}</li>
+                <li><b>Tags:</b> {{ page.tags }}</li>
+                <li><b>Shippable:</b> {{ page.is_shippable }}</li>
               </ul>
+              {% if page.is_shippable == "true" %}
+              <ul>
+                <h4>Shipping Details</h4>
+                <li><b>Costs:</b> ${{ page.shipping_price | precision: 2}}</li>
+                <li><b>Rates:</b> {{ page.shipping_rates }}</li>
+                <li><b>Company:</b> {{ page.shipping_company }}</li>
+                <li><b>Weight:</b> {{ page.weight }} lbs</li>
+                <li><b>Dimensions:</b> {{ page.package_dimensions }}</li>
+                <li><b>Sku:</b> {{ page.stripe_id }}</li>
+              </ul>
+              {% endif %}
               <!-- Product Add To Cart Button -->
               <a href="#" class="button fit">Add To Cart</a>
             </section>
@@ -62,7 +80,7 @@ pagination:
             </div>
             <div class="col-12">
               {{ content }}
-              {% assign author = site.data.authors[page.author] %}
+              {% assign author = page.author %}
               {%- include author_card.html -%}
             </div>
           </section>
@@ -72,7 +90,7 @@ pagination:
             <div class="col-12">
               <h3>More Products</h3>
             </div>
-            {%- assign related_posts = site.products | where_exp:"post", "post.url != page.url" | sample:3 -%}
+            {%- assign related_products = site.products | where_exp:"product", "product.url != page.url and product.layout == 'product'" | sample:3 -%}
             {%- include product_related.html -%}
         </section>
       </div>

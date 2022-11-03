@@ -1,11 +1,11 @@
-{%- for post in related_posts -%}
+{%- for product in related_products -%}
 <div class="col-4 col-12-small vert-expand">
   <article class="post product no-padding">
-    <a href="{{ post.url | absolute_url }}"><img alt="{{ post.title }}" src="{{ post.banner_image }}" class="image fit" /></a>
-    <a href="{{ post.url | absolute_url }}"><h4> {{ post.title | strip_html | truncatewords: 7  }} </h4></a>
-    <p>{{ post.content  | markdownify | strip_html | truncatewords: 19 }}</p>
+    <a href="{{ product.url | absolute_url }}"><img alt="{{ product.title }}" src="{{ product.banner_image }}" class="image fit" /></a>
+    <a href="{{ product.url | absolute_url }}"><h4> {{ product.title | strip_html | truncatewords: 7  }} </h4></a>
+    <p>{{ product.content  | markdownify | strip_html | truncatewords: 19 }}</p>
     <ul class="actions">
-      <li><a href="{{ post.url | absolute_url }}" class="button">Continue ></a></li>
+      <li><a href="{{ product.url | absolute_url }}" class="button">Continue ></a></li>
     </ul>
   </article>
 </div>

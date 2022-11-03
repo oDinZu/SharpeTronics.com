@@ -7,6 +7,7 @@ subheading: my sppooon is too beiigg
 slug: i-am-a-bananna-product
 date: 2022-10-04
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/santa_rudolph_unsplash_0ae8e3d5a7.webp
 banner_image_description: a short desc. about the banner image
 category: Company

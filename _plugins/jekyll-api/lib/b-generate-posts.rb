@@ -41,15 +41,20 @@ module Jekyll
 
   # set filepath, load the json, then parse through json file
   json_post_path = f['api']['collections']['posts']['filepath']
-
+  json_author_path = f['api']['collections']['authors']['filepath']
+  
   # must read data into memory before parsing file
   read_posts_json = File.read(json_post_path) # read json for all posts
-
+  read_authors_json = File.read(json_post_path) # read json for all authors
+  
   # parse through json files
   parsed_posts_file = JSON.parse(read_posts_json.to_s) # returns a hash
+  parsed_authors_file = JSON.parse(read_authors_json.to_s) # returns a hash
 
   # cache / verify and download each post data
   post_ids = parsed_posts_file["data"]
+  author_ids = parsed_authors_file["data"]
+  
     # loop through each post id
     post_ids.each do |id|
 
@@ -100,7 +105,15 @@ module Jekyll
         author = id["attributes"]["author"]["data"]["attributes"]["name"]
         Jekyll.logger.debug "::DOCUMENT POST DEBUG:: Author: " "#{author}".to_s.yellow
       end
-
+      
+      # determine if author avatar data is blank or null.
+      if "#{id["attributes"]["author"]["data"]["attributes"]["avatar_image"]["data"]}".blank? || "#{id["attributes"]["author"]["data"]["attributes"]["avatar_image"]["data"]}".empty?
+          Jekyll.logger.debug "ERROR: the author avatar data is missing; does post [" "#{title}] have a author avatar?".to_s.red
+      else
+        author_image = id["attributes"]["author"]["data"]["attributes"]["avatar_image"]["data"]["attributes"]["url"]
+        Jekyll.logger.debug "::DOCUMENT POST DEBUG:: Author_Avatar URL: " "#{author_image}".to_s.yellow
+      end
+      
       # determine if banner_image is blank or null.
       if "#{id["attributes"]["banner_image"]["data"]}".blank?
         Jekyll.logger.debug "ERROR: the banner_image url is missing; does post [" "#{title}] have a banner image url?".to_s.red
@@ -177,6 +190,7 @@ module Jekyll
       p.puts "slug: #{slug}"
       p.puts "date: #{date}"
       p.puts "author: #{author}"
+      p.puts "author_image: #{author_image}"
       p.puts "banner_image: #{banner_image}"   # the banner images are downloaded from API in image-filter.rb.
       p.puts "banner_image_description: #{banner_image_description}"
       p.puts "category: " "#{category}"
@@ -200,4 +214,5 @@ module Jekyll
       p.puts "#{content}" # write post content
       p.close # close the file; stop writing
     end
-end
+  
+end # jekyll module

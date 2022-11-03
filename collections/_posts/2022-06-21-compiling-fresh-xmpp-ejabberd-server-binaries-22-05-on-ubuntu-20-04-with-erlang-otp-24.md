@@ -6,6 +6,7 @@ subheading: Creating and host your own end-to-end encryption Instant Messenger a
 slug: compiling-fresh-xmpp-ejabberd-server-binaries-22-05-on-ubuntu-20-04-with-erlang-otp-24
 date: 2022-06-21
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/ejabberd_in_the_jungle_8a9f00e089.webp
 banner_image_description: A human male swinging above the trees in a jungle.
 category: Devops

@@ -12,6 +12,10 @@ body.single {
 
 }
 
+ul.actions li {
+  padding: 0em;
+}
+
 h1, h2, h3, h4, h5, h6, header.major h1, .icon.style3 {
   color: #404040;
 }
@@ -192,7 +196,7 @@ a.author {
 }
 
 .vert-expand {
-  display: flex;
+  display: grid;
 }
 
 .post:hover {
@@ -413,6 +417,10 @@ a.author {
     margin: 0px;
     width: 100%;
     height: 100%;
+  }
+  
+  div.product-hero-text {
+    padding: 0 0 0 .5em;
   }
   .product-hero-text p {
     padding-bottom: .5em;

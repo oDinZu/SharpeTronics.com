@@ -6,6 +6,7 @@ subheading: Liquid Democracy Empowering Network Users
 slug: big-startups-without-big-tech
 date: 2021-06-29
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/decentralized_385bd5a376.webp
 banner_image_description: Transparent cubes and a high tech lighting backdrop
 category: How-to

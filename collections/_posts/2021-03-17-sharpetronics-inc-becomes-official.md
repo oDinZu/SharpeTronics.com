@@ -6,6 +6,7 @@ subheading: Winding Roads
 slug: sharpetronics-inc-becomes-official
 date: 2021-03-17
 author: Charles
+author_image: /uploads/c_avatar_30ba895a14.webp
 banner_image: /uploads/pillars_face_art_973bf824dd.webp
 banner_image_description: A pillar with a head holding up the ceiling.
 category: Company
