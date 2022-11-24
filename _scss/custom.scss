@@ -20,6 +20,9 @@ h1, h2, h3, h4, h5, h6, header.major h1, .icon.style3 {
   color: #404040;
 }
 
+.product-font-price {
+  font-size: .5em;
+}
 #thank-you-message {
   display: none;
 }
@@ -262,12 +265,13 @@ a.author {
 }
 
 .button.primary {
-    background-color: #dbdbdb;
+    background-color: #3c3c3c;
     color: #5b5b5b;
+    font-weight: bold;
 }
 
 .button.primary:hover {
-    background-color: gray;
+    background-color: #e1bc63;
 }
 
 @media only screen and (max-width: 480px) {
@@ -592,4 +596,8 @@ section.comments ul {
 
 #myBtn:hover {
   background-color: #67c3af3b;
+}
+
+.snipcart-modal__container {
+  z-index: 999999999;
 }

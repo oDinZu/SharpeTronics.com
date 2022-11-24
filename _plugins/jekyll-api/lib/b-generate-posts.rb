@@ -3,7 +3,7 @@
 
 # Author(s): Charles Sharpe(@odinzu_me) aka SharpeTronics, LLC,
 # License: GPLv3
-# Version: 1.3
+# Version: 1.6
 
 # This is Free Software released under GPLv3. Any misuse of this software
 # will be followed up with GPL enforcement via Software Freedom Law Center:
@@ -28,6 +28,7 @@ require 'fileutils' # https://ruby-doc.org/stdlib-2.4.1/libdoc/fileutils/rdoc/Fi
 require 'json' # https://ruby-doc.org/stdlib-3.0.2/libdoc/json/rdoc/JSON.html
 require 'yaml' # load Jekyll yaml config
 require 'active_support/core_ext/object/blank' # load only the specific extension for .blank? support
+require 'date' # https://github.com/ruby/date
 
 module Jekyll
   # initialize variables
@@ -82,13 +83,8 @@ module Jekyll
         Jekyll.logger.debug "::DOCUMENT POST DEBUG:: Subheading: " "#{subheading}".to_s.yellow.bold
       end
 
-      # determine if date is blank or null.
-      if "#{id["attributes"]["date"]}".blank?
-        Jekyll.logger.debug "ERROR: the date is missing; does post [" "#{title}] have a date?".to_s.red
-      else
-        date = id["attributes"]["date"]
-        Jekyll.logger.debug "::DOCUMENT POST DEBUG:: Date: " "#{date}".to_s.yellow
-      end
+      date = DateTime.strptime(id['attributes']['createdAt'], '%Y-%m-%dT%H:%M:%S')
+      Jekyll.logger.debug "::DOCUMENT POST DEBUG:: Unformatted Creation Date: " "#{date}".to_s.yellow
 
       # determine if layout is blank or null.
       if "#{id["attributes"]["layout"]}".blank?
@@ -175,7 +171,7 @@ module Jekyll
       end
 
       # create the filename
-      file_name = "#{date}-#{slug}#{file_ending}"
+      file_name = "#{date.strftime('%Y-%m-%d')}-#{slug}#{file_ending}"
 
       # let us put humpty dumpty back together again!
       # create a new collection type post *.md
@@ -188,7 +184,7 @@ module Jekyll
       p.puts "title: #{title}"
       p.puts "subheading: #{subheading}"
       p.puts "slug: #{slug}"
-      p.puts "date: #{date}"
+      p.puts "date: #{date.strftime('%Y-%m-%d')}"
       p.puts "author: #{author}"
       p.puts "author_image: #{author_image}"
       p.puts "banner_image: #{banner_image}"   # the banner images are downloaded from API in image-filter.rb.

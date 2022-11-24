@@ -3,7 +3,7 @@
 
 # Author(s): Charles Sharpe(@odinzu_me) aka SharpeTronics, LLC,
 # License: GPLv3
-# Version: 1.3
+# Version: 1.6
 
 # This is Free Software released under GPLv3. Any misuse of this software
 # will be followed up with GPL enforcement via Software Freedom Law Center:
@@ -40,12 +40,12 @@ module Jekyll
   f = YAML.load(File.read(config_yml.to_s)) # r - read file
   Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Is config empty? " "#{config_yml.blank?}".to_s.magenta.bold
 
-  # is Stripe turned on in site _config.yml file?
-  stripe_enabled = f['api']['stripe']['enabled']
-  Jekyll.logger.debug "ENV DEBUG: Is Stripe enabled? " "#{stripe_enabled}".to_s.yellow.bold
+  # is Ecommerce turned on in site _config.yml file?
+  shop_enabled = f['api']['shop']['enabled']
+  Jekyll.logger.debug "ENV DEBUG: Is the shop enabled? " "#{shop_enabled}".to_s.yellow.bold
 
-  # if Stripe is enabled in _config.yml, then generate products
-  if "#{stripe_enabled}" === "true"
+  # if the shop is enabled in _config.yml, then generate products
+  if "#{shop_enabled}" === "true"
 
     # set filepath, load the json, then parse through json file
     json_product_path = f['api']['collections']['products']['filepath']
@@ -61,13 +61,13 @@ module Jekyll
       # loop through each collection id
       product_ids.each do |id|
         # store json specific data for each product
-        # determine if stripe_id is blank or null.; this unique identifier is used for Stripe product ids also.
-        # this allows overwriting Stripe id and syncronizes ids created from CMS API.
+        # determine if product_id is blank or null.; this unique identifier is used for the Ecommerce product ids also.
+        # this allows overwriting ecommerce id and syncronizes ids created from CMS API.
         if "#{id}".blank?
           Jekyll.logger.debug "ERROR: the product id is missing;".to_s.red
         else
-          stripe_id = id["id"]
-          Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Does the JSON data exist? " "#{stripe_id}".to_s.yellow
+          product_id = id["id"]
+          Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Does the JSON data exist? " "#{product_id}".to_s.yellow
         end
 
         # determine if heading is blank or null.
@@ -90,18 +90,12 @@ module Jekyll
           Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Subheading: " "#{subheading}".to_s.yellow.bold
         end
 
-        # determine if date is blank or null.
-        if "#{id["attributes"]["date"]}".blank?
-          Jekyll.logger.debug "ERROR: the date is missing; does product [" "#{heading}] have a date?".to_s.red
-        else
-          date = id["attributes"]["date"]
-          # store build times of local products with Stripe metadata
-          # on update too Stripe, updates the Stripe updatedAt time creating an infinite loop; we must have a static local time for each product that doesn't change on pushing to Stripe API
-          # NOTE: this time needs to be local product data and doesn't come from Strapi CMS API.
-          local_cms_time = DateTime.strptime(id['attributes']['updatedAt'], '%Y-%m-%dT%H:%M:%S')
-          Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Date: " "#{date}".to_s.yellow
-          Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Build_Time: " "#{local_cms_time}".to_s.yellow
-        end
+        date = DateTime.strptime(id['attributes']['createdAt'], '%Y-%m-%d')
+        
+        # store build times of local products with Ecommerce metadata
+        local_cms_time = DateTime.strptime(id['attributes']['updatedAt'], '%Y-%m-%dT%H:%M:%S')
+        Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Unformatted Product Creation Date: " "#{date}".to_s.yellow
+        Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Build_Time: " "#{local_cms_time}".to_s.yellow
 
         # determine if layout is blank or null.
         if "#{id["attributes"]["layout"]}".blank?
@@ -244,7 +238,7 @@ module Jekyll
         end
 
         # determine if product material_type is blank or null.
-        if "#{id["attributes"]["material_type"]}".blank?
+        if "#{id["attributes"]["material_types"]["data"]}".blank?
           Jekyll.logger.debug "ERROR: the material_type is missing; does product [" "#{heading}] have a material_type?".to_s.red
         else
           material_type = id["attributes"]["material_type"]
@@ -276,15 +270,15 @@ module Jekyll
         end
 
         # determine if product currency_type is blank or null.
-        if "#{id["attributes"]["currency_type"]}".blank?
+        if "#{id["attributes"]["currency_types"]["data"]}".blank?
           Jekyll.logger.debug "ERROR: the currency_type is missing; does product [" "#{heading}] have a currency_type?".to_s.red
         else
-          currency_type = id["attributes"]["currency_type"]
-          Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: currency_type: " "#{material_type}".to_s.yellow.bold
+          currency_types = id["attributes"]["currency_types"]
+          Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: currency_types: " "#{material_type}".to_s.yellow.bold
         end
 
         # determine if product shipping_rates is blank or null.
-        if "#{id["attributes"]["shipping_rates"]}".blank?
+        if "#{id["attributes"]["shipping_rates"]["data"]}".blank?
           Jekyll.logger.debug "ERROR: the shipping_rates is missing; does product [" "#{heading}] have shipping_rates?".to_s.red
         else
           shipping_rates = id["attributes"]["shipping_rates"]
@@ -293,7 +287,7 @@ module Jekyll
         end
 
         # determine if product shipping_companies is blank or null.
-        if "#{id["attributes"]["shipping_companies"]}".blank?
+        if "#{id["attributes"]["shipping_companies"]["data"]}".blank?
           Jekyll.logger.debug "ERROR: the shipping_companies is missing; does product [" "#{heading}] have shipping_companies?".to_s.red
         else
           shipping_companies = id["attributes"]["shipping_companies"]
@@ -308,9 +302,57 @@ module Jekyll
           country_origin = id["attributes"]["country_origin"]
           Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: country_origin: " "#{country_origin}".to_s.yellow.bold
         end
+        
+        # determine if product part_number is blank or null.
+        if "#{id["attributes"]["part_number"]}".blank?
+          Jekyll.logger.debug "ERROR: the part_number is missing; does product [" "#{heading}] have a part_number?".to_s.red
+        else
+          part_number = id["attributes"]["part_number"]
+          Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: part_number: " "#{part_number}".to_s.yellow.bold
+        end
+        
+        # determine if product model_number is blank or null.
+        if "#{id["attributes"]["model_number"]}".blank?
+          Jekyll.logger.debug "ERROR: the model_number is missing; does product [" "#{heading}] have a model_number?".to_s.red
+        else
+          model_number = id["attributes"]["model_number"]
+          Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: model_number: " "#{model_number}".to_s.yellow.bold
+        end
 
+        # determine if product colors is blank or null.
+        if "#{id["attributes"]["colors"]["data"]}".blank?
+          Jekyll.logger.debug "ERROR: the color(s) is missing; does product [" "#{heading}] have a color(s)?".to_s.red
+        else
+          colors = id["attributes"]["colors"]
+          Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: color(s): " "#{colors}".to_s.yellow.bold
+        end
+        
+        # determine if product sizes is blank or null.
+        if "#{id["attributes"]["sizes"]["data"]}".blank?
+          Jekyll.logger.debug "ERROR: the size(s) is missing; does product [" "#{heading}] have a size(s)?".to_s.red
+        else
+          sizes = id["attributes"]["sizes"]
+          Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: size(s): " "#{sizes}".to_s.yellow.bold
+        end
+        
+        # determine if product condition is blank or null.
+        if "#{id["attributes"]["condition"]}".blank?
+          Jekyll.logger.debug "ERROR: the condition is missing; does product [" "#{heading}] have a condition?".to_s.red
+        else
+          condition = id["attributes"]["condition"]
+          Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: condition: " "#{condition}".to_s.yellow.bold
+        end
+        
+        # determine if product is_taxable is blank or null.
+        if "#{id["attributes"]["is_taxable"]}".blank?
+          Jekyll.logger.debug "ERROR: the is_taxable option is missing; is the product [" "#{heading}] taxable?".to_s.red
+        else
+          is_taxable = id["attributes"]["is_taxable"]
+          Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: condition: " "#{is_taxable}".to_s.yellow.bold
+        end
+        
         # create the filename
-        file_name = "#{date}-#{slug}#{file_ending}"
+        file_name = "#{date.strftime('%Y-%m-%d')}-#{slug}#{file_ending}"
 
         # let us put humpty dumpty back together again!
         # create a new collection type post *.md
@@ -318,13 +360,13 @@ module Jekyll
 
         # create document.md content in Jekyll yaml formatting
         p.puts "---"
-        p.puts "stripe_id: #{stripe_id}"
+        p.puts "product_id: #{product_id}"
         p.puts "metadata: #{local_cms_time}"
         p.puts "layout: #{layout}"
         p.puts "heading: #{heading}"
         p.puts "subheading: #{subheading}"
         p.puts "slug: #{slug}"
-        p.puts "date: #{date}"
+        p.puts "date: #{date.strftime('%Y-%m-%d')}" 
         p.puts "author: #{author}"
         p.puts "author_image: #{author_image}"
         p.puts "banner_image: #{banner_image}"   # the banner images are downloaded from API in image-filter.rb.
@@ -343,14 +385,110 @@ module Jekyll
               p.print "  - image_path: " "#{gallery_image["attributes"]["url"]} \n"
               p.print "    title: " "#{gallery_image["attributes"]["hash"]} \n"
             end
-            p.puts "" # pretty debug spacing
+            p.puts ""  # pretty markdown debug spacing
+        end
+        
+        # add sizes without json formatting in pretty format
+        p.print "sizes: " # pretty debug
+        # loop & gather sizes from one product
+        if "#{id["attributes"]["sizes"]["data"]}".blank?
+          Jekyll.logger.debug "WRITING WARNING: the product sizes are missing; does product [" "#{heading}] have any sizes?".to_s.red
+        else
+          sizes = id["attributes"]["sizes"]["data"]
+            # loop through all sizes
+            sizes.each do |product_size|
+              p.print
+              p.print product_size
+              p.print ", "
+            end
+            p.puts ""  # pretty markdown debug spacing
+        end
+        
+        # add colors options without json formatting in pretty format
+        p.print "colors: " # pretty debug
+        # loop & gather colors from one product
+        if "#{id["attributes"]["colors"]["data"]}".blank?
+          Jekyll.logger.debug "WRITING WARNING: the product colors are missing; does product [" "#{heading}] have any colors?".to_s.red
+        else
+          colors = id["attributes"]["colors"]["data"]
+            # loop through all sizes
+            colors.each do |product_color|
+              p.print
+              p.print product_color
+              p.print ", "
+            end
+            p.puts ""  # pretty markdown debug spacing
+        end
+        
+        # add material_types without json formatting in pretty format
+        p.print "material_types: " # pretty debug
+        # loop & gather material_types from one product
+        if "#{id["attributes"]["material_types"]["data"]}".blank?
+          Jekyll.logger.debug "WRITING WARNING: the material_types are missing; does product [" "#{heading}] have any material_types?".to_s.red
+        else
+          material_types = id["attributes"]["material_types"]["data"]
+            # loop through all material_types
+            material_types.each do |product_material|
+              p.print
+              p.print product_material
+              p.print ", "
+            end
+            p.puts "" # pretty markdown debug spacing
+        end
+        
+        # add shipping_companies without json formatting in pretty format
+        p.print "shipping_companies: " # pretty debug
+        # loop & gather shipping_companies from one product
+        if "#{id["attributes"]["shipping_companies"]["data"]}".blank?
+          Jekyll.logger.debug "WRITING WARNING: the product shipping_companies are missing; does product [" "#{heading}] have any shipping_companies?".to_s.red
+        else
+          shipping_companies = id["attributes"]["shipping_companies"]["data"]
+            # loop through all sizes
+            shipping_companies.each do |product_company|
+              p.print
+              p.print product_company
+              p.print ", "
+            end
+            p.puts ""  # pretty markdown debug spacing
+        end
+        
+        # add shipping_rates without json formatting in pretty format
+        p.print "shipping_rates: " # pretty debug
+        # loop & gather shipping_rates from one product
+        if "#{id["attributes"]["shipping_rates"]["data"]}".blank?
+          Jekyll.logger.debug "WRITING WARNING: the product shipping_rates are missing; does product [" "#{heading}] have any shipping_rates?".to_s.red
+        else
+          shipping_rates = id["attributes"]["shipping_rates"]["data"]
+            # loop through all sizes
+            shipping_rates.each do |product_shipping_rates|
+              p.print
+              p.print product_shipping_rates
+              p.print ", "
+            end
+            p.puts ""  # pretty markdown debug spacing
+        end
+        
+        # add currency_types without json formatting in pretty format
+        p.print "currency_types: " # pretty debug
+        # loop & gather shipping_rates from one product
+        if "#{id["attributes"]["currency_types"]["data"]}".blank?
+          Jekyll.logger.debug "WRITING WARNING: the product currency_types are missing; does product [" "#{heading}] have any currency_types?".to_s.red
+        else
+          currency_types = id["attributes"]["currency_types"]["data"]
+            # loop through all sizes
+            currency_types.each do |product_currency_types|
+              p.print
+              p.print product_currency_types
+              p.print ", "
+            end
+            p.puts ""  # pretty markdown debug spacing
         end
 
         # add tags without json formatting in pretty format
         p.print "tags: " # pretty debug
         # loop & gather tags from one product
         if "#{id["attributes"]["tags"]["data"]}".blank?
-          Jekyll.logger.debug "WRITING ERROR: the tags are missing; does product [" "#{heading}] have any tags?".to_s.red
+          Jekyll.logger.debug "WRITING WARNING: the tags are missing; does product [" "#{heading}] have any tags?".to_s.red
         else
           tags = id["attributes"]["tags"]["data"]
             # loop through all tags
@@ -359,30 +497,31 @@ module Jekyll
               p.print tag["attributes"]["tag"]
               p.print ", "
             end
-            p.puts "" # pretty debug spacing
+            p.puts ""  # pretty markdown debug spacing
         end
 
         p.puts "webpage_url: #{webpage_url}"
+        p.puts "condition: #{condition}"
+        p.puts "model_number: #{model_number}"
+        p.puts "part_number: #{part_number}"
         p.puts "is_featured: #{is_featured}"
         p.puts "is_software: #{is_software}"
         p.puts "is_shippable: #{is_shippable}"
-        p.puts "currency_type: #{currency_type}"
+        p.puts "is_taxable: #{is_taxable}"
         p.puts "country_origin: #{country_origin}"
         p.puts "unit_price: #{unit_price}"
         p.puts "quantity: #{quantity}"
         p.puts "package_dimensions: #{package_dimensions}"
-        p.puts "material_type: #{material_type}"
         p.puts "weight: #{weight}"
         p.puts "tax_code: #{tax_code}"
         p.puts "shipping_price: #{shipping_price}"
-        p.puts "shipping_rates: #{shipping_rates}"
-        p.puts "shipping_company: #{shipping_companies}"
+
 
         p.puts "---" # close .yaml file frontmatter
         p.puts "#{description}" # write product description
         p.close # close the file; stop writing
       end
   else
-    Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Stripe is disabled in the _config.yml"
+    Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Ecommerce is disabled in the _config.yml"
   end
 end

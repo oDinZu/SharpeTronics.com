@@ -24,7 +24,7 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * Headless CMS with Strapi superpowers!
 * Ease of use for editors and writers.
 * Distributed CDN with automatic HTTPS (Cloudflare).
-* Secure Ecommerce shopping with Stripe.
+* Secure Ecommerce shopping with Snipcart.
 * International Multi-language
 * Commenting System with moderation
 * Secure SharpeTronics (ST) hosting that is flexible, lightning fast and inexpensive.

@@ -3,7 +3,7 @@
     <ul class="links">
       {% for item in site.menus.header %}
       <li class="menu-item-{{ loop.index }}">
-        <a href="{{ item.url }}" title="Go to {{ item.title }}">{{ item.title }}</a>
+        <a href="{{ item.url }}" title="Go to {{ item.title }}">{{ item.pre }} {{ item.title }}</a>
       {% endfor %}
     </ul>
     <!-- <ul class="actions stacked">
