@@ -5,3 +5,5 @@ _site/
 .jekyll-metadata
 .gitattributes
 project.geany
+# collections are generated with Drone CI/CD 
+collections/ 

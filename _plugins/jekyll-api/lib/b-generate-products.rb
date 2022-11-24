@@ -355,8 +355,8 @@ module Jekyll
         file_name = "#{date.strftime('%Y-%m-%d')}-#{slug}#{file_ending}"
 
         # let us put humpty dumpty back together again!
-        # create a new collection type post *.md
-        p = File.open( "#{jekyll_product_path}#{file_name}","w" )
+        # create a new collection type product *.md
+        p = File.new( "#{jekyll_product_path}#{file_name}","w" )
 
         # create document.md content in Jekyll yaml formatting
         p.puts "---"
