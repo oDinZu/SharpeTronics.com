@@ -6,4 +6,6 @@ _site/
 .gitattributes
 project.geany
 # collections are generated with Drone CI/CD 
-collections/ 
+collections/_products/*.md
+collections/_posts/*.md
+collections/_drafts/*.md
