@@ -32,8 +32,6 @@ steps:
       from_secret: server_pass
     API_TOKEN:
       from_secret: api_token
-    STRIPE_LIVE_KEY:
-      from_secret: stripe_live_key
   privileged: false
   volumes:
     - name: jekyll
@@ -74,11 +72,13 @@ steps:
     - chown -R jekyll:jekyll /drone/src
     - gem install bundler
     - bundle install
-    - bundle exec jekyll build --trace
+    - bundle update --bundler
+    - bundle exec jekyll build --verbose --trace
 
     # prepare _site dir for www-data branch & compression
     - ls -a _site/
     - rm _site/docker-compose.yml
+    - rm _site/project.geany
 
     # update www-data branch with fresh drone ci Jekyll _site build
     - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git
@@ -86,7 +86,7 @@ steps:
     - git checkout www-data
     - cp -R ../_site/* .
     - git add *
-    - git commit -m "bots beeing bots! A drone www-data push"
+    - git commit -m "SharpeTronics bots bee ring bots! A drone CD www-data sync"
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
     # sync files to remote server [local _site ] to [remote www edge] while preserving permissions.
