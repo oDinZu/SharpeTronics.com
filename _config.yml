@@ -55,7 +55,7 @@ api:
     # Ecommerce integration
     shop:
       # The Ecommerce Jekyll configuration
-      enabled: false # sometimes we don't need ecommerce integration; defaults to false
+      enabled: true # sometimes we don't need ecommerce integration; defaults to false
 
     # uri format: [endpoint]+[endpoint_ext]+[endpoint_param]
     endpoint: https://dash.sharpetronics.com # url to api; no trailing slash

@@ -90,11 +90,11 @@ module Jekyll
           Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Subheading: " "#{subheading}".to_s.yellow.bold
         end
 
-        date = DateTime.strptime(id['attributes']['createdAt'], '%Y-%m-%d')
+        date = DateTime.strptime(id['attributes']['createdAt'], '%Y-%m-%dT%H:%M:%S')
+        Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Unformatted Product Creation Date: " "#{date}".to_s.yellow
         
         # store build times of local products with Ecommerce metadata
         local_cms_time = DateTime.strptime(id['attributes']['updatedAt'], '%Y-%m-%dT%H:%M:%S')
-        Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Unformatted Product Creation Date: " "#{date}".to_s.yellow
         Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Build_Time: " "#{local_cms_time}".to_s.yellow
 
         # determine if layout is blank or null.
