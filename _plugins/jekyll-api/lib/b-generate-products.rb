@@ -350,6 +350,9 @@ if "#{shop_enabled}" === "true"
         Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: is_taxable: " "#{is_taxable}".to_s.yellow.bold
       end
       
+      # manually create custom collection folders [bug: shouldn't Jekyll do this?]
+      Dir.mkdir("./collections/_products/")
+      
       # create the filename
       file_name = "#{date.strftime('%Y-%m-%d')}-#{slug}#{file_ending}"
       puts "#{jekyll_product_path}#{file_name}"
