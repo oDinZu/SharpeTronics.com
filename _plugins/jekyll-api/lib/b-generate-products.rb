@@ -354,7 +354,7 @@ if "#{shop_enabled}" === "true"
       if not Dir.exist?("./collections/_products")
         Jekyll.logger.info "the Jekyll products directory does not exist, let's create one".to_s.red
         Dir.mkdir("./collections/_products/")
-        Jekyll.logger.info "DIR DEBUG: The local ./collections/_products directory is created at: " "#{posts_type}".to_s.yellow
+        Jekyll.logger.info "DIR DEBUG: The local ./collections/_products directory is created at: ./collections/_products/".to_s.yellow
       end
       
       # create the filename
