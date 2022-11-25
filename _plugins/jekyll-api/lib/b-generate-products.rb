@@ -347,7 +347,7 @@ if "#{shop_enabled}" === "true"
         Jekyll.logger.debug "ERROR: the is_taxable option is missing; is the product [" "#{heading}] taxable?".to_s.red
       else
         is_taxable = id["attributes"]["is_taxable"]
-        Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: condition: " "#{is_taxable}".to_s.yellow.bold
+        Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: is_taxable: " "#{is_taxable}".to_s.yellow.bold
       end
       
       # create the filename
