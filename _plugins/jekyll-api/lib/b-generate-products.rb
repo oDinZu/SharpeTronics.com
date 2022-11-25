@@ -35,10 +35,10 @@ module Jekyll
   jekyll_product_path = "collections/_products/"
   file_ending = ".md"
 
-  # load _config.yml
+  # searches for _config.yml file in the root / of the Jekyll project.
   config_yml = "_config.yml"
-  f = YAML.load(File.read(config_yml.to_s)) # r - read file
-  Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Is config empty? " "#{config_yml.blank?}".to_s.magenta.bold
+  f = YAML.load(File.read(config_yml.to_s))
+  Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: Is the _config.yml available? " "#{f}".to_s.magenta.bold
 
   # is Ecommerce turned on in site _config.yml file?
   shop_enabled = f['api']['shop']['enabled']
@@ -355,8 +355,8 @@ module Jekyll
         file_name = "#{date.strftime('%Y-%m-%d')}-#{slug}#{file_ending}"
 
         # let us put humpty dumpty back together again!
-        # create a new collection type product *.md
-        p = File.new( "#{jekyll_product_path}#{file_name}","w" )
+        # create a new collection type post *.md
+        p = File.open( "#{jekyll_product_path}#{file_name}","w" )
 
         # create document.md content in Jekyll yaml formatting
         p.puts "---"

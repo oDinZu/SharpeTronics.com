@@ -37,7 +37,7 @@ module Jekyll
 
   # searches for _config.yml file in the root / of the Jekyll project.
   config_yml = "_config.yml"
-  f = YAML.load(File.read(config_yml.to_s)) # r - read file
+  f = YAML.load(File.read(config_yml.to_s))
   Jekyll.logger.debug "::DOCUMENT POST DEBUG:: Is the _config.yml available? " "#{f}".to_s.magenta.bold
 
   # set filepath, load the json, then parse through json file
@@ -84,7 +84,7 @@ module Jekyll
       end
 
       date = DateTime.strptime(id['attributes']['createdAt'], '%Y-%m-%dT%H:%M:%S')
-      Jekyll.logger.debug "::DOCUMENT POST DEBUG:: Unformatted Creation Date: " "#{date}".to_s.yellow
+      Jekyll.logger.debug "::DOCUMENT POST DEBUG:: Unformatted Post Creation Date: " "#{date}".to_s.yellow
 
       # determine if layout is blank or null.
       if "#{id["attributes"]["layout"]}".blank?

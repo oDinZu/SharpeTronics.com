@@ -5,7 +5,11 @@ _site/
 .jekyll-metadata
 .gitattributes
 project.geany
-# collections are generated with Drone CI/CD 
+# collections are generated with Drone CI/CD build
 collections/_products/*.md
 collections/_posts/*.md
 collections/_drafts/*.md
+# json data is generated with Drone CI/CD build
+_data/authors/*.json
+_data/posts/*.json
+_data/products/*.json
