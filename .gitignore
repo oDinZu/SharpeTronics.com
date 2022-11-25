@@ -15,5 +15,5 @@ _data/posts/*.json
 _data/products/*.json
 # image data is generated with Drone CI/CD build
 uploads/*
-docs/*
+docs
 Gemfile.lock
