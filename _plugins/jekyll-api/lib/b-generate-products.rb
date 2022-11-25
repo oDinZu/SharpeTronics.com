@@ -357,6 +357,9 @@ if "#{shop_enabled}" === "true"
       # create a new collection type post *.md
       p = File.open( "#{jekyll_product_path}#{file_name}","w" )
       puts "#{jekyll_product_path}#{file_name}"
+      puts Dir.entries(".")
+      puts Dir.entries("collections/")
+      puts Dir.entries("collections/_products/")
       
       # create document.md content in Jekyll yaml formatting
       p.puts "---"
