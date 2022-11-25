@@ -352,12 +352,11 @@ if "#{shop_enabled}" === "true"
       
       # create the filename
       file_name = "#{date.strftime('%Y-%m-%d')}-#{slug}#{file_ending}"
-      puts file_name.to_s
 
       # let us put humpty dumpty back together again!
       # create a new collection type post *.md
       p = File.open( "#{jekyll_product_path}#{file_name}","w" )
-      puts p.to_s
+      puts "#{jekyll_product_path}#{file_name}"
       
       # create document.md content in Jekyll yaml formatting
       p.puts "---"
