@@ -354,8 +354,10 @@ if "#{shop_enabled}" === "true"
       file_name = "#{date.strftime('%Y-%m-%d')}-#{slug}#{file_ending}"
       puts "#{jekyll_product_path}#{file_name}"
       puts Dir.entries(".")
-      puts Dir.entries("collections/")
-      puts Dir.entries("collections/_products/")
+      puts ""
+      puts Dir.entries("./collections/")
+      puts ""
+      puts Dir.entries("./collections/_products/")
 
       # let us put humpty dumpty back together again!
       # create a new collection type post *.md
