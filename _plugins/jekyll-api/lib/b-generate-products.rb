@@ -350,8 +350,12 @@ if "#{shop_enabled}" === "true"
         Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: is_taxable: " "#{is_taxable}".to_s.yellow.bold
       end
       
-      # manually create custom collection folders [bug: shouldn't Jekyll do this?]
-      Dir.mkdir("./collections/_products/")
+      # manually create custom collection folders [bug: shouldn't Jekyll do this? https://github.com/jekyll/jekyll/issues/9193]
+      if not Dir.exist?("./collections/_products")
+        Jekyll.logger.info "the Jekyll products directory does not exist, let's create one".to_s.red
+        Dir.mkdir("./collections/_products/")
+        Jekyll.logger.info "DIR DEBUG: The local ./collections/_products directory is created at: " "#{posts_type}".to_s.yellow
+      end
       
       # create the filename
       file_name = "#{date.strftime('%Y-%m-%d')}-#{slug}#{file_ending}"
