@@ -1,0 +1,22 @@
+---
+layout: none
+permalink: /api/posts/
+---
+[
+  {%- for post in site.posts %}
+    {
+      "id":         {{- post.id | jsonify -}},
+      "url":        {{- post.url | jsonify }},
+      "image":      {{- post.banner_image | jsonify -}},
+      "image-alt":  {{- post.banner_image_alt | jsonify -}},
+      "sub_heading":{{- post.sub_heading | jsonify -}},
+      "title":      {{- post.title | jsonify }},
+      "author":     {{- post.author | jsonify }},
+      "date":       {{- post.date | jsonify }},
+      "tags":       {{- post.tags | jsonify }},
+      "categories": {{- post.categories | jsonify }},
+      "content":    {{- post.content | jsonify }}
+    }
+    {% unless forloop.last %},{% endunless %}
+  {% endfor -%}
+]
