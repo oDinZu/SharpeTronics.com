@@ -91,7 +91,7 @@ collections_dir: collections
 
 collections:
   products:
-    output: true # true or false
+    output: true # Needed to generate `./_site/cupcakes/**/*.html` paths.
     permalink: /products/:path/
 
 permalink: "/blog/:categories/:year/:month/:day/:title/" # Built in options include: date, pretty, ordinal, weekdate, none; learn more here: https://jekyllrb.com/docs/permalinks/
