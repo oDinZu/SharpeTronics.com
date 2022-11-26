@@ -1,6 +1,4 @@
-User-agent: *
-Allow: /*.html$
-Disallow: /assets/*
+User-agent: * Disallow: # allows all bots and users to crawl the site.
 Sitemap: https://www.sharpetronics.com/sitemap.xml
 #____    __                                   ______
 #/\  _`\ /\ \                                 /\__  _\                   __
