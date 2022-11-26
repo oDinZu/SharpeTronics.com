@@ -60,8 +60,8 @@ pagination:
             <section class="">
               <ul>
                 <h4>Product Details</h4>
-                <li name="{{ page.heading }}"><b>Name:</b> {{ page.heading }}</li>
-                <li price="{{ page.unit_price | precision: 2 }}"><b>Price:</b> ${{ page.unit_price | precision: 2 }}</li>
+                <li class="snipcart-add-item" data-item-name="{{ page.heading }}"><b>Name:</b> {{ page.heading }}</li>
+                <li class="snipcart-add-item" data-item-price="{{ page.unit_price | precision: 2 }}"><b>Price:</b> ${{ page.unit_price | precision: 2 }}</li>
                 <li><b>Quantity:</b> {{ page.quantity | precision: 1 }}</li>
                 <li><b>Size(s):</b> {{ page.sizes }}</li>
                 <li><b>Condition:</b> {{ page.condition }}</li>
@@ -69,7 +69,7 @@ pagination:
                 <li><b>Material Type(s):</b> {{ page.material_types }}</li>
                 <br />
                 <h4>Product Specifics</h4>
-                <li id="{{ page.product_id }}"><b>Product ID:</b> {{ page.product_id }}</li>
+                <li class="snipcart-add-item" data-item-id="{{ page.product_id }}"><b>Product ID:</b> {{ page.product_id }}</li>
                 <li><b>Part Number:</b> {{ page.part_number }}</li>
                 <li><b>Model Number:</b> {{ page.model_number }}</li>
                 <li><b>Country Origin:</b> {{ page.country_origin }}</li>
