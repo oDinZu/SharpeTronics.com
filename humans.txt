@@ -13,7 +13,7 @@ Editor: @odinzu_me
 Engineering: @odinzu_me
 Quality Assurance: @odinzu_me
 
-The team, technology & tools behind this site.
+The team, technology & tools and memories that empower this site.
 
 
 SHARPETRONICS TEAM
@@ -29,25 +29,62 @@ SPECIAL THANKS
 --------------
 @YOU
 
-@ajlkn
+@DaneArr
+danearr.com/
+
+@StarTrek
 aj.lkn.io/
 
-@strapijs
-strapi.io/
+@ajlkn
+aj.lkn.io/
 
 @dukeleto
 duke.leto.net/
 
+@Strapijs
+strapi.io/
+
+@Jekyllrb
+jekyllrb.com/
+
+@Gitea
+Gitea.io/
+
+@Snipcart
+Snipcart.com/
+
+
 TECHNOLOGY
 ----------
 Ruby - A dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.
-ruby-lang.org/en/
+ruby-lang.org/
 
 Ruby Gems - Find, install, and publish RubyGems.
 rubygems.org/
 
+HTML5 - Hypertext Markup Language
+w3schools.com/html
+
+Sass - CSS pre-processor
+sass-lang.com/
+
+Liquid - Templating
+shopify.github.io/liquid
+
+YAML - Data serialization for all programming languages
+yaml.org/
+
+JavaScript libraries include:
+jQuery, breakpoints.js
+
+Font Awesome - Premium Web icons
+fontawesome.com/
+
+Cloudflare - DNS & CDN
+cloudflare.com/
+
 Jekyll - Static site generator
-jekyllrb.com
+jekyllrb.com/
 
 Strapi - Headless Javascript CMS
 strapi.io/
@@ -55,74 +92,62 @@ strapi.io/
 Jekyll Plugins - Plugins created by Jekyll community
 jekyll-menus, jekyll-paginate-v2
 
-HTML5 - Hypertext Markup Language
-w3schools.com/html
-
-Sass - CSS pre-processor
-sass-lang.com
-
-Liquid - Templating
-shopify.github.io/liquid
-
-YAML - Data serialization for all programming languages
-yaml.org
+Nginx - high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server.
+nginx.com/
 
 Docker - Container virtualization
-docker.com
+docker.com/
 
-Git, Gitea, GitHub (Mirror) & Gitea Pages - Code collaboration, continuous delivery, version management, DevOps & static hosting
-gitea.com/
+Snipcart - Snipcart lets you sell physical products all over the world. Shipping, inventory and discount features help you manage orders.
+snipcart.com/
 
-Drone CI - Automate Software Build and Testing
+Stripe - Stripe is a suite of APIs powering online payment processing and commerce solutions for internet businesses of all sizes.
+stripe.com/
+
+Drone CI - Automated software build and test.
 drone.io/
 
-Font Awesome - Premium Web icons
-fontawesome.com
+Gitea - A painless, self-hosted Git service.
+gitea.com/
 
-JavaScript libraries include:
-jQuery, breakpoints.js
+Git & GitHub (Mirror) - Code collaboration, continuous delivery, version management and DevOps
+github.com/
 
-
-TOOLS
------
-
-Linux - Operating system
+Ubuntu - Operating system
 pop.system76.com, ubuntu.com, archlinux.org
 
-Cloudflare - DNS & CDN
-cloudflare.com
+Tmux - A Terminal Multiplexer
+github.com/tmux/tmux/
 
 Certbot - Enable secure websites with Let's Encrypt.
 certbot.eff.org
 
 Geany - The Flyweight IDE
-geany.org
-
-Drone CI - Automated software build and test.
-drone.io
-
-Gitea - A painless, self-hosted Git service.
-gitea.com
+geany.org/
 
 DockerHub - Build and ship any application anywhere
-hub.docker.com
+hub.docker.com/
 
 Inkscape, Imagemagick & Gimp - Graphics editor
-inkscape.org, imagemagick.org, gimp.org
+inkscape.org/, imagemagick.org/, gimp.org/
 
 Unsplash - The internet’s source of freely-usable images.
-unsplash.com
+unsplash.com/
 
 Licensing - GPLv3
-gpl-3.0.en.html
+gnu.org/licenses/gpl-3.0.en.html/
 
 Web Browser Debugging - Testing UI/UX of the website
 google.com/chrome/, mozilla.org/en-US/firefox
 
 Startpage - Search engine privacy
-startpage.com
+startpage.com/
+
+Twitter - An American social media company.
+twitter.com/
 
 ...many, many more
+
 
 FONTS
 -----
