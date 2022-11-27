@@ -1,3 +1,4 @@
+---
 # This software configures the virtual machine environment with Gitea and Drone services, builds the Jekyll app, then, securely packages and transports that app to a designated service provider or VPS on the fly.
 # Copyright (C) SharpeTronics, LLC, 2013-2023
 
@@ -23,7 +24,7 @@
 
 # If you would like to contribute to this code, please follow GPLv3 guidelines.
 # as an example, after making changes to the software (Called a Fork) and credit the original copyright holder as the creator with your credit added to theirs.
----
+
 kind: pipeline
 type: docker
 name: build
