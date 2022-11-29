@@ -108,14 +108,9 @@ steps:
     # update www-data branch with fresh drone ci Jekyll _site build
     - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git
     - cd sharpetronics.com/
-    - git branch www-data
     - git checkout www-data
     - cp -R ../_site/* .
-    - ls .
-    - git status
     - git add *
-    - git add -f uploads/
-    - git remote get-url origin
     - git commit -m "SharpeTronics bots bee ring bots! A drone CD www-data sync"
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git origin www-data
 
