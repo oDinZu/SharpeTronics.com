@@ -115,12 +115,12 @@ steps:
     # copy all the files from the finished previous build ../site
     - cp -R ../_site/* .
     # display files being pushed to www-data
-    - ls -a .
+    - ls -a
     # add changes from all tracked and untracked files 
     - git add -A
     - git commit -m "SharpeTronics bots bee-ring bots!"
     # push fresh _site only www-data to remote git.sharpetronics.com
-    - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git origin www-data
+    - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
     # sync files to remote server [local _site ] to [remote www edge] while preserving permissions.
     - chmod -R 775 ../_site
