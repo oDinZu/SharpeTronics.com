@@ -121,10 +121,11 @@ steps:
     # create and checkout fresh local www-data branch
     - git branch www-data
     - git checkout www-data
-    - ls .
+    - ls . # list files of current dir
+    - ls ../ # list files of previous dir 
     
     # copy only www-data from _site Jekyll folder
-    - cp -R ../_site/* .
+    - cp -Rv ../_site/* .
     - git status
     - git add *
     
