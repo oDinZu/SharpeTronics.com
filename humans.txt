@@ -59,8 +59,15 @@ Gitea.io/
 @Snipcart
 Snipcart.com/
 
+@Artosis
+twitter.com/artosis/
+
 @United States Air Force (USAF)
 airforce.com/
+
+@oDinZu
+odinzu.is/
+
 
 TECHNOLOGY
 ----------
