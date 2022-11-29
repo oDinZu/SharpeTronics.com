@@ -7,13 +7,11 @@ docs/
 .gitattributes
 project.geany
 # collections are generated with Drone CI/CD build
-collections/_products/*.md
-collections/_posts/*.md
-collections/_drafts/*.md
+collections/_products/
+collections/_posts/
+collections/_drafts/
 # json data is generated with Drone CI/CD build
-_data/authors/*.json
-_data/posts/*.json
-_data/products/*.json
+**.json
 # image data is generated with Drone CI/CD build
-uploads/*
+uploads/
 Gemfile.lock

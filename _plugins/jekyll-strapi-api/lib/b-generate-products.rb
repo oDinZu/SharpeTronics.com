@@ -252,14 +252,6 @@ if "#{shop_enabled}" === "true"
         Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: tax_code: " "#{tax_code}".to_s.yellow.bold
       end
 
-      # determine if product webpage_url is blank or null.
-      if "#{id["attributes"]["webpage_url"]}".blank?
-        Jekyll.logger.debug "ERROR: the webpage_url is missing; does product [" "#{heading}] have a webpage_url?".to_s.red
-      else
-        webpage_url = id["attributes"]["webpage_url"]
-        Jekyll.logger.debug "::DOCUMENT PRODUCT DEBUG:: webpage_url: " "#{webpage_url}".to_s.yellow.bold
-      end
-
       # determine if product shipping_price is blank or null.
       if "#{id["attributes"]["shipping_price"]}".blank?
         Jekyll.logger.debug "ERROR: the shipping_price is missing; does product [" "#{heading}] have a shipping_price?".to_s.red
@@ -506,7 +498,6 @@ if "#{shop_enabled}" === "true"
           p.puts ""  # pretty markdown debug spacing
       end
 
-      p.puts "webpage_url: #{webpage_url}"
       p.puts "condition: #{condition}"
       p.puts "model_number: #{model_number}"
       p.puts "part_number: #{part_number}"

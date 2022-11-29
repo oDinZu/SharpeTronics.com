@@ -161,6 +161,7 @@ pagination:
 # their entries' file path in the `include:` list.
 
   exclude:
+    - docs/*
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
