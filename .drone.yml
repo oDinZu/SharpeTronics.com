@@ -110,7 +110,8 @@ steps:
     - cd sharpetronics.com/
     - git checkout www-data
     # remove all build files and keep only _site directory
-    - rm -rfv .
+    - ls -a
+    - rm -rfv *
     # copy all the files from the finished previous build ../site
     - cp -R ../_site/* .
     # display files being pushed to www-data
