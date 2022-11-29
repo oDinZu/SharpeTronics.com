@@ -127,7 +127,7 @@ steps:
     - git status
     - git add *
     - git commit -m "SharpeTronics bots beering bots! A drone CD www-data sync"
-    - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git origin www-data
+    - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
     # sync files to remote server [local _site ] to [remote www edge] while preserving permissions.
     - chmod -R 775 ../_site
