@@ -111,9 +111,12 @@ steps:
     - git branch www-data
     - git checkout www-data
     - cp -R ../_site/* .
+    - ls .
     - git add *
+    - git add -f uploads
+    - git remote get-url origin
     - git commit -m "SharpeTronics bots bee ring bots! A drone CD www-data sync"
-    - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
+    - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git origin www-data
 
     # sync files to remote server [local _site ] to [remote www edge] while preserving permissions.
     - chmod -R 775 ../_site
