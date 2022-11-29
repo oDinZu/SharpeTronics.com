@@ -110,6 +110,7 @@ steps:
     - cd sharpetronics.com/
     
     # a conditional is needed if www-data branch doesn't exist
+    - git branch --list
     - if [ `git branch --list "www-data"` ]
     - then
     # create a fresh www-data branch in-case of cached files in docker vm
