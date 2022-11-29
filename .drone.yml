@@ -108,10 +108,23 @@ steps:
     # update www-data branch with fresh drone ci Jekyll _site build
     - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git
     - cd sharpetronics.com/
+    
+    # a conditional is needed if www-data branch doesn't exist
+    - if [ `git branch --list "www-data"` ]
+    - then
+    # create a fresh www-data branch in-case of cached files in docker vm
+    - echo "Deleting cached www-data branch"
+    - git branch -D www-data
+    - fi
+    
+    # create and checkout fresh local www-data branch
+    - git branch www-data
     - git checkout www-data
+    
+    # copy only www-data from _site Jekyll folder
     - cp -R ../_site/* .
     - git add *
-    - git commit -m "SharpeTronics bots bee ring bots! A drone CD www-data sync"
+    - git commit -m "SharpeTronics bots beering bots! A drone CD www-data sync"
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
     # sync files to remote server [local _site ] to [remote www edge] while preserving permissions.
@@ -126,7 +139,7 @@ steps:
     - chmod 775 ../www-data_sharpetronics.tar.gz
     - chown www-data:www-data ../www-data_sharpetronics.tar.gz
 
-    # size of the file in bytes
+    # size of the file in bytes being transferred
     - tar -tzvf ../www-data_sharpetronics.tar.gz | sed 's/ \+/ /g' | cut -f3 -d' ' | sed '2,$s/^/+ /' | paste -sd' ' | bc
     - ls ../ww*
 
