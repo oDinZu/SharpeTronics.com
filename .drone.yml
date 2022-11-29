@@ -109,10 +109,16 @@ steps:
     - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git
     - cd sharpetronics.com/
     - git checkout www-data
+    # remove all build files and keep only _site directory
+    - rm -rfv .
+    # copy all the files from the finished previous build ../site
     - cp -R ../_site/* .
-    - git add *
-    - git add -f uploads
-    - git commit -m "SharpeTronics bots bee ring bots! A drone CD www-data sync"
+    # display files being pushed to www-data
+    - ls -a .
+    # add changes from all tracked and untracked files 
+    - git add -A
+    - git commit -m "SharpeTronics bots bee-ring bots!"
+    # push fresh _site only www-data to remote git.sharpetronics.com
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git origin www-data
 
     # sync files to remote server [local _site ] to [remote www edge] while preserving permissions.
