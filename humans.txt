@@ -15,14 +15,14 @@ Quality Assurance: @odinzu_me
 
 The team, technology & tools and memories that empower this site.
 
-A WEST VIRGINIAN BASED COMPANY
+AN AMERICAN WEST VIRGINIAN BASED COMPANY
 Montani Semper Liberi
 
 
 THE SHARPETRONICS TEAM
 --------
 
-Made with Cosmic LOVE in West Virginia (WV)
+Made with Cosmic L O V E in West Virginia (WV)
 
 Charles Sharpe (@odinzu_me)
 csharpe.me
@@ -32,11 +32,14 @@ SPECIAL THANKS
 --------------
 @YOU
 
-@DaneArr
+@Dane Arr
 danearr.com/
 
-@StarTrek
-aj.lkn.io/
+@Gene Rodenberry
+roddenberryfoundation.org/
+
+@Bungie
+bungie.net/
 
 @ajlkn
 aj.lkn.io/
@@ -56,6 +59,8 @@ Gitea.io/
 @Snipcart
 Snipcart.com/
 
+@United States Air Force (USAF)
+airforce.com/
 
 TECHNOLOGY
 ----------
@@ -123,7 +128,7 @@ Tmux - A Terminal Multiplexer
 github.com/tmux/tmux/
 
 Certbot - Enable secure websites with Let's Encrypt.
-certbot.eff.org
+certbot.eff.org/
 
 Geany - The Flyweight IDE
 geany.org/
@@ -134,8 +139,11 @@ hub.docker.com/
 Inkscape, Imagemagick & Gimp - Graphics editor
 inkscape.org/, imagemagick.org/, gimp.org/
 
-Unsplash - The internet’s source of freely-usable images.
-unsplash.com/
+Blender - is the free and open source 3D creation suite
+blender.org/
+
+Pursa3D - Josef Prusa found his passion for 3D printers as a student of University of Economics in Prague. 
+prusa3d.com/
 
 Licensing - GPLv3
 gnu.org/licenses/gpl-3.0.en.html/
@@ -148,6 +156,18 @@ startpage.com/
 
 Twitter - An American social media company.
 twitter.com/
+
+Facebook - An online social media and social networking service owned by American company Meta Platforms. 
+facebook.com/
+
+Google - An American technology company with a mission to organize the world's information and make it universally accessible and useful.
+google.com/
+
+Android - is a mobile operating system based on a modified version of the Linux kernel and other open-source software, designed primarily for touchscreen mobile devices such as smartphones and tablets.
+android.com/
+
+AMD - Advanced Micro Devices, Inc. (AMD) is an American multinational semiconductor company based in Santa Clara, California, that develops computer processors and related technologies for business and consumer markets.
+amd.com/
 
 ...many, many more
 
