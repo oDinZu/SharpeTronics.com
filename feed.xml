@@ -1,32 +1,264 @@
----
-layout: null
----
-
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 
     <channel>
-        <title>{{ site.data.global.title }}</title>
-        <link>{{ site.url }}</link>
-        <atom:link href="{{ page.url | prepend: site.url }}" rel="self" type="application/rss+xml" />
-        <description>{{ site.data.global.description }}</description>
-        <lastBuildDate>{{ site.data.global.time | date_to_rfc822 }}</lastBuildDate>
-        {% for post in site.posts %}
+        <title>SharpeTronics</title>
+        <link>https://www.sharpetronics.com</link>
+        <atom:link href="https://www.sharpetronics.com/feed.xml" rel="self" type="application/rss+xml" />
+        <description>Easing the content creators experience sharing information through online information portals is our focus.</description>
+        <lastBuildDate></lastBuildDate>
+        
         <item>
-            <image>{{ post.image }}</image>
-            <title>{{ post.title }}</title>
+            <image></image>
+            <title>Upgrade your Crosshair VI Hero Motherboard Firmware with System76's PopOS!</title>
             <link>
-                {{ post.url | prepend: site.url }}
+                https://www.sharpetronics.com/blog/how-to/2022/10/12/upgrade-your-crosshair-vi-hero-motherboard-firmware-with-system76-s-pop-os/
             </link>
-            <author>{{ post.author }}</author>
+            <author>Charles</author>
             <description>
-                {{ post.content | escape | truncate: '400' }}
+                &lt;p&gt;My grandpa always said: “if it ain’t broke, it needs no fixin!”&lt;/p&gt;
+
+&lt;p&gt;I started having trouble with random occurrences of my computer crashing on both Linux and Window’s operating systems. This article details some of the steps I mazed through and will expedite spacetime support for future dilemmas.&lt;/p&gt;
+
+&lt;p&gt;After tinkering and pondering on the possible reasons...
             </description>
-            <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+            <pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate>
             <guid>
-                {{ post.url | prepend: site.url }}
+                https://www.sharpetronics.com/blog/how-to/2022/10/12/upgrade-your-crosshair-vi-hero-motherboard-firmware-with-system76-s-pop-os/
             </guid>
         </item>
-        {% endfor %}
+        
+        <item>
+            <image></image>
+            <title>Update your Strapi CMS with your own Favicon</title>
+            <link>
+                https://www.sharpetronics.com/blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon/
+            </link>
+            <author>Charles</author>
+            <description>
+                &lt;p&gt;    In this article, we will be replacing the Strapi favicon with your own favicon. This same process is similar to how we replace the login logo &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AuthLogo&lt;/code&gt; and menu logo with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MenuLogo&lt;/code&gt;. For more details, please visit Strapi docume...
+            </description>
+            <pubDate>Tue, 26 Jul 2022 00:00:00 +0000</pubDate>
+            <guid>
+                https://www.sharpetronics.com/blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon/
+            </guid>
+        </item>
+        
+        <item>
+            <image></image>
+            <title>How to Setup a Secure Docker Drone Runner with Drone CI</title>
+            <link>
+                https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-secure-docker-drone-runner-with-drone-ci/
+            </link>
+            <author>Charles</author>
+            <description>
+                &lt;blockquote&gt;
+  &lt;p&gt;BeeYoop BeeDeepBoom Weeop DEEpaEEya&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In general, this article describes how to setup SSL with a Drone Runner. This is part II of a part I series. If you would like to learn how-to setup the Drone Server, please visit: &lt;a href=&quot;https://www.sharpetronics.com/blog/tutorials/2022/06/23/how-to-setup-a-docker-drone-ci-with-h...
+            </description>
+            <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
+            <guid>
+                https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-secure-docker-drone-runner-with-drone-ci/
+            </guid>
+        </item>
+        
+        <item>
+            <image></image>
+            <title>How to Setup a Docker Drone CI with HTTPS</title>
+            <link>
+                https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https/
+            </link>
+            <author>Charles</author>
+            <description>
+                &lt;blockquote&gt;
+  &lt;p&gt;R2D2, you know better than to trust a strange computer! [beeps]&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In general, this Drone server enables continuous integration (CI) and is a stepping stone for continuous delivery (CD), including gh-pages and gh-actions like functionality.&lt;/p&gt;
+
+&lt;p&gt;For this to function correctly, you will need to have a working insta...
+            </description>
+            <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
+            <guid>
+                https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https/
+            </guid>
+        </item>
+        
+        <item>
+            <image></image>
+            <title>Compiling Fresh XMPP Ejabberd Server Binaries 22.05 on Ubuntu 20.04 with Erlang OTP 24</title>
+            <link>
+                https://www.sharpetronics.com/blog/devops/2022/06/28/compiling-fresh-xmpp-ejabberd-server-binaries-22-05-on-ubuntu-20-04-with-erlang-otp-24/
+            </link>
+            <author>Charles</author>
+            <description>
+                &lt;h1 id=&quot;compiling-ejabberd-v2205&quot;&gt;Compiling ejabberd v22.05&lt;/h1&gt;
+&lt;h3 id=&quot;a-xmpp-server-based-on-erlangotp-24&quot;&gt;A XMPP server based on Erlang/OTP 24&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Note 1:&lt;/strong&gt; I personally took it upon myself to use the following format [Example-Reference] to &lt;em&gt;tag&lt;/em&gt; references.&lt;/p&gt;
+
+&lt;p&gt;In this artic...
+            </description>
+            <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
+            <guid>
+                https://www.sharpetronics.com/blog/devops/2022/06/28/compiling-fresh-xmpp-ejabberd-server-binaries-22-05-on-ubuntu-20-04-with-erlang-otp-24/
+            </guid>
+        </item>
+        
+        <item>
+            <image></image>
+            <title>Setup a Secure NGINX HTTPS Web Server with Let's Encrypt + Strapi 4.0 Headless CMS</title>
+            <link>
+                https://www.sharpetronics.com/blog/how-to/2022/05/24/setup-a-secure-nginx-https-web-server-with-let-s-encrypt-strapi-4-0-headless-cms/
+            </link>
+            <author>Charles</author>
+            <description>
+                &lt;h2 id=&quot;general&quot;&gt;General&lt;/h2&gt;
+&lt;p&gt;For this tutorial, we will launch a secure SSL NGINX web server for your website domain example.org and enable an API to be consumed from the subdomain i.e. api.example.org with Strapi 4.0.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Tip:&lt;/em&gt; For each reference, I add the &lt;strong&gt;[reference name]&lt;/strong&gt; in brackets at the end o...
+            </description>
+            <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+            <guid>
+                https://www.sharpetronics.com/blog/how-to/2022/05/24/setup-a-secure-nginx-https-web-server-with-let-s-encrypt-strapi-4-0-headless-cms/
+            </guid>
+        </item>
+        
+        <item>
+            <image></image>
+            <title>Our Terms & Conditions</title>
+            <link>
+                https://www.sharpetronics.com/blog/legal/2022/05/24/our-terms-and-conditions/
+            </link>
+            <author>Charles</author>
+            <description>
+                &lt;h2&gt;&lt;strong&gt;Terms and Conditions&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;Welcome to SharpeTronics!&lt;/p&gt;
+
+&lt;p&gt;These terms and conditions outline the rules and regulations for the use of SharpeTronics&#39;s Website, located at https://www.sharpetronics.com.&lt;/p&gt;
+
+&lt;p&gt;By accessing this website we assume you accept these terms and conditions. Do not continue to use Sharp...
+            </description>
+            <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+            <guid>
+                https://www.sharpetronics.com/blog/legal/2022/05/24/our-terms-and-conditions/
+            </guid>
+        </item>
+        
+        <item>
+            <image></image>
+            <title>Our Privacy Policy</title>
+            <link>
+                https://www.sharpetronics.com/blog/legal/2022/05/24/our-privacy-policy/
+            </link>
+            <author>Charles</author>
+            <description>
+                &lt;h2&gt;Privacy Policy for SharpeTronics.com, LLC&lt;/h2&gt;
+
+&lt;p&gt;At SharpeTronics, accessible from https://www.sharpetronics.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by SharpeTronics and how we use it.&lt;/p&gt;
+
+&lt;p&gt;If you have additional questions or require more infor...
+            </description>
+            <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+            <guid>
+                https://www.sharpetronics.com/blog/legal/2022/05/24/our-privacy-policy/
+            </guid>
+        </item>
+        
+        <item>
+            <image></image>
+            <title>Linux VPS Hardening</title>
+            <link>
+                https://www.sharpetronics.com/blog/devops/2022/05/24/linux-vps-hardening/
+            </link>
+            <author>Charles</author>
+            <description>
+                &lt;h3 id=&quot;planting-seeds&quot;&gt;Planting Seeds&lt;/h3&gt;
+
+&lt;p&gt;Administration of a virtual private Linux server (VPS) without a GUI cpanel is the only way to go. Going through any graphical user interface (GUI) to run critical services for your company is like playing the telephone game. Securing our environment begins at the terminal &amp;amp; from terminal experience we create a ...
+            </description>
+            <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+            <guid>
+                https://www.sharpetronics.com/blog/devops/2022/05/24/linux-vps-hardening/
+            </guid>
+        </item>
+        
+        <item>
+            <image></image>
+            <title>Configure a Static Qt5 from Source on Ubuntu 18.04 with X11 Support</title>
+            <link>
+                https://www.sharpetronics.com/blog/devops/2022/05/24/configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support/
+            </link>
+            <author>Charles</author>
+            <description>
+                &lt;h3 id=&quot;configure-build-install--setup-qt-5152-source-on-ubuntu-1804-with-x11-support&quot;&gt;Configure, Build, Install &amp;amp; Setup Qt 5.15.2 Source on Ubuntu 18.04 with X11 Support&lt;/h3&gt;
+
+&lt;p&gt;This tutorial will teach you how to compile from source via CLI (command-line interface) and enable customization for building Qt5 apps on different operating systems andor hardware...
+            </description>
+            <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+            <guid>
+                https://www.sharpetronics.com/blog/devops/2022/05/24/configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support/
+            </guid>
+        </item>
+        
+        <item>
+            <image></image>
+            <title>Big Startups Without Big Tech</title>
+            <link>
+                https://www.sharpetronics.com/blog/how-to/2022/05/24/big-startups-without-big-tech/
+            </link>
+            <author>Charles</author>
+            <description>
+                &lt;p&gt;Welcome to the Blockchain Internet called DFINITY. In my spare time, I have been tinkering and learning &lt;strong&gt;Motoko&lt;/strong&gt;. It is a language built for the Internet Computer (IC) that can be used to interface applications, websites and other various software.&lt;/p&gt;
+
+&lt;p&gt;Motoko is a programming typed language that compiles into WebAssembly (WA) and is created by...
+            </description>
+            <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+            <guid>
+                https://www.sharpetronics.com/blog/how-to/2022/05/24/big-startups-without-big-tech/
+            </guid>
+        </item>
+        
+        <item>
+            <image></image>
+            <title>Welcome To An Appalachian Technology Company</title>
+            <link>
+                https://www.sharpetronics.com/blog/company/2022/05/23/welcome-to-an-appalachian-technology-company/
+            </link>
+            <author>Charles</author>
+            <description>
+                &lt;p&gt;Welcome to SharpeTronics, where light travels at high altitudes. We are a mountain made company in the Appalachians of West Virginia that strives with software and hardware technologies. We are statewide leaders in our area of expertise and invite you to support local business.&lt;/p&gt;
+
+&lt;p&gt;Our mission is to enable a modern web architecture that empowers the user and enables acc...
+            </description>
+            <pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate>
+            <guid>
+                https://www.sharpetronics.com/blog/company/2022/05/23/welcome-to-an-appalachian-technology-company/
+            </guid>
+        </item>
+        
+        <item>
+            <image></image>
+            <title>SharpeTronics LLC Becomes Official</title>
+            <link>
+                https://www.sharpetronics.com/blog/company/2022/05/23/sharpe-tronics-llc-becomes-official/
+            </link>
+            <author>Charles</author>
+            <description>
+                &lt;p&gt;We as in SharpeTronics LLC are proud to announce our business is official with the mountain state of West Virginia on March 17, 2021.&lt;/p&gt;
+
+&lt;p&gt;We also have our very own mailbox provided by the beloved Postmaster.&lt;/p&gt;
+
+&lt;p&gt;Furthermore, we now have pillars in place to begin building and creating avenues to bee of service with our community. It has been a long road t...
+            </description>
+            <pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate>
+            <guid>
+                https://www.sharpetronics.com/blog/company/2022/05/23/sharpe-tronics-llc-becomes-official/
+            </guid>
+        </item>
+        
     </channel>
 </rss>

@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+ *     ____    __                                   ______
+ *    /\  _`\ /\ \                                 /\__  _\                   __
+ *    \ \,\L\_\ \ \___      __    _ __  _____     _\/_/\ \/ _ __  ___    ___ /\_\    ___    ____
+ *     \/_\__ \\ \  _ `\  /'__`\ /\`'__/\ '__`\ /'__`\\ \ \/\`'__/ __`\/' _ `\/\ \  /'___\ /',__\
+ *       /\ \L\ \ \ \ \ \/\ \L\.\\ \ \/\ \ \L\ /\  __/ \ \ \ \ \/\ \L\ /\ \/\ \ \ \/\ \__//\__, `\
+ *       \ `\____\ \_\ \_\ \__/.\_\ \_\ \ \ ,__\ \____\ \ \_\ \_\ \____\ \_\ \_\ \_\ \____\/\____/
+ *        \/_____/\/_/\/_/\/__/\/_/\/_/  \ \ \/ \/____/  \/_/\/_/\/___/ \/_/\/_/\/_/\/____/\/___/
+ *                                        \ \_\
+ *                                         \/_/
+Owner: @odinzu_me (Charles Sharpe)
+Designer: @ajlkn, @csharpe_me
+Developer: @ajlkn, @csharpe_me
+Editor: @odinzu_me
+Engineering: @odinzu_me
+Quality Assurance: @odinzu_me
+-->
+
+<head>
+  <META charset="utf-8">
+  <META http-equiv="X-UA-Compatible" CONTENT="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <META NAME="robots" CONTENT="index, follow">
+
+  <META NAME="author" CONTENT="Charles Sharpe">
+  <META NAME="description" CONTENT="Easing the content creators experience sharing information through online information portals is our focus.">
+  <META NAME="keywords" CONTENT="JAMstack, Web Design, Information Technology, Newsletter, 3D Printing, Computer Technician, Hardware, Open Source, Stack Development, Web Apps, Development">
+
+  <!-- Geolocation Search Engine Optimization BING -->
+  <META NAME="geo.position" CONTENT="39.63;-79,96" />
+  <META NAME="geo.placename" CONTENT="Charles Town" />
+  <META NAME="geo.region" CONTENT="US_WV" />
+  <META NAME="ICBM" content="39.63;-79,96" />
+
+  <!-- Standard SEO Twitter Card data -->
+  <META property="twitter:card" content="summary">
+  <META property="twitter:site" content="@sharpetronics">
+  <META property="twitter:title" content="Configure a Static Qt5 from Source on Ubuntu 18.04 with X11 Support">
+  <META property="twitter:description" content="">
+  <META property="twitter:creator" content="@sharpetronics">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="/blog/devops/2022/05/24/configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support/">
+  <meta property="twitter:title" content="Configure a Static Qt5 from Source on Ubuntu 18.04 with X11 Support">
+  <meta property="twitter:description" content="">
+  <meta property="twitter:image" content="">
+  <meta property="twitter:creator" content="Charles">
+
+  <!-- Standard SEO Open Graph data -->
+  <META property="og:title" content="Configure a Static Qt5 from Source on Ubuntu 18.04 with X11 Support" />
+  <META property="og:type" content="article" />
+  <META property="og:url" content="/blog/devops/2022/05/24/configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support/" />
+  <META property="og:image" content="" />
+  <META property="og:image" content="" />
+  <META property="og:description" content="Easing the content creators experience sharing information through online information portals is our focus." />
+  <META property="og:site_name" content="SharpeTronics" />
+  <META property="fb:admins" content="" />
+
+  <!-- Favicons for various browsers including mobile -->
+  <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico" sizes="64x49">
+
+  <!-- Jekyll RSS Feed Plugin --><link type="application/atom+xml" rel="alternate" href="https://www.sharpetronics.com/feed/posts-feed.xml" /><!-- Site title goes here -->
+  <title> SharpeTronics | Configure a Static Qt5 from Source on Ubuntu 18.04 with X11 Support </title>
+
+  <!-- Linking local cascading stylesheet CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+
+  <!-- Loading local fonts ; preload for fast generation-->
+  <link rel="preload" href="/assets/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/assets/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/assets/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+
+
+<body class="landing is-preload single">
+  
+  
+  <script>
+    window.SnipcartSettings = {
+        publicApiKey: 'NmYxOWQ3ZmItNjY1Mi00MzdjLTkwZGUtZGRmY2I4MTA2NzFjNjM3NDAzMTgwNjc4MzcyOTc2',
+        loadStrategy: 'on-user-interaction',
+    };
+
+    (()=>{var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,m=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interaction"&&(m.forEach(t=>document.addEventListener(t,o)),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],e=document.querySelector("#snipcart"),i=document.querySelector(`src[src^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][src$="snipcart.js"]`),n=document.querySelector(`link[href^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][href$="snipcart.css"]`);e||(e=document.createElement("div"),e.id="snipcart",e.setAttribute("hidden","true"),document.body.appendChild(e)),v(e),i||(i=document.createElement("script"),i.src=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.js`,i.async=!0,t.appendChild(i)),n||(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.css`,t.prepend(n)),m.forEach(g=>document.removeEventListener(g,o))}function v(t){!f||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
+  </script>
+
+<div class="page-wrapper">
+
+<!-- Header Menus -->
+<header id="header">
+  <a href="#menu">Menu</a>
+  <a href="https://www.sharpetronics.com/products" class="button"><i class="fas fa-store fa-1x"></i> Shop</a>
+</header>
+
+<!-- Nav -->
+  <nav id="menu">
+    <ul class="links">
+      
+      <li class="menu-item-">
+        <a href="/" title="Go to Home"><i class="fas fa-home fa-1x"></i> Home</a>
+      
+      <li class="menu-item-">
+        <a href="/blog" title="Go to Journal"><i class="fas fa-newspaper fa-1x"></i> Journal</a>
+      
+      <li class="menu-item-">
+        <a href="/products" title="Go to Shop"><i class="fas fa-store fa-1x"></i> Shop</a>
+      
+    </ul>
+    <!-- <ul class="actions stacked">
+      <li><a href="#" class="button primary fit">Log In</a></li>
+    </ul> -->
+  </nav>
+
+
+<main class="page-content" aria-label="Content">
+  
+
+  
+
+<section id="main" class="wrapper style1">
+  <div class="inner">
+    
+    <!-- The back button on a single post -->
+    <section class="row product-cart journal">
+      <div class="col-12">
+        <a href="https://www.sharpetronics.com/blog"><h5 class="button back">< Go Back</h5></a>
+      </div>
+    </section>
+    
+
+  <!-- Title -->
+    <header class="major special journal">
+      <div class="hero"> <img class="image fit" src="/uploads/quantum_qt5_41fa19c935.webp" alt=""> </div>
+      <h1>Configure a Static Qt5 from Source on Ubuntu 18.04 with X11 Support</h1>
+      <p>Compiling & Configuring Qt from Source</p>
+    </header>
+    <!-- Content -->
+      <div class="content">
+        <h3 id="configure-build-install--setup-qt-5152-source-on-ubuntu-1804-with-x11-support">Configure, Build, Install &amp; Setup Qt 5.15.2 Source on Ubuntu 18.04 with X11 Support</h3>
+
+<p>This tutorial will teach you how to compile from source via CLI (command-line interface) and enable customization for building Qt5 apps on different operating systems andor hardware architectures like RPI400.</p>
+
+<p>When compiling Qt5 yourself, you are empowered with a configuration that is constant throughout the Linux Universe. This process is also very similar with compiling Qt apps on your (AArch64) ARM64 devices like RPi 400, Rock64 &amp; PineBook64.</p>
+
+<p><em>Note: This tutorial doesn’t include json Qtwebengine</em></p>
+
+<h3 id="what-is-qt">What is Qt?</h3>
+<p>“Qt is a cross-platform application development framework for desktop, embedded and mobile.” [Qt Wiki]</p>
+
+<h3 id="what-is-a-static-qt">What is a Static Qt?</h3>
+<p>In general, a static Qt option includes libraries locally. This aids in having an application run on different versions of Linux distros. When the application is compiled, we check the app with <em>ldd yourapp</em> to list what the binary is dependent on to run. Essentially, the Qt libraries are included in the binary. Decovar.dev has a great explanation on advantages and disadvantages of building a static Qt. [At last, let’s build Qt statically]</p>
+
+<h3 id="lets-begin">Let’s Begin!</h3>
+
+<h4 id="remove--purge-all-qt-packages">Remove &amp; purge all Qt packages</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt -y remove qt5* libqt5* qtcreator &amp;&amp; sudo autoremove
+</code></pre></div></div>
+
+<h4 id="download-qt-5152-source-to-qt5-sources-folder">Download Qt 5.15.2 Source to qt5-sources folder</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir qt5-sources &amp;&amp; cd qt5-sources &amp;&amp; mkdir build-shadow
+
+wget https://download.qt.io/official_releases/qt/5.15/5.15.2/single/qt-everywhere-src-5.15.2.tar.xz
+</code></pre></div></div>
+
+<h5 id="verify-md5-hash">Verify MD5 hash</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>md5sum qt-everywhere-src-5.15.2.tar.xz
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>e1447db4f06c841d8947f0a6ce83a7b5  qt-everywhere-src-5.15.2.tar.xz
+</code></pre></div></div>
+
+<h5 id="un-tar-qt5-archive">Un-tar Qt5 archive</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar xf qt-everywhere-src-5.15.2.tar.xz
+</code></pre></div></div>
+
+<h5 id="move-into-build-shadow-directory-to-configure-your-qt-5152">Move into build-shadow directory to configure your Qt 5.15.2</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd build-shadow
+</code></pre></div></div>
+
+<h4 id="install-qt5-minimal-dependencies">Install Qt5 Minimal Dependencies</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt update
+
+sudo apt install build-essential libfontconfig1-dev libdbus-1-dev libfreetype6-dev libicu-dev libinput-dev libxkbcommon-dev libsqlite3-dev libssl-dev libpng-dev libjpeg-dev libglib2.0-dev
+</code></pre></div></div>
+
+<h5 id="optional-install-vc4-drivers-for-rpi-4-type-devices-ie-cortex-a53--cortex-a72">(Optional) Install VC4 Drivers for RPi 4 type devices (i.e. cortex-a53 &amp; cortex-a72)</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install libgles2-mesa-dev libgbm-dev libdrm-dev
+</code></pre></div></div>
+<h4 id="optional-install-x11-support-dependencies">(Optional) Install X11 Support Dependencies</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install libx11-dev libxcb1-dev  libxext-dev libxi-dev libxcomposite-dev libxcursor-dev libxtst-dev libxrandr-dev libfontconfig1-dev libfreetype6-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev  libxcb-glx0-dev  libxcb-keysyms1-dev libxcb-image0-dev  libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev  libxcb-randr0-dev  libxcb-render-util0-dev  libxcb-util0-dev  libxcb-xinerama0-dev  libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev
+</code></pre></div></div>
+
+<h4 id="configure-qt-5152">Configure Qt 5.15.2</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../qt-everywhere-src-5.15.2/configure -static -release -openssl-linked -opensource -confirm-license -qt-zlib -qt-libpng -bundled-xcb-xinput \
+-skip qtlocation -skip qtmacextras -skip qtpurchasing -skip qtscript -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qtdatavis3d -skip qtdoc -skip qtcharts -skip qtdeclarative -skip qt3d -skip qtwebengine -skip qtandroidextras -skip qtwebview -skip qtgamepad -skip qtquickcontrols -skip qtquickcontrols2 -skip qtremoteobjects -skip qtwebview -skip qtwebchannel -skip qtwebglplugin \
+-nomake examples -nomake tests  -feature-fontconfig -no-feature-getentropy -v
+</code></pre></div></div>
+
+<p>*If you would like to see a full list of options, we can do <strong>../qt-everywhere-src-5.15.2/configure -h</strong></p>
+
+<h5 id="make-the-configuration--j-4-is-number-of-cpus-you-want-to-use">Make the configuration <em>(-j 4 is number of cpus you want to use)</em></h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make -j 4
+</code></pre></div></div>
+
+<h5 id="install-qt5-into-default-usrlocal">Install Qt5 into: <em>(default) /usr/local/</em></h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo make install
+</code></pre></div></div>
+<p><em>Note: Check and make sure ./configure has required deps; if you installed the deps, but still receiving errors, remove config.cache and ./configure again.</em></p>
+
+<p><strong>Tip:</strong> <em>If you want to view your configuration summary, you may do so via nano config.summary from build-shadow directory</em></p>
+
+<h4 id="update-profile-to-know-where-qt5152-bins-are">Update profile to know where Qt5.15.2 bins are</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano ~/.bashrc
+</code></pre></div></div>
+
+<h5 id="add-this-at-the-bottom-of-your-bashrc-file">Add this at the bottom of your .bashrc file.</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># set PATH for Qt 5.15.2
+export PATH="/usr/local/Qt-5.15.2/bin:$PATH"
+</code></pre></div></div>
+
+<h5 id="reload-your-bashrc-file--create-new-shell-window">Reload your ~/.bashrc file &amp; create new shell window.</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source ~/.bashrc
+CTRL+SHIFT+T
+ALT+1
+exit
+</code></pre></div></div>
+<h5 id="verify-qt-5152-has-been-installed">Verify Qt 5.15.2 has been installed</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qmake --version
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>QMake version 3.1
+Using Qt version 5.15.2 in /usr/local/Qt-5.15.2/lib
+</code></pre></div></div>
+<h4 id="build-your-happy-qt5-app">Build your happy Qt5 app</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build.sh
+</code></pre></div></div>
+<h4 id="support--questions">Support &amp; Questions</h4>
+<p><a href="https://github.com/SharpeTronics/sharpetronics.github.io/issues">sharpetronics.github</a></p>
+
+<p><img src="/uploads/2021/bob-ross-happy.gif" alt="happy little apps" /></p>
+
+<h4 id="references">References</h4>
+<p><a href="https://www.tal.org/tutorials/building-qt-515-raspberry-pi">tal.org/rpi</a></p>
+
+<p><a href="https://doc.qt.io/qt-5/qtmodules.html">doc.qt.io/qtmodules</a></p>
+
+<p><a href="https://wiki.qt.io/About_Qt">wiki.qt.io/about</a></p>
+
+<p><a href="https://decovar.dev/blog/2018/02/17/build-qt-statically/#why-build-qt-statically">why-build-qt-statically</a></p>
+
+        
+
+
+
+  <div class="meta">
+    <time class="published">24 May 2022</time>
+    <h5 class="author"><img src="/uploads/c_avatar_30ba895a14.webp" alt="Charles" /><span class="name">Charles</span></h5>
+  </div>
+  
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<!-- Related posts collection -->
+        <section class="row related-items">
+          <div class="col-12">
+            <h3>More Posts</h3>
+          </div><div class="col-4 col-12-small vert-expand">
+  <article class="post product no-padding">
+    <a href="https://www.sharpetronics.com/blog/company/2022/05/23/sharpe-tronics-llc-becomes-official/"><img alt="SharpeTronics LLC Becomes Official" src="/uploads/pillars_face_art_973bf824dd.webp" class="image fit" /></a>
+    <a href="https://www.sharpetronics.com/blog/company/2022/05/23/sharpe-tronics-llc-becomes-official/"><h4> SharpeTronics LLC Becomes Official </h4></a>
+    <p>We as in SharpeTronics LLC are proud to announce our business is official with the mountain state of West...</p>
+    <ul class="actions">
+      <li><a href="https://www.sharpetronics.com/blog/company/2022/05/23/sharpe-tronics-llc-becomes-official/" class="button">Continue ></a></li>
+    </ul>
+  </article>
+</div>
+<div class="col-4 col-12-small vert-expand">
+  <article class="post product no-padding">
+    <a href="https://www.sharpetronics.com/blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon/"><img alt="Update your Strapi CMS with your own Favicon" src="/uploads/code_2b5ed5fa9c.webp" class="image fit" /></a>
+    <a href="https://www.sharpetronics.com/blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon/"><h4> Update your Strapi CMS with your own... </h4></a>
+    <p>    In this article, we will be replacing the Strapi favicon with your own favicon. This same process is similar...</p>
+    <ul class="actions">
+      <li><a href="https://www.sharpetronics.com/blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon/" class="button">Continue ></a></li>
+    </ul>
+  </article>
+</div>
+<div class="col-4 col-12-small vert-expand">
+  <article class="post product no-padding">
+    <a href="https://www.sharpetronics.com/blog/how-to/2022/05/24/big-startups-without-big-tech/"><img alt="Big Startups Without Big Tech" src="/uploads/decentralized_385bd5a376.webp" class="image fit" /></a>
+    <a href="https://www.sharpetronics.com/blog/how-to/2022/05/24/big-startups-without-big-tech/"><h4> Big Startups Without Big Tech </h4></a>
+    <p>Welcome to the Blockchain Internet called DFINITY. In my spare time, I have been tinkering and learning Motoko. It...</p>
+    <ul class="actions">
+      <li><a href="https://www.sharpetronics.com/blog/how-to/2022/05/24/big-startups-without-big-tech/" class="button">Continue ></a></li>
+    </ul>
+  </article>
+</div>
+
+</section>
+        
+        <!-- A Placeholder for Community Discussion aka Comments -->
+      </div>
+    </div>
+    
+</section>
+
+
+</main>
+
+  <!-- JS scripts get loaded last-->
+	<script src="/assets/js/jquery.min.js" defer></script>
+	<script src="/assets/js/jquery.scrolly.min.js" defer></script>
+	<script src="/assets/js/jquery.scrollex.min.js" defer></script>
+	<script src="/assets/js/browser.min.js" defer></script>
+
+	<script src="/assets/js/breakpoints.min.js" defer></script>
+	<script src="/assets/js/util.js" defer></script>
+	<script src="/assets/js/main.js" defer></script>
+
+</div>
+<!-- Footer -->
+<footer id="footer">
+  <ul class="alt-icons">
+    <li><a href="https://twitter.com/SharpeTronics" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
+    <li><a href="https://facebook.com/SharpeeTronics" class="icon brands fa-facebook-f" target="_blank"><span class="label">Facebook</span></a></li>
+    <li><a href="https://github.com/SharpeTronics" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+    <li><link rel="alternate" type="application/rss+xml" href="https://www.sharpetronics.com/feed/posts-feed.xml/" class="icon solid fa-rss" target="_blank"></li>
+    <li><a href="mailto:info@sharpetronics.com" class="icon solid fa-envelope" target="_blank"><span class="label">Email</span></a></li>
+  </ul>
+  <p class="copyright">
+    &copy; 2013-<script>document.write(new Date().getFullYear())</script> SharpeTronics, LLC <a href="" target="_blank"></a><br />
+       <a href="/humans.txt" target="_blank">Imagined by humans</a>, <a href="https://jekyllrb.com/" target="_blank">built with Jekyll</a>,
+       <a href="https://git.sharpetronics.com/SharpeTronics/sharpetronics.com" target="_blank">hosted by SharpeTronics, LLC</a><br />
+       <!-- Creative Commons Attribution-NoDerivs 3.0 United States License  -->
+       This is <a href="https://softwarefreedom.org/" target="_blank">Free Software</a> released under <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GPLv3</a>.
+  </p>
+  <ul class="menu">
+    <li><a href="/blog/legal/2020/02/03/our-terms-and-conditions/">Terms of Use</a></li>
+    <li><a href="/blog/legal/2020/02/03/our-privacy-policy/">Privacy Policy</a></li>
+    <li><a href="/sitemap.xml">Sitemap</a></li>
+  </ul>
+</footer>
+
+  </body>
+</html>

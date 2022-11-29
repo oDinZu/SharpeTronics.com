@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+ *     ____    __                                   ______
+ *    /\  _`\ /\ \                                 /\__  _\                   __
+ *    \ \,\L\_\ \ \___      __    _ __  _____     _\/_/\ \/ _ __  ___    ___ /\_\    ___    ____
+ *     \/_\__ \\ \  _ `\  /'__`\ /\`'__/\ '__`\ /'__`\\ \ \/\`'__/ __`\/' _ `\/\ \  /'___\ /',__\
+ *       /\ \L\ \ \ \ \ \/\ \L\.\\ \ \/\ \ \L\ /\  __/ \ \ \ \ \/\ \L\ /\ \/\ \ \ \/\ \__//\__, `\
+ *       \ `\____\ \_\ \_\ \__/.\_\ \_\ \ \ ,__\ \____\ \ \_\ \_\ \____\ \_\ \_\ \_\ \____\/\____/
+ *        \/_____/\/_/\/_/\/__/\/_/\/_/  \ \ \/ \/____/  \/_/\/_/\/___/ \/_/\/_/\/_/\/____/\/___/
+ *                                        \ \_\
+ *                                         \/_/
+Owner: @odinzu_me (Charles Sharpe)
+Designer: @ajlkn, @csharpe_me
+Developer: @ajlkn, @csharpe_me
+Editor: @odinzu_me
+Engineering: @odinzu_me
+Quality Assurance: @odinzu_me
+-->
+
+<head>
+  <META charset="utf-8">
+  <META http-equiv="X-UA-Compatible" CONTENT="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <META NAME="robots" CONTENT="index, follow">
+
+  <META NAME="author" CONTENT="Charles Sharpe">
+  <META NAME="description" CONTENT="Easing the content creators experience sharing information through online information portals is our focus.">
+  <META NAME="keywords" CONTENT="JAMstack, Web Design, Information Technology, Newsletter, 3D Printing, Computer Technician, Hardware, Open Source, Stack Development, Web Apps, Development">
+
+  <!-- Geolocation Search Engine Optimization BING -->
+  <META NAME="geo.position" CONTENT="39.63;-79,96" />
+  <META NAME="geo.placename" CONTENT="Charles Town" />
+  <META NAME="geo.region" CONTENT="US_WV" />
+  <META NAME="ICBM" content="39.63;-79,96" />
+
+  <!-- Standard SEO Twitter Card data -->
+  <META property="twitter:card" content="summary">
+  <META property="twitter:site" content="@sharpetronics">
+  <META property="twitter:title" content="How to Setup a Secure Docker Drone Runner with Drone CI">
+  <META property="twitter:description" content="">
+  <META property="twitter:creator" content="@sharpetronics">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="/blog/how-to/2022/06/28/how-to-setup-a-secure-docker-drone-runner-with-drone-ci/">
+  <meta property="twitter:title" content="How to Setup a Secure Docker Drone Runner with Drone CI">
+  <meta property="twitter:description" content="">
+  <meta property="twitter:image" content="">
+  <meta property="twitter:creator" content="Charles">
+
+  <!-- Standard SEO Open Graph data -->
+  <META property="og:title" content="How to Setup a Secure Docker Drone Runner with Drone CI" />
+  <META property="og:type" content="article" />
+  <META property="og:url" content="/blog/how-to/2022/06/28/how-to-setup-a-secure-docker-drone-runner-with-drone-ci/" />
+  <META property="og:image" content="" />
+  <META property="og:image" content="" />
+  <META property="og:description" content="Easing the content creators experience sharing information through online information portals is our focus." />
+  <META property="og:site_name" content="SharpeTronics" />
+  <META property="fb:admins" content="" />
+
+  <!-- Favicons for various browsers including mobile -->
+  <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico" sizes="64x49">
+
+  <!-- Jekyll RSS Feed Plugin --><link type="application/atom+xml" rel="alternate" href="https://www.sharpetronics.com/feed/posts-feed.xml" /><!-- Site title goes here -->
+  <title> SharpeTronics | How to Setup a Secure Docker Drone Runner with Drone CI </title>
+
+  <!-- Linking local cascading stylesheet CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+
+  <!-- Loading local fonts ; preload for fast generation-->
+  <link rel="preload" href="/assets/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/assets/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/assets/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+
+
+<body class="landing is-preload single">
+  
+  
+  <script>
+    window.SnipcartSettings = {
+        publicApiKey: 'NmYxOWQ3ZmItNjY1Mi00MzdjLTkwZGUtZGRmY2I4MTA2NzFjNjM3NDAzMTgwNjc4MzcyOTc2',
+        loadStrategy: 'on-user-interaction',
+    };
+
+    (()=>{var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,m=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interaction"&&(m.forEach(t=>document.addEventListener(t,o)),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],e=document.querySelector("#snipcart"),i=document.querySelector(`src[src^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][src$="snipcart.js"]`),n=document.querySelector(`link[href^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][href$="snipcart.css"]`);e||(e=document.createElement("div"),e.id="snipcart",e.setAttribute("hidden","true"),document.body.appendChild(e)),v(e),i||(i=document.createElement("script"),i.src=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.js`,i.async=!0,t.appendChild(i)),n||(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.css`,t.prepend(n)),m.forEach(g=>document.removeEventListener(g,o))}function v(t){!f||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
+  </script>
+
+<div class="page-wrapper">
+
+<!-- Header Menus -->
+<header id="header">
+  <a href="#menu">Menu</a>
+  <a href="https://www.sharpetronics.com/products" class="button"><i class="fas fa-store fa-1x"></i> Shop</a>
+</header>
+
+<!-- Nav -->
+  <nav id="menu">
+    <ul class="links">
+      
+      <li class="menu-item-">
+        <a href="/" title="Go to Home"><i class="fas fa-home fa-1x"></i> Home</a>
+      
+      <li class="menu-item-">
+        <a href="/blog" title="Go to Journal"><i class="fas fa-newspaper fa-1x"></i> Journal</a>
+      
+      <li class="menu-item-">
+        <a href="/products" title="Go to Shop"><i class="fas fa-store fa-1x"></i> Shop</a>
+      
+    </ul>
+    <!-- <ul class="actions stacked">
+      <li><a href="#" class="button primary fit">Log In</a></li>
+    </ul> -->
+  </nav>
+
+
+<main class="page-content" aria-label="Content">
+  
+
+  
+
+<section id="main" class="wrapper style1">
+  <div class="inner">
+    
+    <!-- The back button on a single post -->
+    <section class="row product-cart journal">
+      <div class="col-12">
+        <a href="https://www.sharpetronics.com/blog"><h5 class="button back">< Go Back</h5></a>
+      </div>
+    </section>
+    
+
+  <!-- Title -->
+    <header class="major special journal">
+      <div class="hero"> <img class="image fit" src="/uploads/c3po_a_friend_in_need_74a237a413.webp" alt=""> </div>
+      <h1>How to Setup a Secure Docker Drone Runner with Drone CI</h1>
+      <p>BeeYoop BeeDeepBoom Weeop DEEpaEEya</p>
+    </header>
+    <!-- Content -->
+      <div class="content">
+        <blockquote>
+  <p>BeeYoop BeeDeepBoom Weeop DEEpaEEya</p>
+</blockquote>
+
+<p>In general, this article describes how to setup SSL with a Drone Runner. This is part II of a part I series. If you would like to learn how-to setup the Drone Server, please visit: <a href="https://www.sharpetronics.com/blog/tutorials/2022/06/23/how-to-setup-a-docker-drone-ci-with-https/">Setup Drone CI Server</a>.</p>
+
+<p>This part II creates a pipeline runner with a Docker machine; what that means is, like GitHub Actions, but with Drone super powers. The configuration file is stored as <code class="language-plaintext highlighter-rouge">.drone.yml</code> in the root of your site directory and drone server uses that application yml file to do a series of commands or actions within the virtual docker machine.</p>
+
+<p>This is empowering because you can automate a fresh build every time. Also, you create a <strong>drone trigger</strong> for when you push to a branch master as an example. Here is the configuration of all the possible things you can do. <a href="https://docs.drone.io/pipeline/docker/overview/">Docker Pipelines Overview</a></p>
+
+<p><strong>Note 1:</strong> If you see a [name-goes-here], I am linking to the references I shared below.
+<strong>Note 2:</strong> If you want to use Docker Engine without sudo, follow this url: <a href="https://docs.docker.com/engine/install/linux-postinstall/">Linux Docker Post-Install</a></p>
+
+<h3 id="requirements">Requirements</h3>
+<ul>
+  <li>Basic Linux CLI knowledge</li>
+  <li>A hardened remote SSH server <a href="https://sharpetronics.com/blog/tutorials/2021/07/26/linux-vps-hardening-init/">see Linux VPS hardening</a></li>
+  <li>A running Gitea server: Git with a cup of tea</li>
+  <li><a href="https://docs.docker.com/engine/install/">Docker Engine</a></li>
+  <li>a basic understanding of how to use Docker Engine</li>
+  <li>basic Nginx, Gitea and Certbot/Let’s Encrypt experience</li>
+  <li>openssl</li>
+  <li>a running drone ci server <a href="https://www.sharpetronics.com/blog/tutorials/2022/06/23/how-to-setup-a-docker-drone-ci-with-https/">see part I</a></li>
+</ul>
+
+<h3 id="lets-begin">Let’s Begin!</h3>
+
+<h4 id="pull-docker-image-from-dockerhub">Pull docker image from dockerhub</h4>
+<p><code class="language-plaintext highlighter-rouge">docker pull drone/drone-runner-docker:1</code></p>
+
+<h4 id="make-public-access-to-repo-in-drone-gui">Make public access to repo in drone GUI</h4>
+<p>For testing, I made sure the repo was publicly available.</p>
+
+<p><img src="/uploads/2022/screenshot-drone-gui.webp" alt="Screenshot Drone UI" /></p>
+
+<h3 id="launch-a-secure-docker-drone-runner">Launch a Secure Docker Drone Runner</h3>
+
+<p>For the <strong>DRONE_RPC_SECRET</strong> use the same ssl secret we created in Part I. See <a href="https://docs.drone.io/runner/docker/configuration/reference/">Configuration</a> for a complete list of configuration options.</p>
+
+<p>Please see the reference to understand what this docker config is doing. That is important for you to do yourself.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --detach \
+  --volume=/var/run/docker.sock:/var/run/docker.sock \
+  --env=DRONE_RPC_PROTO=https \
+  --env=DRONE_RPC_HOST=drone.example.com \
+  --env=DRONE_RPC_SECRET=bea26a2221fd8090ea38720fc445eca6 \
+  --env=DRONE_RUNNER_CAPACITY=2 \
+  --env=DRONE_RUNNER_NAME=st-runner \
+  --env=DRONE_UI_USERNAME=youruserhere \
+  --env=DRONE_UI_PASSWORD=yourpasshere \
+  --env=DRONE_DEBUG=true \
+  --env=DRONE_TRACE=true \
+  --publish=3000:3000 \
+  --restart=always \
+  --name=st-drone-runner \
+  drone/drone-runner-docker:1
+</code></pre></div></div>
+
+<h4 id="a-pipeline-config-example">A Pipeline Config Example</h4>
+
+<p>An example of a custom pipeline I have created. I ain’t going to explain this to you in detail; I expect you to determine your own pipeline and this is only for a reference point. Essentially, what you will be doing is launching your own virtual machine for your specific use case scenario.</p>
+
+<p>In this example, on drone.example.com, I have created a secret pass that needs to be passed to the virtual machine so I can package the build aka <strong>_site</strong> only, then auto push to www_data branch on my git server. Furthermore, I <strong>rsync</strong> this data through an ssh tunnel to a <strong>Gitea Pages</strong> server that serves the <strong>WWW or edge</strong> data.</p>
+
+<p><strong>Note: 3:</strong> The example configuration is a <strong>.drone.yml</strong> file stored in the root of your site project.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+kind: pipeline
+type: docker
+name: build
+
+workspace:
+  path: /drone/src
+
+platform:
+  os: linux
+  arch: amd64
+
+trigger:
+  branch:
+  - master
+
+steps:
+- name: build-website
+  image: ruby:latest
+  environment:
+    SSH_USER:
+      from_secret: ssh_user
+    SSH_HOST:
+      from_secret: ssh_host
+    NO_HOSTKEY:
+      from_secret: no_hostkey
+  privileged: false
+  volumes:
+    - name: jekyll
+      path: /srv/jekyll
+
+  commands:
+    # general vm information for debugging
+    - whoami
+    - pwd
+    - gem environment
+</code></pre></div></div>
+
+<h4 id="verify">Verify</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker logs st-drone-runner
+
+INFO[0000] starting the server
+INFO[0000] successfully pinged the remote server
+</code></pre></div></div>
+<h4 id="stop--start-container">Stop &amp; Start Container</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo docker container stop st-drone-ssl
+sudo docker container start st-drone-ssl
+</code></pre></div></div>
+<h3 id="references">References</h3>
+<ul>
+  <li><a href="https://docs.drone.io/runner/docker/configuration/reference/">Drone Runner Configuration</a></li>
+  <li><a href="https://docs.drone.io/runner/docker/installation/linux/">Drone Runner Docker Installation</a></li>
+  <li><a href="https://docs.drone.io/pipeline/docker/overview/">Docker Pipelines Overview</a></li>
+  <li><a href="https://unsplash.com/@nietzsche99">Unsplash - Nice M Nshuti</a></li>
+</ul>
+
+<h3 id="support">Support</h3>
+
+<p>If you have any questions, concerns, want to say hi, please join the following channel: <a href="https://discord.gg/HQcvr2JBQv">SharpeTronics Discord Support Channel</a> Eventually, I plan on having a commenting system on here..</p>
+
+<h3 id="want-to-buy-me-a-coffee">Want to buy me a coffee?</h3>
+<p>Recently, I have had many folk as about <strong>how to send me a donation</strong>. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!</p>
+
+<ul>
+  <li><a href="https://cash.app/$sharpeee">Cash App</a></li>
+  <li><a href="https://account.venmo.com/u/seabeeess">Venmo</a></li>
+  <li><a href="https://opencollective.com/sharpetronics">Open Collective</a></li>
+</ul>
+
+        
+
+
+
+  <div class="meta">
+    <time class="published">28 Jun 2022</time>
+    <h5 class="author"><img src="/uploads/c_avatar_30ba895a14.webp" alt="Charles" /><span class="name">Charles</span></h5>
+  </div>
+  
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<!-- Related posts collection -->
+        <section class="row related-items">
+          <div class="col-12">
+            <h3>More Posts</h3>
+          </div><div class="col-4 col-12-small vert-expand">
+  <article class="post product no-padding">
+    <a href="https://www.sharpetronics.com/blog/company/2022/05/23/welcome-to-an-appalachian-technology-company/"><img alt="Welcome To An Appalachian Technology Company" src="/uploads/wv_seneca_rocks_sky_0d5928baa9.webp" class="image fit" /></a>
+    <a href="https://www.sharpetronics.com/blog/company/2022/05/23/welcome-to-an-appalachian-technology-company/"><h4> Welcome To An Appalachian Technology Company </h4></a>
+    <p>Welcome to SharpeTronics, where light travels at high altitudes. We are a mountain made company in the Appalachians of...</p>
+    <ul class="actions">
+      <li><a href="https://www.sharpetronics.com/blog/company/2022/05/23/welcome-to-an-appalachian-technology-company/" class="button">Continue ></a></li>
+    </ul>
+  </article>
+</div>
+<div class="col-4 col-12-small vert-expand">
+  <article class="post product no-padding">
+    <a href="https://www.sharpetronics.com/blog/legal/2022/05/24/our-privacy-policy/"><img alt="Our Privacy Policy" src="/uploads/terms_48bec2a697.webp" class="image fit" /></a>
+    <a href="https://www.sharpetronics.com/blog/legal/2022/05/24/our-privacy-policy/"><h4> Our Privacy Policy </h4></a>
+    <p>Privacy Policy for SharpeTronics.com, LLC At SharpeTronics, accessible from https://www.sharpetronics.com, one of our main priorities is the privacy of...</p>
+    <ul class="actions">
+      <li><a href="https://www.sharpetronics.com/blog/legal/2022/05/24/our-privacy-policy/" class="button">Continue ></a></li>
+    </ul>
+  </article>
+</div>
+<div class="col-4 col-12-small vert-expand">
+  <article class="post product no-padding">
+    <a href="https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https/"><img alt="How to Setup a Docker Drone CI with HTTPS" src="/uploads/r2d2_skywalker_c84e2364fe.webp" class="image fit" /></a>
+    <a href="https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https/"><h4> How to Setup a Docker Drone CI... </h4></a>
+    <p>R2D2, you know better than to trust a strange computer! [beeps] In general, this Drone server enables continuous integration...</p>
+    <ul class="actions">
+      <li><a href="https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https/" class="button">Continue ></a></li>
+    </ul>
+  </article>
+</div>
+
+</section>
+        
+        <!-- A Placeholder for Community Discussion aka Comments -->
+      </div>
+    </div>
+    
+</section>
+
+
+</main>
+
+  <!-- JS scripts get loaded last-->
+	<script src="/assets/js/jquery.min.js" defer></script>
+	<script src="/assets/js/jquery.scrolly.min.js" defer></script>
+	<script src="/assets/js/jquery.scrollex.min.js" defer></script>
+	<script src="/assets/js/browser.min.js" defer></script>
+
+	<script src="/assets/js/breakpoints.min.js" defer></script>
+	<script src="/assets/js/util.js" defer></script>
+	<script src="/assets/js/main.js" defer></script>
+
+</div>
+<!-- Footer -->
+<footer id="footer">
+  <ul class="alt-icons">
+    <li><a href="https://twitter.com/SharpeTronics" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
+    <li><a href="https://facebook.com/SharpeeTronics" class="icon brands fa-facebook-f" target="_blank"><span class="label">Facebook</span></a></li>
+    <li><a href="https://github.com/SharpeTronics" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+    <li><link rel="alternate" type="application/rss+xml" href="https://www.sharpetronics.com/feed/posts-feed.xml/" class="icon solid fa-rss" target="_blank"></li>
+    <li><a href="mailto:info@sharpetronics.com" class="icon solid fa-envelope" target="_blank"><span class="label">Email</span></a></li>
+  </ul>
+  <p class="copyright">
+    &copy; 2013-<script>document.write(new Date().getFullYear())</script> SharpeTronics, LLC <a href="" target="_blank"></a><br />
+       <a href="/humans.txt" target="_blank">Imagined by humans</a>, <a href="https://jekyllrb.com/" target="_blank">built with Jekyll</a>,
+       <a href="https://git.sharpetronics.com/SharpeTronics/sharpetronics.com" target="_blank">hosted by SharpeTronics, LLC</a><br />
+       <!-- Creative Commons Attribution-NoDerivs 3.0 United States License  -->
+       This is <a href="https://softwarefreedom.org/" target="_blank">Free Software</a> released under <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GPLv3</a>.
+  </p>
+  <ul class="menu">
+    <li><a href="/blog/legal/2020/02/03/our-terms-and-conditions/">Terms of Use</a></li>
+    <li><a href="/blog/legal/2020/02/03/our-privacy-policy/">Privacy Policy</a></li>
+    <li><a href="/sitemap.xml">Sitemap</a></li>
+  </ul>
+</footer>
+
+  </body>
+</html>

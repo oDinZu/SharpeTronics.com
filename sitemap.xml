@@ -1,27 +1,225 @@
----
-layout: null
-search: exclude
----
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-    {% for page in site.pages %}
+    
     <url>
-        <loc>{{page.url}}</loc>
-        <lastmod>{{site.time | date: '%Y-%m-%d' }}</lastmod>
+        <loc>/404.html</loc>
+        <lastmod>2022-11-29</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
-    {% endfor %}
+    
+    <url>
+        <loc>/feed.xml</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/assets/css/main.css</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/sitemap.xml</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/feed/company.xml</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/feed/tutorials.xml</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/feed/devops.xml</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/feed/posts-feed.xml</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/feed/products/company.xml</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/feed/products/tutorials.xml</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/feed/products/legal.xml</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/feed/products/devops.xml</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/feed/products-feed.xml</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/index.html</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/blog/2/index.html</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/products/index.html</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/assets/css/main.css.map</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
 
-    {% for post in site.posts %}
+    
     <url>
-        <loc>{{post.url}}</loc>
-        <lastmod>{{site.time | date: '%Y-%m-%d' }}</lastmod>
+        <loc>/blog/how-to/2022/10/12/upgrade-your-crosshair-vi-hero-motherboard-firmware-with-system76-s-pop-os/</loc>
+        <lastmod>2022-11-29</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
-    {% endfor %}
+    
+    <url>
+        <loc>/blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/how-to/2022/06/28/how-to-setup-a-secure-docker-drone-runner-with-drone-ci/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/devops/2022/06/28/compiling-fresh-xmpp-ejabberd-server-binaries-22-05-on-ubuntu-20-04-with-erlang-otp-24/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/how-to/2022/05/24/setup-a-secure-nginx-https-web-server-with-let-s-encrypt-strapi-4-0-headless-cms/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/legal/2022/05/24/our-terms-and-conditions/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/legal/2022/05/24/our-privacy-policy/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/devops/2022/05/24/linux-vps-hardening/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/devops/2022/05/24/configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/how-to/2022/05/24/big-startups-without-big-tech/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/company/2022/05/23/welcome-to-an-appalachian-technology-company/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>/blog/company/2022/05/23/sharpe-tronics-llc-becomes-official/</loc>
+        <lastmod>2022-11-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
 
 </urlset>

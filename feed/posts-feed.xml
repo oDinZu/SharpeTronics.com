@@ -1,0 +1,1118 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://www.sharpetronics.com/feed/posts-feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.sharpetronics.com/" rel="alternate" type="text/html" /><updated>2022-11-29T22:17:18+00:00</updated><id>https://www.sharpetronics.com/feed/posts-feed.xml</id><entry><title type="html">Upgrade your Crosshair VI Hero Motherboard Firmware with System76’s PopOS!</title><link href="https://www.sharpetronics.com/blog/how-to/2022/10/12/upgrade-your-crosshair-vi-hero-motherboard-firmware-with-system76-s-pop-os/" rel="alternate" type="text/html" title="Upgrade your Crosshair VI Hero Motherboard Firmware with System76’s PopOS!" /><published>2022-10-12T00:00:00+00:00</published><updated>2022-10-12T00:00:00+00:00</updated><id>https://www.sharpetronics.com/blog/how-to/2022/10/12/upgrade-your-crosshair-vi-hero-motherboard-firmware-with-system76-s-pop-os</id><content type="html" xml:base="https://www.sharpetronics.com/blog/how-to/2022/10/12/upgrade-your-crosshair-vi-hero-motherboard-firmware-with-system76-s-pop-os/"><![CDATA[<p>My grandpa always said: “if it ain’t broke, it needs no fixin!”</p>
+
+<p>I started having trouble with random occurrences of my computer crashing on both Linux and Window’s operating systems. This article details some of the steps I mazed through and will expedite spacetime support for future dilemmas.</p>
+
+<p>After tinkering and pondering on the possible reasons, I deduced it down to either the GPU, Motherboard or potentially the PSU voltage irregularities. The GPU &amp; RAM worked like a champ while stress testing them. I was unable to reproduce the random occurrence of this hard crash, and both Ubuntu 22.04 and Windows 10 never provided any error logs I could trace through. After each crash, I would restart and save the logs to maybe find a pattern between all the crashes, but sorting through all this didn’t even provide a solution!</p>
+
+<p>The PopOS! logs:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo journalctl --since today --output=short &gt; ~/Documents/System\ Logs/today-1.log
+journalctl -p 3 -xb
+</code></pre></div></div>
+
+<p>The Windows 10 logs:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Windows key + R 
+input: eventvwr and tap the enter key
+navigate through the GUI...
+</code></pre></div></div>
+
+<p>To deduce it further, the physical symptoms were:</p>
+<ul>
+  <li>The computer visuals on screen would freeze for a few seconds and then the monitors would all turn off, but the computer fans and motherboard lights stayed online.</li>
+  <li>No error logs to trace on both Windows or Linux Ubuntu</li>
+  <li>Random occurrences with intense and normal visuals</li>
+  <li>It happened with more than one browser like Firefox and Google Chrome</li>
+</ul>
+
+<p>Normally, I would do a hard reset after it would crash and mistakenly overlooked the error code that was displayed after the crash; anyhow, the QCODE I received was: <strong>08</strong>. Upon further investigation and mazing around with the software bios utilities, I discovered I had a little button that would do all this in a <em>Flash</em>.</p>
+
+<h2 id="requirements--safety">Requirements &amp; Safety</h2>
+
+<ul>
+  <li>Linux OS; Windows 11 is similar, but the commands are different.</li>
+  <li>Basic electronic principles</li>
+  <li>Always make backups</li>
+  <li>Create a bootable drive in case bootloader messes up after update (see here)</li>
+  <li>Backup procedures in-case BIOS update fails</li>
+  <li>A official manual for your motherboard</li>
+</ul>
+
+<p><em>WARNING:</em> You are soley responsible for your own hardware; this article is the process of how I have successfully troubleshooted my own hardware.</p>
+
+<ol>
+  <li>Get BIOS &amp; Motherboard Information
+<code class="language-plaintext highlighter-rouge">sudo dmidecode --type 0</code></li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># dmidecode 3.3
+Getting SMBIOS data from sysfs.
+SMBIOS 3.2.0 present.
+
+Handle 0x0000, DMI type 0, 26 bytes
+BIOS Information
+	Vendor: SharpeTronics Inc.
+	Version: 1501
+	Release Date: 07/3/2017
+	Address: 0xF0000
+	Runtime Size: 64 kB
+	ROM Size: 16 MB
+	Characteristics:
+		PCI is supported
+		APM is supported
+		BIOS is upgradeable
+		BIOS shadowing is allowed
+		Boot from CD is supported
+		Selectable boot is supported
+		BIOS ROM is socketed
+		EDD is supported
+		5.25"/1.2 MB floppy services are supported (int 13h)
+		3.5"/720 kB floppy services are supported (int 13h)
+		3.5"/2.88 MB floppy services are supported (int 13h)
+		Print screen service is supported (int 5h)
+		8042 keyboard services are supported (int 9h)
+		Serial services are supported (int 14h)
+		Printer services are supported (int 17h)
+		ACPI is supported
+		USB legacy is supported
+		BIOS boot specification is supported
+		Targeted content distribution is supported
+		UEFI is supported
+	BIOS Revision: 1.17
+</code></pre></div></div>
+
+<p>The above output allows us to verify the BIOS</p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo dmidecode --type 2</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Handle 0x0002, DMI type 2, 15 bytes
+Base Board Information
+	Manufacturer: ASUSTeK COMPUTER INC.
+	Product Name: CROSSHAIR VI HERO
+	Version: Rev 1.xx
+	Serial Number: 0x0x0x0x0x0x0x
+	Asset Tag: Default string
+	Location In Chassis: Default string
+	Chassis Handle: 0x0003
+	Type: Motherboard
+	Contained Object Handles: 0
+</code></pre></div></div>
+
+<ol>
+  <li>Download the Firmware from Manufacturer’s Website</li>
+</ol>
+
+<p>Navigate to the firmware page and download the most recent firmware update for your CROSSHAIR VI HERO: <a href="#sources">link</a></p>
+
+<ol>
+  <li>After you download the new firmware, we open &amp; rename the file to <strong>C6H.CAP</strong>, then <em>duplicate</em> or move it to the <em>root</em> of the <em>USB device</em>.</li>
+</ol>
+
+<p>The instructions are provided by the manufacturer; you may discover this information online or the actual manual shipped with your motherboard. For this use case scenario, the ASUS Crosshair VI Hero motherboard has a BIOS button that sweeps or extracts the file and updates your firmware in about 3-5min with a ~17mb file.</p>
+
+<ol>
+  <li>Upgrade your Motherboard Firmware</li>
+</ol>
+
+<p>If you’re also upgrading the: ROG CROSSHAIR VI HERO Motherboard to <em>version 8601</em>, the page of reference is located in “<strong>Chapter 2.2 BIOS update utility : USB BIOS Flashback</strong>”.</p>
+
+<p>To use USB BIOS Flashback:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.Download the latest BIOS file from the ASUS website.
+2.Extract and rename the BIOS image file to C6H.CAP.
+3.Copy C6H.CAP to the root directory of your USB storage device.
+4.Turn off the system and connect the USB storage device to the USB BIOS Flashback port.
+5.Press the USB BIOS Flashback button.
+</code></pre></div></div>
+
+<p>The method above allows an owner to update their motherboard without mazing around in the BIOS software. You simply plug-in the USB device into the <strong>correct port</strong> and <strong>press</strong> the button.</p>
+
+<p>The button will <strong>blink blue slowly then speed up as time progress’s</strong>; I spent about 3-5 minutes flashing the BIOS this way; before, I have had horror stories flashing the BIOS with the BIOS. For example, I was unable to successfully make use of the other two tools the manufacturer provided because the software would bug out. The simplest and most effective method is using a USB BIOS Flashback button that is physically located on your motherboard.</p>
+
+<h2 id="other-misc-testing">Other Misc. Testing</h2>
+
+<p>Some other things I spent doing before I reached a solution were the following:</p>
+
+<ul>
+  <li>Upgraded all disk drivers</li>
+  <li>Lots of research</li>
+  <li>Re-seated all motherboard connections</li>
+  <li>Cleaned and dusted all dust on the grill and fans.</li>
+  <li>Cleaned and Reapplied thermal paste to CPU</li>
+  <li>Re-seated and clean the GPU</li>
+  <li>Reinstalled Windows and Linux OS</li>
+  <li>Contacted a support channel with another company</li>
+  <li>The bug could be related to AMD’s fTPM feature. <a href="#sources">link</a></li>
+  <li>…many more…</li>
+</ul>
+
+<p>In conclusion, the entire machine has been revitalized, including both software and hardware. The bug has been resolved and I can get back to doing other cool stuff and things. In the future, I will include how to repair your bootloader on Ubuntu and Windows after upgrading your BIOS; in the meantime, if you need this ASAP, System76 has a well written article on the topic at hand at: <a href="#sources">link</a>.</p>
+
+<h3 id="sources">Sources</h3>
+
+<p><a href="https://support.system76.com/articles/bootloader/" target="_blank">Repair Your Linux Bootloaders - System76</a></p>
+
+<p><a href="https://www.tomshardware.com/news/amd-issues-fix-and-workaround-for-ftpm-stuttering-issues" target="_blank">AMD fTPM Stuttering Issues - Toms Hardware</a></p>
+
+<p><a href="https://rog.asus.com/us/motherboards/rog-crosshair/rog-crosshair-vi-hero-model/helpdesk_bios/" target="_blank">ASUS Crosshair VI Hero Drivers &amp; Manuals</a></p>]]></content><author><name>Charles</name></author><category term="How-to" /><category term="Repairs," /><category term="Debugging," /><category term="Troubleshooting," /><summary type="html"><![CDATA[My grandpa always said: “if it ain’t broke, it needs no fixin!”]]></summary></entry><entry><title type="html">Update your Strapi CMS with your own Favicon</title><link href="https://www.sharpetronics.com/blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon/" rel="alternate" type="text/html" title="Update your Strapi CMS with your own Favicon" /><published>2022-07-26T00:00:00+00:00</published><updated>2022-07-26T00:00:00+00:00</updated><id>https://www.sharpetronics.com/blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon</id><content type="html" xml:base="https://www.sharpetronics.com/blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon/"><![CDATA[<p>    In this article, we will be replacing the Strapi favicon with your own favicon. This same process is similar to how we replace the login logo <code class="language-plaintext highlighter-rouge">AuthLogo</code> and menu logo with <code class="language-plaintext highlighter-rouge">MenuLogo</code>. For more details, please visit Strapi documentations example configuration. [Strapi Documents]</p>
+
+<blockquote>
+  <p><strong>Tip:</strong> This same process may be used to replace the login logo <code class="language-plaintext highlighter-rouge">AuthLogo</code> and menu logo with <code class="language-plaintext highlighter-rouge">MenuLogo</code>. 
+For more details, please visit <a href="https://docs.strapi.io/developer-docs/latest/development/admin-customization.html#logos">Strapi Documents</a></p>
+</blockquote>
+
+<ol>
+  <li>
+    <p>Create an extensions folder at:
+<code class="language-plaintext highlighter-rouge">src/admin/extensions/</code></p>
+  </li>
+  <li>
+    <p>Upload your favicon into:
+<code class="language-plaintext highlighter-rouge">src/admin/extensions/</code></p>
+  </li>
+  <li>
+    <p>Replace the <strong>favicon.ico</strong> at:
+<code class="language-plaintext highlighter-rouge">Strapi app root</code> with custom favicon.ico</p>
+  </li>
+  <li>
+    <p>Update your <code class="language-plaintext highlighter-rouge">src/admin/app.js</code> with the following:</p>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// path: src/admin/app.js
+
+import favicon from './extensions/favicon.png';
+
+export default {
+  config: {
+         // replace favicon with custom icon
+         head: {
+                favicon: favicon,
+        },
+  }
+}
+</code></pre></div></div>
+<ol>
+  <li>Rebuild, run &amp; revisit your Strapi app
+ <code class="language-plaintext highlighter-rouge">yarn build &amp;&amp; yarn develop</code></li>
+</ol>
+
+<blockquote>
+  <p><strong>Note:</strong> 
+Be certain that the cached favicon is cleared. It can be cached in your web browser and also with your domain management
+tool like Cloudflare’s CDN</p>
+</blockquote>
+
+<h4 id="references">References</h4>
+<p><a href="https://docs.strapi.io/developer-docs/latest/development/admin-customization.html#configuration-options">Strapi Documents</a></p>]]></content><author><name>Charles</name></author><category term="How-to" /><category term="Jekyll," /><category term="Strapi," /><category term="Headless" /><category term="CMS," /><summary type="html"><![CDATA[    In this article, we will be replacing the Strapi favicon with your own favicon. This same process is similar to how we replace the login logo AuthLogo and menu logo with MenuLogo. For more details, please visit Strapi documentations example configuration. [Strapi Documents]]]></summary></entry><entry><title type="html">Compiling Fresh XMPP Ejabberd Server Binaries 22.05 on Ubuntu 20.04 with Erlang OTP 24</title><link href="https://www.sharpetronics.com/blog/devops/2022/06/28/compiling-fresh-xmpp-ejabberd-server-binaries-22-05-on-ubuntu-20-04-with-erlang-otp-24/" rel="alternate" type="text/html" title="Compiling Fresh XMPP Ejabberd Server Binaries 22.05 on Ubuntu 20.04 with Erlang OTP 24" /><published>2022-06-28T00:00:00+00:00</published><updated>2022-06-28T00:00:00+00:00</updated><id>https://www.sharpetronics.com/blog/devops/2022/06/28/compiling-fresh-xmpp-ejabberd-server-binaries-22-05-on-ubuntu-20-04-with-erlang-otp-24</id><content type="html" xml:base="https://www.sharpetronics.com/blog/devops/2022/06/28/compiling-fresh-xmpp-ejabberd-server-binaries-22-05-on-ubuntu-20-04-with-erlang-otp-24/"><![CDATA[<h1 id="compiling-ejabberd-v2205">Compiling ejabberd v22.05</h1>
+<h3 id="a-xmpp-server-based-on-erlangotp-24">A XMPP server based on Erlang/OTP 24</h3>
+
+<p><strong>Note 1:</strong> I personally took it upon myself to use the following format [Example-Reference] to <em>tag</em> references.</p>
+
+<p>In this article, I will be sharing a <em>HOWTO</em> create your own end-to-end encrypted instant messenger(IM) XMPP service for your Company, family xor community. Having ownership of your data requires <strong>work</strong> and this setup allows any Human in the world to protect their digital data from those who sell it for profit.</p>
+
+<blockquote>
+  <p>“Ejabberd is a complete open-source XMPP-based messaging solution that is for all human beings, but ideal for governments, police, military, banks, insurance, finance, and healthcare companies that value privacy and security.”</p>
+</blockquote>
+
+<p>The minimal cost is less than $100 per year and is portable with the <em>nifty</em> config option -with-rebar; this option packages the whole app for transport.</p>
+
+<h3 id="configure--compile-ejabberd">Configure &amp; compile Ejabberd</h3>
+
+<p>Please see [Ejabberd Configure] for setting up your Linux environment.</p>
+
+<h4 id="requirements">Requirements</h4>
+<ul>
+  <li>A remove server that has been hardened <a href="https://www.sharpetronics.com/blog/tutorials/2021/07/26/linux-vps-hardening-init/">Linux VPS Hardening</a></li>
+  <li>Linux CLI knowledge</li>
+  <li>Patience</li>
+</ul>
+
+<h4 id="operating-system">Operating System</h4>
+<ul>
+  <li>This article is tested with <code class="language-plaintext highlighter-rouge">cat /etc/os-release</code> VERSION=”20.04.4 LTS (Focal Fossa)”</li>
+</ul>
+
+<h4 id="dependencies">Dependencies:</h4>
+<ul>
+  <li>GNU Make <code class="language-plaintext highlighter-rouge">make -v</code></li>
+  <li>GCC <code class="language-plaintext highlighter-rouge">sudo apt install build-essential &amp;&amp; gcc -v</code></li>
+  <li>Libexpat 1.95 or higher <code class="language-plaintext highlighter-rouge">sudo apt install -y expat &amp;&amp; libexpat-dev</code></li>
+  <li>Libyaml 0.1.4 or higher <code class="language-plaintext highlighter-rouge">sudo apt install -y libyaml-dev</code></li>
+  <li>Erlang/OTP 19.3 or higher. We recommend using Erlang OTP 21.2. <code class="language-plaintext highlighter-rouge">sudo apt install -y erlang &amp;&amp; erl -v</code></li>
+  <li>OpenSSL 1.0.0 or higher, for STARTTLS, SASL and SSL encryption. <code class="language-plaintext highlighter-rouge">sudo apt install -y libssl-dev</code></li>
+  <li>Zlib 1.2.3 or higher. Optional. For Zlib Stream Compression <code class="language-plaintext highlighter-rouge">sudo apt install -y zlib1g &amp;&amp; zlib1g-dev</code></li>
+  <li>
+    <p>ImageMagick’s Convert program and Ghostscript fonts. Optional. For CAPTCHA challenges. <code class="language-plaintext highlighter-rouge">sudo apt install -y imagemagick</code></p>
+  </li>
+  <li>PAM library. <em>Optional</em>. For PAM Authentication</li>
+  <li>Elixir 1.10.3 or higher. <em>Optional</em>. For Elixir Development</li>
+</ul>
+
+<h4 id="extras-deps-i-needed">Extras Deps I needed</h4>
+<ul>
+  <li><strong>PostgreSQL</strong> <code class="language-plaintext highlighter-rouge">sudo apt install -y postgresql postgresql-contrib &amp;&amp; sudo systemctl start postgresql.service</code></li>
+  <li><strong>Erlang-dev</strong> I had too also install erlang-dev for <em>erl_nif.h</em> was missing <code class="language-plaintext highlighter-rouge">sudo apt install -y erlang-dev</code></li>
+  <li><strong>eunit_autoexport</strong> was missing at compile <code class="language-plaintext highlighter-rouge">sudo apt-get install -y erlang-eunit</code></li>
+  <li><strong>erlang-parsetools</strong> was needed to create and assemble the 22.05.tar.gz. <code class="language-plaintext highlighter-rouge">sudo apt-get install -y erlang-parsetools</code></li>
+</ul>
+
+<h3 id="clone-ejabberd-2205">Clone Ejabberd 22.05</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/processone/ejabberd.git &amp;&amp; cd ejabberd
+git checkout tags/22.05 -b branch-name-example &amp;&amp; git status
+</code></pre></div></div>
+<p><strong>Note 2-3:</strong> the latest stable release is 22.05 on June 21, 2022. Verify you are on branch-name-example.</p>
+
+<h4 id="we-begin-compiling-and-installng-ejabberd-after-the-environment-is-ready">We begin compiling and installng <strong>ejabberd</strong> after the environment is ready</h4>
+
+<p>Below, I had to create my <strong>configure</strong> file with <em>autogen</em>. The <strong>configure</strong> options I have included are: postgresql database (default: mysql), zlib compression algos (optional), extra dev tools (optional) and rebar for packaging everything into one portable app.(optional) To see more options, please visit: <a href="https://github.com/processone/ejabberd/blob/22.05/COMPILE.md">Ejabberd Configure</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./autogen.sh
+./configure --enable-pgsql --with-rebar=rebar3 --enable-tools --enable-zlib --enable-debug
+make rel
+</code></pre></div></div>
+<p><strong>Note 4-6:</strong> if you want to clean up the make after errors, use <em>make distclean</em> for dev files and clean for binaries. You are also able to see all the options for make via <code class="language-plaintext highlighter-rouge">make help</code>. Make rel creates a static portable binary release; no need to sudo make install, simply launch the app from the directory.</p>
+
+<h3 id="eureka-party-hat">Eureka! :party-hat</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>===&gt; Release successfully assembled: _build/prod/rel/ejabberd
+===&gt; Building release tarball ejabberd-22.05.tar.gz...
+===&gt; Tarball successfully created: _build/prod/rel/ejabberd/ejabberd-22.05.tar.gz
+</code></pre></div></div>
+<h3 id="prepare-ejabberd-binary">Prepare Ejabberd Binary</h3>
+
+<p>After we have successfully compiled ejabberd binaries on our own system, we have a system to create fresh binaries that are portable on the fly! Furthermore, we rename the ejabberd folder to ejabberd_builder and copy the created tar.gz to desired location.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd .. &amp;&amp; mv ejabberd ejabberd_builder
+cp _build/prod/rel/ejabberd/ejabberd-22.05.tar.gz ~/nodes/
+
+</code></pre></div></div>
+
+<h3 id="launch-ejabberd">Launch Ejabberd</h3>
+
+<p>Next, we untar or extract the data into the appropriate directory.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/nodes/ &amp;&amp; mkdir ejabberd-20.05
+tar -xvkf ejabberd-20.05.tar.gz -C ./ejabberd-20.05
+cd ejabberd-20.05/ &amp;&amp; ls bin/
+./bin/ejabberdctl start
+./bin/ejabberdctl status
+</code></pre></div></div>
+
+<blockquote>
+  <p>NOW, the hard part… configuration of your fresh ejabberd binaries.</p>
+</blockquote>
+
+<p>As you may have noticed, <strong>ejabberdctl</strong> status failed to start. This is because we now have to configure the server.</p>
+
+<h5 id="part-ii---tba">PART II - TBA</h5>
+
+<h3 id="references">References:</h3>
+
+<ul>
+  <li><a href="https://github.com/processone/ejabberd/blob/22.05/COMPILE.md">Ejabberd Source</a></li>
+  <li><a href="https://docs.ejabberd.im/admin/installation/#source-code">Ejabberd Compile</a></li>
+  <li><a href="https://www.ejabberd.im/">Ejabberd Features</a></li>
+  <li><a href="https://www.process-one.net/blog/how-to-configure-ejabberd-to-get-100-in-xmpp-compliance-test/">Ejabberd Configure</a></li>
+  <li><a href="https://www.sharpetronics.com/blog/tutorials/2021/07/26/linux-vps-hardening-init/">Linux VPS Hardening</a></li>
+  <li><a href="https://conversations.im/omemo/">OMEMO Extension</a></li>
+  <li><a href="https://xmpp.org/software/servers/">XMPP Servers</a></li>
+</ul>
+
+<h3 id="support">Support</h3>
+
+<p>If you have any questions, concerns, want to say hi, please join the following channel: <a href="https://discord.gg/HQcvr2JBQv">SharpeTronics Discord Support Channel</a> Eventually, I plan on having a commenting system on here..</p>
+
+<h3 id="want-to-buy-me-a-coffee">Want to buy me a coffee?</h3>
+<p>Recently, I have had many folk as about <strong>how to send me a donation</strong>. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!</p>
+
+<ul>
+  <li><a href="https://cash.app/$sharpeee">Cash App</a></li>
+  <li><a href="https://account.venmo.com/u/seabeeess">Venmo</a></li>
+  <li><a href="https://opencollective.com/sharpetronics">Open Collective</a></li>
+</ul>]]></content><author><name>Charles</name></author><category term="Devops" /><category term="Privacy," /><category term="XMPP," /><category term="Ejabberd," /><summary type="html"><![CDATA[Compiling ejabberd v22.05 A XMPP server based on Erlang/OTP 24]]></summary></entry><entry><title type="html">How to Setup a Docker Drone CI with HTTPS</title><link href="https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https/" rel="alternate" type="text/html" title="How to Setup a Docker Drone CI with HTTPS" /><published>2022-06-28T00:00:00+00:00</published><updated>2022-06-28T00:00:00+00:00</updated><id>https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https</id><content type="html" xml:base="https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https/"><![CDATA[<blockquote>
+  <p>R2D2, you know better than to trust a strange computer! [beeps]</p>
+</blockquote>
+
+<p>In general, this Drone server enables continuous integration (CI) and is a stepping stone for continuous delivery (CD), including gh-pages and gh-actions like functionality.</p>
+
+<p>For this to function correctly, you will need to have a working instance of Gitea running on your own system.</p>
+
+<p>This tutorial doesn’t guide you on how-to create your own HTTPS server using Let’s Encrypt and Certbot. I have added the certbot resource below [Setting Up HTTPS Certs] I will document this in more detail in the near future. However, this article is similar to how to get https on your server setup.
+<a href="https://sharpetronics.com/blog/tutorials/2021/12/27/setup-nginx-https-web-server-with-lets-encrypt-plus-strapi-4.0-headless-cms/">How-to get HTTPS on your server</a></p>
+
+<p>As a stack developer and business owner, I am working on so many things! It is difficult to remember everything, so documentation is critical for me to remember.</p>
+
+<p><strong>Note 1:</strong> If you see a [name-goes-here], I am linking to the references shared at the end of the article.
+<strong>Note 2:</strong> Be sure your firewall <code class="language-plaintext highlighter-rouge">sudo ufw status</code> allows port 80 and 443. <code class="language-plaintext highlighter-rouge">sudo ufw allow http</code> &amp;&amp; <code class="language-plaintext highlighter-rouge">sudo ufw allow https</code>.
+<strong>Note 3:</strong> If you want to use Docker Engine without sudo, follow this url: <a href="https://docs.docker.com/engine/install/linux-postinstall/">Linux Docker Post-Install</a></p>
+
+<h3 id="requirements">Requirements</h3>
+<ul>
+  <li>Basic Linux CLI knowledge</li>
+  <li>A hardened remote SSH server <a href="https://sharpetronics.com/blog/tutorials/2021/07/26/linux-vps-hardening-init/">see Linux VPS hardening</a></li>
+  <li>A running Gitea server: Git with a cup of tea</li>
+  <li><a href="https://docs.docker.com/engine/install/">Docker Engine</a></li>
+  <li>a basic understanding of how to use Docker Engine</li>
+  <li>basic Nginx, Gitea and Certbot/Let’s Encrypt experience</li>
+  <li>openssl</li>
+</ul>
+
+<h3 id="lets-begin">Let’s Begin!</h3>
+
+<h4 id="preparing-the-environment">Preparing the Environment</h4>
+
+<h5 id="creating-our-super-duper-shared-secret">Creating our super-duper-shared secret</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl rand -hex 16
+bea26a2221fd8090ea38720fc445eca6
+</code></pre></div></div>
+
+<h5 id="creating-an-oauth-application-on-gitea">Creating an OAuth application on Gitea</h5>
+<ol>
+  <li>Goto your git.example.com and login</li>
+  <li>Navigate to your profile settings (not the administrator settings, but personal profile)</li>
+  <li>At the top below the main navigation bar, click on <strong>Applications</strong></li>
+  <li>Scroll down to the bottom of the page and create a new App name and Redirect URI
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Applications Name: drone
+Redirect URI: https://drone.example.com/login
+</code></pre></div>    </div>
+  </li>
+  <li>Click <strong>Create Application</strong></li>
+  <li>Copy and save your <strong>Client Secret</strong>; you will only be able to see this secret one time.</li>
+  <li>In the next section, we will use these credentials to authenticate with Gitea and launch the Drone server.</li>
+</ol>
+
+<h4 id="create--configure-the-docker-container">Create &amp; configure the Docker Container</h4>
+
+<h5 id="download-docker-drone-image-from-dockerhub">Download docker drone image from Dockerhub</h5>
+<p><code class="language-plaintext highlighter-rouge">docker pull drone/drone:2</code>
+<code class="language-plaintext highlighter-rouge">docker image</code></p>
+
+<h5 id="begin-configuring-and-starting-drone">Begin configuring and starting drone</h5>
+
+<p><em>The below command creates a container and starts the Docker runner. Remember to replace the environment variables below with your Drone server details.</em></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run \
+  --volume=/var/lib/drone:/data \
+  --env=DRONE_TLS_AUTOCERT=true \
+  --env=DRONE_HTTP_SSL_REDIRECT=true \
+  --env=DRONE_HTTP_SSL_TEMPORARY_REDIRECT=true \
+  --env=DRONE_HTTP_SSL_HOST=drone.example.com \
+  --env=DRONE_HTTP_STS_SECONDS=315360000 \
+  --env=DRONE_SERVER_CERT=/etc/letsencrypt/live/drone.example.com/fullchain.pem \
+  --env=DRONE_SERVER_KEY=/etc/letsencrypt/live/drone.example.com/privkey.pem \
+  --env=DRONE_GITEA_SERVER=https://git.example.com \
+  --env=DRONE_GITEA_CLIENT_ID=e69c443c-6bc2-4a35-000b-a2f36a885400 \
+  --env=DRONE_GITEA_CLIENT_SECRET=3aY2000000c2Np7zX4e1Z9nlYhelENfX7nmWyxsgVixRg \
+  --env=DRONE_RPC_SECRET=bea26a2221fd80900000038720fc445eca6 \
+  --env=DRONE_SERVER_HOST=drone.example.com \
+  --env=DRONE_SERVER_PROTO=https \
+  --env=DRONE_USER_FILTER=gitea-user-account \
+  --publish=80:80 \
+  --publish=443:443 \
+  --restart=always \
+  --detach=true \
+  --name=st-drone-ssl \
+  drone/drone:2
+</code></pre></div></div>
+
+<h6 id="going-the-extra-yards">Going the extra yards</h6>
+<p>After you create the docker container, it will automatically restart to remember your configuration, but if you create a shell script, you are able to <code class="language-plaintext highlighter-rouge">./shell-script.sh</code> and run the Docker image.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi shell-script.sh
+copy/paste docker config via CTRL+SHIFT+V
+double check for typos
+hit ESC
+press SHIFT+Z,Z (saves and quits)
+chmod +x shell-script.sh (makes script executable)
+then, run the script with: ./shell-script.sh
+</code></pre></div></div>
+
+<h4 id="verify">Verify</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker logs st-drone-ssl
+
+INFO[0000] starting the server
+INFO[0000] successfully pinged the remote server
+</code></pre></div></div>
+
+<h4 id="stop--start-container">Stop &amp; Start Container</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo docker container stop st-drone-ssl
+sudo docker container start st-drone-ssl
+</code></pre></div></div>
+
+<h3 id="part-ii---configure-a-drone-runner-pipeline-with-docker-engine">Part II - Configure a Drone Runner Pipeline with Docker Engine</h3>
+
+<p>This article will be shared at a later date.</p>
+
+<h3 id="references">References</h3>
+
+<ul>
+  <li><a href="https://certbot.eff.org/instructions">Setting up HTTPS certs</a></li>
+  <li><a href="https://docs.drone.io/server/reference/">Drone Configuration Options</a></li>
+  <li><a href="https://docs.drone.io/server/provider/gitea/">Drone Gitea Setup</a></li>
+  <li><a href="https://docs.drone.io/server/provider/gitea/">Drone Server Docker Installation</a></li>
+  <li><a href="https://www.infoworld.com/article/3271126/what-is-cicd-continuous-integration-and-continuous-delivery-explained.html">What is CI/CD</a></li>
+  <li><a href="https://unsplash.com/@studbee">Unsplash - Studbee</a></li>
+</ul>
+
+<h3 id="support">Support</h3>
+
+<p>If you have any questions, concerns, want to say hi, please join the following channel: <a href="https://discord.gg/HQcvr2JBQv">SharpeTronics Discord Support Channel</a> Eventually, I plan on having a commenting system on here..</p>
+
+<h3 id="donations">Donations</h3>
+<p>Recently, I have had many folk as about <strong>how to send me a donation</strong>. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!</p>
+
+<ul>
+  <li><a href="https://cash.app/$sharpeee">Cash App</a></li>
+  <li><a href="https://account.venmo.com/u/seabeeess">Venmo</a></li>
+  <li><a href="https://opencollective.com/sharpetronics">Open Collective</a></li>
+</ul>]]></content><author><name>Charles</name></author><category term="How-to" /><category term="VPS," /><category term="SSL," /><category term="Drone" /><category term="CI," /><category term="Docker," /><summary type="html"><![CDATA[R2D2, you know better than to trust a strange computer! [beeps]]]></summary></entry><entry><title type="html">How to Setup a Secure Docker Drone Runner with Drone CI</title><link href="https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-secure-docker-drone-runner-with-drone-ci/" rel="alternate" type="text/html" title="How to Setup a Secure Docker Drone Runner with Drone CI" /><published>2022-06-28T00:00:00+00:00</published><updated>2022-06-28T00:00:00+00:00</updated><id>https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-secure-docker-drone-runner-with-drone-ci</id><content type="html" xml:base="https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-secure-docker-drone-runner-with-drone-ci/"><![CDATA[<blockquote>
+  <p>BeeYoop BeeDeepBoom Weeop DEEpaEEya</p>
+</blockquote>
+
+<p>In general, this article describes how to setup SSL with a Drone Runner. This is part II of a part I series. If you would like to learn how-to setup the Drone Server, please visit: <a href="https://www.sharpetronics.com/blog/tutorials/2022/06/23/how-to-setup-a-docker-drone-ci-with-https/">Setup Drone CI Server</a>.</p>
+
+<p>This part II creates a pipeline runner with a Docker machine; what that means is, like GitHub Actions, but with Drone super powers. The configuration file is stored as <code class="language-plaintext highlighter-rouge">.drone.yml</code> in the root of your site directory and drone server uses that application yml file to do a series of commands or actions within the virtual docker machine.</p>
+
+<p>This is empowering because you can automate a fresh build every time. Also, you create a <strong>drone trigger</strong> for when you push to a branch master as an example. Here is the configuration of all the possible things you can do. <a href="https://docs.drone.io/pipeline/docker/overview/">Docker Pipelines Overview</a></p>
+
+<p><strong>Note 1:</strong> If you see a [name-goes-here], I am linking to the references I shared below.
+<strong>Note 2:</strong> If you want to use Docker Engine without sudo, follow this url: <a href="https://docs.docker.com/engine/install/linux-postinstall/">Linux Docker Post-Install</a></p>
+
+<h3 id="requirements">Requirements</h3>
+<ul>
+  <li>Basic Linux CLI knowledge</li>
+  <li>A hardened remote SSH server <a href="https://sharpetronics.com/blog/tutorials/2021/07/26/linux-vps-hardening-init/">see Linux VPS hardening</a></li>
+  <li>A running Gitea server: Git with a cup of tea</li>
+  <li><a href="https://docs.docker.com/engine/install/">Docker Engine</a></li>
+  <li>a basic understanding of how to use Docker Engine</li>
+  <li>basic Nginx, Gitea and Certbot/Let’s Encrypt experience</li>
+  <li>openssl</li>
+  <li>a running drone ci server <a href="https://www.sharpetronics.com/blog/tutorials/2022/06/23/how-to-setup-a-docker-drone-ci-with-https/">see part I</a></li>
+</ul>
+
+<h3 id="lets-begin">Let’s Begin!</h3>
+
+<h4 id="pull-docker-image-from-dockerhub">Pull docker image from dockerhub</h4>
+<p><code class="language-plaintext highlighter-rouge">docker pull drone/drone-runner-docker:1</code></p>
+
+<h4 id="make-public-access-to-repo-in-drone-gui">Make public access to repo in drone GUI</h4>
+<p>For testing, I made sure the repo was publicly available.</p>
+
+<p><img src="/uploads/2022/screenshot-drone-gui.webp" alt="Screenshot Drone UI" /></p>
+
+<h3 id="launch-a-secure-docker-drone-runner">Launch a Secure Docker Drone Runner</h3>
+
+<p>For the <strong>DRONE_RPC_SECRET</strong> use the same ssl secret we created in Part I. See <a href="https://docs.drone.io/runner/docker/configuration/reference/">Configuration</a> for a complete list of configuration options.</p>
+
+<p>Please see the reference to understand what this docker config is doing. That is important for you to do yourself.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --detach \
+  --volume=/var/run/docker.sock:/var/run/docker.sock \
+  --env=DRONE_RPC_PROTO=https \
+  --env=DRONE_RPC_HOST=drone.example.com \
+  --env=DRONE_RPC_SECRET=bea26a2221fd8090ea38720fc445eca6 \
+  --env=DRONE_RUNNER_CAPACITY=2 \
+  --env=DRONE_RUNNER_NAME=st-runner \
+  --env=DRONE_UI_USERNAME=youruserhere \
+  --env=DRONE_UI_PASSWORD=yourpasshere \
+  --env=DRONE_DEBUG=true \
+  --env=DRONE_TRACE=true \
+  --publish=3000:3000 \
+  --restart=always \
+  --name=st-drone-runner \
+  drone/drone-runner-docker:1
+</code></pre></div></div>
+
+<h4 id="a-pipeline-config-example">A Pipeline Config Example</h4>
+
+<p>An example of a custom pipeline I have created. I ain’t going to explain this to you in detail; I expect you to determine your own pipeline and this is only for a reference point. Essentially, what you will be doing is launching your own virtual machine for your specific use case scenario.</p>
+
+<p>In this example, on drone.example.com, I have created a secret pass that needs to be passed to the virtual machine so I can package the build aka <strong>_site</strong> only, then auto push to www_data branch on my git server. Furthermore, I <strong>rsync</strong> this data through an ssh tunnel to a <strong>Gitea Pages</strong> server that serves the <strong>WWW or edge</strong> data.</p>
+
+<p><strong>Note: 3:</strong> The example configuration is a <strong>.drone.yml</strong> file stored in the root of your site project.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+kind: pipeline
+type: docker
+name: build
+
+workspace:
+  path: /drone/src
+
+platform:
+  os: linux
+  arch: amd64
+
+trigger:
+  branch:
+  - master
+
+steps:
+- name: build-website
+  image: ruby:latest
+  environment:
+    SSH_USER:
+      from_secret: ssh_user
+    SSH_HOST:
+      from_secret: ssh_host
+    NO_HOSTKEY:
+      from_secret: no_hostkey
+  privileged: false
+  volumes:
+    - name: jekyll
+      path: /srv/jekyll
+
+  commands:
+    # general vm information for debugging
+    - whoami
+    - pwd
+    - gem environment
+</code></pre></div></div>
+
+<h4 id="verify">Verify</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker logs st-drone-runner
+
+INFO[0000] starting the server
+INFO[0000] successfully pinged the remote server
+</code></pre></div></div>
+<h4 id="stop--start-container">Stop &amp; Start Container</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo docker container stop st-drone-ssl
+sudo docker container start st-drone-ssl
+</code></pre></div></div>
+<h3 id="references">References</h3>
+<ul>
+  <li><a href="https://docs.drone.io/runner/docker/configuration/reference/">Drone Runner Configuration</a></li>
+  <li><a href="https://docs.drone.io/runner/docker/installation/linux/">Drone Runner Docker Installation</a></li>
+  <li><a href="https://docs.drone.io/pipeline/docker/overview/">Docker Pipelines Overview</a></li>
+  <li><a href="https://unsplash.com/@nietzsche99">Unsplash - Nice M Nshuti</a></li>
+</ul>
+
+<h3 id="support">Support</h3>
+
+<p>If you have any questions, concerns, want to say hi, please join the following channel: <a href="https://discord.gg/HQcvr2JBQv">SharpeTronics Discord Support Channel</a> Eventually, I plan on having a commenting system on here..</p>
+
+<h3 id="want-to-buy-me-a-coffee">Want to buy me a coffee?</h3>
+<p>Recently, I have had many folk as about <strong>how to send me a donation</strong>. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!</p>
+
+<ul>
+  <li><a href="https://cash.app/$sharpeee">Cash App</a></li>
+  <li><a href="https://account.venmo.com/u/seabeeess">Venmo</a></li>
+  <li><a href="https://opencollective.com/sharpetronics">Open Collective</a></li>
+</ul>]]></content><author><name>Charles</name></author><category term="How-to" /><category term="Linux," /><category term="Drone" /><category term="CI," /><category term="Docker," /><summary type="html"><![CDATA[BeeYoop BeeDeepBoom Weeop DEEpaEEya]]></summary></entry><entry><title type="html">Big Startups Without Big Tech</title><link href="https://www.sharpetronics.com/blog/how-to/2022/05/24/big-startups-without-big-tech/" rel="alternate" type="text/html" title="Big Startups Without Big Tech" /><published>2022-05-24T00:00:00+00:00</published><updated>2022-05-24T00:00:00+00:00</updated><id>https://www.sharpetronics.com/blog/how-to/2022/05/24/big-startups-without-big-tech</id><content type="html" xml:base="https://www.sharpetronics.com/blog/how-to/2022/05/24/big-startups-without-big-tech/"><![CDATA[<p>Welcome to the Blockchain Internet called DFINITY. In my spare time, I have been tinkering and learning <strong>Motoko</strong>. It is a language built for the Internet Computer (IC) that can be used to interface applications, websites and other various software.</p>
+
+<p>Motoko is a programming typed language that compiles into WebAssembly (WA) and is created by <strong>Andreas Rossberg</strong> &amp; the <strong>Dfinity Foundation</strong></p>
+
+<blockquote>
+  <p>“To offer a seamless developer experience, we wanted to create a specialized programming language, called Motoko, that is designed to directly support the programming model of the Internet Computer, making it easier to efficiently build applications and take advantage of some of the more unusual features of this platform.” -Andreas Rossberg</p>
+</blockquote>
+
+<p>To begin development of the open decentralized Internet called Dfinity, I needed to install the Software Developer Kit (SDK).
+I ran into a few challenges initially with using the <strong>“dfx”</strong> command after installing. I needed to setup my PATH and let <strong>.bashrc</strong> know where the program dfx is installed.
+Knowing how to do this is important and enables more flow with development. Normally, these things are done by default when installing the program, but in unique scenarios, the installed location of that application may not be added to your .bashrc or profile.</p>
+
+<h3 id="lets-begin">Let’s begin,</h3>
+
+<ol>
+  <li>Open up Linux terminal</li>
+  <li><code class="language-plaintext highlighter-rouge">nano ~/.bashrc</code></li>
+  <li>Scroll down to end of page and type the following code to add “dfx” command to your profile or .bashrc.</li>
+  <li>Rerun the updated .bashrc or .profile script via . ~/.bashrc, then test <em>“dfx –version”</em> again.
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># DFINITY MOTOKO
+export PATH=$HOME/bin:$PATH.
+</code></pre></div>    </div>
+    <p><img src="/uploads/2021/motoko_bashrc-edit.webp" alt="Bashrc Edit for Linux" title="Motoko Bashrc Edit" /></p>
+  </li>
+</ol>
+
+<p>What we have enabled here is the command <strong>“dfx –version”</strong> to work without having to type the entire path to execute the dfx program.
+As an example, without setting up our PATH, we would type the full path of where the program is located in the terminal; this would be <strong>“/home/username/bin/dfx –version”</strong> to run the program each time we need it.</p>
+
+<p><em>If for some reason your dfx installed in a different location, all you need to do is run “which dfx” and it will provide the installed location of that program.</em></p>
+
+<p>I hope this quick tutorial aided in your Linux administration talents. I will begin sharing short tutorials like this. It will enable my own glossary of experience and also aid in other curious programmers and Linux users seeking answers. 🖖</p>
+
+<h4 id="sources">Sources:</h4>
+<ul>
+  <li>Internet Computer Genesis Launch Event - <a href="https://youtu.be/xiupEw4MfxY">https://youtu.be/xiupEw4MfxY</a> - Premiered May 7, 2021</li>
+  <li>The Dfinity Foundation - <a href="https://dfinity.org/">https://dfinity.org/</a></li>
+  <li>Adding a Path to the Linux PATH variable - <a href="https://www.baeldung.com/linux/path-variable">https://www.baeldung.com/linux/path-variable</a> - May 13th, 2021</li>
+</ul>]]></content><author><name>Charles</name></author><category term="How-to" /><category term="Blockchain," /><summary type="html"><![CDATA[Welcome to the Blockchain Internet called DFINITY. In my spare time, I have been tinkering and learning Motoko. It is a language built for the Internet Computer (IC) that can be used to interface applications, websites and other various software.]]></summary></entry><entry><title type="html">Configure a Static Qt5 from Source on Ubuntu 18.04 with X11 Support</title><link href="https://www.sharpetronics.com/blog/devops/2022/05/24/configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support/" rel="alternate" type="text/html" title="Configure a Static Qt5 from Source on Ubuntu 18.04 with X11 Support" /><published>2022-05-24T00:00:00+00:00</published><updated>2022-05-24T00:00:00+00:00</updated><id>https://www.sharpetronics.com/blog/devops/2022/05/24/configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support</id><content type="html" xml:base="https://www.sharpetronics.com/blog/devops/2022/05/24/configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support/"><![CDATA[<h3 id="configure-build-install--setup-qt-5152-source-on-ubuntu-1804-with-x11-support">Configure, Build, Install &amp; Setup Qt 5.15.2 Source on Ubuntu 18.04 with X11 Support</h3>
+
+<p>This tutorial will teach you how to compile from source via CLI (command-line interface) and enable customization for building Qt5 apps on different operating systems andor hardware architectures like RPI400.</p>
+
+<p>When compiling Qt5 yourself, you are empowered with a configuration that is constant throughout the Linux Universe. This process is also very similar with compiling Qt apps on your (AArch64) ARM64 devices like RPi 400, Rock64 &amp; PineBook64.</p>
+
+<p><em>Note: This tutorial doesn’t include json Qtwebengine</em></p>
+
+<h3 id="what-is-qt">What is Qt?</h3>
+<p>“Qt is a cross-platform application development framework for desktop, embedded and mobile.” [Qt Wiki]</p>
+
+<h3 id="what-is-a-static-qt">What is a Static Qt?</h3>
+<p>In general, a static Qt option includes libraries locally. This aids in having an application run on different versions of Linux distros. When the application is compiled, we check the app with <em>ldd yourapp</em> to list what the binary is dependent on to run. Essentially, the Qt libraries are included in the binary. Decovar.dev has a great explanation on advantages and disadvantages of building a static Qt. [At last, let’s build Qt statically]</p>
+
+<h3 id="lets-begin">Let’s Begin!</h3>
+
+<h4 id="remove--purge-all-qt-packages">Remove &amp; purge all Qt packages</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt -y remove qt5* libqt5* qtcreator &amp;&amp; sudo autoremove
+</code></pre></div></div>
+
+<h4 id="download-qt-5152-source-to-qt5-sources-folder">Download Qt 5.15.2 Source to qt5-sources folder</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir qt5-sources &amp;&amp; cd qt5-sources &amp;&amp; mkdir build-shadow
+
+wget https://download.qt.io/official_releases/qt/5.15/5.15.2/single/qt-everywhere-src-5.15.2.tar.xz
+</code></pre></div></div>
+
+<h5 id="verify-md5-hash">Verify MD5 hash</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>md5sum qt-everywhere-src-5.15.2.tar.xz
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>e1447db4f06c841d8947f0a6ce83a7b5  qt-everywhere-src-5.15.2.tar.xz
+</code></pre></div></div>
+
+<h5 id="un-tar-qt5-archive">Un-tar Qt5 archive</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar xf qt-everywhere-src-5.15.2.tar.xz
+</code></pre></div></div>
+
+<h5 id="move-into-build-shadow-directory-to-configure-your-qt-5152">Move into build-shadow directory to configure your Qt 5.15.2</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd build-shadow
+</code></pre></div></div>
+
+<h4 id="install-qt5-minimal-dependencies">Install Qt5 Minimal Dependencies</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt update
+
+sudo apt install build-essential libfontconfig1-dev libdbus-1-dev libfreetype6-dev libicu-dev libinput-dev libxkbcommon-dev libsqlite3-dev libssl-dev libpng-dev libjpeg-dev libglib2.0-dev
+</code></pre></div></div>
+
+<h5 id="optional-install-vc4-drivers-for-rpi-4-type-devices-ie-cortex-a53--cortex-a72">(Optional) Install VC4 Drivers for RPi 4 type devices (i.e. cortex-a53 &amp; cortex-a72)</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install libgles2-mesa-dev libgbm-dev libdrm-dev
+</code></pre></div></div>
+<h4 id="optional-install-x11-support-dependencies">(Optional) Install X11 Support Dependencies</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install libx11-dev libxcb1-dev  libxext-dev libxi-dev libxcomposite-dev libxcursor-dev libxtst-dev libxrandr-dev libfontconfig1-dev libfreetype6-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev  libxcb-glx0-dev  libxcb-keysyms1-dev libxcb-image0-dev  libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev  libxcb-randr0-dev  libxcb-render-util0-dev  libxcb-util0-dev  libxcb-xinerama0-dev  libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev
+</code></pre></div></div>
+
+<h4 id="configure-qt-5152">Configure Qt 5.15.2</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../qt-everywhere-src-5.15.2/configure -static -release -openssl-linked -opensource -confirm-license -qt-zlib -qt-libpng -bundled-xcb-xinput \
+-skip qtlocation -skip qtmacextras -skip qtpurchasing -skip qtscript -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qtdatavis3d -skip qtdoc -skip qtcharts -skip qtdeclarative -skip qt3d -skip qtwebengine -skip qtandroidextras -skip qtwebview -skip qtgamepad -skip qtquickcontrols -skip qtquickcontrols2 -skip qtremoteobjects -skip qtwebview -skip qtwebchannel -skip qtwebglplugin \
+-nomake examples -nomake tests  -feature-fontconfig -no-feature-getentropy -v
+</code></pre></div></div>
+
+<p>*If you would like to see a full list of options, we can do <strong>../qt-everywhere-src-5.15.2/configure -h</strong></p>
+
+<h5 id="make-the-configuration--j-4-is-number-of-cpus-you-want-to-use">Make the configuration <em>(-j 4 is number of cpus you want to use)</em></h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make -j 4
+</code></pre></div></div>
+
+<h5 id="install-qt5-into-default-usrlocal">Install Qt5 into: <em>(default) /usr/local/</em></h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo make install
+</code></pre></div></div>
+<p><em>Note: Check and make sure ./configure has required deps; if you installed the deps, but still receiving errors, remove config.cache and ./configure again.</em></p>
+
+<p><strong>Tip:</strong> <em>If you want to view your configuration summary, you may do so via nano config.summary from build-shadow directory</em></p>
+
+<h4 id="update-profile-to-know-where-qt5152-bins-are">Update profile to know where Qt5.15.2 bins are</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano ~/.bashrc
+</code></pre></div></div>
+
+<h5 id="add-this-at-the-bottom-of-your-bashrc-file">Add this at the bottom of your .bashrc file.</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># set PATH for Qt 5.15.2
+export PATH="/usr/local/Qt-5.15.2/bin:$PATH"
+</code></pre></div></div>
+
+<h5 id="reload-your-bashrc-file--create-new-shell-window">Reload your ~/.bashrc file &amp; create new shell window.</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source ~/.bashrc
+CTRL+SHIFT+T
+ALT+1
+exit
+</code></pre></div></div>
+<h5 id="verify-qt-5152-has-been-installed">Verify Qt 5.15.2 has been installed</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qmake --version
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>QMake version 3.1
+Using Qt version 5.15.2 in /usr/local/Qt-5.15.2/lib
+</code></pre></div></div>
+<h4 id="build-your-happy-qt5-app">Build your happy Qt5 app</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build.sh
+</code></pre></div></div>
+<h4 id="support--questions">Support &amp; Questions</h4>
+<p><a href="https://github.com/SharpeTronics/sharpetronics.github.io/issues">sharpetronics.github</a></p>
+
+<p><img src="/uploads/2021/bob-ross-happy.gif" alt="happy little apps" /></p>
+
+<h4 id="references">References</h4>
+<p><a href="https://www.tal.org/tutorials/building-qt-515-raspberry-pi">tal.org/rpi</a></p>
+
+<p><a href="https://doc.qt.io/qt-5/qtmodules.html">doc.qt.io/qtmodules</a></p>
+
+<p><a href="https://wiki.qt.io/About_Qt">wiki.qt.io/about</a></p>
+
+<p><a href="https://decovar.dev/blog/2018/02/17/build-qt-statically/#why-build-qt-statically">why-build-qt-statically</a></p>]]></content><author><name>Charles</name></author><category term="Devops" /><category term="Linux," /><category term="Qt5," /><category term="ARM64," /><category term="Raspberry" /><category term="Pi" /><category term="400," /><category term="X11," /><summary type="html"><![CDATA[Configure, Build, Install &amp; Setup Qt 5.15.2 Source on Ubuntu 18.04 with X11 Support]]></summary></entry><entry><title type="html">Linux VPS Hardening</title><link href="https://www.sharpetronics.com/blog/devops/2022/05/24/linux-vps-hardening/" rel="alternate" type="text/html" title="Linux VPS Hardening" /><published>2022-05-24T00:00:00+00:00</published><updated>2022-05-24T00:00:00+00:00</updated><id>https://www.sharpetronics.com/blog/devops/2022/05/24/linux-vps-hardening</id><content type="html" xml:base="https://www.sharpetronics.com/blog/devops/2022/05/24/linux-vps-hardening/"><![CDATA[<h3 id="planting-seeds">Planting Seeds</h3>
+
+<p>Administration of a virtual private Linux server (VPS) without a GUI cpanel is the only way to go. Going through any graphical user interface (GUI) to run critical services for your company is like playing the telephone game. Securing our environment begins at the terminal &amp; from terminal experience we create a deeper learning experience for ourselves and build confidence along the way.</p>
+
+<p>This article will extrapolate on initializing a Ubuntu Linux VPS for the first time and how we secure our environment through the terminal. No Windows or MacOS pancakes here; only Linux.</p>
+
+<p>When beginning a new server or garden, the soil is most important; we create an environment to protect and maximize growth potential. The VPS provider may give you an OS they installed, but I always create a fresh install myself.</p>
+
+<h3 id="logging-in-via-ssh">Logging in via SSH</h3>
+
+<h5 id="creating-rsa-public-key">Creating RSA Public Key</h5>
+<p>Before you are able to login with SSH, you will most likely have to generate and add a RSA public key.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ssh-keygen -t rsa -b 4096</code></p>
+
+<h5 id="copy--paste-public-key">Copy / Paste Public Key</h5>
+<p>After key is generated, we display the public key and add it to VPS account. <em>Optionally, you may have to add the key with ssh-copy-id user@ip_address.</em></p>
+
+<p><code class="language-plaintext highlighter-rouge">cat ~/.ssh/id_rsa.pub</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-rsa AAAEXAMPLECAQDBn0Z88lqrtya0Nd7yYtP/1o90vwVxjvCm/txb+SW85JRRnrI616d2iWwtVCSiUX0s59FfIPxUJl6vPqmxY40DIrX9KZijVpaq/TzWXh2ktCTjT6uBNMBRz/2lxP3w2AZov65dygjW5eQT9K9YB13dr1B4RkQMmUW5xiFbdHM0WzBYM2CMtE+lnmebn7m+B3DcvNkuGdT9Qw1/J24dTuNJSzJXVxzTOTlnVKOVSp1NWzu0USFI6dkrz8YImSgP9hQX970zTnzQ1Ctei4xlR/IiCpVGG6zWeV4oT3sLf4E9mk9eYF/wU0AdA3mQ68yZvv+Bhlc75e9kmUFe+JbctKR4YaKGY6K6K/F1tHrKYkASEkfQQ0KJU/ez/wtSf21A6Z2bM/Gg28f/6owfIMPWnYuB9VOLqkdIHFUot40uMi9CBvkdwH69zAQfz4jFvmu588klE0usBclGAFs78KM6YWaXHYjHdWVRIUrAqdZw1IP0uYS3uSBUPsbBG/Aq0V+22dg8U5DSu5XmwLB5jT+3c4ScqH3kY5tomRLe+2Dx4K+mAHpgtf10xL6Ayx2y0GFZCf+LB1Va3Trk3ChcaKRF5KvyayFQNSY4AfA47B90asdv== user@hostname
+</code></pre></div></div>
+
+<h5 id="ssh-into-vps">SSH into VPS</h5>
+<p>Next, we login to our VPS and specify -i what key to use. The -i is only needed if you have more than one key. The -v displays verbose or details of what the command is doing in the terminal.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ssh -i ~/.ssh/id_rsa root@123.123.123.123</code></p>
+
+<p>Success! Now, we are able to update and upgrade our packages.</p>
+
+<h3 id="prepping-linux-environment">Prepping Linux Environment</h3>
+
+<h5 id="update-sources--packages">Update Sources &amp; Packages</h5>
+<p><code class="language-plaintext highlighter-rouge">apt-get update &amp;&amp; apt-get upgrade</code></p>
+
+<h5 id="disable-ubuntu-sudo-timeout">Disable Ubuntu Sudo Timeout</h5>
+<p>In Ubuntu, sudo has a timeout built in for ease of use. I personally remove this timeout; without knowing you are using sudo will create all kinds of headaches in the future. When you make use of root privileges, we must explicitly type sudo each command.</p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo visudo</code></p>
+
+<p>add <code class="language-plaintext highlighter-rouge">Defaults        env_reset, timestamp_timeout=00</code></p>
+
+<h3 id="setting-up-the-firewall">Setting Up The Firewall</h3>
+<p>After we have logged in via SSH for root user account. I recommend installing a powerful firewall called: <strong>ufw</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">apt-get install ufw</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">ufw status</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">ufw allow ssh</code></p>
+
+<p>Display the status of the firewall and determine if ssh has been allowed. If nomenclature <em>ssh</em> doesn’t add the ports, we do this manually with ufw allow 22/udp &amp; ufw all 22/tcp. Port 22 is the common port SSH server makes use of; we are able to change this port for extra hardening, but for the sake of this tutorial, we will use port 22.
+<code class="language-plaintext highlighter-rouge">ufw status</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW        Anywhere                  
+22/udp                     ALLOW        Anywhere
+</code></pre></div></div>
+
+<p>Now, we enable the firewall <strong>after</strong> we allow port 22. The SSH connection should remain open. If it closes, SSH back into your VPS.
+<code class="language-plaintext highlighter-rouge">ufw enable</code></p>
+
+<h5 id="check-if-port-is-open">Check If Port Is Open</h5>
+<p>Once telnet is ran, ssh information should populate
+<code class="language-plaintext highlighter-rouge">telnet 123.123.123.123 22</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Trying 123.123.123.123...
+Connected to 123.123.123.123.
+Escape character is '^]'.
+SSH-X.0-OpenSSH_X.2p1 Ubuntu-Xubuntu0.2
+
+Invalid SSH identification string.
+Connection closed by foreign host.
+</code></pre></div></div>
+
+<h3 id="creating-new-users--permissions">Creating New Users &amp; Permissions</h3>
+
+<p>To further expand on the garden, we must define a secure space for each plant or service we are running. To manage each service, like dns, mail, gitea, etc… we create a new user for each of these environments. This separation is important for operational security (OPSEC).</p>
+
+<p><code class="language-plaintext highlighter-rouge">adduser username</code> <em>Note: If we want to use Dockerfile or auto script without prompts, we make use of the <strong>useradd</strong> command.</em></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Adding user `username' ...
+Adding new group `username' (1003) ...
+Adding new user `username' (1002) with group `username' ...
+Creating home directory `/home/username' ...
+Copying files from `/etc/skel' ...
+New password: 
+</code></pre></div></div>
+
+<p>Next, if the user should have sudo permission, we do the following.</p>
+
+<p><code class="language-plaintext highlighter-rouge">usermod -a -G sudo username</code></p>
+
+<h5 id="prove-user-was-created">Prove User was Created</h5>
+
+<p><code class="language-plaintext highlighter-rouge">cat /etc/passwd</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+username:x:1001:1002:User Name,,,:/home/username:/bin/bash
+...
+</code></pre></div></div>
+
+<h5 id="logging-in-with-new-username">Logging In with New Username</h5>
+
+<p><code class="language-plaintext highlighter-rouge">su username</code></p>
+
+<h5 id="update-ssh-config">Update SSH Config</h5>
+<p><code class="language-plaintext highlighter-rouge">sudo nano /etc/ssh/sshd_config</code></p>
+
+<p>Add sudo to the <strong>AllowGroups</strong> like so:</p>
+
+<p><code class="language-plaintext highlighter-rouge">AllowGroups wheel root sudo</code></p>
+
+<p>Next, we disable root login since we will only have root privileges when using sudo.</p>
+
+<p><code class="language-plaintext highlighter-rouge">PermitRootLogin no</code></p>
+
+<h5 id="ssh-directory-creation-for-new-username">SSH Directory Creation For New Username</h5>
+<p>Creating new user access to SSH login.
+When you connect to new username@ip, the vps user needs the public key for verification of authorized user. Authorized users with correct <strong>private key</strong> will be able to login to vps via ssh protocol.</p>
+
+<p><code class="language-plaintext highlighter-rouge">mkdir ~/.ssh</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">nano ~/.ssh/authorized_keys</code></p>
+
+<p>Paste your public key we created earlier into the authorized_keys file.</p>
+
+<h5 id="update-file--folder-permissions">Update file &amp; folder permissions</h5>
+
+<p><code class="language-plaintext highlighter-rouge">chmod 700 ~/.ssh</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">chmod 600 ~/.ssh/authorized_keys</code></p>
+
+<h5 id="restart-ssh-service">Restart SSH service</h5>
+
+<p><code class="language-plaintext highlighter-rouge">sudo service ssh restart</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">exit</code></p>
+
+<p>In conclusion, we are now able to login via SSH with new user and have also disabled root user logins.
+This process will have to be done for each user that is created.</p>
+
+<h3 id="backups-with-rsync-superpowers">Backups with Rsync Superpowers!</h3>
+
+<p>After all our hard work and focus, we should backup our VPS and create scheduled routines. Depending on your use case, I would recommend at least weekly backups.</p>
+
+<p>The following command is quite complex, but, essentially we are discarding folders we don’t need, backing up the entire VPS to our local machine and preserving all permissions and file integrity from the VPS.</p>
+
+<ul>
+  <li>rsync - A fast, versatile, local and remote file-copying utility</li>
+  <li>-aAXv - The files are transferred in “archive” mode, which ensures that symbolic links, devices, permissions, ownerships, modification times, ACLs, and extended attributes are preserved.</li>
+  <li>/ - Source directory</li>
+  <li>–exclude - Excludes the given directories from backup.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo rsync -aAXv --rsh="ssh -i /home/user/.ssh/id_rsa" --recursive --progress --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/backups/*"} user@123.123.123.123:/ /home/user/VPS/Backups/
+</code></pre></div></div>
+
+<h4 id="sources">Sources:</h4>
+<ul>
+  <li>Full System Backup Using Rsync - <a href="https://wiki.archlinux.org/title/Rsync#Full_system_backup">https://wiki.archlinux.org/title/Rsync#Full_system_backup</a></li>
+</ul>]]></content><author><name>Charles</name></author><category term="Devops" /><category term="Linux," /><category term="VPS," /><category term="SSL," /><category term="Security," /><summary type="html"><![CDATA[Planting Seeds]]></summary></entry><entry><title type="html">Our Privacy Policy</title><link href="https://www.sharpetronics.com/blog/legal/2022/05/24/our-privacy-policy/" rel="alternate" type="text/html" title="Our Privacy Policy" /><published>2022-05-24T00:00:00+00:00</published><updated>2022-05-24T00:00:00+00:00</updated><id>https://www.sharpetronics.com/blog/legal/2022/05/24/our-privacy-policy</id><content type="html" xml:base="https://www.sharpetronics.com/blog/legal/2022/05/24/our-privacy-policy/"><![CDATA[<h2>Privacy Policy for SharpeTronics.com, LLC</h2>
+
+<p>At SharpeTronics, accessible from https://www.sharpetronics.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by SharpeTronics and how we use it.</p>
+
+<p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
+
+<p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in SharpeTronics. This policy is not applicable to any information collected offline or via channels other than this website. </p>
+
+<h3>Consent</h3>
+
+<p>By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
+
+<h3>Information we collect</h3>
+
+<p>The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.</p>
+<p>If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide.</p>
+<p>When you register for an Account, we may ask for your contact information, including items such as name, company name, address, email address, and telephone number.</p>
+
+<h3>How we use your information</h3>
+
+<p>We use the information we collect in various ways, including to:</p>
+
+<ul>
+<li>Provide, operate, and maintain our webste</li>
+<li>Improve, personalize, and expand our webste</li>
+<li>Understand and analyze how you use our webste</li>
+<li>Develop new products, services, features, and functionality</li>
+<li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the webste, and for marketing and promotional purposes</li>
+<li>Send you emails</li>
+<li>Find and prevent fraud</li>
+</ul>
+
+<h3>Log Files</h3>
+
+<p>SharpeTronics follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.</p>
+
+<h3>Cookies and Web Beacons</h3>
+
+<p>Like any other website, SharpeTronics uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
+
+<p>For more general information on cookies, please read <a href="https://www.cookieconsent.com/what-are-cookies/">"What Are Cookies" from Cookie Consent</a>.</p>
+
+<h3>Our Advertising Partners</h3>
+
+<p>Some of advertisers on our site may use cookies and web beacons. Our advertising partners are listed below. Each of our advertising partners has their own Privacy Policy for their policies on user data. For easier access, we hyperlinked to their Privacy Policies below.</p>
+
+<ul>
+    <li>
+        <p>Google</p>
+        <p><a href="https://policies.google.com/technologies/ads">https://policies.google.com/technologies/ads</a></p>
+    </li>
+</ul>
+
+<h3>Advertising Partners Privacy Policies</h3>
+
+<p>You may consult this list to find the Privacy Policy for each of the advertising partners of SharpeTronics.</p>
+
+<p>Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on SharpeTronics, which are sent directly to users' browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.</p>
+
+<p>Note that SharpeTronics has no access to or control over these cookies that are used by third-party advertisers.</p>
+
+<h3>Third Party Privacy Policies</h3>
+
+<p>SharpeTronics's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options. </p>
+
+<p>You can choose to disable cookies through your individual browser options. To know more detailed information about cookie management with specific web browsers, it can be found at the browsers' respective websites.</p>
+
+<h3>CCPA Privacy Rights (Do Not Sell My Personal Information)</h3>
+
+<p>Under the CCPA, among other rights, California consumers have the right to:</p>
+<p>Request that a business that collects a consumer's personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.</p>
+<p>Request that a business delete any personal data about the consumer that a business has collected.</p>
+<p>Request that a business that sells a consumer's personal data, not sell the consumer's personal data.</p>
+<p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
+
+<h3>GDPR Data Protection Rights</h3>
+
+<p>We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:</p>
+<p>The right to access – You have the right to request copies of your personal data. We may charge you a small fee for this service.</p>
+<p>The right to rectification – You have the right to request that we correct any information you believe is inaccurate. You also have the right to request that we complete the information you believe is incomplete.</p>
+<p>The right to erasure – You have the right to request that we erase your personal data, under certain conditions.</p>
+<p>The right to restrict processing – You have the right to request that we restrict the processing of your personal data, under certain conditions.</p>
+<p>The right to object to processing – You have the right to object to our processing of your personal data, under certain conditions.</p>
+<p>The right to data portability – You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</p>
+<p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
+
+<h3>Children's Information</h3>
+
+<p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.</p>
+
+<p>SharpeTronics does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>]]></content><author><name>Charles</name></author><category term="Legal" /><category term="Privacy," /><summary type="html"><![CDATA[Privacy Policy for SharpeTronics.com, LLC]]></summary></entry><entry><title type="html">Our Terms &amp;amp; Conditions</title><link href="https://www.sharpetronics.com/blog/legal/2022/05/24/our-terms-and-conditions/" rel="alternate" type="text/html" title="Our Terms &amp;amp; Conditions" /><published>2022-05-24T00:00:00+00:00</published><updated>2022-05-24T00:00:00+00:00</updated><id>https://www.sharpetronics.com/blog/legal/2022/05/24/our-terms-and-conditions</id><content type="html" xml:base="https://www.sharpetronics.com/blog/legal/2022/05/24/our-terms-and-conditions/"><![CDATA[<h2><strong>Terms and Conditions</strong></h2>
+
+<p>Welcome to SharpeTronics!</p>
+
+<p>These terms and conditions outline the rules and regulations for the use of SharpeTronics's Website, located at https://www.sharpetronics.com.</p>
+
+<p>By accessing this website we assume you accept these terms and conditions. Do not continue to use SharpeTronics if you do not agree to take all of the terms and conditions stated on this page.</p>
+
+<p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: "Client", "You" and "Your" refers to you, the person log on this website and compliant to the Company’s terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client’s needs in respect of provision of the Company’s stated services, in accordance with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.</p>
+
+<h3><strong>Cookies</strong></h3>
+
+<p>We employ the use of cookies. By accessing SharpeTronics, you agreed to use cookies in agreement with the SharpeTronics's Privacy Policy. </p>
+
+<p>Most interactive websites use cookies to let us retrieve the user’s details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.</p>
+
+<h3><strong>License</strong></h3>
+
+<p>Unless otherwise stated, SharpeTronics and/or its licensors own the intellectual property rights for all material on SharpeTronics. All intellectual property rights are reserved. You may access this from SharpeTronics for your own personal use subjected to restrictions set in these terms and conditions.</p>
+
+<p>You must not:</p>
+<ul>
+    <li>Republish material from SharpeTronics</li>
+    <li>Sell, rent or sub-license material from SharpeTronics</li>
+    <li>Reproduce, duplicate or copy material from SharpeTronics</li>
+    <li>Redistribute content from SharpeTronics</li>
+</ul>
+
+<p>This Agreement shall begin on the date hereof.</p>
+
+<p>Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. SharpeTronics does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of SharpeTronics,its agents and/or affiliates. Comments reflect the views and opinions of the person who post their views and opinions. To the extent permitted by applicable laws, SharpeTronics shall not be liable for the Comments or for any liability, damages or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.</p>
+
+<p>SharpeTronics reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.</p>
+
+<p>You warrant and represent that:</p>
+
+<ul>
+    <li>You are entitled to post the Comments on our website and have all necessary licenses and consents to do so;</li>
+    <li>The Comments do not invade any intellectual property right, including without limitation copyright, patent or trademark of any third party;</li>
+    <li>The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful material which is an invasion of privacy</li>
+    <li>The Comments will not be used to solicit or promote business or custom or present commercial activities or unlawful activity.</li>
+</ul>
+
+<p>You hereby grant SharpeTronics a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.</p>
+
+<h3><strong>Hyperlinking to our Content</strong></h3>
+
+<p>The following organizations may link to our Website without prior written approval:</p>
+
+<ul>
+    <li>Government agencies;</li>
+    <li>Search engines;</li>
+    <li>News organizations;</li>
+    <li>Online directory distributors may link to our Website in the same manner as they hyperlink to the Websites of other listed businesses; and</li>
+    <li>System wide Accredited Businesses except soliciting non-profit organizations, charity shopping malls, and charity fundraising groups which may not hyperlink to our Web site.</li>
+</ul>
+
+<p>These organizations may link to our home page, to publications or to other Website information so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products and/or services; and (c) fits within the context of the linking party’s site.</p>
+
+<p>We may consider and approve other link requests from the following types of organizations:</p>
+
+<ul>
+    <li>commonly-known consumer and/or business information sources;</li>
+    <li>dot.com community sites;</li>
+    <li>associations or other groups representing charities;</li>
+    <li>online directory distributors;</li>
+    <li>internet portals;</li>
+    <li>accounting, law and consulting firms; and</li>
+    <li>educational institutions and trade associations.</li>
+</ul>
+
+<p>We will approve link requests from these organizations if we decide that: (a) the link would not make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative records with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of SharpeTronics; and (d) the link is in the context of general resource information.</p>
+
+<p>These organizations may link to our home page so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products or services; and (c) fits within the context of the linking party’s site.</p>
+
+<p>If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you must inform us by sending an e-mail to SharpeTronics. Please include your name, your organization name, contact information as well as the URL of your site, a list of any URLs from which you intend to link to our Website, and a list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.</p>
+
+<p>Approved organizations may hyperlink to our Website as follows:</p>
+
+<ul>
+    <li>By use of our corporate name; or</li>
+    <li>By use of the uniform resource locator being linked to; or</li>
+    <li>By use of any other description of our Website being linked to that makes sense within the context and format of content on the linking party’s site.</li>
+</ul>
+
+<p>No use of SharpeTronics's logo or other artwork will be allowed for linking absent a trademark license agreement.</p>
+
+<h3><strong>iFrames</strong></h3>
+
+<p>Without prior approval and written permission, you may not create frames around our Webpages that alter in any way the visual presentation or appearance of our Website.</p>
+
+<h3><strong>Content Liability</strong></h3>
+
+<p>We shall not be hold responsible for any content that appears on your Website. You agree to protect and defend us against all claims that is rising on your Website. No link(s) should appear on any Website that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third party rights.</p>
+
+<h3><strong>Your Privacy</strong></h3>
+
+<p>Please read Privacy Policy</p>
+
+<h3><strong>Reservation of Rights</strong></h3>
+
+<p>We reserve the right to request that you remove all links or any particular link to our Website. You approve to immediately remove all links to our Website upon request. We also reserve the right to amen these terms and conditions and it’s linking policy at any time. By continuously linking to our Website, you agree to be bound to and follow these linking terms and conditions.</p>
+
+<h3><strong>Removal of links from our website</strong></h3>
+
+<p>If you find any link on our Website that is offensive for any reason, you are free to contact and inform us any moment. We will consider requests to remove links but we are not obligated to or so or to respond to you directly.</p>
+
+<p>We do not ensure that the information on this website is correct, we do not warrant its completeness or accuracy; nor do we promise to ensure that the website remains available or that the material on the website is kept up to date.</p>
+
+<h3><strong>Disclaimer</strong></h3>
+
+<p>To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this disclaimer will:</p>
+
+<ul>
+    <li>limit or exclude our or your liability for death or personal injury;</li>
+    <li>limit or exclude our or your liability for fraud or fraudulent misrepresentation;</li>
+    <li>limit any of our or your liabilities in any way that is not permitted under applicable law; or</li>
+    <li>exclude any of our or your liabilities that may not be excluded under applicable law.</li>
+</ul>
+
+<p>The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort and for breach of statutory duty.</p>
+
+<p>As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.</p>]]></content><author><name>Charles</name></author><category term="Legal" /><category term="Terms" /><category term="&amp;" /><category term="Conditions," /><summary type="html"><![CDATA[Terms and Conditions]]></summary></entry></feed>
