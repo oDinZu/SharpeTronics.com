@@ -111,6 +111,7 @@ steps:
     - git checkout www-data
     - cp -R ../_site/* .
     - git add *
+    - git add -f uploads
     - git commit -m "SharpeTronics bots bee ring bots! A drone CD www-data sync"
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git origin www-data
 
