@@ -109,14 +109,14 @@ steps:
     - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git
     - cd sharpetronics.com/
     
-    # a conditional is needed if www-data branch doesn't exist
+    # a conditional exampled if www-data branch doesn't exist
     - git branch --list
-    - if [ `git branch --list "www-data"` ]
-    - then
+    #- if [ `git branch --list "www-data"` ]
+    #- then
     # create a fresh www-data branch in-case of cached files in docker vm
-    - echo "Deleting cached www-data branch"
-    - git branch -D www-data
-    - fi
+    #- echo "Deleting cached www-data branch"
+    #- git branch -D www-data
+    #- fi
     
     # create and checkout fresh local www-data branch
     - git branch www-data
@@ -124,6 +124,7 @@ steps:
     
     # copy only www-data from _site Jekyll folder
     - cp -R ../_site/* .
+    - git status
     - git add *
     - git commit -m "SharpeTronics bots beering bots! A drone CD www-data sync"
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git origin www-data
