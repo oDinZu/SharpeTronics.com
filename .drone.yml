@@ -121,11 +121,17 @@ steps:
     # create and checkout fresh local www-data branch
     - git branch www-data
     - git checkout www-data
+    - ls .
     
     # copy only www-data from _site Jekyll folder
     - cp -R ../_site/* .
     - git status
     - git add *
+    
+    # force -f add uploads folder to www-data (This folder should be added here, but not in local development)
+    - git add -f uploads
+    
+    # commit and push the data to remote git server at git.sharpetronics.com
     - git commit -m "SharpeTronics bots beering bots! A drone CD www-data sync"
     - git push https://$GITEA_USER:$GITEA_PASS@git.sharpetronics.com/sharpetronics/sharpetronics.com.git
 
