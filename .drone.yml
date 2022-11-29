@@ -108,6 +108,7 @@ steps:
     # update www-data branch with fresh drone ci Jekyll _site build
     - git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git
     - cd sharpetronics.com/
+    - git branch -b www-data
     - git checkout www-data
     - cp -R ../_site/* .
     - git add *
