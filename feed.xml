@@ -1,264 +1,1492 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
-
-    <channel>
-        <title>SharpeTronics</title>
-        <link>https://www.sharpetronics.com</link>
-        <atom:link href="https://www.sharpetronics.com/feed.xml" rel="self" type="application/rss+xml" />
-        <description>Easing the content creators experience sharing information through online information portals is our focus.</description>
-        <lastBuildDate></lastBuildDate>
-        
-        <item>
-            <image></image>
-            <title>Upgrade your Crosshair VI Hero Motherboard Firmware with System76's PopOS!</title>
-            <link>
-                https://www.sharpetronics.com/blog/how-to/2022/10/12/upgrade-your-crosshair-vi-hero-motherboard-firmware-with-system76-s-pop-os/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;p&gt;My grandpa always said: “if it ain’t broke, it needs no fixin!”&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <description></description>
+    <link>https://www.sharpetronics.com//</link>
+    <atom:link href="https://www.sharpetronics.com//feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 02 Dec 2022 06:47:29 +0000</pubDate>
+    <lastBuildDate>Fri, 02 Dec 2022 06:47:29 +0000</lastBuildDate>
+    <generator>Jekyll v4.2.2</generator>
+    
+      <item>
+        <title>Upgrade your Crosshair VI Hero Motherboard Firmware with System76&apos;s PopOS!</title>
+        <description>&lt;p&gt;My grandpa always said: “if it ain’t broke, it needs no fixin!”&lt;/p&gt;
 
 &lt;p&gt;I started having trouble with random occurrences of my computer crashing on both Linux and Window’s operating systems. This article details some of the steps I mazed through and will expedite spacetime support for future dilemmas.&lt;/p&gt;
 
-&lt;p&gt;After tinkering and pondering on the possible reasons...
-            </description>
-            <pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/how-to/2022/10/12/upgrade-your-crosshair-vi-hero-motherboard-firmware-with-system76-s-pop-os/
-            </guid>
-        </item>
+&lt;p&gt;After tinkering and pondering on the possible reasons, I deduced it down to either the GPU, Motherboard or potentially the PSU voltage irregularities. The GPU &amp;amp; RAM worked like a champ while stress testing them. I was unable to reproduce the random occurrence of this hard crash, and both Ubuntu 22.04 and Windows 10 never provided any error logs I could trace through. After each crash, I would restart and save the logs to maybe find a pattern between all the crashes, but sorting through all this didn’t even provide a solution!&lt;/p&gt;
+
+&lt;p&gt;The PopOS! logs:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo journalctl --since today --output=short &amp;gt; ~/Documents/System\ Logs/today-1.log
+journalctl -p 3 -xb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The Windows 10 logs:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Windows key + R 
+input: eventvwr and tap the enter key
+navigate through the GUI...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To deduce it further, the physical symptoms were:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The computer visuals on screen would freeze for a few seconds and then the monitors would all turn off, but the computer fans and motherboard lights stayed online.&lt;/li&gt;
+  &lt;li&gt;No error logs to trace on both Windows or Linux Ubuntu&lt;/li&gt;
+  &lt;li&gt;Random occurrences with intense and normal visuals&lt;/li&gt;
+  &lt;li&gt;It happened with more than one browser like Firefox and Google Chrome&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Normally, I would do a hard reset after it would crash and mistakenly overlooked the error code that was displayed after the crash; anyhow, the QCODE I received was: &lt;strong&gt;08&lt;/strong&gt;. Upon further investigation and mazing around with the software bios utilities, I discovered I had a little button that would do all this in a &lt;em&gt;Flash&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;requirements--safety&quot;&gt;Requirements &amp;amp; Safety&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Linux OS; Windows 11 is similar, but the commands are different.&lt;/li&gt;
+  &lt;li&gt;Basic electronic principles&lt;/li&gt;
+  &lt;li&gt;Always make backups&lt;/li&gt;
+  &lt;li&gt;Create a bootable drive in case bootloader messes up after update (see here)&lt;/li&gt;
+  &lt;li&gt;Backup procedures in-case BIOS update fails&lt;/li&gt;
+  &lt;li&gt;A official manual for your motherboard&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;WARNING:&lt;/em&gt; You are soley responsible for your own hardware; this article is the process of how I have successfully troubleshooted my own hardware.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Get BIOS &amp;amp; Motherboard Information
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo dmidecode --type 0&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# dmidecode 3.3
+Getting SMBIOS data from sysfs.
+SMBIOS 3.2.0 present.
+
+Handle 0x0000, DMI type 0, 26 bytes
+BIOS Information
+	Vendor: SharpeTronics Inc.
+	Version: 1501
+	Release Date: 07/3/2017
+	Address: 0xF0000
+	Runtime Size: 64 kB
+	ROM Size: 16 MB
+	Characteristics:
+		PCI is supported
+		APM is supported
+		BIOS is upgradeable
+		BIOS shadowing is allowed
+		Boot from CD is supported
+		Selectable boot is supported
+		BIOS ROM is socketed
+		EDD is supported
+		5.25&quot;/1.2 MB floppy services are supported (int 13h)
+		3.5&quot;/720 kB floppy services are supported (int 13h)
+		3.5&quot;/2.88 MB floppy services are supported (int 13h)
+		Print screen service is supported (int 5h)
+		8042 keyboard services are supported (int 9h)
+		Serial services are supported (int 14h)
+		Printer services are supported (int 17h)
+		ACPI is supported
+		USB legacy is supported
+		BIOS boot specification is supported
+		Targeted content distribution is supported
+		UEFI is supported
+	BIOS Revision: 1.17
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The above output allows us to verify the BIOS&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo dmidecode --type 2&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Handle 0x0002, DMI type 2, 15 bytes
+Base Board Information
+	Manufacturer: ASUSTeK COMPUTER INC.
+	Product Name: CROSSHAIR VI HERO
+	Version: Rev 1.xx
+	Serial Number: 0x0x0x0x0x0x0x
+	Asset Tag: Default string
+	Location In Chassis: Default string
+	Chassis Handle: 0x0003
+	Type: Motherboard
+	Contained Object Handles: 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Download the Firmware from Manufacturer’s Website&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Navigate to the firmware page and download the most recent firmware update for your CROSSHAIR VI HERO: &lt;a href=&quot;#sources&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;After you download the new firmware, we open &amp;amp; rename the file to &lt;strong&gt;C6H.CAP&lt;/strong&gt;, then &lt;em&gt;duplicate&lt;/em&gt; or move it to the &lt;em&gt;root&lt;/em&gt; of the &lt;em&gt;USB device&lt;/em&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The instructions are provided by the manufacturer; you may discover this information online or the actual manual shipped with your motherboard. For this use case scenario, the ASUS Crosshair VI Hero motherboard has a BIOS button that sweeps or extracts the file and updates your firmware in about 3-5min with a ~17mb file.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Upgrade your Motherboard Firmware&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you’re also upgrading the: ROG CROSSHAIR VI HERO Motherboard to &lt;em&gt;version 8601&lt;/em&gt;, the page of reference is located in “&lt;strong&gt;Chapter 2.2 BIOS update utility : USB BIOS Flashback&lt;/strong&gt;”.&lt;/p&gt;
+
+&lt;p&gt;To use USB BIOS Flashback:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1.Download the latest BIOS file from the ASUS website.
+2.Extract and rename the BIOS image file to C6H.CAP.
+3.Copy C6H.CAP to the root directory of your USB storage device.
+4.Turn off the system and connect the USB storage device to the USB BIOS Flashback port.
+5.Press the USB BIOS Flashback button.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The method above allows an owner to update their motherboard without mazing around in the BIOS software. You simply plug-in the USB device into the &lt;strong&gt;correct port&lt;/strong&gt; and &lt;strong&gt;press&lt;/strong&gt; the button.&lt;/p&gt;
+
+&lt;p&gt;The button will &lt;strong&gt;blink blue slowly then speed up as time progress’s&lt;/strong&gt;; I spent about 3-5 minutes flashing the BIOS this way; before, I have had horror stories flashing the BIOS with the BIOS. For example, I was unable to successfully make use of the other two tools the manufacturer provided because the software would bug out. The simplest and most effective method is using a USB BIOS Flashback button that is physically located on your motherboard.&lt;/p&gt;
+
+&lt;h2 id=&quot;other-misc-testing&quot;&gt;Other Misc. Testing&lt;/h2&gt;
+
+&lt;p&gt;Some other things I spent doing before I reached a solution were the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Upgraded all disk drivers&lt;/li&gt;
+  &lt;li&gt;Lots of research&lt;/li&gt;
+  &lt;li&gt;Re-seated all motherboard connections&lt;/li&gt;
+  &lt;li&gt;Cleaned and dusted all dust on the grill and fans.&lt;/li&gt;
+  &lt;li&gt;Cleaned and Reapplied thermal paste to CPU&lt;/li&gt;
+  &lt;li&gt;Re-seated and clean the GPU&lt;/li&gt;
+  &lt;li&gt;Reinstalled Windows and Linux OS&lt;/li&gt;
+  &lt;li&gt;Contacted a support channel with another company&lt;/li&gt;
+  &lt;li&gt;The bug could be related to AMD’s fTPM feature. &lt;a href=&quot;#sources&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;…many more…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In conclusion, the entire machine has been revitalized, including both software and hardware. The bug has been resolved and I can get back to doing other cool stuff and things. In the future, I will include how to repair your bootloader on Ubuntu and Windows after upgrading your BIOS; in the meantime, if you need this ASAP, System76 has a well written article on the topic at hand at: &lt;a href=&quot;#sources&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;sources&quot;&gt;Sources&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://support.system76.com/articles/bootloader/&quot; target=&quot;_blank&quot;&gt;Repair Your Linux Bootloaders - System76&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.tomshardware.com/news/amd-issues-fix-and-workaround-for-ftpm-stuttering-issues&quot; target=&quot;_blank&quot;&gt;AMD fTPM Stuttering Issues - Toms Hardware&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://rog.asus.com/us/motherboards/rog-crosshair/rog-crosshair-vi-hero-model/helpdesk_bios/&quot; target=&quot;_blank&quot;&gt;ASUS Crosshair VI Hero Drivers &amp;amp; Manuals&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate>
+        <link>https://www.sharpetronics.com//blog/how-to/2022/10/12/upgrade-your-crosshair-vi-hero-motherboard-firmware-with-system76-s-pop-os/</link>
+        <guid isPermaLink="true">https://www.sharpetronics.com//blog/how-to/2022/10/12/upgrade-your-crosshair-vi-hero-motherboard-firmware-with-system76-s-pop-os/</guid>
         
-        <item>
-            <image></image>
-            <title>Update your Strapi CMS with your own Favicon</title>
-            <link>
-                https://www.sharpetronics.com/blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;p&gt;    In this article, we will be replacing the Strapi favicon with your own favicon. This same process is similar to how we replace the login logo &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AuthLogo&lt;/code&gt; and menu logo with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MenuLogo&lt;/code&gt;. For more details, please visit Strapi docume...
-            </description>
-            <pubDate>Tue, 26 Jul 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon/
-            </guid>
-        </item>
+        <category>Repairs,</category>
         
-        <item>
-            <image></image>
-            <title>How to Setup a Secure Docker Drone Runner with Drone CI</title>
-            <link>
-                https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-secure-docker-drone-runner-with-drone-ci/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;blockquote&gt;
+        <category>Debugging,</category>
+        
+        <category>Troubleshooting,</category>
+        
+        
+        <category>How-to</category>
+        
+      </item>
+    
+      <item>
+        <title>Update your Strapi CMS with your own Favicon</title>
+        <description>&lt;p&gt;    In this article, we will be replacing the Strapi favicon with your own favicon. This same process is similar to how we replace the login logo &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AuthLogo&lt;/code&gt; and menu logo with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MenuLogo&lt;/code&gt;. For more details, please visit Strapi documentations example configuration. [Strapi Documents]&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; This same process may be used to replace the login logo &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AuthLogo&lt;/code&gt; and menu logo with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MenuLogo&lt;/code&gt;. 
+For more details, please visit &lt;a href=&quot;https://docs.strapi.io/developer-docs/latest/development/admin-customization.html#logos&quot;&gt;Strapi Documents&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create an extensions folder at:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/admin/extensions/&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Upload your favicon into:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/admin/extensions/&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Replace the &lt;strong&gt;favicon.ico&lt;/strong&gt; at:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Strapi app root&lt;/code&gt; with custom favicon.ico&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Update your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/admin/app.js&lt;/code&gt; with the following:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// path: src/admin/app.js
+
+import favicon from &apos;./extensions/favicon.png&apos;;
+
+export default {
+  config: {
+         // replace favicon with custom icon
+         head: {
+                favicon: favicon,
+        },
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ol&gt;
+  &lt;li&gt;Rebuild, run &amp;amp; revisit your Strapi app
+ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yarn build &amp;amp;&amp;amp; yarn develop&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; 
+Be certain that the cached favicon is cleared. It can be cached in your web browser and also with your domain management
+tool like Cloudflare’s CDN&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;references&quot;&gt;References&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.strapi.io/developer-docs/latest/development/admin-customization.html#configuration-options&quot;&gt;Strapi Documents&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 26 Jul 2022 00:00:00 +0000</pubDate>
+        <link>https://www.sharpetronics.com//blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon/</link>
+        <guid isPermaLink="true">https://www.sharpetronics.com//blog/how-to/2022/07/26/update-your-strapi-cms-with-your-own-favicon/</guid>
+        
+        <category>Jekyll,</category>
+        
+        <category>Strapi,</category>
+        
+        <category>Headless</category>
+        
+        <category>CMS,</category>
+        
+        
+        <category>How-to</category>
+        
+      </item>
+    
+      <item>
+        <title>How to Setup a Secure Docker Drone Runner with Drone CI</title>
+        <description>&lt;blockquote&gt;
   &lt;p&gt;BeeYoop BeeDeepBoom Weeop DEEpaEEya&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;In general, this article describes how to setup SSL with a Drone Runner. This is part II of a part I series. If you would like to learn how-to setup the Drone Server, please visit: &lt;a href=&quot;https://www.sharpetronics.com/blog/tutorials/2022/06/23/how-to-setup-a-docker-drone-ci-with-h...
-            </description>
-            <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-secure-docker-drone-runner-with-drone-ci/
-            </guid>
-        </item>
+&lt;p&gt;In general, this article describes how to setup SSL with a Drone Runner. This is part II of a part I series. If you would like to learn how-to setup the Drone Server, please visit: &lt;a href=&quot;https://www.sharpetronics.com/blog/tutorials/2022/06/23/how-to-setup-a-docker-drone-ci-with-https/&quot;&gt;Setup Drone CI Server&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This part II creates a pipeline runner with a Docker machine; what that means is, like GitHub Actions, but with Drone super powers. The configuration file is stored as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.drone.yml&lt;/code&gt; in the root of your site directory and drone server uses that application yml file to do a series of commands or actions within the virtual docker machine.&lt;/p&gt;
+
+&lt;p&gt;This is empowering because you can automate a fresh build every time. Also, you create a &lt;strong&gt;drone trigger&lt;/strong&gt; for when you push to a branch master as an example. Here is the configuration of all the possible things you can do. &lt;a href=&quot;https://docs.drone.io/pipeline/docker/overview/&quot;&gt;Docker Pipelines Overview&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note 1:&lt;/strong&gt; If you see a [name-goes-here], I am linking to the references I shared below.
+&lt;strong&gt;Note 2:&lt;/strong&gt; If you want to use Docker Engine without sudo, follow this url: &lt;a href=&quot;https://docs.docker.com/engine/install/linux-postinstall/&quot;&gt;Linux Docker Post-Install&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Basic Linux CLI knowledge&lt;/li&gt;
+  &lt;li&gt;A hardened remote SSH server &lt;a href=&quot;https://sharpetronics.com/blog/tutorials/2021/07/26/linux-vps-hardening-init/&quot;&gt;see Linux VPS hardening&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;A running Gitea server: Git with a cup of tea&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.docker.com/engine/install/&quot;&gt;Docker Engine&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;a basic understanding of how to use Docker Engine&lt;/li&gt;
+  &lt;li&gt;basic Nginx, Gitea and Certbot/Let’s Encrypt experience&lt;/li&gt;
+  &lt;li&gt;openssl&lt;/li&gt;
+  &lt;li&gt;a running drone ci server &lt;a href=&quot;https://www.sharpetronics.com/blog/tutorials/2022/06/23/how-to-setup-a-docker-drone-ci-with-https/&quot;&gt;see part I&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;lets-begin&quot;&gt;Let’s Begin!&lt;/h3&gt;
+
+&lt;h4 id=&quot;pull-docker-image-from-dockerhub&quot;&gt;Pull docker image from dockerhub&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker pull drone/drone-runner-docker:1&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;make-public-access-to-repo-in-drone-gui&quot;&gt;Make public access to repo in drone GUI&lt;/h4&gt;
+&lt;p&gt;For testing, I made sure the repo was publicly available.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/uploads/2022/screenshot-drone-gui.webp&quot; alt=&quot;Screenshot Drone UI&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;launch-a-secure-docker-drone-runner&quot;&gt;Launch a Secure Docker Drone Runner&lt;/h3&gt;
+
+&lt;p&gt;For the &lt;strong&gt;DRONE_RPC_SECRET&lt;/strong&gt; use the same ssl secret we created in Part I. See &lt;a href=&quot;https://docs.drone.io/runner/docker/configuration/reference/&quot;&gt;Configuration&lt;/a&gt; for a complete list of configuration options.&lt;/p&gt;
+
+&lt;p&gt;Please see the reference to understand what this docker config is doing. That is important for you to do yourself.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --detach \
+  --volume=/var/run/docker.sock:/var/run/docker.sock \
+  --env=DRONE_RPC_PROTO=https \
+  --env=DRONE_RPC_HOST=drone.example.com \
+  --env=DRONE_RPC_SECRET=bea26a2221fd8090ea38720fc445eca6 \
+  --env=DRONE_RUNNER_CAPACITY=2 \
+  --env=DRONE_RUNNER_NAME=st-runner \
+  --env=DRONE_UI_USERNAME=youruserhere \
+  --env=DRONE_UI_PASSWORD=yourpasshere \
+  --env=DRONE_DEBUG=true \
+  --env=DRONE_TRACE=true \
+  --publish=3000:3000 \
+  --restart=always \
+  --name=st-drone-runner \
+  drone/drone-runner-docker:1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;a-pipeline-config-example&quot;&gt;A Pipeline Config Example&lt;/h4&gt;
+
+&lt;p&gt;An example of a custom pipeline I have created. I ain’t going to explain this to you in detail; I expect you to determine your own pipeline and this is only for a reference point. Essentially, what you will be doing is launching your own virtual machine for your specific use case scenario.&lt;/p&gt;
+
+&lt;p&gt;In this example, on drone.example.com, I have created a secret pass that needs to be passed to the virtual machine so I can package the build aka &lt;strong&gt;_site&lt;/strong&gt; only, then auto push to www_data branch on my git server. Furthermore, I &lt;strong&gt;rsync&lt;/strong&gt; this data through an ssh tunnel to a &lt;strong&gt;Gitea Pages&lt;/strong&gt; server that serves the &lt;strong&gt;WWW or edge&lt;/strong&gt; data.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note: 3:&lt;/strong&gt; The example configuration is a &lt;strong&gt;.drone.yml&lt;/strong&gt; file stored in the root of your site project.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---
+kind: pipeline
+type: docker
+name: build
+
+workspace:
+  path: /drone/src
+
+platform:
+  os: linux
+  arch: amd64
+
+trigger:
+  branch:
+  - master
+
+steps:
+- name: build-website
+  image: ruby:latest
+  environment:
+    SSH_USER:
+      from_secret: ssh_user
+    SSH_HOST:
+      from_secret: ssh_host
+    NO_HOSTKEY:
+      from_secret: no_hostkey
+  privileged: false
+  volumes:
+    - name: jekyll
+      path: /srv/jekyll
+
+  commands:
+    # general vm information for debugging
+    - whoami
+    - pwd
+    - gem environment
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;verify&quot;&gt;Verify&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker logs st-drone-runner
+
+INFO[0000] starting the server
+INFO[0000] successfully pinged the remote server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;stop--start-container&quot;&gt;Stop &amp;amp; Start Container&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo docker container stop st-drone-ssl
+sudo docker container start st-drone-ssl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.drone.io/runner/docker/configuration/reference/&quot;&gt;Drone Runner Configuration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.drone.io/runner/docker/installation/linux/&quot;&gt;Drone Runner Docker Installation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.drone.io/pipeline/docker/overview/&quot;&gt;Docker Pipelines Overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://unsplash.com/@nietzsche99&quot;&gt;Unsplash - Nice M Nshuti&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;support&quot;&gt;Support&lt;/h3&gt;
+
+&lt;p&gt;If you have any questions, concerns, want to say hi, please join the following channel: &lt;a href=&quot;https://discord.gg/HQcvr2JBQv&quot;&gt;SharpeTronics Discord Support Channel&lt;/a&gt; Eventually, I plan on having a commenting system on here..&lt;/p&gt;
+
+&lt;h3 id=&quot;want-to-buy-me-a-coffee&quot;&gt;Want to buy me a coffee?&lt;/h3&gt;
+&lt;p&gt;Recently, I have had many folk as about &lt;strong&gt;how to send me a donation&lt;/strong&gt;. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cash.app/$sharpeee&quot;&gt;Cash App&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://account.venmo.com/u/seabeeess&quot;&gt;Venmo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://opencollective.com/sharpetronics&quot;&gt;Open Collective&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
+        <link>https://www.sharpetronics.com//blog/how-to/2022/06/28/how-to-setup-a-secure-docker-drone-runner-with-drone-ci/</link>
+        <guid isPermaLink="true">https://www.sharpetronics.com//blog/how-to/2022/06/28/how-to-setup-a-secure-docker-drone-runner-with-drone-ci/</guid>
         
-        <item>
-            <image></image>
-            <title>How to Setup a Docker Drone CI with HTTPS</title>
-            <link>
-                https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;blockquote&gt;
+        <category>Linux,</category>
+        
+        <category>Drone</category>
+        
+        <category>CI,</category>
+        
+        <category>Docker,</category>
+        
+        
+        <category>How-to</category>
+        
+      </item>
+    
+      <item>
+        <title>How to Setup a Docker Drone CI with HTTPS</title>
+        <description>&lt;blockquote&gt;
   &lt;p&gt;R2D2, you know better than to trust a strange computer! [beeps]&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;In general, this Drone server enables continuous integration (CI) and is a stepping stone for continuous delivery (CD), including gh-pages and gh-actions like functionality.&lt;/p&gt;
 
-&lt;p&gt;For this to function correctly, you will need to have a working insta...
-            </description>
-            <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https/
-            </guid>
-        </item>
+&lt;p&gt;For this to function correctly, you will need to have a working instance of Gitea running on your own system.&lt;/p&gt;
+
+&lt;p&gt;This tutorial doesn’t guide you on how-to create your own HTTPS server using Let’s Encrypt and Certbot. I have added the certbot resource below [Setting Up HTTPS Certs] I will document this in more detail in the near future. However, this article is similar to how to get https on your server setup.
+&lt;a href=&quot;https://sharpetronics.com/blog/tutorials/2021/12/27/setup-nginx-https-web-server-with-lets-encrypt-plus-strapi-4.0-headless-cms/&quot;&gt;How-to get HTTPS on your server&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;As a stack developer and business owner, I am working on so many things! It is difficult to remember everything, so documentation is critical for me to remember.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note 1:&lt;/strong&gt; If you see a [name-goes-here], I am linking to the references shared at the end of the article.
+&lt;strong&gt;Note 2:&lt;/strong&gt; Be sure your firewall &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo ufw status&lt;/code&gt; allows port 80 and 443. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo ufw allow http&lt;/code&gt; &amp;amp;&amp;amp; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo ufw allow https&lt;/code&gt;.
+&lt;strong&gt;Note 3:&lt;/strong&gt; If you want to use Docker Engine without sudo, follow this url: &lt;a href=&quot;https://docs.docker.com/engine/install/linux-postinstall/&quot;&gt;Linux Docker Post-Install&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Basic Linux CLI knowledge&lt;/li&gt;
+  &lt;li&gt;A hardened remote SSH server &lt;a href=&quot;https://sharpetronics.com/blog/tutorials/2021/07/26/linux-vps-hardening-init/&quot;&gt;see Linux VPS hardening&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;A running Gitea server: Git with a cup of tea&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.docker.com/engine/install/&quot;&gt;Docker Engine&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;a basic understanding of how to use Docker Engine&lt;/li&gt;
+  &lt;li&gt;basic Nginx, Gitea and Certbot/Let’s Encrypt experience&lt;/li&gt;
+  &lt;li&gt;openssl&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;lets-begin&quot;&gt;Let’s Begin!&lt;/h3&gt;
+
+&lt;h4 id=&quot;preparing-the-environment&quot;&gt;Preparing the Environment&lt;/h4&gt;
+
+&lt;h5 id=&quot;creating-our-super-duper-shared-secret&quot;&gt;Creating our super-duper-shared secret&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;openssl rand -hex 16
+bea26a2221fd8090ea38720fc445eca6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;creating-an-oauth-application-on-gitea&quot;&gt;Creating an OAuth application on Gitea&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;Goto your git.example.com and login&lt;/li&gt;
+  &lt;li&gt;Navigate to your profile settings (not the administrator settings, but personal profile)&lt;/li&gt;
+  &lt;li&gt;At the top below the main navigation bar, click on &lt;strong&gt;Applications&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Scroll down to the bottom of the page and create a new App name and Redirect URI
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Applications Name: drone
+Redirect URI: https://drone.example.com/login
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Click &lt;strong&gt;Create Application&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Copy and save your &lt;strong&gt;Client Secret&lt;/strong&gt;; you will only be able to see this secret one time.&lt;/li&gt;
+  &lt;li&gt;In the next section, we will use these credentials to authenticate with Gitea and launch the Drone server.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;create--configure-the-docker-container&quot;&gt;Create &amp;amp; configure the Docker Container&lt;/h4&gt;
+
+&lt;h5 id=&quot;download-docker-drone-image-from-dockerhub&quot;&gt;Download docker drone image from Dockerhub&lt;/h5&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker pull drone/drone:2&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker image&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;begin-configuring-and-starting-drone&quot;&gt;Begin configuring and starting drone&lt;/h5&gt;
+
+&lt;p&gt;&lt;em&gt;The below command creates a container and starts the Docker runner. Remember to replace the environment variables below with your Drone server details.&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run \
+  --volume=/var/lib/drone:/data \
+  --env=DRONE_TLS_AUTOCERT=true \
+  --env=DRONE_HTTP_SSL_REDIRECT=true \
+  --env=DRONE_HTTP_SSL_TEMPORARY_REDIRECT=true \
+  --env=DRONE_HTTP_SSL_HOST=drone.example.com \
+  --env=DRONE_HTTP_STS_SECONDS=315360000 \
+  --env=DRONE_SERVER_CERT=/etc/letsencrypt/live/drone.example.com/fullchain.pem \
+  --env=DRONE_SERVER_KEY=/etc/letsencrypt/live/drone.example.com/privkey.pem \
+  --env=DRONE_GITEA_SERVER=https://git.example.com \
+  --env=DRONE_GITEA_CLIENT_ID=e69c443c-6bc2-4a35-000b-a2f36a885400 \
+  --env=DRONE_GITEA_CLIENT_SECRET=3aY2000000c2Np7zX4e1Z9nlYhelENfX7nmWyxsgVixRg \
+  --env=DRONE_RPC_SECRET=bea26a2221fd80900000038720fc445eca6 \
+  --env=DRONE_SERVER_HOST=drone.example.com \
+  --env=DRONE_SERVER_PROTO=https \
+  --env=DRONE_USER_FILTER=gitea-user-account \
+  --publish=80:80 \
+  --publish=443:443 \
+  --restart=always \
+  --detach=true \
+  --name=st-drone-ssl \
+  drone/drone:2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h6 id=&quot;going-the-extra-yards&quot;&gt;Going the extra yards&lt;/h6&gt;
+&lt;p&gt;After you create the docker container, it will automatically restart to remember your configuration, but if you create a shell script, you are able to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./shell-script.sh&lt;/code&gt; and run the Docker image.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vi shell-script.sh
+copy/paste docker config via CTRL+SHIFT+V
+double check for typos
+hit ESC
+press SHIFT+Z,Z (saves and quits)
+chmod +x shell-script.sh (makes script executable)
+then, run the script with: ./shell-script.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;verify&quot;&gt;Verify&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker logs st-drone-ssl
+
+INFO[0000] starting the server
+INFO[0000] successfully pinged the remote server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;stop--start-container&quot;&gt;Stop &amp;amp; Start Container&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo docker container stop st-drone-ssl
+sudo docker container start st-drone-ssl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;part-ii---configure-a-drone-runner-pipeline-with-docker-engine&quot;&gt;Part II - Configure a Drone Runner Pipeline with Docker Engine&lt;/h3&gt;
+
+&lt;p&gt;This article will be shared at a later date.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://certbot.eff.org/instructions&quot;&gt;Setting up HTTPS certs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.drone.io/server/reference/&quot;&gt;Drone Configuration Options&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.drone.io/server/provider/gitea/&quot;&gt;Drone Gitea Setup&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.drone.io/server/provider/gitea/&quot;&gt;Drone Server Docker Installation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.infoworld.com/article/3271126/what-is-cicd-continuous-integration-and-continuous-delivery-explained.html&quot;&gt;What is CI/CD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://unsplash.com/@studbee&quot;&gt;Unsplash - Studbee&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;support&quot;&gt;Support&lt;/h3&gt;
+
+&lt;p&gt;If you have any questions, concerns, want to say hi, please join the following channel: &lt;a href=&quot;https://discord.gg/HQcvr2JBQv&quot;&gt;SharpeTronics Discord Support Channel&lt;/a&gt; Eventually, I plan on having a commenting system on here..&lt;/p&gt;
+
+&lt;h3 id=&quot;donations&quot;&gt;Donations&lt;/h3&gt;
+&lt;p&gt;Recently, I have had many folk as about &lt;strong&gt;how to send me a donation&lt;/strong&gt;. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cash.app/$sharpeee&quot;&gt;Cash App&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://account.venmo.com/u/seabeeess&quot;&gt;Venmo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://opencollective.com/sharpetronics&quot;&gt;Open Collective&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
+        <link>https://www.sharpetronics.com//blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https/</link>
+        <guid isPermaLink="true">https://www.sharpetronics.com//blog/how-to/2022/06/28/how-to-setup-a-docker-drone-ci-with-https/</guid>
         
-        <item>
-            <image></image>
-            <title>Compiling Fresh XMPP Ejabberd Server Binaries 22.05 on Ubuntu 20.04 with Erlang OTP 24</title>
-            <link>
-                https://www.sharpetronics.com/blog/devops/2022/06/28/compiling-fresh-xmpp-ejabberd-server-binaries-22-05-on-ubuntu-20-04-with-erlang-otp-24/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;h1 id=&quot;compiling-ejabberd-v2205&quot;&gt;Compiling ejabberd v22.05&lt;/h1&gt;
+        <category>VPS,</category>
+        
+        <category>SSL,</category>
+        
+        <category>Drone</category>
+        
+        <category>CI,</category>
+        
+        <category>Docker,</category>
+        
+        
+        <category>How-to</category>
+        
+      </item>
+    
+      <item>
+        <title>Compiling Fresh XMPP Ejabberd Server Binaries 22.05 on Ubuntu 20.04 with Erlang OTP 24</title>
+        <description>&lt;h1 id=&quot;compiling-ejabberd-v2205&quot;&gt;Compiling ejabberd v22.05&lt;/h1&gt;
 &lt;h3 id=&quot;a-xmpp-server-based-on-erlangotp-24&quot;&gt;A XMPP server based on Erlang/OTP 24&lt;/h3&gt;
 
 &lt;p&gt;&lt;strong&gt;Note 1:&lt;/strong&gt; I personally took it upon myself to use the following format [Example-Reference] to &lt;em&gt;tag&lt;/em&gt; references.&lt;/p&gt;
 
-&lt;p&gt;In this artic...
-            </description>
-            <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/devops/2022/06/28/compiling-fresh-xmpp-ejabberd-server-binaries-22-05-on-ubuntu-20-04-with-erlang-otp-24/
-            </guid>
-        </item>
+&lt;p&gt;In this article, I will be sharing a &lt;em&gt;HOWTO&lt;/em&gt; create your own end-to-end encrypted instant messenger(IM) XMPP service for your Company, family xor community. Having ownership of your data requires &lt;strong&gt;work&lt;/strong&gt; and this setup allows any Human in the world to protect their digital data from those who sell it for profit.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“Ejabberd is a complete open-source XMPP-based messaging solution that is for all human beings, but ideal for governments, police, military, banks, insurance, finance, and healthcare companies that value privacy and security.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The minimal cost is less than $100 per year and is portable with the &lt;em&gt;nifty&lt;/em&gt; config option -with-rebar; this option packages the whole app for transport.&lt;/p&gt;
+
+&lt;h3 id=&quot;configure--compile-ejabberd&quot;&gt;Configure &amp;amp; compile Ejabberd&lt;/h3&gt;
+
+&lt;p&gt;Please see [Ejabberd Configure] for setting up your Linux environment.&lt;/p&gt;
+
+&lt;h4 id=&quot;requirements&quot;&gt;Requirements&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;A remove server that has been hardened &lt;a href=&quot;https://www.sharpetronics.com/blog/tutorials/2021/07/26/linux-vps-hardening-init/&quot;&gt;Linux VPS Hardening&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Linux CLI knowledge&lt;/li&gt;
+  &lt;li&gt;Patience&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;operating-system&quot;&gt;Operating System&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;This article is tested with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat /etc/os-release&lt;/code&gt; VERSION=”20.04.4 LTS (Focal Fossa)”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;dependencies&quot;&gt;Dependencies:&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;GNU Make &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make -v&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;GCC &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install build-essential &amp;amp;&amp;amp; gcc -v&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Libexpat 1.95 or higher &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install -y expat &amp;amp;&amp;amp; libexpat-dev&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Libyaml 0.1.4 or higher &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install -y libyaml-dev&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Erlang/OTP 19.3 or higher. We recommend using Erlang OTP 21.2. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install -y erlang &amp;amp;&amp;amp; erl -v&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;OpenSSL 1.0.0 or higher, for STARTTLS, SASL and SSL encryption. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install -y libssl-dev&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Zlib 1.2.3 or higher. Optional. For Zlib Stream Compression &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install -y zlib1g &amp;amp;&amp;amp; zlib1g-dev&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ImageMagick’s Convert program and Ghostscript fonts. Optional. For CAPTCHA challenges. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install -y imagemagick&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;PAM library. &lt;em&gt;Optional&lt;/em&gt;. For PAM Authentication&lt;/li&gt;
+  &lt;li&gt;Elixir 1.10.3 or higher. &lt;em&gt;Optional&lt;/em&gt;. For Elixir Development&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;extras-deps-i-needed&quot;&gt;Extras Deps I needed&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;PostgreSQL&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install -y postgresql postgresql-contrib &amp;amp;&amp;amp; sudo systemctl start postgresql.service&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Erlang-dev&lt;/strong&gt; I had too also install erlang-dev for &lt;em&gt;erl_nif.h&lt;/em&gt; was missing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install -y erlang-dev&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;eunit_autoexport&lt;/strong&gt; was missing at compile &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt-get install -y erlang-eunit&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;erlang-parsetools&lt;/strong&gt; was needed to create and assemble the 22.05.tar.gz. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt-get install -y erlang-parsetools&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;clone-ejabberd-2205&quot;&gt;Clone Ejabberd 22.05&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/processone/ejabberd.git &amp;amp;&amp;amp; cd ejabberd
+git checkout tags/22.05 -b branch-name-example &amp;amp;&amp;amp; git status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Note 2-3:&lt;/strong&gt; the latest stable release is 22.05 on June 21, 2022. Verify you are on branch-name-example.&lt;/p&gt;
+
+&lt;h4 id=&quot;we-begin-compiling-and-installng-ejabberd-after-the-environment-is-ready&quot;&gt;We begin compiling and installng &lt;strong&gt;ejabberd&lt;/strong&gt; after the environment is ready&lt;/h4&gt;
+
+&lt;p&gt;Below, I had to create my &lt;strong&gt;configure&lt;/strong&gt; file with &lt;em&gt;autogen&lt;/em&gt;. The &lt;strong&gt;configure&lt;/strong&gt; options I have included are: postgresql database (default: mysql), zlib compression algos (optional), extra dev tools (optional) and rebar for packaging everything into one portable app.(optional) To see more options, please visit: &lt;a href=&quot;https://github.com/processone/ejabberd/blob/22.05/COMPILE.md&quot;&gt;Ejabberd Configure&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./autogen.sh
+./configure --enable-pgsql --with-rebar=rebar3 --enable-tools --enable-zlib --enable-debug
+make rel
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Note 4-6:&lt;/strong&gt; if you want to clean up the make after errors, use &lt;em&gt;make distclean&lt;/em&gt; for dev files and clean for binaries. You are also able to see all the options for make via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make help&lt;/code&gt;. Make rel creates a static portable binary release; no need to sudo make install, simply launch the app from the directory.&lt;/p&gt;
+
+&lt;h3 id=&quot;eureka-party-hat&quot;&gt;Eureka! :party-hat&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;===&amp;gt; Release successfully assembled: _build/prod/rel/ejabberd
+===&amp;gt; Building release tarball ejabberd-22.05.tar.gz...
+===&amp;gt; Tarball successfully created: _build/prod/rel/ejabberd/ejabberd-22.05.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;prepare-ejabberd-binary&quot;&gt;Prepare Ejabberd Binary&lt;/h3&gt;
+
+&lt;p&gt;After we have successfully compiled ejabberd binaries on our own system, we have a system to create fresh binaries that are portable on the fly! Furthermore, we rename the ejabberd folder to ejabberd_builder and copy the created tar.gz to desired location.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd .. &amp;amp;&amp;amp; mv ejabberd ejabberd_builder
+cp _build/prod/rel/ejabberd/ejabberd-22.05.tar.gz ~/nodes/
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;launch-ejabberd&quot;&gt;Launch Ejabberd&lt;/h3&gt;
+
+&lt;p&gt;Next, we untar or extract the data into the appropriate directory.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd ~/nodes/ &amp;amp;&amp;amp; mkdir ejabberd-20.05
+tar -xvkf ejabberd-20.05.tar.gz -C ./ejabberd-20.05
+cd ejabberd-20.05/ &amp;amp;&amp;amp; ls bin/
+./bin/ejabberdctl start
+./bin/ejabberdctl status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;NOW, the hard part… configuration of your fresh ejabberd binaries.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;As you may have noticed, &lt;strong&gt;ejabberdctl&lt;/strong&gt; status failed to start. This is because we now have to configure the server.&lt;/p&gt;
+
+&lt;h5 id=&quot;part-ii---tba&quot;&gt;PART II - TBA&lt;/h5&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/processone/ejabberd/blob/22.05/COMPILE.md&quot;&gt;Ejabberd Source&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.ejabberd.im/admin/installation/#source-code&quot;&gt;Ejabberd Compile&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.ejabberd.im/&quot;&gt;Ejabberd Features&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.process-one.net/blog/how-to-configure-ejabberd-to-get-100-in-xmpp-compliance-test/&quot;&gt;Ejabberd Configure&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sharpetronics.com/blog/tutorials/2021/07/26/linux-vps-hardening-init/&quot;&gt;Linux VPS Hardening&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://conversations.im/omemo/&quot;&gt;OMEMO Extension&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://xmpp.org/software/servers/&quot;&gt;XMPP Servers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;support&quot;&gt;Support&lt;/h3&gt;
+
+&lt;p&gt;If you have any questions, concerns, want to say hi, please join the following channel: &lt;a href=&quot;https://discord.gg/HQcvr2JBQv&quot;&gt;SharpeTronics Discord Support Channel&lt;/a&gt; Eventually, I plan on having a commenting system on here..&lt;/p&gt;
+
+&lt;h3 id=&quot;want-to-buy-me-a-coffee&quot;&gt;Want to buy me a coffee?&lt;/h3&gt;
+&lt;p&gt;Recently, I have had many folk as about &lt;strong&gt;how to send me a donation&lt;/strong&gt;. If you want to give back andor support my efforts, I have shared various ways to donate. Thank You!&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cash.app/$sharpeee&quot;&gt;Cash App&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://account.venmo.com/u/seabeeess&quot;&gt;Venmo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://opencollective.com/sharpetronics&quot;&gt;Open Collective&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
+        <link>https://www.sharpetronics.com//blog/devops/2022/06/28/compiling-fresh-xmpp-ejabberd-server-binaries-22-05-on-ubuntu-20-04-with-erlang-otp-24/</link>
+        <guid isPermaLink="true">https://www.sharpetronics.com//blog/devops/2022/06/28/compiling-fresh-xmpp-ejabberd-server-binaries-22-05-on-ubuntu-20-04-with-erlang-otp-24/</guid>
         
-        <item>
-            <image></image>
-            <title>Setup a Secure NGINX HTTPS Web Server with Let's Encrypt + Strapi 4.0 Headless CMS</title>
-            <link>
-                https://www.sharpetronics.com/blog/how-to/2022/05/24/setup-a-secure-nginx-https-web-server-with-let-s-encrypt-strapi-4-0-headless-cms/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;h2 id=&quot;general&quot;&gt;General&lt;/h2&gt;
+        <category>Privacy,</category>
+        
+        <category>XMPP,</category>
+        
+        <category>Ejabberd,</category>
+        
+        
+        <category>Devops</category>
+        
+      </item>
+    
+      <item>
+        <title>Setup a Secure NGINX HTTPS Web Server with Let&apos;s Encrypt + Strapi 4.0 Headless CMS</title>
+        <description>&lt;h2 id=&quot;general&quot;&gt;General&lt;/h2&gt;
 &lt;p&gt;For this tutorial, we will launch a secure SSL NGINX web server for your website domain example.org and enable an API to be consumed from the subdomain i.e. api.example.org with Strapi 4.0.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Tip:&lt;/em&gt; For each reference, I add the &lt;strong&gt;[reference name]&lt;/strong&gt; in brackets at the end o...
-            </description>
-            <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/how-to/2022/05/24/setup-a-secure-nginx-https-web-server-with-let-s-encrypt-strapi-4-0-headless-cms/
-            </guid>
-        </item>
+&lt;p&gt;&lt;em&gt;Tip:&lt;/em&gt; For each reference, I add the &lt;strong&gt;[reference name]&lt;/strong&gt; in brackets at the end of the “transmission.” &lt;strong&gt;[AWK example]&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;requirements&quot;&gt;Requirements:&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;a Ubuntu Linux 20.04 VPS with SSH access&lt;/li&gt;
+  &lt;li&gt;CLI knowledge&lt;/li&gt;
+  &lt;li&gt;a registered web domain i.e. example.org&lt;/li&gt;
+  &lt;li&gt;Basic knowledge of DNS and managing a VPS with SSH&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;dependencies--packages&quot;&gt;Dependencies &amp;amp; Packages&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;NodeJS v12 or v14 (v14 is recommended for Strapi 4.0)&lt;/li&gt;
+  &lt;li&gt;Npm v6+ &amp;amp; Yarn (Yarn is optional)&lt;/li&gt;
+  &lt;li&gt;Certbot with Let’s Encrypt&lt;/li&gt;
+  &lt;li&gt;Nano editor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;prepare-operating-system&quot;&gt;Prepare Operating System&lt;/h2&gt;
+&lt;p&gt;Let’s Begin! We begin by installing nginx, certbot and verifying versions Strapi needs. Keep in mind, if you are reading this from the future, the versions will change.&lt;/p&gt;
+
+&lt;h3 id=&quot;update-system&quot;&gt;Update System&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt update&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;install-nginx-certbot-packages&quot;&gt;Install Nginx Certbot Packages&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install certbot python3-certbot-nginx&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;install-nginx--verify-version&quot;&gt;Install NGINX &amp;amp; verify version&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install nginx&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node -v &amp;amp;&amp;amp; nginx -v&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; Strapi recommends nodejs v14, but v12 works.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-yarn-corepack&quot;&gt;Install Yarn (Corepack)&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm i -g corepack&lt;/code&gt; &lt;strong&gt;[Install Yarn]&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;configure-nginx&quot;&gt;Configure NGINX&lt;/h2&gt;
+&lt;p&gt;Next, we will configure your newly installed Nginx server. By default the configurations are located at: /etc/nginx/ &amp;amp; /etc/nginx/sites-available/. To keep things tidy and organized, we create a new api.example.org conf for each domain we are publicly facing to WWW.&lt;/p&gt;
+
+&lt;h3 id=&quot;make-directory--copy-default-html-page&quot;&gt;Make Directory &amp;amp; Copy Default HTML page&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo mkdir -p /var/www/api.example.org/html/&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo cp -R /var/www/html/index.nginx-debian.html /var/www/api.example.org/html/index.html&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;duplicate-default-config&quot;&gt;Duplicate Default Config&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/api.example.org&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;update-nginx-apiexampleorg-config-file&quot;&gt;Update NGINX api.example.org Config File&lt;/h3&gt;
+
+&lt;p&gt;The &lt;strong&gt;Proxy Config&lt;/strong&gt; is important and allows the Strapi 4.0 server to run with nginx. In general, the rest allows SSL and redirects all HTTP traffic to HTTPS, plus denies automated user-agents like wget.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;server {
+        # Redirect all HTTP requests to HTTPS
+        listen 80;
+        server_name _;
+        return 301 https://$host$request_uri;
+
+        # Deny Automated User-Agents
+        if ($http_user_agent ~* (netcrawl|npbot|malicious|LWP::Simple|BBBike|wget)) {
+        return 403;
+        }
+}
+
+server {
+    # Listen HTTPS
+    listen 443 ssl http2; # managed by Certbot
+    listen [::]:443 ssl http2;
+    server_name api.example.org www.api.example.org;
+
+    # sites document root
+    root /var/www/api.example.org/html;
+    index index.html index.htm;
+
+    # SSL Config
+    ssl_certificate /etc/letsencrypt/live/api.example.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/api.example.org/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+    # Proxy Config
+    location / {
+        proxy_pass http://strapi;
+        proxy_http_version 1.1;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host $http_host;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection &quot;Upgrade&quot;;
+        proxy_pass_request_headers on;
+    }
+
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CTRL+X, then Y for Yes to save&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;symbolic-link-to-sites-enabled&quot;&gt;Symbolic Link to sites-enabled&lt;/h3&gt;
+&lt;p&gt;This creates a ‘mirror’ like reference to the sites-available folder.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo ln -s /etc/nginx/sites-available/api.exampleorg /etc/nginx/sites-enabled/&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;verify-symbolic-link&quot;&gt;Verify Symbolic Link&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls /etc/nginx/sites-enabled/&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;dns-configuration&quot;&gt;DNS Configuration&lt;/h2&gt;
+&lt;p&gt;We now point our domain to the server we are hosting our Strapi on. i.e. 123.123.1.1&lt;/p&gt;
+
+&lt;h3 id=&quot;update-dns-settings&quot;&gt;Update DNS Settings&lt;/h3&gt;
+&lt;p&gt;Depending on your DNS provider or maybe you have your own Domain Name Server, we point our DNS settings for example.org to 123.123.1.1 as type A. I personally recommend Cloudflare.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-ssl-certs&quot;&gt;Create SSL Certs&lt;/h2&gt;
+&lt;p&gt;We run the automated tool Certbot and create all the needed files and update our &lt;em&gt;api.example.org&lt;/em&gt; configuration file.&lt;/p&gt;
+
+&lt;h3 id=&quot;run-certbot&quot;&gt;Run Certbot&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo  certbot --nginx&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Choose api.example.org for the site to create certs. for.&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Choose option 1 to disable auto redirect HTTP traffic to HTTPS since we already redirected the traffic manually.&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; sudo certbot renew –dry-run will test for automatic renewal for your certs. [Certbot Insturctions]&lt;/p&gt;
+
+&lt;h3 id=&quot;verify-apiexampleorg-updated-with-correct-domain&quot;&gt;Verify api.example.org Updated with Correct Domain&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nano /etc/nginx/sites-enabled/api.example.org&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;test-config--restart-nginx&quot;&gt;Test Config &amp;amp; Restart Nginx&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nginx -t&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo systemctl restart nginx&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;firewall-configuration&quot;&gt;Firewall Configuration&lt;/h2&gt;
+&lt;p&gt;Allow public to connect via HTTPS, we need to open up ports 80 &amp;amp; 443 (HTTP &amp;amp; HTTPS).&lt;/p&gt;
+
+&lt;h3 id=&quot;allow-ufw-ports-for-public-traffic&quot;&gt;Allow UFW Ports for Public Traffic&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo ufw allow HTTPS&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo ufw allow HTTP&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;verify-status--reload-ufw&quot;&gt;Verify Status &amp;amp; Reload UFW&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo ufw status&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo ufw reload&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tip&lt;/strong&gt; sudo ufw allow ‘Nginx Full’ opens both port 80 &amp;amp; 443 (For SSL / TLS encryption).&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-started-with-strapi&quot;&gt;Getting Started with Strapi&lt;/h2&gt;
+&lt;p&gt;Now, we must install Strapi 4.0 on the server and launch the Strapi server.&lt;/p&gt;
+
+&lt;h3 id=&quot;strapi-default-installation&quot;&gt;Strapi Default Installation&lt;/h3&gt;
+&lt;p&gt;Goto desired place to install Strapi project i.e. ~/development/my-strapi-project, then,&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yarn create strapi-app my-project&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The default Strapi installation uses SQLite as the database. You are able to use other databases like PostgreSQL. See &lt;strong&gt;[Strapi Installation]&lt;/strong&gt; for more details.&lt;/p&gt;
+
+&lt;h3 id=&quot;launch-strapi-development-server&quot;&gt;Launch Strapi Development Server&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yarn develop&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;launch-strapi-from-domain-url&quot;&gt;Launch Strapi from Domain URL&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Goto: api.example.com via web browser of your choice.&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Follow the instructions and continue creating a new Strapi administrator.&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;references&quot;&gt;References:&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment/optional-software/nginx-proxy.html#nginx-upstream&quot;&gt;Nginx Strapi Configuration&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/installation/cli.html#creating-a-strapi-project&quot;&gt;Strapi Installation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04&quot;&gt;Nginx Server Blocks&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://yarnpkg.com/getting-started/install&quot;&gt;Install Yarn&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://certbot.eff.org/instructions?ws=nginx&amp;amp;os=ubuntufocal&quot;&gt;Certbot Insturctions&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;donations-are-welcome&quot;&gt;Donations Are Welcome&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://cash.app/$sharpeee&quot;&gt;Cash App&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+        <link>https://www.sharpetronics.com//blog/how-to/2022/05/24/setup-a-secure-nginx-https-web-server-with-let-s-encrypt-strapi-4-0-headless-cms/</link>
+        <guid isPermaLink="true">https://www.sharpetronics.com//blog/how-to/2022/05/24/setup-a-secure-nginx-https-web-server-with-let-s-encrypt-strapi-4-0-headless-cms/</guid>
         
-        <item>
-            <image></image>
-            <title>Our Terms & Conditions</title>
-            <link>
-                https://www.sharpetronics.com/blog/legal/2022/05/24/our-terms-and-conditions/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;h2&gt;&lt;strong&gt;Terms and Conditions&lt;/strong&gt;&lt;/h2&gt;
+        <category>Nginx,</category>
+        
+        <category>Strapi,</category>
+        
+        <category>SSL,</category>
+        
+        <category>Headless</category>
+        
+        <category>CMS,</category>
+        
+        <category>JAMstack,</category>
+        
+        
+        <category>How-to</category>
+        
+      </item>
+    
+      <item>
+        <title>Our Terms &amp; Conditions</title>
+        <description>&lt;h2&gt;&lt;strong&gt;Terms and Conditions&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;Welcome to SharpeTronics!&lt;/p&gt;
 
-&lt;p&gt;These terms and conditions outline the rules and regulations for the use of SharpeTronics&#39;s Website, located at https://www.sharpetronics.com.&lt;/p&gt;
+&lt;p&gt;These terms and conditions outline the rules and regulations for the use of SharpeTronics&apos;s Website, located at https://www.sharpetronics.com.&lt;/p&gt;
 
-&lt;p&gt;By accessing this website we assume you accept these terms and conditions. Do not continue to use Sharp...
-            </description>
-            <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/legal/2022/05/24/our-terms-and-conditions/
-            </guid>
-        </item>
+&lt;p&gt;By accessing this website we assume you accept these terms and conditions. Do not continue to use SharpeTronics if you do not agree to take all of the terms and conditions stated on this page.&lt;/p&gt;
+
+&lt;p&gt;The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: &quot;Client&quot;, &quot;You&quot; and &quot;Your&quot; refers to you, the person log on this website and compliant to the Company’s terms and conditions. &quot;The Company&quot;, &quot;Ourselves&quot;, &quot;We&quot;, &quot;Our&quot; and &quot;Us&quot;, refers to our Company. &quot;Party&quot;, &quot;Parties&quot;, or &quot;Us&quot;, refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client’s needs in respect of provision of the Company’s stated services, in accordance with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.&lt;/p&gt;
+
+&lt;h3&gt;&lt;strong&gt;Cookies&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;We employ the use of cookies. By accessing SharpeTronics, you agreed to use cookies in agreement with the SharpeTronics&apos;s Privacy Policy. &lt;/p&gt;
+
+&lt;p&gt;Most interactive websites use cookies to let us retrieve the user’s details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.&lt;/p&gt;
+
+&lt;h3&gt;&lt;strong&gt;License&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Unless otherwise stated, SharpeTronics and/or its licensors own the intellectual property rights for all material on SharpeTronics. All intellectual property rights are reserved. You may access this from SharpeTronics for your own personal use subjected to restrictions set in these terms and conditions.&lt;/p&gt;
+
+&lt;p&gt;You must not:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;Republish material from SharpeTronics&lt;/li&gt;
+    &lt;li&gt;Sell, rent or sub-license material from SharpeTronics&lt;/li&gt;
+    &lt;li&gt;Reproduce, duplicate or copy material from SharpeTronics&lt;/li&gt;
+    &lt;li&gt;Redistribute content from SharpeTronics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This Agreement shall begin on the date hereof.&lt;/p&gt;
+
+&lt;p&gt;Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. SharpeTronics does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of SharpeTronics,its agents and/or affiliates. Comments reflect the views and opinions of the person who post their views and opinions. To the extent permitted by applicable laws, SharpeTronics shall not be liable for the Comments or for any liability, damages or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.&lt;/p&gt;
+
+&lt;p&gt;SharpeTronics reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.&lt;/p&gt;
+
+&lt;p&gt;You warrant and represent that:&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;You are entitled to post the Comments on our website and have all necessary licenses and consents to do so;&lt;/li&gt;
+    &lt;li&gt;The Comments do not invade any intellectual property right, including without limitation copyright, patent or trademark of any third party;&lt;/li&gt;
+    &lt;li&gt;The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful material which is an invasion of privacy&lt;/li&gt;
+    &lt;li&gt;The Comments will not be used to solicit or promote business or custom or present commercial activities or unlawful activity.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You hereby grant SharpeTronics a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.&lt;/p&gt;
+
+&lt;h3&gt;&lt;strong&gt;Hyperlinking to our Content&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;The following organizations may link to our Website without prior written approval:&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;Government agencies;&lt;/li&gt;
+    &lt;li&gt;Search engines;&lt;/li&gt;
+    &lt;li&gt;News organizations;&lt;/li&gt;
+    &lt;li&gt;Online directory distributors may link to our Website in the same manner as they hyperlink to the Websites of other listed businesses; and&lt;/li&gt;
+    &lt;li&gt;System wide Accredited Businesses except soliciting non-profit organizations, charity shopping malls, and charity fundraising groups which may not hyperlink to our Web site.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These organizations may link to our home page, to publications or to other Website information so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products and/or services; and (c) fits within the context of the linking party’s site.&lt;/p&gt;
+
+&lt;p&gt;We may consider and approve other link requests from the following types of organizations:&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;commonly-known consumer and/or business information sources;&lt;/li&gt;
+    &lt;li&gt;dot.com community sites;&lt;/li&gt;
+    &lt;li&gt;associations or other groups representing charities;&lt;/li&gt;
+    &lt;li&gt;online directory distributors;&lt;/li&gt;
+    &lt;li&gt;internet portals;&lt;/li&gt;
+    &lt;li&gt;accounting, law and consulting firms; and&lt;/li&gt;
+    &lt;li&gt;educational institutions and trade associations.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We will approve link requests from these organizations if we decide that: (a) the link would not make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative records with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of SharpeTronics; and (d) the link is in the context of general resource information.&lt;/p&gt;
+
+&lt;p&gt;These organizations may link to our home page so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products or services; and (c) fits within the context of the linking party’s site.&lt;/p&gt;
+
+&lt;p&gt;If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you must inform us by sending an e-mail to SharpeTronics. Please include your name, your organization name, contact information as well as the URL of your site, a list of any URLs from which you intend to link to our Website, and a list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.&lt;/p&gt;
+
+&lt;p&gt;Approved organizations may hyperlink to our Website as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;By use of our corporate name; or&lt;/li&gt;
+    &lt;li&gt;By use of the uniform resource locator being linked to; or&lt;/li&gt;
+    &lt;li&gt;By use of any other description of our Website being linked to that makes sense within the context and format of content on the linking party’s site.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;No use of SharpeTronics&apos;s logo or other artwork will be allowed for linking absent a trademark license agreement.&lt;/p&gt;
+
+&lt;h3&gt;&lt;strong&gt;iFrames&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Without prior approval and written permission, you may not create frames around our Webpages that alter in any way the visual presentation or appearance of our Website.&lt;/p&gt;
+
+&lt;h3&gt;&lt;strong&gt;Content Liability&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;We shall not be hold responsible for any content that appears on your Website. You agree to protect and defend us against all claims that is rising on your Website. No link(s) should appear on any Website that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third party rights.&lt;/p&gt;
+
+&lt;h3&gt;&lt;strong&gt;Your Privacy&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Please read Privacy Policy&lt;/p&gt;
+
+&lt;h3&gt;&lt;strong&gt;Reservation of Rights&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;We reserve the right to request that you remove all links or any particular link to our Website. You approve to immediately remove all links to our Website upon request. We also reserve the right to amen these terms and conditions and it’s linking policy at any time. By continuously linking to our Website, you agree to be bound to and follow these linking terms and conditions.&lt;/p&gt;
+
+&lt;h3&gt;&lt;strong&gt;Removal of links from our website&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;If you find any link on our Website that is offensive for any reason, you are free to contact and inform us any moment. We will consider requests to remove links but we are not obligated to or so or to respond to you directly.&lt;/p&gt;
+
+&lt;p&gt;We do not ensure that the information on this website is correct, we do not warrant its completeness or accuracy; nor do we promise to ensure that the website remains available or that the material on the website is kept up to date.&lt;/p&gt;
+
+&lt;h3&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this disclaimer will:&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;limit or exclude our or your liability for death or personal injury;&lt;/li&gt;
+    &lt;li&gt;limit or exclude our or your liability for fraud or fraudulent misrepresentation;&lt;/li&gt;
+    &lt;li&gt;limit any of our or your liabilities in any way that is not permitted under applicable law; or&lt;/li&gt;
+    &lt;li&gt;exclude any of our or your liabilities that may not be excluded under applicable law.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort and for breach of statutory duty.&lt;/p&gt;
+
+&lt;p&gt;As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+        <link>https://www.sharpetronics.com//blog/legal/2022/05/24/our-terms-and-conditions/</link>
+        <guid isPermaLink="true">https://www.sharpetronics.com//blog/legal/2022/05/24/our-terms-and-conditions/</guid>
         
-        <item>
-            <image></image>
-            <title>Our Privacy Policy</title>
-            <link>
-                https://www.sharpetronics.com/blog/legal/2022/05/24/our-privacy-policy/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;h2&gt;Privacy Policy for SharpeTronics.com, LLC&lt;/h2&gt;
+        <category>Terms</category>
+        
+        <category>&amp;</category>
+        
+        <category>Conditions,</category>
+        
+        
+        <category>Legal</category>
+        
+      </item>
+    
+      <item>
+        <title>Our Privacy Policy</title>
+        <description>&lt;h2&gt;Privacy Policy for SharpeTronics.com, LLC&lt;/h2&gt;
 
 &lt;p&gt;At SharpeTronics, accessible from https://www.sharpetronics.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by SharpeTronics and how we use it.&lt;/p&gt;
 
-&lt;p&gt;If you have additional questions or require more infor...
-            </description>
-            <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/legal/2022/05/24/our-privacy-policy/
-            </guid>
-        </item>
-        
-        <item>
-            <image></image>
-            <title>Linux VPS Hardening</title>
-            <link>
-                https://www.sharpetronics.com/blog/devops/2022/05/24/linux-vps-hardening/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;h3 id=&quot;planting-seeds&quot;&gt;Planting Seeds&lt;/h3&gt;
+&lt;p&gt;If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.&lt;/p&gt;
 
-&lt;p&gt;Administration of a virtual private Linux server (VPS) without a GUI cpanel is the only way to go. Going through any graphical user interface (GUI) to run critical services for your company is like playing the telephone game. Securing our environment begins at the terminal &amp;amp; from terminal experience we create a ...
-            </description>
-            <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/devops/2022/05/24/linux-vps-hardening/
-            </guid>
-        </item>
-        
-        <item>
-            <image></image>
-            <title>Configure a Static Qt5 from Source on Ubuntu 18.04 with X11 Support</title>
-            <link>
-                https://www.sharpetronics.com/blog/devops/2022/05/24/configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;h3 id=&quot;configure-build-install--setup-qt-5152-source-on-ubuntu-1804-with-x11-support&quot;&gt;Configure, Build, Install &amp;amp; Setup Qt 5.15.2 Source on Ubuntu 18.04 with X11 Support&lt;/h3&gt;
+&lt;p&gt;This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in SharpeTronics. This policy is not applicable to any information collected offline or via channels other than this website. &lt;/p&gt;
 
-&lt;p&gt;This tutorial will teach you how to compile from source via CLI (command-line interface) and enable customization for building Qt5 apps on different operating systems andor hardware...
-            </description>
-            <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/devops/2022/05/24/configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support/
-            </guid>
-        </item>
-        
-        <item>
-            <image></image>
-            <title>Big Startups Without Big Tech</title>
-            <link>
-                https://www.sharpetronics.com/blog/how-to/2022/05/24/big-startups-without-big-tech/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;p&gt;Welcome to the Blockchain Internet called DFINITY. In my spare time, I have been tinkering and learning &lt;strong&gt;Motoko&lt;/strong&gt;. It is a language built for the Internet Computer (IC) that can be used to interface applications, websites and other various software.&lt;/p&gt;
+&lt;h3&gt;Consent&lt;/h3&gt;
 
-&lt;p&gt;Motoko is a programming typed language that compiles into WebAssembly (WA) and is created by...
-            </description>
-            <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/how-to/2022/05/24/big-startups-without-big-tech/
-            </guid>
-        </item>
-        
-        <item>
-            <image></image>
-            <title>Welcome To An Appalachian Technology Company</title>
-            <link>
-                https://www.sharpetronics.com/blog/company/2022/05/23/welcome-to-an-appalachian-technology-company/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;p&gt;Welcome to SharpeTronics, where light travels at high altitudes. We are a mountain made company in the Appalachians of West Virginia that strives with software and hardware technologies. We are statewide leaders in our area of expertise and invite you to support local business.&lt;/p&gt;
+&lt;p&gt;By using our website, you hereby consent to our Privacy Policy and agree to its terms.&lt;/p&gt;
 
-&lt;p&gt;Our mission is to enable a modern web architecture that empowers the user and enables acc...
-            </description>
-            <pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/company/2022/05/23/welcome-to-an-appalachian-technology-company/
-            </guid>
-        </item>
-        
-        <item>
-            <image></image>
-            <title>SharpeTronics LLC Becomes Official</title>
-            <link>
-                https://www.sharpetronics.com/blog/company/2022/05/23/sharpe-tronics-llc-becomes-official/
-            </link>
-            <author>Charles</author>
-            <description>
-                &lt;p&gt;We as in SharpeTronics LLC are proud to announce our business is official with the mountain state of West Virginia on March 17, 2021.&lt;/p&gt;
+&lt;h3&gt;Information we collect&lt;/h3&gt;
 
-&lt;p&gt;We also have our very own mailbox provided by the beloved Postmaster.&lt;/p&gt;
+&lt;p&gt;The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.&lt;/p&gt;
+&lt;p&gt;If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide.&lt;/p&gt;
+&lt;p&gt;When you register for an Account, we may ask for your contact information, including items such as name, company name, address, email address, and telephone number.&lt;/p&gt;
 
-&lt;p&gt;Furthermore, we now have pillars in place to begin building and creating avenues to bee of service with our community. It has been a long road t...
-            </description>
-            <pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate>
-            <guid>
-                https://www.sharpetronics.com/blog/company/2022/05/23/sharpe-tronics-llc-becomes-official/
-            </guid>
-        </item>
+&lt;h3&gt;How we use your information&lt;/h3&gt;
+
+&lt;p&gt;We use the information we collect in various ways, including to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Provide, operate, and maintain our webste&lt;/li&gt;
+&lt;li&gt;Improve, personalize, and expand our webste&lt;/li&gt;
+&lt;li&gt;Understand and analyze how you use our webste&lt;/li&gt;
+&lt;li&gt;Develop new products, services, features, and functionality&lt;/li&gt;
+&lt;li&gt;Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the webste, and for marketing and promotional purposes&lt;/li&gt;
+&lt;li&gt;Send you emails&lt;/li&gt;
+&lt;li&gt;Find and prevent fraud&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Log Files&lt;/h3&gt;
+
+&lt;p&gt;SharpeTronics follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services&apos; analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users&apos; movement on the website, and gathering demographic information.&lt;/p&gt;
+
+&lt;h3&gt;Cookies and Web Beacons&lt;/h3&gt;
+
+&lt;p&gt;Like any other website, SharpeTronics uses &apos;cookies&apos;. These cookies are used to store information including visitors&apos; preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users&apos; experience by customizing our web page content based on visitors&apos; browser type and/or other information.&lt;/p&gt;
+
+&lt;p&gt;For more general information on cookies, please read &lt;a href=&quot;https://www.cookieconsent.com/what-are-cookies/&quot;&gt;&quot;What Are Cookies&quot; from Cookie Consent&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Our Advertising Partners&lt;/h3&gt;
+
+&lt;p&gt;Some of advertisers on our site may use cookies and web beacons. Our advertising partners are listed below. Each of our advertising partners has their own Privacy Policy for their policies on user data. For easier access, we hyperlinked to their Privacy Policies below.&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;
+        &lt;p&gt;Google&lt;/p&gt;
+        &lt;p&gt;&lt;a href=&quot;https://policies.google.com/technologies/ads&quot;&gt;https://policies.google.com/technologies/ads&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Advertising Partners Privacy Policies&lt;/h3&gt;
+
+&lt;p&gt;You may consult this list to find the Privacy Policy for each of the advertising partners of SharpeTronics.&lt;/p&gt;
+
+&lt;p&gt;Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on SharpeTronics, which are sent directly to users&apos; browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.&lt;/p&gt;
+
+&lt;p&gt;Note that SharpeTronics has no access to or control over these cookies that are used by third-party advertisers.&lt;/p&gt;
+
+&lt;h3&gt;Third Party Privacy Policies&lt;/h3&gt;
+
+&lt;p&gt;SharpeTronics&apos;s Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options. &lt;/p&gt;
+
+&lt;p&gt;You can choose to disable cookies through your individual browser options. To know more detailed information about cookie management with specific web browsers, it can be found at the browsers&apos; respective websites.&lt;/p&gt;
+
+&lt;h3&gt;CCPA Privacy Rights (Do Not Sell My Personal Information)&lt;/h3&gt;
+
+&lt;p&gt;Under the CCPA, among other rights, California consumers have the right to:&lt;/p&gt;
+&lt;p&gt;Request that a business that collects a consumer&apos;s personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.&lt;/p&gt;
+&lt;p&gt;Request that a business delete any personal data about the consumer that a business has collected.&lt;/p&gt;
+&lt;p&gt;Request that a business that sells a consumer&apos;s personal data, not sell the consumer&apos;s personal data.&lt;/p&gt;
+&lt;p&gt;If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.&lt;/p&gt;
+
+&lt;h3&gt;GDPR Data Protection Rights&lt;/h3&gt;
+
+&lt;p&gt;We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:&lt;/p&gt;
+&lt;p&gt;The right to access – You have the right to request copies of your personal data. We may charge you a small fee for this service.&lt;/p&gt;
+&lt;p&gt;The right to rectification – You have the right to request that we correct any information you believe is inaccurate. You also have the right to request that we complete the information you believe is incomplete.&lt;/p&gt;
+&lt;p&gt;The right to erasure – You have the right to request that we erase your personal data, under certain conditions.&lt;/p&gt;
+&lt;p&gt;The right to restrict processing – You have the right to request that we restrict the processing of your personal data, under certain conditions.&lt;/p&gt;
+&lt;p&gt;The right to object to processing – You have the right to object to our processing of your personal data, under certain conditions.&lt;/p&gt;
+&lt;p&gt;The right to data portability – You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.&lt;/p&gt;
+&lt;p&gt;If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.&lt;/p&gt;
+
+&lt;h3&gt;Children&apos;s Information&lt;/h3&gt;
+
+&lt;p&gt;Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.&lt;/p&gt;
+
+&lt;p&gt;SharpeTronics does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+        <link>https://www.sharpetronics.com//blog/legal/2022/05/24/our-privacy-policy/</link>
+        <guid isPermaLink="true">https://www.sharpetronics.com//blog/legal/2022/05/24/our-privacy-policy/</guid>
         
-    </channel>
+        <category>Privacy,</category>
+        
+        
+        <category>Legal</category>
+        
+      </item>
+    
+      <item>
+        <title>Linux VPS Hardening</title>
+        <description>&lt;h3 id=&quot;planting-seeds&quot;&gt;Planting Seeds&lt;/h3&gt;
+
+&lt;p&gt;Administration of a virtual private Linux server (VPS) without a GUI cpanel is the only way to go. Going through any graphical user interface (GUI) to run critical services for your company is like playing the telephone game. Securing our environment begins at the terminal &amp;amp; from terminal experience we create a deeper learning experience for ourselves and build confidence along the way.&lt;/p&gt;
+
+&lt;p&gt;This article will extrapolate on initializing a Ubuntu Linux VPS for the first time and how we secure our environment through the terminal. No Windows or MacOS pancakes here; only Linux.&lt;/p&gt;
+
+&lt;p&gt;When beginning a new server or garden, the soil is most important; we create an environment to protect and maximize growth potential. The VPS provider may give you an OS they installed, but I always create a fresh install myself.&lt;/p&gt;
+
+&lt;h3 id=&quot;logging-in-via-ssh&quot;&gt;Logging in via SSH&lt;/h3&gt;
+
+&lt;h5 id=&quot;creating-rsa-public-key&quot;&gt;Creating RSA Public Key&lt;/h5&gt;
+&lt;p&gt;Before you are able to login with SSH, you will most likely have to generate and add a RSA public key.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh-keygen -t rsa -b 4096&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;copy--paste-public-key&quot;&gt;Copy / Paste Public Key&lt;/h5&gt;
+&lt;p&gt;After key is generated, we display the public key and add it to VPS account. &lt;em&gt;Optionally, you may have to add the key with ssh-copy-id user@ip_address.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat ~/.ssh/id_rsa.pub&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh-rsa AAAEXAMPLECAQDBn0Z88lqrtya0Nd7yYtP/1o90vwVxjvCm/txb+SW85JRRnrI616d2iWwtVCSiUX0s59FfIPxUJl6vPqmxY40DIrX9KZijVpaq/TzWXh2ktCTjT6uBNMBRz/2lxP3w2AZov65dygjW5eQT9K9YB13dr1B4RkQMmUW5xiFbdHM0WzBYM2CMtE+lnmebn7m+B3DcvNkuGdT9Qw1/J24dTuNJSzJXVxzTOTlnVKOVSp1NWzu0USFI6dkrz8YImSgP9hQX970zTnzQ1Ctei4xlR/IiCpVGG6zWeV4oT3sLf4E9mk9eYF/wU0AdA3mQ68yZvv+Bhlc75e9kmUFe+JbctKR4YaKGY6K6K/F1tHrKYkASEkfQQ0KJU/ez/wtSf21A6Z2bM/Gg28f/6owfIMPWnYuB9VOLqkdIHFUot40uMi9CBvkdwH69zAQfz4jFvmu588klE0usBclGAFs78KM6YWaXHYjHdWVRIUrAqdZw1IP0uYS3uSBUPsbBG/Aq0V+22dg8U5DSu5XmwLB5jT+3c4ScqH3kY5tomRLe+2Dx4K+mAHpgtf10xL6Ayx2y0GFZCf+LB1Va3Trk3ChcaKRF5KvyayFQNSY4AfA47B90asdv== user@hostname
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;ssh-into-vps&quot;&gt;SSH into VPS&lt;/h5&gt;
+&lt;p&gt;Next, we login to our VPS and specify -i what key to use. The -i is only needed if you have more than one key. The -v displays verbose or details of what the command is doing in the terminal.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh -i ~/.ssh/id_rsa root@123.123.123.123&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Success! Now, we are able to update and upgrade our packages.&lt;/p&gt;
+
+&lt;h3 id=&quot;prepping-linux-environment&quot;&gt;Prepping Linux Environment&lt;/h3&gt;
+
+&lt;h5 id=&quot;update-sources--packages&quot;&gt;Update Sources &amp;amp; Packages&lt;/h5&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-get update &amp;amp;&amp;amp; apt-get upgrade&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;disable-ubuntu-sudo-timeout&quot;&gt;Disable Ubuntu Sudo Timeout&lt;/h5&gt;
+&lt;p&gt;In Ubuntu, sudo has a timeout built in for ease of use. I personally remove this timeout; without knowing you are using sudo will create all kinds of headaches in the future. When you make use of root privileges, we must explicitly type sudo each command.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo visudo&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;add &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Defaults        env_reset, timestamp_timeout=00&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;setting-up-the-firewall&quot;&gt;Setting Up The Firewall&lt;/h3&gt;
+&lt;p&gt;After we have logged in via SSH for root user account. I recommend installing a powerful firewall called: &lt;strong&gt;ufw&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-get install ufw&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ufw status&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ufw allow ssh&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Display the status of the firewall and determine if ssh has been allowed. If nomenclature &lt;em&gt;ssh&lt;/em&gt; doesn’t add the ports, we do this manually with ufw allow 22/udp &amp;amp; ufw all 22/tcp. Port 22 is the common port SSH server makes use of; we are able to change this port for extra hardening, but for the sake of this tutorial, we will use port 22.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ufw status&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW        Anywhere                  
+22/udp                     ALLOW        Anywhere
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, we enable the firewall &lt;strong&gt;after&lt;/strong&gt; we allow port 22. The SSH connection should remain open. If it closes, SSH back into your VPS.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ufw enable&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;check-if-port-is-open&quot;&gt;Check If Port Is Open&lt;/h5&gt;
+&lt;p&gt;Once telnet is ran, ssh information should populate
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;telnet 123.123.123.123 22&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Trying 123.123.123.123...
+Connected to 123.123.123.123.
+Escape character is &apos;^]&apos;.
+SSH-X.0-OpenSSH_X.2p1 Ubuntu-Xubuntu0.2
+
+Invalid SSH identification string.
+Connection closed by foreign host.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;creating-new-users--permissions&quot;&gt;Creating New Users &amp;amp; Permissions&lt;/h3&gt;
+
+&lt;p&gt;To further expand on the garden, we must define a secure space for each plant or service we are running. To manage each service, like dns, mail, gitea, etc… we create a new user for each of these environments. This separation is important for operational security (OPSEC).&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;adduser username&lt;/code&gt; &lt;em&gt;Note: If we want to use Dockerfile or auto script without prompts, we make use of the &lt;strong&gt;useradd&lt;/strong&gt; command.&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Adding user `username&apos; ...
+Adding new group `username&apos; (1003) ...
+Adding new user `username&apos; (1002) with group `username&apos; ...
+Creating home directory `/home/username&apos; ...
+Copying files from `/etc/skel&apos; ...
+New password: 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, if the user should have sudo permission, we do the following.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;usermod -a -G sudo username&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;prove-user-was-created&quot;&gt;Prove User was Created&lt;/h5&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat /etc/passwd&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;...
+username:x:1001:1002:User Name,,,:/home/username:/bin/bash
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;logging-in-with-new-username&quot;&gt;Logging In with New Username&lt;/h5&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;su username&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;update-ssh-config&quot;&gt;Update SSH Config&lt;/h5&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nano /etc/ssh/sshd_config&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Add sudo to the &lt;strong&gt;AllowGroups&lt;/strong&gt; like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AllowGroups wheel root sudo&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, we disable root login since we will only have root privileges when using sudo.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PermitRootLogin no&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;ssh-directory-creation-for-new-username&quot;&gt;SSH Directory Creation For New Username&lt;/h5&gt;
+&lt;p&gt;Creating new user access to SSH login.
+When you connect to new username@ip, the vps user needs the public key for verification of authorized user. Authorized users with correct &lt;strong&gt;private key&lt;/strong&gt; will be able to login to vps via ssh protocol.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mkdir ~/.ssh&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nano ~/.ssh/authorized_keys&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Paste your public key we created earlier into the authorized_keys file.&lt;/p&gt;
+
+&lt;h5 id=&quot;update-file--folder-permissions&quot;&gt;Update file &amp;amp; folder permissions&lt;/h5&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chmod 700 ~/.ssh&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chmod 600 ~/.ssh/authorized_keys&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;restart-ssh-service&quot;&gt;Restart SSH service&lt;/h5&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo service ssh restart&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exit&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;In conclusion, we are now able to login via SSH with new user and have also disabled root user logins.
+This process will have to be done for each user that is created.&lt;/p&gt;
+
+&lt;h3 id=&quot;backups-with-rsync-superpowers&quot;&gt;Backups with Rsync Superpowers!&lt;/h3&gt;
+
+&lt;p&gt;After all our hard work and focus, we should backup our VPS and create scheduled routines. Depending on your use case, I would recommend at least weekly backups.&lt;/p&gt;
+
+&lt;p&gt;The following command is quite complex, but, essentially we are discarding folders we don’t need, backing up the entire VPS to our local machine and preserving all permissions and file integrity from the VPS.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;rsync - A fast, versatile, local and remote file-copying utility&lt;/li&gt;
+  &lt;li&gt;-aAXv - The files are transferred in “archive” mode, which ensures that symbolic links, devices, permissions, ownerships, modification times, ACLs, and extended attributes are preserved.&lt;/li&gt;
+  &lt;li&gt;/ - Source directory&lt;/li&gt;
+  &lt;li&gt;–exclude - Excludes the given directories from backup.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo rsync -aAXv --rsh=&quot;ssh -i /home/user/.ssh/id_rsa&quot; --recursive --progress --exclude={&quot;/dev/*&quot;,&quot;/proc/*&quot;,&quot;/sys/*&quot;,&quot;/tmp/*&quot;,&quot;/run/*&quot;,&quot;/mnt/*&quot;,&quot;/media/*&quot;,&quot;/lost+found&quot;,&quot;/backups/*&quot;} user@123.123.123.123:/ /home/user/VPS/Backups/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;sources&quot;&gt;Sources:&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Full System Backup Using Rsync - &lt;a href=&quot;https://wiki.archlinux.org/title/Rsync#Full_system_backup&quot;&gt;https://wiki.archlinux.org/title/Rsync#Full_system_backup&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+        <link>https://www.sharpetronics.com//blog/devops/2022/05/24/linux-vps-hardening/</link>
+        <guid isPermaLink="true">https://www.sharpetronics.com//blog/devops/2022/05/24/linux-vps-hardening/</guid>
+        
+        <category>Linux,</category>
+        
+        <category>VPS,</category>
+        
+        <category>SSL,</category>
+        
+        <category>Security,</category>
+        
+        
+        <category>Devops</category>
+        
+      </item>
+    
+      <item>
+        <title>Configure a Static Qt5 from Source on Ubuntu 18.04 with X11 Support</title>
+        <description>&lt;h3 id=&quot;configure-build-install--setup-qt-5152-source-on-ubuntu-1804-with-x11-support&quot;&gt;Configure, Build, Install &amp;amp; Setup Qt 5.15.2 Source on Ubuntu 18.04 with X11 Support&lt;/h3&gt;
+
+&lt;p&gt;This tutorial will teach you how to compile from source via CLI (command-line interface) and enable customization for building Qt5 apps on different operating systems andor hardware architectures like RPI400.&lt;/p&gt;
+
+&lt;p&gt;When compiling Qt5 yourself, you are empowered with a configuration that is constant throughout the Linux Universe. This process is also very similar with compiling Qt apps on your (AArch64) ARM64 devices like RPi 400, Rock64 &amp;amp; PineBook64.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: This tutorial doesn’t include json Qtwebengine&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-qt&quot;&gt;What is Qt?&lt;/h3&gt;
+&lt;p&gt;“Qt is a cross-platform application development framework for desktop, embedded and mobile.” [Qt Wiki]&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-a-static-qt&quot;&gt;What is a Static Qt?&lt;/h3&gt;
+&lt;p&gt;In general, a static Qt option includes libraries locally. This aids in having an application run on different versions of Linux distros. When the application is compiled, we check the app with &lt;em&gt;ldd yourapp&lt;/em&gt; to list what the binary is dependent on to run. Essentially, the Qt libraries are included in the binary. Decovar.dev has a great explanation on advantages and disadvantages of building a static Qt. [At last, let’s build Qt statically]&lt;/p&gt;
+
+&lt;h3 id=&quot;lets-begin&quot;&gt;Let’s Begin!&lt;/h3&gt;
+
+&lt;h4 id=&quot;remove--purge-all-qt-packages&quot;&gt;Remove &amp;amp; purge all Qt packages&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt -y remove qt5* libqt5* qtcreator &amp;amp;&amp;amp; sudo autoremove
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;download-qt-5152-source-to-qt5-sources-folder&quot;&gt;Download Qt 5.15.2 Source to qt5-sources folder&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir qt5-sources &amp;amp;&amp;amp; cd qt5-sources &amp;amp;&amp;amp; mkdir build-shadow
+
+wget https://download.qt.io/official_releases/qt/5.15/5.15.2/single/qt-everywhere-src-5.15.2.tar.xz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;verify-md5-hash&quot;&gt;Verify MD5 hash&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;md5sum qt-everywhere-src-5.15.2.tar.xz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;e1447db4f06c841d8947f0a6ce83a7b5  qt-everywhere-src-5.15.2.tar.xz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;un-tar-qt5-archive&quot;&gt;Un-tar Qt5 archive&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tar xf qt-everywhere-src-5.15.2.tar.xz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;move-into-build-shadow-directory-to-configure-your-qt-5152&quot;&gt;Move into build-shadow directory to configure your Qt 5.15.2&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd build-shadow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;install-qt5-minimal-dependencies&quot;&gt;Install Qt5 Minimal Dependencies&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt update
+
+sudo apt install build-essential libfontconfig1-dev libdbus-1-dev libfreetype6-dev libicu-dev libinput-dev libxkbcommon-dev libsqlite3-dev libssl-dev libpng-dev libjpeg-dev libglib2.0-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;optional-install-vc4-drivers-for-rpi-4-type-devices-ie-cortex-a53--cortex-a72&quot;&gt;(Optional) Install VC4 Drivers for RPi 4 type devices (i.e. cortex-a53 &amp;amp; cortex-a72)&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install libgles2-mesa-dev libgbm-dev libdrm-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;optional-install-x11-support-dependencies&quot;&gt;(Optional) Install X11 Support Dependencies&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install libx11-dev libxcb1-dev  libxext-dev libxi-dev libxcomposite-dev libxcursor-dev libxtst-dev libxrandr-dev libfontconfig1-dev libfreetype6-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev  libxcb-glx0-dev  libxcb-keysyms1-dev libxcb-image0-dev  libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev  libxcb-randr0-dev  libxcb-render-util0-dev  libxcb-util0-dev  libxcb-xinerama0-dev  libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;configure-qt-5152&quot;&gt;Configure Qt 5.15.2&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;../qt-everywhere-src-5.15.2/configure -static -release -openssl-linked -opensource -confirm-license -qt-zlib -qt-libpng -bundled-xcb-xinput \
+-skip qtlocation -skip qtmacextras -skip qtpurchasing -skip qtscript -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qtdatavis3d -skip qtdoc -skip qtcharts -skip qtdeclarative -skip qt3d -skip qtwebengine -skip qtandroidextras -skip qtwebview -skip qtgamepad -skip qtquickcontrols -skip qtquickcontrols2 -skip qtremoteobjects -skip qtwebview -skip qtwebchannel -skip qtwebglplugin \
+-nomake examples -nomake tests  -feature-fontconfig -no-feature-getentropy -v
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;*If you would like to see a full list of options, we can do &lt;strong&gt;../qt-everywhere-src-5.15.2/configure -h&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;make-the-configuration--j-4-is-number-of-cpus-you-want-to-use&quot;&gt;Make the configuration &lt;em&gt;(-j 4 is number of cpus you want to use)&lt;/em&gt;&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;make -j 4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;install-qt5-into-default-usrlocal&quot;&gt;Install Qt5 into: &lt;em&gt;(default) /usr/local/&lt;/em&gt;&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo make install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Note: Check and make sure ./configure has required deps; if you installed the deps, but still receiving errors, remove config.cache and ./configure again.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; &lt;em&gt;If you want to view your configuration summary, you may do so via nano config.summary from build-shadow directory&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;update-profile-to-know-where-qt5152-bins-are&quot;&gt;Update profile to know where Qt5.15.2 bins are&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nano ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;add-this-at-the-bottom-of-your-bashrc-file&quot;&gt;Add this at the bottom of your .bashrc file.&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# set PATH for Qt 5.15.2
+export PATH=&quot;/usr/local/Qt-5.15.2/bin:$PATH&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;reload-your-bashrc-file--create-new-shell-window&quot;&gt;Reload your ~/.bashrc file &amp;amp; create new shell window.&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;source ~/.bashrc
+CTRL+SHIFT+T
+ALT+1
+exit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h5 id=&quot;verify-qt-5152-has-been-installed&quot;&gt;Verify Qt 5.15.2 has been installed&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;qmake --version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;QMake version 3.1
+Using Qt version 5.15.2 in /usr/local/Qt-5.15.2/lib
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;build-your-happy-qt5-app&quot;&gt;Build your happy Qt5 app&lt;/h4&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./build.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;support--questions&quot;&gt;Support &amp;amp; Questions&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/SharpeTronics/sharpetronics.github.io/issues&quot;&gt;sharpetronics.github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/uploads/2021/bob-ross-happy.gif&quot; alt=&quot;happy little apps&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;references&quot;&gt;References&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.tal.org/tutorials/building-qt-515-raspberry-pi&quot;&gt;tal.org/rpi&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://doc.qt.io/qt-5/qtmodules.html&quot;&gt;doc.qt.io/qtmodules&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wiki.qt.io/About_Qt&quot;&gt;wiki.qt.io/about&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://decovar.dev/blog/2018/02/17/build-qt-statically/#why-build-qt-statically&quot;&gt;why-build-qt-statically&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+        <link>https://www.sharpetronics.com//blog/devops/2022/05/24/configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support/</link>
+        <guid isPermaLink="true">https://www.sharpetronics.com//blog/devops/2022/05/24/configure-a-static-qt5-from-source-on-ubuntu-18-04-with-x11-support/</guid>
+        
+        <category>Linux,</category>
+        
+        <category>Qt5,</category>
+        
+        <category>ARM64,</category>
+        
+        <category>Raspberry</category>
+        
+        <category>Pi</category>
+        
+        <category>400,</category>
+        
+        <category>X11,</category>
+        
+        
+        <category>Devops</category>
+        
+      </item>
+    
+  </channel>
 </rss>
