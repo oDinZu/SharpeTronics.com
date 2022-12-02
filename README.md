@@ -32,13 +32,11 @@ No proprietary operating system dependencies required, only Docker Engine super 
 ## Jekyll Plugins
 * Menus
 * Tagging
-* Feed
 * Archives
 * Pagination v2
 
 ## Strapi Plugins
 * Slugify
-* Duplicate Button
 * Media Library
 * Import Export Entries *upload/download or migrate products and posts*
 
