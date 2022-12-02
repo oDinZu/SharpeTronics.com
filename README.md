@@ -19,14 +19,14 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * Web3 Ready!
 * Blog ready with *collections* and *pagination*.
 * SharpeTronics Pages ready (free GitHub hosting or premium hosting).
-* Continuous Integration (CI), Continuous Delivery (CD) & ContinuDrone CI / CD system.
-* Backups for restoring to previous states.
+* Continuous Integration (CI), Continuous Delivery (CD) & Automated platform.
+* Backups galore for restoring to previous states.
 * Headless CMS with Strapi superpowers!
 * Ease of use for editors and writers.
 * Distributed CDN with automatic HTTPS (Cloudflare).
 * Secure Ecommerce shopping with Snipcart.
 * International Multi-language
-* Commenting System with moderation
+* Commenting System with moderation (*pending*)
 * Secure SharpeTronics (ST) hosting that is flexible, lightning fast and inexpensive.
 
 ## Jekyll Plugins
@@ -65,9 +65,9 @@ No proprietary operating system dependencies required, only Docker Engine super 
 1. ```git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git```
 2. ```cd sharpetronics.com```
 3. ```docker compose up```
-4. ```open a web browser and navigate to: ``` *localhost:4000*
+4. ```open a web browser and navigate to: localhost:4000```
 
-*Happy Hacking!!!*
+*Happy Hacking!!!* :star:
 
 ## Further Reading
 * Docker Engine https://docs.docker.com/install/
@@ -75,5 +75,5 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * Jekyll https://jekyllrb.com/
 * Git https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 * Strapi https://docs.strapi.io/developer-docs/latest/getting-started/introduction.html
-* Stripe https://stripe.com/docs
+* Snipcart https://snipcart.com/
 * SharpeTronics Custom Ruby Plugin (LICENSE: GPLv3)
