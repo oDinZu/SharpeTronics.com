@@ -41,7 +41,7 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * Import Export Entries *upload/download or migrate products and posts*
 
 ## Socials
-* Discord: [https://discord.gg/TUZ6P7BV](https://discord.gg/jB4mXBsZjd)
+* Discord: https://discord.gg/jB4mXBsZjd
 * Facebook: [https://facebook.com/sharpeetronics](https://facebook.com/sharpeetronics)
 * Twitter: [https://twitter.com/sharpetronics](https://twitter.com/sharpetronics)
 * Email: info@sharpetronics.com
@@ -59,7 +59,7 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * Install & Configure Git
 
 *All Ruby dependencies are created and stored in a Docker container.*
-*Currently, the integration is maintained with Ubuntu 20.04 LTS Linux operating system, although, it is possible to use with Macintosh or Windows. The setup with docker and docker-compose will be similar as the Linux workflow; please see **Further Reading** for more details or get involved at: https://discord.gg/TUZ6P7BV.*
+*Currently, the integration is maintained with Ubuntu 20.04 LTS Linux operating system, although, it is possible to use with Macintosh or Windows. The setup with docker and docker-compose will be similar as the Linux workflow; please see **Further Reading** for more details or get involved at: https://discord.gg/jB4mXBsZjd.*
 
 ### Clone, Build & Launch
 1. ```git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git```
