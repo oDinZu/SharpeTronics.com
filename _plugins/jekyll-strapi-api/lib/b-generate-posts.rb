@@ -3,7 +3,7 @@
 
 # Author(s): Charles Sharpe(@odinzu_me) aka SharpeTronics, LLC,
 # License: GPLv3
-# Version: 1.6
+# Version: 1.7
 
 # This is Free Software released under GPLv3. Any misuse of this software
 # will be followed up with GPL enforcement via Software Freedom Law Center:

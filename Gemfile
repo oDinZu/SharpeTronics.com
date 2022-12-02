@@ -28,8 +28,8 @@ group :dev_plugins do
   gem 'webrick', '~> 1.7' # dep for Jekyll 4.2.2; Ruby 3 doesn't have webrick by default anymore.
   gem 'json', '~> 2.1' # dep for transforming json data
   gem 'faraday' # a simple, but flexible HTTP client library, with support for multiple backends.
+  gem 'faraday-multipart' # send with UDP; No encoding of the data; currently being used with download-images.rb
   gem 'httpx' # swiss army knife of Ruby for HTTP
-  gem 'faraday-multipart' # send with UDP; No encoding of the data
   gem 'rails' # must use Rails for .blank support
 end
 

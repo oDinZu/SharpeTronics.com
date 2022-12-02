@@ -57,8 +57,9 @@ api:
       # The Ecommerce Jekyll configuration
       enabled: true # enable or disable ecommerce integration; defaults to false
 
-    # uri format: [endpoint]+[endpoint_ext]+[endpoint_param]
+    # uri format: [endpoint]+[endpoint_ext]+[endpoint_param] 
     endpoint: https://dash.sharpetronics.com # url to api; no trailing slash
+    endpoint_api_auth_ext: auth/local  # the ext for Strapi user authentication; no / allowed
     endpoint_ext: /api/ # (optional) the extension of endpoint e.g. https://www.example.com/api/
     endpoint_param: ?populate=deep # (optional) e.g. populate all json data; does not affect endpoint_uploads.
     endpoint_uploads: uploads # the location of all media files on api; this is required for downloading images
@@ -161,7 +162,6 @@ pagination:
 # their entries' file path in the `include:` list.
 
   exclude:
-    - docs/*
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/

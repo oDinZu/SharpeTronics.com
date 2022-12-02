@@ -73,5 +73,6 @@ services:
       ports:
         - 4000:4000
       environment:
-        - API_TOKEN=$API_TOKEN
+        - STRAPI_BOT_USER_EMAIL=$STRAPI_BOT_USER_EMAIL
+        - STRAPI_BOT_USER_PASS=$STRAPI_BOT_USER_PASS
       command: jekyll serve --lsi --watch --verbose --trace

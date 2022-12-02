@@ -3,7 +3,7 @@
 
 # Author(s): Charles Sharpe(@odinzu_me) aka SharpeTronics, LLC,
 # License: GPLv3
-# Version: 1.6
+# Version: 1.7
 
 # This is Free Software released under GPLv3. Any misuse of this software
 # will be followed up with GPL enforcement via Software Freedom Law Center:
@@ -28,9 +28,9 @@ require 'json' # https://ruby-doc.org/stdlib-3.0.2/libdoc/json/rdoc/JSON.html
 require 'fileutils' # https://ruby-doc.org/stdlib-2.4.1/libdoc/fileutils/rdoc/FileUtils.html
 require 'yaml' # load jekyll yaml config
 require 'faraday' # https://lostisland.github.io/faraday/usage/
-require 'httpx/adapters/faraday' # https://honeyryderchuck.gitlab.io/httpx/
+require 'httpx/adapters/faraday' # https://os85.gitlab.io/httpx/rdoc/
 require 'addressable/uri' # https://github.com/sporkmonger/addressable If you need to normalize URIs, e.g. http://www.詹姆斯.com/
-require 'faraday/multipart' # https://github.com/lostisland/faraday-multipart
+#require 'faraday/multipart' # https://github.com/lostisland/faraday-multipart
 require 'active_support/core_ext/object/blank' # load only the specific extension for .blank? support
 
 Jekyll.logger.debug "A SharpeTronics bot be building this...[*_-]\n".green.bold
@@ -38,6 +38,7 @@ Jekyll.logger.debug "A SharpeTronics bot be building this...[*_-]\n".green.bold
 config_yml = "_config.yml"
 f = YAML.load(File.read(config_yml.to_s)) # r - read file
 api_endpoint = f['api']['endpoint']
+endpoint_api_auth_ext = f['api']['endpoint_api_auth_ext']
 endpoint_param = f['api']['endpoint_param']
 endpoint_ext = f['api']['endpoint_ext']
 Jekyll.logger.debug "DEBUG: API_ENDPDOINT for GET COLLECTIONS: " "#{api_endpoint}".to_s.yellow.bold
@@ -45,28 +46,49 @@ media_dir = f['api']['local_media_dir']
 Jekyll.logger.debug "CONFIG DEBUG: MEDIA_DIR: " "#{media_dir}".to_s.yellow.bold
 # authenticated or public API data
 # import API_TOKEN from the environment. e.g. export API_TOKEN=example
-api_token = ENV['API_TOKEN']
+strapi_bot_user_email = ENV['STRAPI_BOT_USER_EMAIL']
+strapi_bot_user_pass = ENV['STRAPI_BOT_USER_PASS']
+strapi_token = nil
+
+# authenticate user before accessing the json data and store JWT
+auth_login = "#{api_endpoint}#{endpoint_ext}#{endpoint_api_auth_ext}"
+#auth_login_ext = "#{endpoint_api_auth_ext}"
+Jekyll.logger.debug "HTTP DEBUG: AUTH LOGIN: " "#{auth_login}".to_s.yellow.bold
+
 # check if api_token is auth or unauth
-if "#{api_token}".blank?
+if "#{strapi_bot_user_email}".blank? || "#{strapi_bot_user_pass}".blank?
     # logs data to screen
-    puts "TOKEN MISSING! Testing a public request without a bearer token... ".red
-    options = {
-      headers: ""
-    }
+    puts "STRAPI AUTH DATA IS MISSING from .env!".red
+  else
+
+    connection = Faraday.new(auth_login) do |b|
+      b.request :json # This will set the "Content-Type" header to application/json and call .to_json on the body
+      b.response(:json, content_type: /\bjson$/)
+      b.adapter :httpx # default is Net:HTTP see README.md
+    end
+    
+    response = connection.post(auth_login, { "identifier": strapi_bot_user_email, "password": strapi_bot_user_pass })
+    strapi_token = response.body["jwt"]
+    
+    Jekyll.logger.debug "HTTP DEBUG: BULIDING CONNECTION: #{response}".to_s.yellow.bold
+    puts ""
+    puts "API_AUTH_LOGIN SUCCESS! Downloading JWT...".cyan.bold
+    puts ""
+  end # close if/else
+
+    Jekyll.logger.debug "Strapi Token Test: #{strapi_token}".to_s.yellow.bold
+
+# check if api_token is auth or unauth
+if "#{strapi_token}".blank?
+    # logs data to screen
+    puts "STRAPI BEARER TOKEN IS MISSING!".red
   else
     # build the connection to the API
     api_builder = Faraday.new do |builder|
-      # add the class directly instead of using lookups
-      builder.use Faraday::Request::UrlEncoded
-      builder.use Faraday::Response::RaiseError
-
-      # add by symbol, lookup from Faraday::Request
-      # Faraday::Response and Faraday::Adapter registries
-      builder.request :authorization, 'Bearer Token', api_token # include bearer token "options" and authenticated header
-      builder.request :json # encode req bodies as JSON and automatically set the Content-Type header
-      builder.response :json # decode response bodies as JSON
-
-      builder.adapter :httpx # must add adapter; default is Net:HTTP see README.md
+      builder.request :authorization, 'Bearer', strapi_token # include bearer token "options" and authenticated header
+      builder.request :json # This will set the "Content-Type" header to application/json and call .to_json on the body
+      builder.response(:json, content_type: /\bjson$/)
+      builder.adapter :httpx # default is Net:HTTP see README.md
     end
     Jekyll.logger.debug "HTTP DEBUG: BULIDING CONNECTION: #{api_builder}".to_s.yellow.bold
     # logs auth status to screen
@@ -130,6 +152,10 @@ uri_authors = "#{api_endpoint}#{endpoint_ext}#{authors_type}#{endpoint_param}"
 Jekyll.logger.debug "HTTP DEBUG: AUTHORS URI: " "#{uri_authors}".to_s.yellow.bold
 
 # the actual GET with header data; retrieve all product and posts json data from API
+# check auth_login status code
+auth_login_connect = response.status
+Jekyll.logger.debug "HTTP DEBUG: THE AUTH LOGIN STATUS CODE: #{auth_login_connect}".to_s.cyan.bold
+
 posts_api_connect = api_builder.get(uri_posts)
 Jekyll.logger.debug "HTTP DEBUG: THE COLLECTION is: #{posts_type} with STATUS CODE: #{posts_api_connect.status}".to_s.cyan.bold
 
