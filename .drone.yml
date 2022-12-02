@@ -56,8 +56,10 @@ steps:
       from_secret: no_hostkey
     SERVER_PASS:
       from_secret: server_pass
-    API_TOKEN:
-      from_secret: api_token
+    STRAPI_BOT_USER_EMAIL:
+      from_secret: strapi_bot_user_email
+    STRAPI_BOT_USER_PASS
+      from_secret: strapi_bot_user_pass
   privileged: false
   volumes:
     - name: jekyll

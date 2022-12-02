@@ -76,8 +76,6 @@ if "#{strapi_bot_user_email}".blank? || "#{strapi_bot_user_pass}".blank?
     puts ""
   end # close if/else
 
-    Jekyll.logger.debug "Strapi Token Test: #{strapi_token}".to_s.yellow.bold
-
 # check if api_token is auth or unauth
 if "#{strapi_token}".blank?
     # logs data to screen
