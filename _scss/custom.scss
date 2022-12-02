@@ -278,6 +278,20 @@ a.author {
   ul.actions:not(.fixed) li {
     padding: .5em 0 .5em 0;
   }
+  /* ----- mobile featured product ----- */
+  
+  .post.featured.product.no-padding {
+    margin: 0 0 1em 0;
+  }
+  .col-6.col-12-small.product-hero-text.vert-expand {
+    padding: 0 0 0 1.3em;
+  }
+  .button.primary.fit.snipcart-add-item {
+    margin-bottom: 1.5em;
+  }
+  
+  /* ----- end mobile featured product ----- */
+  
   ul.actions:not(.fixed) li:first-child {
     padding-top: .5em;
   }
@@ -495,7 +509,7 @@ a.author {
   //Product Shopping Cart
   .product-cart ul {
     list-style:none;
-    padding: 1em;
+    padding: .2em 0 0 0;
     display: flex;
     justify-content: flex-end;
     margin: 0 0 1em 0;
@@ -555,6 +569,9 @@ a.author {
     margin-bottom: .5em;
   }
 
+  .fas.fa-shopping-basket.fa-2x:hover {
+    color: #e1bc63;
+  }
 /* ---------Comment Discussion Styling------------- */
 ul.simple-nested li {
   margin-left: 3em;

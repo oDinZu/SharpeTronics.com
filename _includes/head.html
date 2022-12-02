@@ -18,50 +18,45 @@ Quality Assurance: @odinzu_me
 
 <head>
   <META charset="utf-8">
-  <META http-equiv="X-UA-Compatible" CONTENT="IE=edge">
+  <META http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <META NAME="robots" CONTENT="index, follow">
+  <META name="robots" content="index, follow">
 
-  <META NAME="author" CONTENT="{{ site.data.global.author }}">
-  <META NAME="description" CONTENT="{{ site.data.global.description }}">
-  <META NAME="keywords" CONTENT="{{ site.data.global.keywords }}">
+  <META name="author" content="{{ site.data.global.author }}">
+  <META name="description" content="{{ site.data.global.description }}">
+  <META name="keywords" content="{{ site.data.global.keywords }}">
 
   <!-- Geolocation Search Engine Optimization BING -->
-  <META NAME="geo.position" CONTENT="{{ site.data.global.location_coords }}" />
-  <META NAME="geo.placename" CONTENT="{{ site.data.global.location_town }}" />
-  <META NAME="geo.region" CONTENT="{{ site.data.global.location_state }}" />
-  <META NAME="ICBM" content="{{ site.data.global.location_coords }}" />
-
-  <!-- Standard SEO Twitter Card data -->
-  <META property="twitter:card" content="summary">
-  <META property="twitter:site" content="@{{ site.data.social.twitter_user }}">
-  <META property="twitter:title" content="{{ page.title }}">
-  <META property="twitter:description" content="{{ page.description }}">
-  <META property="twitter:creator" content="@{{ site.data.social.twitter_user }}">
+  <META name="geo.position" content="{{ site.data.global.location_coords }}" />
+  <META name="geo.placename" content="{{ site.data.global.location_town }}" />
+  <META name="geo.region" content="{{ site.data.global.location_state }}" />
+  <META name="ICBM" content="{{ site.data.global.location_coords }}" />
 
   <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="{{ page.url }}">
-  <meta property="twitter:title" content="{{ page.title }}">
-  <meta property="twitter:description" content="{{ page.description }}">
-  <meta property="twitter:image" content="{{ page.image_url }}">
-  <meta property="twitter:creator" content="{{ page.author }}">
+  <META name="twitter:card" content="summary_large_image">
+  <META name="twitter:image" content="{{ page.banner_image }}">
+  <META name="twitter:image:alt" content="{{ page.banner_image_description }}">
+  <META name="twitter:site" content="@{{ site.data.social.twitter_user }}">
+  <META name="twitter:url" content="{{ page.url }}">
+  <META name="twitter:title" content="{{ page.title }}">
+  <META name="twitter:description" content="{{ page.content | strip_html | truncatewords: 50 }}">
+  <META name="twitter:creator" content="{{ page.author }}">
 
   <!-- Standard SEO Open Graph data -->
-  <META property="og:title" content="{{ page.title }}" />
   <META property="og:type" content="article" />
+  <META property="og:locale" content="en_US">
+  <META property="og:title" content="{{ page.title }}" />
   <META property="og:url" content="{{ page.url }}" />
-  <META property="og:image" content="{{ page.image_url }}" />
-  <META property="og:image" content="{{ page.image_alt }}" />
-  <META property="og:description" content="{{ site.data.global.description }}" />
+  <META property="og:image" content="{{ page.banner_image }}" />
+  <META property="og:image:alt" content="{{ page.banner_image_description }}" />
+  <META property="og:description" content="{{ page.content | strip_html | truncatewords: 50 }}" />
   <META property="og:site_name" content="{{ site.data.global.title }}" />
-  <META property="fb:admins" content="{{ site.data.social.facebook_admin_user }}" />
 
   <!-- Favicons for various browsers including mobile -->
   <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico" sizes="64x49">
 
-  <!-- Jekyll RSS Feed Plugin -->
-  {%- feed_meta -%}
+  <!-- Jekyll RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml">
 
   <!-- Site title goes here -->
   <title> {{ site.data.global.title }} | {{ page.title }} </title>

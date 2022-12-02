@@ -24,7 +24,6 @@ source: "."
 
 # Plugins
 plugins:
-  - jekyll-feed # I have manually generated rss.xml https://jekyllrb.com/tutorials/convert-site-to-jekyll/#10-rss-feed
   - jekyll-menus
   - jekyll-archives
   - jekyll-paginate-v2
@@ -32,22 +31,6 @@ plugins:
 
 # Latent Semantic Indexing for similarity bewtween documents.
 lsi: true
-
-feed:
-  collections:
-    posts:
-      path: "/feed/posts-feed.xml"
-      categories:
-        - company
-        - tutorials
-        - devops
-    products:
-      path: "/feed/products-feed.xml"
-      categories:
-        - company
-        - tutorials
-        - legal
-        - devops
 
 # ===================================================================================
 # the API dashboard configuration
