@@ -58,7 +58,7 @@ steps:
       from_secret: server_pass
     STRAPI_BOT_USER_EMAIL:
       from_secret: strapi_bot_user_email
-    STRAPI_BOT_USER_PASS
+    STRAPI_BOT_USER_PASS:
       from_secret: strapi_bot_user_pass
   privileged: false
   volumes:
