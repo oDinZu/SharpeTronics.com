@@ -32,21 +32,20 @@ No proprietary operating system dependencies required, only Docker Engine super 
 ## Jekyll Plugins
 * Menus
 * Tagging
-* Feed
 * Archives
 * Pagination v2
 
 ## Strapi Plugins
 * Slugify
-* Duplicate Button
 * Media Library
 * Import Export Entries *upload/download or migrate products and posts*
 
 ## Socials
-* Discord: https://discord.gg/TUZ6P7BV
-* Twitter: https://twitter.com/sharpetronics
+* Discord: https://discord.gg/jB4mXBsZjd
+* Facebook: [https://facebook.com/sharpeetronics](https://facebook.com/sharpeetronics)
+* Twitter: [https://twitter.com/sharpetronics](https://twitter.com/sharpetronics)
 * Email: info@sharpetronics.com
-* Telegram: https://t.me/+oFUwKSn3frgzZDFh
+* Telegram: [https://t.me/+oFUwKSn3frgzZDFh](https://t.me/+oFUwKSn3frgzZDFh)
 
 # Development
 
@@ -60,7 +59,7 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * Install & Configure Git
 
 *All Ruby dependencies are created and stored in a Docker container.*
-*Currently, the integration is maintained with Ubuntu 20.04 LTS Linux operating system, although, it is possible to use with Macintosh or Windows. The setup with docker and docker-compose will be similar as the Linux workflow; please see **Further Reading** for more details or get involved at: https://discord.gg/TUZ6P7BV.*
+*Currently, the integration is maintained with Ubuntu 20.04 LTS Linux operating system, although, it is possible to use with Macintosh or Windows. The setup with docker and docker-compose will be similar as the Linux workflow; please see **Further Reading** for more details or get involved at: https://discord.gg/jB4mXBsZjd.*
 
 ### Clone, Build & Launch
 1. ```git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git```
@@ -77,4 +76,4 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * Git https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 * Strapi https://docs.strapi.io/developer-docs/latest/getting-started/introduction.html
 * Stripe https://stripe.com/docs
-* SharpeTronics Custom Ruby Plugin (License: GPLv3)
+* SharpeTronics Custom Ruby Plugin (LICENSE: GPLv3)
