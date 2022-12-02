@@ -41,10 +41,11 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * Import Export Entries *upload/download or migrate products and posts*
 
 ## Socials
-* Discord: https://discord.gg/TUZ6P7BV
-* Twitter: https://twitter.com/sharpetronics
+* Discord: [https://discord.gg/TUZ6P7BV](https://discord.gg/jB4mXBsZjd)
+* Facebook: [https://facebook.com/sharpeetronics](https://facebook.com/sharpeetronics)
+* Twitter: [https://twitter.com/sharpetronics](https://twitter.com/sharpetronics)
 * Email: info@sharpetronics.com
-* Telegram: https://t.me/+oFUwKSn3frgzZDFh
+* Telegram: [https://t.me/+oFUwKSn3frgzZDFh](https://t.me/+oFUwKSn3frgzZDFh)
 
 # Development
 
@@ -75,4 +76,4 @@ No proprietary operating system dependencies required, only Docker Engine super 
 * Git https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 * Strapi https://docs.strapi.io/developer-docs/latest/getting-started/introduction.html
 * Stripe https://stripe.com/docs
-* SharpeTronics Custom Ruby Plugin (License: GPLv3)
+* SharpeTronics Custom Ruby Plugin (LICENSE: GPLv3)
