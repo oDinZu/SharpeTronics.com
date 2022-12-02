@@ -64,10 +64,11 @@ No proprietary operating system dependencies required, only Docker Engine super 
 ### Clone, Build & Launch
 1. ```git clone https://git.sharpetronics.com/sharpetronics/sharpetronics.com.git```
 2. ```cd sharpetronics.com```
+3. ```rename /_plugins to /BAK_plugins``` *to make use of these plugins, you need to be authorized*
 3. ```docker compose up```
 4. ```open a web browser and navigate to: localhost:4000```
 
-*Happy Hacking!!!* :star:
+**Happy Hacking!!!** :star:
 
 ## Further Reading
 * Docker Engine https://docs.docker.com/install/
